@@ -1,0 +1,43 @@
+﻿@model List<ShootingCompetitionsRequests.Areas.Cup.Models.CompetitionModelParams>
+
+<style>
+
+    .checkSmall {
+        width:20px;
+        min-width:15px;
+        margin:auto;
+    }
+
+    .inTextSmall {
+        padding:0px;
+        width:auto;
+        min-width:initial;
+    }
+
+    .trSmall {
+        padding:1px;
+    }
+
+</style>
+
+<table id="tableCompList" class="tableInfo" style="width:365px; display:block; overflow:auto; height:265px">
+    <thead>
+        <tr>
+            <th style="width:20%">Включить</th>
+            <th style="width:30%">Упражнение</th>
+            <th style="width:50%">Время стара первой смены</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var item in Model)
+        {
+            <tr class="trSmall">
+                <td>@Html.CheckBox(string.Format("compCheck_{0}", item.IdCompetitionType), item.IsInCup, new { idCompetitionType = item.IdCompetitionType, Name = item.Name, @class="checkSmall", idCupCompetitionType = item.IdCupCompetitionType })</td>
+                <td>@item.Name</td>
+                <td>@Html.TextBox("dp_"+item.Name, item.TimeFirstShift.ToString("HH:mm dd.MM.yyyy"), new { @class="datepicker inTextSmall"})  @*@item.TimeFirstShift.ToString("HH:mm dd.MM.yyyy")*@</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

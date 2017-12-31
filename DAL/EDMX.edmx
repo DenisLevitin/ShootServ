@@ -1,0 +1,1410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ShootingCompetitionRequestsModel" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="Хранилище ShootingCompetitionRequestsModelContainer">
+          <EntitySet Name="CompetitionType" EntityType="Хранилище ShootingCompetitionRequestsModel.CompetitionType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Countries" EntityType="Хранилище ShootingCompetitionRequestsModel.Countries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CupCompetitionType" EntityType="Хранилище ShootingCompetitionRequestsModel.CupCompetitionType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Cups" EntityType="Хранилище ShootingCompetitionRequestsModel.Cups" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CupTypes" EntityType="Хранилище ShootingCompetitionRequestsModel.CupTypes" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EntryForCompetitions" EntityType="Хранилище ShootingCompetitionRequestsModel.EntryForCompetitions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EntryStatus" EntityType="Хранилище ShootingCompetitionRequestsModel.EntryStatus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="RecoveredPasswords" EntityType="Хранилище ShootingCompetitionRequestsModel.RecoveredPasswords" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Regions" EntityType="Хранилище ShootingCompetitionRequestsModel.Regions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Results" EntityType="Хранилище ShootingCompetitionRequestsModel.Results" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="Хранилище ShootingCompetitionRequestsModel.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShooterCategory" EntityType="Хранилище ShootingCompetitionRequestsModel.ShooterCategory" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShooterClubs" EntityType="Хранилище ShootingCompetitionRequestsModel.ShooterClubs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Shooters" EntityType="Хранилище ShootingCompetitionRequestsModel.Shooters" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShootingRanges" EntityType="Хранилище ShootingCompetitionRequestsModel.ShootingRanges" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="Хранилище ShootingCompetitionRequestsModel.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="Хранилище ShootingCompetitionRequestsModel.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="WeaponTypes" EntityType="Хранилище ShootingCompetitionRequestsModel.WeaponTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CompetitionType_WeaponTypes" Association="Хранилище ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes">
+            <End Role="WeaponTypes" EntitySet="WeaponTypes" />
+            <End Role="CompetitionType" EntitySet="CompetitionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CupCompetitionType_CompetitionType" Association="Хранилище ShootingCompetitionRequestsModel.FK_CupCompetitionType_CompetitionType">
+            <End Role="CompetitionType" EntitySet="CompetitionType" />
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CupCompetitionType_Cups" Association="Хранилище ShootingCompetitionRequestsModel.FK_CupCompetitionType_Cups">
+            <End Role="Cups" EntitySet="Cups" />
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cups_CupTypes" Association="Хранилище ShootingCompetitionRequestsModel.FK_Cups_CupTypes">
+            <End Role="CupTypes" EntitySet="CupTypes" />
+            <End Role="Cups" EntitySet="Cups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cups_ShootingRanges" Association="Хранилище ShootingCompetitionRequestsModel.FK_Cups_ShootingRanges">
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+            <End Role="Cups" EntitySet="Cups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cups_Users" Association="Хранилище ShootingCompetitionRequestsModel.FK_Cups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cups" EntitySet="Cups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntryForCompetitions_CupCompetitionType" Association="Хранилище ShootingCompetitionRequestsModel.FK_EntryForCompetitions_CupCompetitionType">
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+            <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntryForCompetitions_EntryStatus" Association="Хранилище ShootingCompetitionRequestsModel.FK_EntryForCompetitions_EntryStatus">
+            <End Role="EntryStatus" EntitySet="EntryStatus" />
+            <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntryForCompetitions_Shooters" Association="Хранилище ShootingCompetitionRequestsModel.FK_EntryForCompetitions_Shooters">
+            <End Role="Shooters" EntitySet="Shooters" />
+            <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RecoveredPasswords_Users" Association="Хранилище ShootingCompetitionRequestsModel.FK_RecoveredPasswords_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RecoveredPasswords" EntitySet="RecoveredPasswords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Regions_Countries" Association="Хранилище ShootingCompetitionRequestsModel.FK_Regions_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Regions" EntitySet="Regions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_CupCompetitionType" Association="Хранилище ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType">
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Shooters" Association="Хранилище ShootingCompetitionRequestsModel.FK_Results_Shooters">
+            <End Role="Shooters" EntitySet="Shooters" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShooterClubs_ShootingRanges" Association="Хранилище ShootingCompetitionRequestsModel.FK_ShooterClubs_ShootingRanges">
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+            <End Role="ShooterClubs" EntitySet="ShooterClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShooterClubs_Users" Association="Хранилище ShootingCompetitionRequestsModel.FK_ShooterClubs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ShooterClubs" EntitySet="ShooterClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_ShooterCategory" Association="Хранилище ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory">
+            <End Role="ShooterCategory" EntitySet="ShooterCategory" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_ShooterClubs" Association="Хранилище ShootingCompetitionRequestsModel.FK_Shooters_ShooterClubs">
+            <End Role="ShooterClubs" EntitySet="ShooterClubs" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_Users" Association="Хранилище ShootingCompetitionRequestsModel.FK_Shooters_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_WeaponTypes" Association="Хранилище ShootingCompetitionRequestsModel.FK_Shooters_WeaponTypes">
+            <End Role="WeaponTypes" EntitySet="WeaponTypes" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShootingRanges_Regions" Association="Хранилище ShootingCompetitionRequestsModel.FK_ShootingRanges_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShootingRanges_Users" Association="Хранилище ShootingCompetitionRequestsModel.FK_ShootingRanges_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="Хранилище ShootingCompetitionRequestsModel.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CompetitionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IdWeaponType" Type="int" Nullable="false" />
+          <Property Name="SeriesCount" Type="int" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="50" />
+          <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CupCompetitionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdCup" Type="int" Nullable="false" />
+          <Property Name="IdCompetitionType" Type="int" Nullable="false" />
+          <Property Name="TimeFirstShift" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Cups">
+          <Key>
+            <PropertyRef Name="IdCup" />
+          </Key>
+          <Property Name="IdCup" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="IdCupType" Type="int" Nullable="false" />
+          <Property Name="DateStart" Type="datetime" Nullable="false" />
+          <Property Name="DateEnd" Type="datetime" Nullable="false" />
+          <Property Name="IdShootingRange" Type="int" Nullable="false" />
+          <Property Name="Document" Type="varbinary" MaxLength="50" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="DateCreate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CupTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Keychar" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EntryForCompetitions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdShooter" Type="int" Nullable="false" />
+          <Property Name="IdCupCompetitionType" Type="int" Nullable="false" />
+          <Property Name="DateCreate" Type="datetime" Nullable="false" />
+          <Property Name="IdEntryStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EntryStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Keychar" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RecoveredPasswords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="IsRecovered" Type="bit" Nullable="false" />
+          <Property Name="ActionDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="IdRegion" />
+          </Key>
+          <Property Name="IdRegion" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FederationAddress" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="FederationTelefon" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="IdCountry" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="IdShooter" Type="int" Nullable="false" />
+          <Property Name="IdCompetitionTypeCup" Type="int" Nullable="false" />
+          <Property Name="ResultInPoints" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="KeyChar" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ShooterCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Keychar" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="OrderSort" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShooterClubs">
+          <Key>
+            <PropertyRef Name="IdClub" />
+          </Key>
+          <Property Name="IdClub" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="MainCoach" Type="varchar" MaxLength="50" />
+          <Property Name="IdShootingRange" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="DateCreate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shooters">
+          <Key>
+            <PropertyRef Name="IdShooter" />
+          </Key>
+          <Property Name="IdShooter" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Family" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FatherName" Type="varchar" MaxLength="50" />
+          <Property Name="IdClub" Type="int" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="BirthDate" Type="datetime" Nullable="false" />
+          <Property Name="IdWeaponType" Type="int" Nullable="false" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+          <Property Name="DateCreate" Type="datetime" Nullable="false" />
+          <Property Name="Sex" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShootingRanges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Info" Type="varchar(max)" Nullable="false" />
+          <Property Name="IdRegion" Type="int" Nullable="false" />
+          <Property Name="Town" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IdUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Family" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FatherName" Type="varchar" MaxLength="50" />
+          <Property Name="Login" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+          <Property Name="DateCreate" Type="datetime" Nullable="false" />
+          <Property Name="E-mail" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WeaponTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="KeyChar" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_CompetitionType_WeaponTypes">
+          <End Role="WeaponTypes" Type="Хранилище ShootingCompetitionRequestsModel.WeaponTypes" Multiplicity="1" />
+          <End Role="CompetitionType" Type="Хранилище ShootingCompetitionRequestsModel.CompetitionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeaponTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompetitionType">
+              <PropertyRef Name="IdWeaponType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CupCompetitionType_CompetitionType">
+          <End Role="CompetitionType" Type="Хранилище ShootingCompetitionRequestsModel.CompetitionType" Multiplicity="1" />
+          <End Role="CupCompetitionType" Type="Хранилище ShootingCompetitionRequestsModel.CupCompetitionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CupCompetitionType">
+              <PropertyRef Name="IdCompetitionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CupCompetitionType_Cups">
+          <End Role="Cups" Type="Хранилище ShootingCompetitionRequestsModel.Cups" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="CupCompetitionType" Type="Хранилище ShootingCompetitionRequestsModel.CupCompetitionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cups">
+              <PropertyRef Name="IdCup" />
+            </Principal>
+            <Dependent Role="CupCompetitionType">
+              <PropertyRef Name="IdCup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cups_CupTypes">
+          <End Role="CupTypes" Type="Хранилище ShootingCompetitionRequestsModel.CupTypes" Multiplicity="1" />
+          <End Role="Cups" Type="Хранилище ShootingCompetitionRequestsModel.Cups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cups">
+              <PropertyRef Name="IdCupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cups_ShootingRanges">
+          <End Role="ShootingRanges" Type="Хранилище ShootingCompetitionRequestsModel.ShootingRanges" Multiplicity="1" />
+          <End Role="Cups" Type="Хранилище ShootingCompetitionRequestsModel.Cups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShootingRanges">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cups">
+              <PropertyRef Name="IdShootingRange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cups_Users">
+          <End Role="Users" Type="Хранилище ShootingCompetitionRequestsModel.Users" Multiplicity="1" />
+          <End Role="Cups" Type="Хранилище ShootingCompetitionRequestsModel.Cups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cups">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntryForCompetitions_CupCompetitionType">
+          <End Role="CupCompetitionType" Type="Хранилище ShootingCompetitionRequestsModel.CupCompetitionType" Multiplicity="1" />
+          <End Role="EntryForCompetitions" Type="Хранилище ShootingCompetitionRequestsModel.EntryForCompetitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupCompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryForCompetitions">
+              <PropertyRef Name="IdCupCompetitionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntryForCompetitions_EntryStatus">
+          <End Role="EntryStatus" Type="Хранилище ShootingCompetitionRequestsModel.EntryStatus" Multiplicity="1" />
+          <End Role="EntryForCompetitions" Type="Хранилище ShootingCompetitionRequestsModel.EntryForCompetitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntryStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryForCompetitions">
+              <PropertyRef Name="IdEntryStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntryForCompetitions_Shooters">
+          <End Role="Shooters" Type="Хранилище ShootingCompetitionRequestsModel.Shooters" Multiplicity="1" />
+          <End Role="EntryForCompetitions" Type="Хранилище ShootingCompetitionRequestsModel.EntryForCompetitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shooters">
+              <PropertyRef Name="IdShooter" />
+            </Principal>
+            <Dependent Role="EntryForCompetitions">
+              <PropertyRef Name="IdShooter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RecoveredPasswords_Users">
+          <End Role="Users" Type="Хранилище ShootingCompetitionRequestsModel.Users" Multiplicity="1" />
+          <End Role="RecoveredPasswords" Type="Хранилище ShootingCompetitionRequestsModel.RecoveredPasswords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecoveredPasswords">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Regions_Countries">
+          <End Role="Countries" Type="Хранилище ShootingCompetitionRequestsModel.Countries" Multiplicity="1" />
+          <End Role="Regions" Type="Хранилище ShootingCompetitionRequestsModel.Regions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Regions">
+              <PropertyRef Name="IdCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_CupCompetitionType">
+          <End Role="CupCompetitionType" Type="Хранилище ShootingCompetitionRequestsModel.CupCompetitionType" Multiplicity="1" />
+          <End Role="Results" Type="Хранилище ShootingCompetitionRequestsModel.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupCompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdCompetitionTypeCup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Shooters">
+          <End Role="Shooters" Type="Хранилище ShootingCompetitionRequestsModel.Shooters" Multiplicity="1" />
+          <End Role="Results" Type="Хранилище ShootingCompetitionRequestsModel.Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shooters">
+              <PropertyRef Name="IdShooter" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdShooter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShooterClubs_ShootingRanges">
+          <End Role="ShootingRanges" Type="Хранилище ShootingCompetitionRequestsModel.ShootingRanges" Multiplicity="1" />
+          <End Role="ShooterClubs" Type="Хранилище ShootingCompetitionRequestsModel.ShooterClubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShootingRanges">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShooterClubs">
+              <PropertyRef Name="IdShootingRange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShooterClubs_Users">
+          <End Role="Users" Type="Хранилище ShootingCompetitionRequestsModel.Users" Multiplicity="1" />
+          <End Role="ShooterClubs" Type="Хранилище ShootingCompetitionRequestsModel.ShooterClubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShooterClubs">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_ShooterCategory">
+          <End Role="ShooterCategory" Type="Хранилище ShootingCompetitionRequestsModel.ShooterCategory" Multiplicity="1" />
+          <End Role="Shooters" Type="Хранилище ShootingCompetitionRequestsModel.Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShooterCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_ShooterClubs">
+          <End Role="ShooterClubs" Type="Хранилище ShootingCompetitionRequestsModel.ShooterClubs" Multiplicity="1" />
+          <End Role="Shooters" Type="Хранилище ShootingCompetitionRequestsModel.Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShooterClubs">
+              <PropertyRef Name="IdClub" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_Users">
+          <End Role="Users" Type="Хранилище ShootingCompetitionRequestsModel.Users" Multiplicity="1" />
+          <End Role="Shooters" Type="Хранилище ShootingCompetitionRequestsModel.Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_WeaponTypes">
+          <End Role="WeaponTypes" Type="Хранилище ShootingCompetitionRequestsModel.WeaponTypes" Multiplicity="1" />
+          <End Role="Shooters" Type="Хранилище ShootingCompetitionRequestsModel.Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeaponTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdWeaponType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShootingRanges_Regions">
+          <End Role="Regions" Type="Хранилище ShootingCompetitionRequestsModel.Regions" Multiplicity="1" />
+          <End Role="ShootingRanges" Type="Хранилище ShootingCompetitionRequestsModel.ShootingRanges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="IdRegion" />
+            </Principal>
+            <Dependent Role="ShootingRanges">
+              <PropertyRef Name="IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShootingRanges_Users">
+          <End Role="Users" Type="Хранилище ShootingCompetitionRequestsModel.Users" Multiplicity="1" />
+          <End Role="ShootingRanges" Type="Хранилище ShootingCompetitionRequestsModel.ShootingRanges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShootingRanges">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Role="Roles" Type="Хранилище ShootingCompetitionRequestsModel.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Хранилище ShootingCompetitionRequestsModel.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ShootingCompetitionRequestsModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ShootingCompetitionRequestsEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="CupTypes" EntityType="ShootingCompetitionRequestsModel.CupTypes" />
+          <EntitySet Name="EntryStatus" EntityType="ShootingCompetitionRequestsModel.EntryStatus" />
+          <EntitySet Name="Results" EntityType="ShootingCompetitionRequestsModel.Results" />
+          <EntitySet Name="Roles" EntityType="ShootingCompetitionRequestsModel.Roles" />
+          <EntitySet Name="ShooterCategory" EntityType="ShootingCompetitionRequestsModel.ShooterCategory" />
+          <EntitySet Name="sysdiagrams" EntityType="ShootingCompetitionRequestsModel.sysdiagrams" />
+          <EntitySet Name="WeaponTypes" EntityType="ShootingCompetitionRequestsModel.WeaponTypes" />
+          <EntitySet Name="CompetitionType" EntityType="ShootingCompetitionRequestsModel.CompetitionType" />
+          <AssociationSet Name="FK_CompetitionType_WeaponTypes" Association="ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes">
+            <End Role="WeaponTypes" EntitySet="WeaponTypes" />
+            <End Role="CompetitionType" EntitySet="CompetitionType" />
+          </AssociationSet>
+          <EntitySet Name="Cups" EntityType="ShootingCompetitionRequestsModel.Cups" />
+          <AssociationSet Name="FK_Cups_CupTypes" Association="ShootingCompetitionRequestsModel.FK_Cups_CupTypes">
+            <End Role="CupTypes" EntitySet="CupTypes" />
+            <End Role="Cups" EntitySet="Cups" />
+          </AssociationSet>
+          <EntitySet Name="EntryForCompetitions" EntityType="ShootingCompetitionRequestsModel.EntryForCompetitions" />
+          <AssociationSet Name="FK_EntryForCompetitions_EntryStatus" Association="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_EntryStatus">
+            <End Role="EntryStatus" EntitySet="EntryStatus" />
+            <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
+          </AssociationSet>
+          <EntitySet Name="CupCompetitionType" EntityType="ShootingCompetitionRequestsModel.CupCompetitionType" />
+          <AssociationSet Name="FK_CupCompetitionType_CompetitionType" Association="ShootingCompetitionRequestsModel.FK_CupCompetitionType_CompetitionType">
+            <End Role="CompetitionType" EntitySet="CompetitionType" />
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CupCompetitionType_Cups" Association="ShootingCompetitionRequestsModel.FK_CupCompetitionType_Cups">
+            <End Role="Cups" EntitySet="Cups" />
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntryForCompetitions_CupCompetitionType" Association="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_CupCompetitionType">
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+            <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_CupCompetitionType" Association="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType">
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <EntitySet Name="Shooters" EntityType="ShootingCompetitionRequestsModel.Shooters" />
+          <AssociationSet Name="FK_EntryForCompetitions_Shooters" Association="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_Shooters">
+            <End Role="Shooters" EntitySet="Shooters" />
+            <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Shooters" Association="ShootingCompetitionRequestsModel.FK_Results_Shooters">
+            <End Role="Shooters" EntitySet="Shooters" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_ShooterCategory" Association="ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory">
+            <End Role="ShooterCategory" EntitySet="ShooterCategory" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_WeaponTypes" Association="ShootingCompetitionRequestsModel.FK_Shooters_WeaponTypes">
+            <End Role="WeaponTypes" EntitySet="WeaponTypes" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <EntitySet Name="ShootingRanges" EntityType="ShootingCompetitionRequestsModel.ShootingRanges" />
+          <AssociationSet Name="FK_Cups_ShootingRanges" Association="ShootingCompetitionRequestsModel.FK_Cups_ShootingRanges">
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+            <End Role="Cups" EntitySet="Cups" />
+          </AssociationSet>
+          <EntitySet Name="ShooterClubs" EntityType="ShootingCompetitionRequestsModel.ShooterClubs" />
+          <AssociationSet Name="FK_ShooterClubs_ShootingRanges" Association="ShootingCompetitionRequestsModel.FK_ShooterClubs_ShootingRanges">
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+            <End Role="ShooterClubs" EntitySet="ShooterClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_ShooterClubs" Association="ShootingCompetitionRequestsModel.FK_Shooters_ShooterClubs">
+            <End Role="ShooterClubs" EntitySet="ShooterClubs" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="ShootingCompetitionRequestsModel.Users" />
+          <AssociationSet Name="FK_Cups_Users" Association="ShootingCompetitionRequestsModel.FK_Cups_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cups" EntitySet="Cups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Roles" Association="ShootingCompetitionRequestsModel.FK_Users_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShooterClubs_Users" Association="ShootingCompetitionRequestsModel.FK_ShooterClubs_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ShooterClubs" EntitySet="ShooterClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shooters_Users" Association="ShootingCompetitionRequestsModel.FK_Shooters_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Shooters" EntitySet="Shooters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShootingRanges_Users" Association="ShootingCompetitionRequestsModel.FK_ShootingRanges_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+          </AssociationSet>
+          <EntitySet Name="Regions" EntityType="ShootingCompetitionRequestsModel.Regions" />
+          <AssociationSet Name="FK_ShootingRanges_Regions" Association="ShootingCompetitionRequestsModel.FK_ShootingRanges_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="ShootingRanges" EntitySet="ShootingRanges" />
+          </AssociationSet>
+          <EntitySet Name="RecoveredPasswords" EntityType="ShootingCompetitionRequestsModel.RecoveredPasswords" />
+          <AssociationSet Name="FK_RecoveredPasswords_Users" Association="ShootingCompetitionRequestsModel.FK_RecoveredPasswords_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="RecoveredPasswords" EntitySet="RecoveredPasswords" />
+          </AssociationSet>
+          <EntitySet Name="Countries" EntityType="ShootingCompetitionRequestsModel.Countries" />
+          <AssociationSet Name="FK_Regions_Countries" Association="ShootingCompetitionRequestsModel.FK_Regions_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Regions" EntitySet="Regions" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="CupTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Keychar" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cups" Relationship="ShootingCompetitionRequestsModel.FK_Cups_CupTypes" FromRole="CupTypes" ToRole="Cups" />
+        </EntityType>
+        <EntityType Name="EntryStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Keychar" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EntryForCompetitions" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_EntryStatus" FromRole="EntryStatus" ToRole="EntryForCompetitions" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdShooter" Nullable="false" />
+          <Property Type="Int32" Name="IdCompetitionTypeCup" Nullable="false" />
+          <Property Type="Int32" Name="ResultInPoints" Nullable="false" />
+          <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType" FromRole="Results" ToRole="CupCompetitionType" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Results" ToRole="Shooters" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KeyChar" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="ShooterCategory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Keychar" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OrderSort" Nullable="false" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory" FromRole="ShooterCategory" ToRole="Shooters" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="WeaponTypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="KeyChar" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes" FromRole="WeaponTypes" ToRole="CompetitionType" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_WeaponTypes" FromRole="WeaponTypes" ToRole="Shooters" />
+        </EntityType>
+        <EntityType Name="CompetitionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdWeaponType" Nullable="false" />
+          <Property Type="Int32" Name="SeriesCount" />
+          <NavigationProperty Name="WeaponTypes" Relationship="ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes" FromRole="CompetitionType" ToRole="WeaponTypes" />
+          <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_CupCompetitionType_CompetitionType" FromRole="CompetitionType" ToRole="CupCompetitionType" />
+        </EntityType>
+        <Association Name="FK_CompetitionType_WeaponTypes">
+          <End Type="ShootingCompetitionRequestsModel.WeaponTypes" Role="WeaponTypes" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.CompetitionType" Role="CompetitionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeaponTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompetitionType">
+              <PropertyRef Name="IdWeaponType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cups">
+          <Key>
+            <PropertyRef Name="IdCup" />
+          </Key>
+          <Property Type="Int32" Name="IdCup" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdCupType" Nullable="false" />
+          <Property Type="DateTime" Name="DateStart" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="DateEnd" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="IdShootingRange" Nullable="false" />
+          <Property Type="Binary" Name="Document" MaxLength="50" FixedLength="false" />
+          <Property Type="Int32" Name="IdUser" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CupTypes" Relationship="ShootingCompetitionRequestsModel.FK_Cups_CupTypes" FromRole="Cups" ToRole="CupTypes" />
+          <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_CupCompetitionType_Cups" FromRole="Cups" ToRole="CupCompetitionType" />
+          <NavigationProperty Name="ShootingRanges" Relationship="ShootingCompetitionRequestsModel.FK_Cups_ShootingRanges" FromRole="Cups" ToRole="ShootingRanges" />
+          <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_Cups_Users" FromRole="Cups" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_Cups_CupTypes">
+          <End Type="ShootingCompetitionRequestsModel.CupTypes" Role="CupTypes" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Cups" Role="Cups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cups">
+              <PropertyRef Name="IdCupType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="EntryForCompetitions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdShooter" Nullable="false" />
+          <Property Type="Int32" Name="IdCupCompetitionType" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="IdEntryStatus" Nullable="false" />
+          <NavigationProperty Name="EntryStatus" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_EntryStatus" FromRole="EntryForCompetitions" ToRole="EntryStatus" />
+          <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_CupCompetitionType" FromRole="EntryForCompetitions" ToRole="CupCompetitionType" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_Shooters" FromRole="EntryForCompetitions" ToRole="Shooters" />
+        </EntityType>
+        <Association Name="FK_EntryForCompetitions_EntryStatus">
+          <End Type="ShootingCompetitionRequestsModel.EntryStatus" Role="EntryStatus" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.EntryForCompetitions" Role="EntryForCompetitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EntryStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryForCompetitions">
+              <PropertyRef Name="IdEntryStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CupCompetitionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="IdCup" Nullable="false" />
+          <Property Type="Int32" Name="IdCompetitionType" Nullable="false" />
+          <Property Type="DateTime" Name="TimeFirstShift" Precision="3" />
+          <NavigationProperty Name="CompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_CupCompetitionType_CompetitionType" FromRole="CupCompetitionType" ToRole="CompetitionType" />
+          <NavigationProperty Name="Cups" Relationship="ShootingCompetitionRequestsModel.FK_CupCompetitionType_Cups" FromRole="CupCompetitionType" ToRole="Cups" />
+          <NavigationProperty Name="EntryForCompetitions" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_CupCompetitionType" FromRole="CupCompetitionType" ToRole="EntryForCompetitions" />
+          <NavigationProperty Name="Results" Relationship="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType" FromRole="CupCompetitionType" ToRole="Results" />
+        </EntityType>
+        <Association Name="FK_CupCompetitionType_CompetitionType">
+          <End Type="ShootingCompetitionRequestsModel.CompetitionType" Role="CompetitionType" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.CupCompetitionType" Role="CupCompetitionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CupCompetitionType">
+              <PropertyRef Name="IdCompetitionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CupCompetitionType_Cups">
+          <End Type="ShootingCompetitionRequestsModel.Cups" Role="Cups" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.CupCompetitionType" Role="CupCompetitionType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cups">
+              <PropertyRef Name="IdCup" />
+            </Principal>
+            <Dependent Role="CupCompetitionType">
+              <PropertyRef Name="IdCup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntryForCompetitions_CupCompetitionType">
+          <End Type="ShootingCompetitionRequestsModel.CupCompetitionType" Role="CupCompetitionType" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.EntryForCompetitions" Role="EntryForCompetitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupCompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntryForCompetitions">
+              <PropertyRef Name="IdCupCompetitionType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_CupCompetitionType">
+          <End Type="ShootingCompetitionRequestsModel.CupCompetitionType" Role="CupCompetitionType" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupCompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdCompetitionTypeCup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Shooters">
+          <Key>
+            <PropertyRef Name="IdShooter" />
+          </Key>
+          <Property Type="Int32" Name="IdShooter" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Family" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdClub" Nullable="false" />
+          <Property Type="String" Name="Address" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdCategory" Nullable="false" />
+          <Property Type="DateTime" Name="BirthDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="IdWeaponType" Nullable="false" />
+          <Property Type="Int32" Name="IdUser" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="3" />
+          <Property Type="Boolean" Name="Sex" Nullable="false" />
+          <NavigationProperty Name="EntryForCompetitions" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_Shooters" FromRole="Shooters" ToRole="EntryForCompetitions" />
+          <NavigationProperty Name="Results" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Shooters" ToRole="Results" />
+          <NavigationProperty Name="ShooterCategory" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory" FromRole="Shooters" ToRole="ShooterCategory" />
+          <NavigationProperty Name="WeaponTypes" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_WeaponTypes" FromRole="Shooters" ToRole="WeaponTypes" />
+          <NavigationProperty Name="ShooterClubs" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterClubs" FromRole="Shooters" ToRole="ShooterClubs" />
+          <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_Users" FromRole="Shooters" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_EntryForCompetitions_Shooters">
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.EntryForCompetitions" Role="EntryForCompetitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shooters">
+              <PropertyRef Name="IdShooter" />
+            </Principal>
+            <Dependent Role="EntryForCompetitions">
+              <PropertyRef Name="IdShooter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Shooters">
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shooters">
+              <PropertyRef Name="IdShooter" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdShooter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_ShooterCategory">
+          <End Type="ShootingCompetitionRequestsModel.ShooterCategory" Role="ShooterCategory" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShooterCategory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_WeaponTypes">
+          <End Type="ShootingCompetitionRequestsModel.WeaponTypes" Role="WeaponTypes" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WeaponTypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdWeaponType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ShootingRanges">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Telefon" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Info" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdRegion" Nullable="false" />
+          <Property Type="String" Name="Town" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdUser" Nullable="false" />
+          <NavigationProperty Name="Cups" Relationship="ShootingCompetitionRequestsModel.FK_Cups_ShootingRanges" FromRole="ShootingRanges" ToRole="Cups" />
+          <NavigationProperty Name="ShooterClubs" Relationship="ShootingCompetitionRequestsModel.FK_ShooterClubs_ShootingRanges" FromRole="ShootingRanges" ToRole="ShooterClubs" />
+          <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_ShootingRanges_Users" FromRole="ShootingRanges" ToRole="Users" />
+          <NavigationProperty Name="Regions" Relationship="ShootingCompetitionRequestsModel.FK_ShootingRanges_Regions" FromRole="ShootingRanges" ToRole="Regions" />
+        </EntityType>
+        <Association Name="FK_Cups_ShootingRanges">
+          <End Type="ShootingCompetitionRequestsModel.ShootingRanges" Role="ShootingRanges" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Cups" Role="Cups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShootingRanges">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cups">
+              <PropertyRef Name="IdShootingRange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ShooterClubs">
+          <Key>
+            <PropertyRef Name="IdClub" />
+          </Key>
+          <Property Type="Int32" Name="IdClub" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MainCoach" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdShootingRange" Nullable="false" />
+          <Property Type="Int32" Name="IdUser" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ShootingRanges" Relationship="ShootingCompetitionRequestsModel.FK_ShooterClubs_ShootingRanges" FromRole="ShooterClubs" ToRole="ShootingRanges" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterClubs" FromRole="ShooterClubs" ToRole="Shooters" />
+          <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_ShooterClubs_Users" FromRole="ShooterClubs" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_ShooterClubs_ShootingRanges">
+          <End Type="ShootingCompetitionRequestsModel.ShootingRanges" Role="ShootingRanges" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.ShooterClubs" Role="ShooterClubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShootingRanges">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShooterClubs">
+              <PropertyRef Name="IdShootingRange" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_ShooterClubs">
+          <End Type="ShootingCompetitionRequestsModel.ShooterClubs" Role="ShooterClubs" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShooterClubs">
+              <PropertyRef Name="IdClub" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdClub" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Family" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FatherName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Login" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IdRole" Nullable="false" />
+          <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="3" />
+          <Property Type="String" Name="E_mail" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cups" Relationship="ShootingCompetitionRequestsModel.FK_Cups_Users" FromRole="Users" ToRole="Cups" />
+          <NavigationProperty Name="Roles" Relationship="ShootingCompetitionRequestsModel.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
+          <NavigationProperty Name="ShooterClubs" Relationship="ShootingCompetitionRequestsModel.FK_ShooterClubs_Users" FromRole="Users" ToRole="ShooterClubs" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_Users" FromRole="Users" ToRole="Shooters" />
+          <NavigationProperty Name="ShootingRanges" Relationship="ShootingCompetitionRequestsModel.FK_ShootingRanges_Users" FromRole="Users" ToRole="ShootingRanges" />
+          <NavigationProperty Name="RecoveredPasswords" Relationship="ShootingCompetitionRequestsModel.FK_RecoveredPasswords_Users" FromRole="Users" ToRole="RecoveredPasswords" />
+        </EntityType>
+        <Association Name="FK_Cups_Users">
+          <End Type="ShootingCompetitionRequestsModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Cups" Role="Cups" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cups">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Roles">
+          <End Type="ShootingCompetitionRequestsModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Users" Role="Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShooterClubs_Users">
+          <End Type="ShootingCompetitionRequestsModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.ShooterClubs" Role="ShooterClubs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShooterClubs">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shooters_Users">
+          <End Type="ShootingCompetitionRequestsModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Shooters">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShootingRanges_Users">
+          <End Type="ShootingCompetitionRequestsModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.ShootingRanges" Role="ShootingRanges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ShootingRanges">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="IdRegion" />
+          </Key>
+          <Property Type="Int32" Name="IdRegion" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FederationAddress" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FederationTelefon" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ShootingRanges" Relationship="ShootingCompetitionRequestsModel.FK_ShootingRanges_Regions" FromRole="Regions" ToRole="ShootingRanges" />
+          <Property Type="Int32" Name="IdCountry" Nullable="false" />
+          <NavigationProperty Name="Countries" Relationship="ShootingCompetitionRequestsModel.FK_Regions_Countries" FromRole="Regions" ToRole="Countries" />
+        </EntityType>
+        <Association Name="FK_ShootingRanges_Regions">
+          <End Type="ShootingCompetitionRequestsModel.Regions" Role="Regions" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.ShootingRanges" Role="ShootingRanges" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="IdRegion" />
+            </Principal>
+            <Dependent Role="ShootingRanges">
+              <PropertyRef Name="IdRegion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RecoveredPasswords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUser" Type="Int32" Nullable="false" />
+          <Property Name="IsRecovered" Type="Boolean" Nullable="false" />
+          <Property Name="ActionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_RecoveredPasswords_Users" FromRole="RecoveredPasswords" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_RecoveredPasswords_Users">
+          <End Type="ShootingCompetitionRequestsModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.RecoveredPasswords" Role="RecoveredPasswords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RecoveredPasswords">
+              <PropertyRef Name="IdUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="CODE" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CountryName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Regions" Relationship="ShootingCompetitionRequestsModel.FK_Regions_Countries" FromRole="Countries" ToRole="Regions" />
+        </EntityType>
+        <Association Name="FK_Regions_Countries">
+          <End Type="ShootingCompetitionRequestsModel.Countries" Role="Countries" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Regions" Role="Regions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Regions">
+              <PropertyRef Name="IdCountry" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ShootingCompetitionRequestsModelContainer" CdmEntityContainer="ShootingCompetitionRequestsEntities">
+          <EntitySetMapping Name="CupTypes">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.CupTypes">
+              <MappingFragment StoreEntitySet="CupTypes">
+                <ScalarProperty Name="Keychar" ColumnName="Keychar" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntryStatus">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.EntryStatus">
+              <MappingFragment StoreEntitySet="EntryStatus">
+                <ScalarProperty Name="Keychar" ColumnName="Keychar" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Results">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="ResultInPoints" ColumnName="ResultInPoints" />
+                <ScalarProperty Name="IdCompetitionTypeCup" ColumnName="IdCompetitionTypeCup" />
+                <ScalarProperty Name="IdShooter" ColumnName="IdShooter" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Roles">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="KeyChar" ColumnName="KeyChar" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShooterCategory">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.ShooterCategory">
+              <MappingFragment StoreEntitySet="ShooterCategory">
+                <ScalarProperty Name="OrderSort" ColumnName="OrderSort" />
+                <ScalarProperty Name="Keychar" ColumnName="Keychar" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WeaponTypes">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.WeaponTypes">
+              <MappingFragment StoreEntitySet="WeaponTypes">
+                <ScalarProperty Name="KeyChar" ColumnName="KeyChar" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompetitionType">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.CompetitionType">
+              <MappingFragment StoreEntitySet="CompetitionType">
+                <ScalarProperty Name="SeriesCount" ColumnName="SeriesCount" />
+                <ScalarProperty Name="IdWeaponType" ColumnName="IdWeaponType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cups">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Cups">
+              <MappingFragment StoreEntitySet="Cups">
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Document" ColumnName="Document" />
+                <ScalarProperty Name="IdShootingRange" ColumnName="IdShootingRange" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="IdCupType" ColumnName="IdCupType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCup" ColumnName="IdCup" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntryForCompetitions">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.EntryForCompetitions">
+              <MappingFragment StoreEntitySet="EntryForCompetitions">
+                <ScalarProperty Name="IdEntryStatus" ColumnName="IdEntryStatus" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdCupCompetitionType" ColumnName="IdCupCompetitionType" />
+                <ScalarProperty Name="IdShooter" ColumnName="IdShooter" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CupCompetitionType">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.CupCompetitionType">
+              <MappingFragment StoreEntitySet="CupCompetitionType">
+                <ScalarProperty Name="TimeFirstShift" ColumnName="TimeFirstShift" />
+                <ScalarProperty Name="IdCompetitionType" ColumnName="IdCompetitionType" />
+                <ScalarProperty Name="IdCup" ColumnName="IdCup" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shooters">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Shooters">
+              <MappingFragment StoreEntitySet="Shooters">
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdWeaponType" ColumnName="IdWeaponType" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IdClub" ColumnName="IdClub" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+                <ScalarProperty Name="IdShooter" ColumnName="IdShooter" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShootingRanges">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.ShootingRanges">
+              <MappingFragment StoreEntitySet="ShootingRanges">
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="IdRegion" ColumnName="IdRegion" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShooterClubs">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.ShooterClubs">
+              <MappingFragment StoreEntitySet="ShooterClubs">
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="IdShootingRange" ColumnName="IdShootingRange" />
+                <ScalarProperty Name="MainCoach" ColumnName="MainCoach" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdClub" ColumnName="IdClub" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+                <ScalarProperty Name="DateCreate" ColumnName="DateCreate" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="Family" ColumnName="Family" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Regions">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+                <ScalarProperty Name="FederationTelefon" ColumnName="FederationTelefon" />
+                <ScalarProperty Name="FederationAddress" ColumnName="FederationAddress" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdRegion" ColumnName="IdRegion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecoveredPasswords">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.RecoveredPasswords">
+              <MappingFragment StoreEntitySet="RecoveredPasswords">
+                <ScalarProperty Name="ActionDate" ColumnName="ActionDate" />
+                <ScalarProperty Name="IsRecovered" ColumnName="IsRecovered" />
+                <ScalarProperty Name="IdUser" ColumnName="IdUser" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,88 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootingCompetitionsRequestsWeb", "ShootingCompetitionsRequests\ShootingCompetitionsRequestsWeb.csproj", "{6991581B-BB7E-45DE-B537-326A8F1DBBA4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{1362B03B-C1DB-4D8B-95FA-CAC237D55B19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{5B0D9A7C-5A6B-4550-B1FC-4C5AFAF1F897}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BO", "BO\BO.csproj", "{0A42CC6F-4F5D-4F80-8116-678CBDC1568A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{38BC1668-B865-4556-82C6-860FF873E0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "EmailSender\EmailSender.csproj", "{AC6C34AD-0140-4AE5-877C-4046A3B49A47}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenXmlHelpers", "OpenXmlHelper\OpenXmlHelpers.csproj", "{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 7
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://disa15.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BL\\BL.csproj
+		SccProjectTopLevelParentUniqueName1 = ShootingCompetitionsRequests.sln
+		SccProjectName1 = BL
+		SccLocalPath1 = BL
+		SccProjectUniqueName2 = BO\\BO.csproj
+		SccProjectTopLevelParentUniqueName2 = ShootingCompetitionsRequests.sln
+		SccProjectName2 = BO
+		SccLocalPath2 = BO
+		SccProjectUniqueName3 = DAL\\DAL.csproj
+		SccProjectTopLevelParentUniqueName3 = ShootingCompetitionsRequests.sln
+		SccProjectName3 = DAL
+		SccLocalPath3 = DAL
+		SccProjectUniqueName4 = EmailSender\\EmailSender.csproj
+		SccProjectTopLevelParentUniqueName4 = ShootingCompetitionsRequests.sln
+		SccProjectName4 = EmailSender
+		SccLocalPath4 = EmailSender
+		SccProjectUniqueName5 = OpenXmlHelper\\OpenXmlHelpers.csproj
+		SccProjectTopLevelParentUniqueName5 = ShootingCompetitionsRequests.sln
+		SccProjectName5 = OpenXmlHelper
+		SccLocalPath5 = OpenXmlHelper
+		SccProjectUniqueName6 = ShootingCompetitionsRequests\\ShootingCompetitionsRequestsWeb.csproj
+		SccProjectName6 = ShootingCompetitionsRequests
+		SccLocalPath6 = ShootingCompetitionsRequests
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6991581B-BB7E-45DE-B537-326A8F1DBBA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6991581B-BB7E-45DE-B537-326A8F1DBBA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6991581B-BB7E-45DE-B537-326A8F1DBBA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6991581B-BB7E-45DE-B537-326A8F1DBBA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B0D9A7C-5A6B-4550-B1FC-4C5AFAF1F897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B0D9A7C-5A6B-4550-B1FC-4C5AFAF1F897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B0D9A7C-5A6B-4550-B1FC-4C5AFAF1F897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B0D9A7C-5A6B-4550-B1FC-4C5AFAF1F897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A42CC6F-4F5D-4F80-8116-678CBDC1568A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A42CC6F-4F5D-4F80-8116-678CBDC1568A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A42CC6F-4F5D-4F80-8116-678CBDC1568A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A42CC6F-4F5D-4F80-8116-678CBDC1568A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38BC1668-B865-4556-82C6-860FF873E0D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38BC1668-B865-4556-82C6-860FF873E0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38BC1668-B865-4556-82C6-860FF873E0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38BC1668-B865-4556-82C6-860FF873E0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC6C34AD-0140-4AE5-877C-4046A3B49A47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC6C34AD-0140-4AE5-877C-4046A3B49A47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC6C34AD-0140-4AE5-877C-4046A3B49A47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC6C34AD-0140-4AE5-877C-4046A3B49A47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5B0D9A7C-5A6B-4550-B1FC-4C5AFAF1F897} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
+		{0A42CC6F-4F5D-4F80-8116-678CBDC1568A} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
+		{38BC1668-B865-4556-82C6-860FF873E0D1} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
+		{AC6C34AD-0140-4AE5-877C-4046A3B49A47} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
+		{A4F87EB8-BE08-4BE9-944F-9A839D95D70E} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
+	EndGlobalSection
+EndGlobal

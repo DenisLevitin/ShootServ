@@ -1,0 +1,12 @@
+﻿@model BO.UserParams
+
+@if ( Model != null && ! string.IsNullOrEmpty(Model.Login) ) 
+{
+<a href="@Url.Action("Index", "Registration", new { Area = "Registration", idUser=Model.Id })">
+    @string.Format("Пользователь: {0}", Model.Login)
+</a>
+}
+else 
+{
+    <a href="@Url.Action("Index", "Registration", new { Area = "Registration" })">Регистрация</a>
+}

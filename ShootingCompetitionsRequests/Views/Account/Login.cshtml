@@ -1,0 +1,39 @@
+﻿@model ShootingCompetitionsRequests.Models.LoginModel
+
+@{
+    ViewBag.Title = "Выполнить вход";
+}
+
+
+<div class="instr" style="margin:auto;">
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div>
+        <ol style="list-style:none;">
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName) <br>
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password) <br>
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+        </ol>
+        <input class="buttonEnter"  type="submit" value="Выполнить вход" />
+        <p>
+            @Html.ActionLink("Регистрация", "Index", "Registration", new { Area = "Registration"}, null), если у вас нет учетной записи.
+            <br/>
+            @Html.ActionLink("Восстановление пароля", "RecoveryPasswordForm", "Account", new { Area = "" }, null), если вы забыли свой пароль.
+        </p>
+    </div>
+
+}
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

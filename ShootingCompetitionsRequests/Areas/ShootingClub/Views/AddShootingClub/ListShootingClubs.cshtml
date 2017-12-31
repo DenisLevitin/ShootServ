@@ -1,0 +1,26 @@
+﻿@model List<ShootingCompetitionsRequests.Areas.ShootingClub.Models.ShooterClubModelParams>
+
+
+    <table class="tableInfo" style ="width:auto">
+    <tr style="width:100%">
+        <th style="width:15%">Название</th>
+        <th style="width:25%">Адрес</th>
+        <th style="width:12%">Телефон</th>
+        <th style="width:12%">Главный тренер</th>
+        <th style="width:25%">Название региона</th>
+        <th style="width:9%"></th>
+    </tr>
+@{ foreach (var item in Model)
+   {
+       <tr>
+           <td>@item.Name</td>
+           <td>@item.Address</td>
+           <td>@item.Phone</td>
+           <td>@item.MainCoach</td>
+           <td>@item.RegionName</td>
+           <td><a href="#" class="delClub" idClub="@item.Id">Удалить</a></td>
+       </tr>
+   }
+}
+</table>
+

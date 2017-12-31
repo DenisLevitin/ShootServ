@@ -1,0 +1,176 @@
+﻿@model BO.CupDetailsParams
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var heightAttr = $("#divCupAttr").css("height");
+        $("#viewCupRightPart").css("height", heightAttr);
+    });
+
+    // При изменении стрелкового клуба загружаем список заявленных
+    $(document).on("change", "#IdClub", function () {
+
+        var idClub = $("#IdClub").val();
+        var idCup = "@Model.Id";
+
+        GetEntryShootersByClub(idClub, idCup);
+    });
+
+    $(document).on("click", "#btEdit", function () {
+
+        window.location = "@Url.Action("Index", "Cup", new { Area = "Cup", idCup = Model.Id })";
+    });
+
+    // клик на "Заявиться"
+    $(document).on("click", ".hrefAddEntry", function () {
+        
+        if (CheckLogin()) {
+
+            var idCup = $(this).attr("idCup");
+            var idCompType = $(this).attr("idCompType");
+
+            $.ajax({
+                url: "@Url.Action("CreateEntry")",
+                dataType: "json",
+                data: { idCup: idCup, idCompType: idCompType },
+                async: false,
+                success: function (data) {
+                    if (data.IsOk == true) {
+                        ShowInfo("заявка создана");
+                    }
+                    else { ShowError(data.Message); }
+                },
+                error: function (data) {
+                    ShowError("Ошибка ajax");
+                }
+            });
+        }
+        else {
+            var redirectUrl = "@Url.Action("Index", "ViewCup", new { Area = "ViewCup", idCup = Model.Id})";
+            RedirectLoginPage(redirectUrl);
+        }
+    });
+
+    // Клик на кнопке "печать заявки (мужчины)"
+    $(document).on("click", "#btPrintEntryMen", function () {
+        PrintEntry(1);
+    });
+
+    // Клик на кнопке "печать заявки (женщины)"
+    $(document).on("click", "#btPrintEntryWomen", function () {
+        PrintEntry(0);
+    });
+
+    // Печать бланка заявки ( передаем еще и пол )
+    function PrintEntry(sex)
+    {
+        var idClub = $("#IdClub").val();
+
+        var url = "@Url.Action("PrintEntry", "ViewCup", new { Area = "Cup", idCup = Model.Id })";
+
+        url += "&sex=" + sex;
+         if (idClub != undefined && idClub > 0) {
+             url += "&idClub=" + idClub;
+         }
+         window.open(url, "blank");
+    }
+
+    // Получить заявленных стрелков по команде ( клубу )
+    function GetEntryShootersByClub(idClub, idCup) {
+
+        $.ajax({
+            url: "@Url.Action("GetEntryShootersListByClub")",
+             dataType: "html",
+             data: { idCup: idCup, idClub: idClub },
+             async: false,
+             success: function (data) {
+                 $("#divShootersList").html(data);
+             },
+             error: function (data) {
+                 ShowError("Ошибка ajax");
+             }
+         });
+    }
+
+
+    // Проверка залогированности
+    function CheckLogin()
+    {
+        var isLogin = "@ViewBag.IsLogin";
+        return isLogin.toLowerCase() === "true";
+    }
+
+</script>
+
+@Html.ActionLink("К списку","Index", "Cup", null, null)
+
+<h3>Просмотр соревнования</h3>
+
+<div id="divViewCupContent" style="margin-top:15px; width:auto; height:100%">
+    <div id="divCupAttr" style="float:left; margin-right:10px; width:40%;">
+        <fieldset>
+            <legend>Соревнование</legend>
+        <table id="tableCupParams">
+                <tr>
+                    <td>@Html.LabelFor(x=>x.Name)</td>
+                    <td>@Html.TextBoxFor(x => x.Name, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.Region)</td>
+                    <td>@Html.TextBoxFor(x=>x.Region, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.Town)</td>
+                    <td>@Html.TextBoxFor(x=>x.Town, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.RangeName)</td>
+                    <td>@Html.TextBoxFor(x=>x.RangeName, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.RangeAddress)</td>
+                    <td>@Html.TextBoxFor(x=>x.RangeAddress, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.RangePhone)</td>
+                    <td>@Html.TextBoxFor(x=>x.RangePhone, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.DateStart)</td>
+                    <td>@Html.TextBoxFor(x=>x.DateStart, "{0:dd.MM.yyyy}", new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.DateEnd)</td>
+                    <td>@Html.TextBoxFor(x=>x.DateEnd, "{0:dd.MM.yyyy}", new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(x=>x.CupType)</td>
+                    <td>@Html.TextBoxFor(x=>x.CupType, new { @readonly="readonly"})</td>
+                </tr>
+                <tr>
+                    <td><input type="button" id="btEdit" value="Редактировать" /></td>
+                    <td></td>
+                </tr>
+            </table>  
+        </fieldset>     
+    </div>
+    <div id="viewCupRightPart" style="width:auto; height:auto;">   
+        <div id="divCompetitionsList" style="height:300px; margin-bottom:20px">
+            <fieldset style="height:100%;">
+                <legend>Список упражнений</legend>
+            @{ Html.RenderAction("GetCompetitionsList", "ViewCup", new { idCup = Model.Id });}
+            </fieldset>
+        </div>
+        <div id="divEntryShootersList" style="height:auto">
+            <fieldset style="height:100%; margin: 0 5px">
+                <legend>Список заявленных</legend>
+            @{ Html.RenderAction("GetEntryShootersList", "ViewCup", new { idCup = Model.Id });}
+            </fieldset>
+        </div>
+    </div>
+</div>

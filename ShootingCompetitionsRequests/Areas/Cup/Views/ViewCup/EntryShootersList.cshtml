@@ -1,0 +1,12 @@
+﻿@model ShootingCompetitionsRequests.Areas.Cup.Models.EntryShootersModel
+
+<div id="divFiltersClub">
+    @Html.Label("Стрелковый клуб")
+    @Html.DropDownList("IdClub", Model.Clubs)
+</div>
+
+<div id="divShootersList">
+@{
+    Html.RenderPartial("ShootersListTable", Model.Shooters);
+}
+</div>

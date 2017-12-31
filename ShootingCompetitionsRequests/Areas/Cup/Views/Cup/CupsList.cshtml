@@ -1,0 +1,37 @@
+﻿@model List<BO.CupDetailsParams> 
+
+<!-- Модель на странице потребуется другая, с детализацией -->
+
+<table class="tableInfo">
+    <thead>
+        <th style="width:14%">Название</th>
+        <th style="width:5%">Масштаб соревнования</th>
+        <th style="width:9%">Тир</th>
+        <th style="width:14%">Регион</th>
+        <th style="width:10%">Город</th>
+        <th style="width:14%">Дата начала соревнования</th>
+        <th style="width:14%">Дата окончания соревнования</th>
+        <th style="width:5%"></th>
+        <th style="width:5%"></th>
+        <th style="width:6%"></th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.CupType</td>
+                <td>@item.RangeName</td>
+                <td>@item.Region</td>
+                <td>@item.Town</td>
+                <td>@item.DateStart.ToString("dd.MM.yyyy")</td>
+                <td>@item.DateEnd.ToString("dd.MM.yyyy")</td>
+                <td><a href="#" class="delCup" idcup="@item.Id">Удалить</a></td>
+                <td>@Html.ActionLink("Просмотр", "Index", "ViewCup", new { idCup = item.Id }, null)</td>
+                <td><a href="#" class="editCup" idcup="@item.Id">Ред.</a></td>
+            </tr> 
+        }
+    </tbody>
+</table>
+    
+

@@ -1,0 +1,37 @@
+﻿@model List<BO.ShooterEntryDetailsParams>
+
+<table style="height:100%; width:100%">
+    <thead>
+        <th>ФИО</th>
+        <th>Пол</th>
+        <th>Год рождения</th>
+        <th>Разряд</th>
+        <th>Стрелковый клуб</th>
+    </thead>
+    <tbody>
+        
+        @foreach (var item in Model)
+        {
+            
+                string listCompetitions = "";     
+                foreach (var comp in item.Competitions)
+                {
+                    listCompetitions += comp + " ";
+                }
+                   
+            <tr>
+                <td>@string.Format("{0} {1}", item.FamilyName, item.Name)</td>
+                <td>@item.Sex</td>
+                <td>@item.BirthDate.ToString("yyyy")</td>
+                <td>@item.Category</td>
+                <td>@item.ClubName</td>
+                <td>@listCompetitions</td>
+            </tr>     
+        }
+
+    </tbody>
+</table>
+
+<input type="button" id="btPrintEntryMen" value="Печать бланка заявки (мужчины)" style="width:300px" />
+<br/>
+<input type="button" id="btPrintEntryWomen" value="Печать бланка заявки (женщины)" style="width:300px" />

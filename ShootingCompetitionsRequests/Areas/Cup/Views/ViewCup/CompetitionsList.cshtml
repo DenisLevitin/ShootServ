@@ -1,0 +1,32 @@
+﻿@model ShootingCompetitionsRequests.Areas.Cup.Models.ViewCupCompetitionModel
+
+<table style="width:400px;">
+    <thead>
+        <th>Упражнение</th>
+        <th>Время старта первой смены</th>
+        <th></th>
+    </thead>
+    <tbody>
+        
+        @foreach (var item in Model.Competitions)
+        {
+            <tr>
+                <td>@item.NameCompetition</td>
+                <td>@item.TimeFirstShift.ToString("HH:mm dd.MM.yyyy")</td>
+                
+                    <td>@if (Model.ShowEntryButton)
+                        {
+                            if ( ! item.IsShooterWasEntried)
+                            {
+                                <a class="hrefAddEntry" href="#" idCup="@Model.IdCup" idCompType="@item.IdCompetitionType">Заявиться</a>
+                            }
+                            else
+                            {
+                                <label>Заявка подана</label>
+                            }
+                        }
+                    </td>
+            </tr>     
+        }
+    </tbody>
+</table>
