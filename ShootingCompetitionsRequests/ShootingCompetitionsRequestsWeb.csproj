@@ -24,6 +24,8 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -195,6 +197,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Bootstrap\css\bootstrap-theme.css" />
+    <Content Include="Content\Bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Content\Bootstrap\css\bootstrap.css" />
+    <Content Include="Content\Bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\Bootstrap\css\dopstyle.css" />
+    <Content Include="Content\Bootstrap\js\bootstrap.js" />
+    <Content Include="Content\Bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\Bootstrap\js\npm.js" />
+    <Content Include="Content\Less\less.min.js" />
+    <Content Include="Content\CSSReset.css" />
     <Content Include="Content\themes\base\datePicker.css" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -295,6 +307,11 @@
     <Content Include="Areas\Cup\Views\ViewCup\EntryShootersList.cshtml" />
     <Content Include="Areas\Cup\Views\ViewCup\ShootersListTable.cshtml" />
     <Content Include="Content\Template\Шаблон_заявки_excel.xlsx" />
+    <Content Include="Content\Bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="Content\Bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\Bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\Bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\Main.less" />
     <None Include="Properties\PublishProfiles\1.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Images\babax2.png" />
@@ -340,6 +357,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\StandartViewScripts\StandartFilterScripts.js" />
     <Content Include="Web.config">

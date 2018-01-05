@@ -1,200 +1,65 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>Shoot-Serv</title>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/CSSReset.css" rel="stylesheet" />
+    <script src="~/Content/Less/less.min.js"></script>
+    <link href="~/Content/themes/base/minified/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
+    <link href="~/Content/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/layout.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/datepicker")
 
-
-    <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8" />
-        <title>Shoot-Serv</title>
-        
-        <meta name="viewport" content="width=device-width" />
-       @* @Styles.Render("~/Content/css")*@
-        <link href="~/Content/Site.css" rel="stylesheet" />
-        <link href="~/Content/themes/base/minified/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
-
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/datepicker")
-        @RenderSection("scripts", required: false)
-    </head>
-
-    <body>
-
-            
-            @RenderSection("featured", required: false)
-      <div id="divContent">
-                                                                       @*/*шапка**@
-          <header style="margin-bottom:5px;vertical-align:bottom;text-align:center;width:100%; height:100px;  background:#50321A; position:relative; background-image: url(../Models/Images/TKAN.jpg) ; background-position: left bottom;background-repeat: repeat-x; background-size:auto;position:relative;">
-    <img src="~/Models/Images/Vintovochnik.png" alt="винтовочник" style="height: 100%; float: left;"/>
-    <span id="siteName"> Shoot-Serv </span>        
-                       
-                      
-   <img src="~/Models/Images/PIST.png"alt="пистолетчик" style="height: 100%;float: right;" />
-</header>
-   
-
-                   @* меню*@
-<nav class="mainMenu">
-              <div><a href="@Url.Action("Index", "Home", new { Area="" })">На главную</a></div>
-              <div><a href="@Url.Action("Login", "Account", new { Area = "", returnUrl = Url.Action("Index", "Home", new { Area = ""}) })">Войти</a></div>
-              <div id="shootingRangeButton"><a href="@Url.Action("Index", "AddShootingRange", new { Area="ShootingRange" })">Тиры</a></div>
-              <div><a href="@Url.Action("Index", "AddShootingClub", new { Area="ShootingClub" })">Команды</a></div>
-              <div><a href="@Url.Action("Index", "Cup", new { Area="Cup" })">Соревнования</a></div>
-              <div id="liUserInfo">@{ Html.RenderAction("GetUserInfo", "Home", new { Area = ""}); }</div>
-
-              <div style="float: right;"><a href="@Url.Action("Logout", "Home", new { Area = ""})" ">Выход</a></div>
-
-</nav>
-          <div id="InfoError" class="instr" style="opacity:0;padding:0;padding-bottom:6px;width:15%;text-align:center; position:fixed;bottom:30px;top: 150px ;height:15%; ">
-               
-              <div id="closeShowInfo">Закрыть</div>
-               <div style="position:relative;margin:2px;   border-radius:4px;border:3px solid red;height:80%;background-color:white;">
-              <div id="divShowError" style="display:inline;padding:5px;color:red;font-family:tahoma;font-size:14px"></div>   
-           <div id="ShowInfo" style="display:inline;padding:5px;color:green;font-family:tahoma;font-size:14px;"></div>     
-          </div>
-              </div>
-
-          <script>
-            
-              
-              //функция вызова ошибки
-
-              function ShowError(text) {
-                  $("#divShowError").text(text)
-                  $("#InfoError").animate({ "opacity": "100%" }, "slow");
-
-                  setTimeout(function () {
-                      $("#InfoError").animate({ "opacity": "0" }, "slow")},5000);
-                     
-
-                  }
-              
-              
-              function ShowInfo(text) {
-                  $("#ShowInfo").text(text);
-                  
-              }
-
-
-              // Перевод на страницу логина
-              function RedirectLoginPage(returnUrl) {
-                  if (confirm("Для данного действия требуется выполнить вход. Перейти на страницу авторизации?")) {
-                      window.location = "@Url.Action("Login", "Account", new { Area = "" })" + "?ReturnUrl=" + returnUrl;
-                  }
-
-              }
-
-              //скролл
-              function scroll(div) {
-                  var topcoords = $(div).offset().top;
-                  window.scrollTo(0, topcoords);
-              }
-              // Добавление стрелок на все дивы - кнопки с выпадающим контентом
-
-              function AddSumbol(div, isUp, text) {
-
-                  var a = isUp ? "&#8659;" : "&#8657;"
-                  var text = a + a + a + text + a + a + a;
-
-                  div.html(text);
-              }
-              //на весь выпадоющий контент
-              function togetherContent(button, content, text) {
-                  $(document).on("click", button, function () {
-                      if ($(content).is(":hidden")) {
-                          $(content).slideDown();
-                          AddSumbol($(button), false, text);
-                          $(button).addClass("light");
-                          scroll(button);
-                      }
-                      else {
-                          $(content).slideUp();
-                          AddSumbol($(button), true, text);
-                          $(button).removeClass("light");
-                      }
-                  });
-              }
-
-
-              //$.ajax(url, {
-              //    dataType: "html text",
-              //    converters: {
-              //        "json": function (json) {
-
-              //            if (json.IsOk === true) {
-              //                ShowError(json.ErrorText);
-              //            }
-
-              //        }
-              //    }
-              //});
-
-
-              //  Делаем кликабельные блоки в меню
-
-              $(document).on("click", ".mainMenu div", function () {
-                  window.location = $(this).find("a").attr("href"); return false;
-              });
-
-
-              // Форматируем дату для правильной передачи в контроллер
-              function FormatDate(date) {
-                  var year = date.getFullYear();
-                  var month = date.getMonth() + 1;
-                  var day = date.getDate();
-              }
-
-              //закрываем showInfo
-              $(document).on("click", "#closeShowInfo", function () {
-                  $("#InfoError").animate({"opacity": "0"}, "slow");
-              });
-
-            
-          </script>
-
-          <article>
-             
-	
-                    <div id="divRenderBody" class="divRenderBody" >
-                        @RenderBody() </div>
-                  </article>
-
-                    <footer style="height:40px;">
-                    <div id="footer" style="text-align:center;">
-                            <h5 style="display:inline;color:black;">D&V Applications</h5><br />
-                            <a style=" color:black" href="mailto:disa15@rambler.ru">Обратная связь</a>
-                    </div>
-                        </footer>
-
-
-
+    @RenderSection("scripts", required: false)
+    <script src="~/Content/Bootstrap/js/bootstrap.min.js"></script>
+    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
+</head>
+<body>
+    @RenderSection("featured", required: false)
+    <div id="divContent">
+        <header class="page-header">
+            <img src="~/Models/Images/Vintovochnik.png" alt="винтовочник" style="height: 100%; float: left;" />
+            <h1>Shoot-Serv </h1>
+            <img src="~/Models/Images/PIST.png" alt="пистолетчик" style="height: 100%;float: right;" />
+        </header>
+        <nav class="navbar navbar-inverse">
+            <ul class="nav navbar-nav">
+                <li><a href="@Url.Action("Index", "Home", new { Area="" })">На главную</a></li>
+                <li><a href="@Url.Action("Login", "Account", new { Area = "", returnUrl = Url.Action("Index", "Home", new { Area = ""}) })">Войти</a></li>
+                <li id="shootingRangeButton"><a href="@Url.Action("Index", "AddShootingRange", new { Area="ShootingRange" })">Тиры</a></li>
+                <li><a href="@Url.Action("Index", "AddShootingClub", new { Area="ShootingClub" })">Команды</a></li>
+                <li><a href="@Url.Action("Index", "Cup", new { Area="Cup" })">Соревнования</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="liUserInfo">@{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }</li>
+                <li style="float: right;"><a href="@Url.Action("Logout", "Home", new { Area = ""})" ">Выход</a></li>
+            </ul>
+        </nav>
+        <div id="InfoError" class="instr" style="opacity:0;padding:0;padding-bottom:6px;width:15%;text-align:center; position:fixed;bottom:30px;top: 150px ;height:15%; ">
+            <div id="closeShowInfo">Закрыть</div>
+            <div style="position:relative;margin:2px;   border-radius:4px;border:3px solid red;height:80%;background-color:white;">
+                <div id="divShowError" style="display:inline;padding:5px;color:red;font-family:tahoma;font-size:14px"></div>
+                <div id="ShowInfo" style="display:inline;padding:5px;color:green;font-family:tahoma;font-size:14px;"></div>
+            </div>
         </div>
-    <!--Preload  -->
-<style>
-    #hellopreloader_preload{display: block;position: fixed;z-index: 99999;top: 0;left: 0;width: 100%;height: 100%;min-width: 1000px;background: #2574A9 url(http://hello-site.ru//main/images/preloads/rings.svg) center center no-repeat;background-size:101px;}
-</style>
-<div id="hellopreloader">
-    <div id="hellopreloader_preload"></div>
-
-</div>
-
-<script type="text/javascript">
-    var hellopreloader = document.getElementById("hellopreloader_preload");
-    function fadeOutnojquery(el) {
-        el.style.opacity = 1;
-        var interhellopreloader = setInterval(function () {
-            el.style.opacity = el.style.opacity - 0.05;
-            if (el.style.opacity <= 0.05) {
-                clearInterval(interhellopreloader);
-                hellopreloader.style.display = "none";
-            }
-        }, 16);
-    }
-    window.onload = function () {
-        setTimeout(function () {
-            fadeOutnojquery(hellopreloader);
-        }, 1000);
-    };
-</script>
-    </body>
+        <article>
+            <div id="divRenderBody" class="divRenderBody">
+                @RenderBody()
+            </div>
+        </article>
+        <footer style="height:40px;">
+            <div id="footer" style="text-align:center;">
+                <h5 style="display:inline;color:black;">D&V Applications</h5><br />
+                <a style=" color:black" href="mailto:disa15@rambler.ru">Обратная связь</a>
+            </div>
+        </footer>
+    </div>
+    <div id="hellopreloader">
+        <div id="hellopreloader_preload"></div>
+    </div>
+</body>
 </html>
