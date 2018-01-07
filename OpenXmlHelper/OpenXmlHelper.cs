@@ -52,7 +52,5 @@ namespace OpenXmlHelpers
         {
             wb.SaveAs(stream);
         }
-
-        
     }
 }
