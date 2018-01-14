@@ -5,27 +5,24 @@
     <meta charset="utf-8" />
     <title>Shoot-Serv</title>
     <meta name="viewport" content="width=device-width" />
-    <link href="~/Content/CSSReset.css" rel="stylesheet" />
-    <script src="~/Content/Less/less.min.js"></script>
     <link href="~/Content/themes/base/minified/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
-    <link href="~/Content/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/layout.js"></script>
+
+    <link href="~/Content/styles.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/datepicker")
-
     @RenderSection("scripts", required: false)
-    <script src="~/Content/Bootstrap/js/bootstrap.min.js"></script>
-    @*<link href="~/Content/Site.css" rel="stylesheet" />*@
 </head>
 <body>
+    @Html.Hidden("newAccountUrl", Url.Action("Login", "Account", new { Area = "" }))
     @RenderSection("featured", required: false)
-    <div id="divContent">
-        <header class="page-header">
-            <img src="~/Models/Images/Vintovochnik.png" alt="винтовочник" style="height: 100%; float: left;" />
+    <div class="">
+        <header class="container-fluid  mainheader">
+            <div class="mainpage-header">
             <h1>Shoot-Serv </h1>
-            <img src="~/Models/Images/PIST.png" alt="пистолетчик" style="height: 100%;float: right;" />
-        </header>
+            </div>
+                </header>
         <nav class="navbar navbar-inverse">
             <ul class="nav navbar-nav">
                 <li><a href="@Url.Action("Index", "Home", new { Area="" })">На главную</a></li>
@@ -58,8 +55,8 @@
             </div>
         </footer>
     </div>
-    <div id="hellopreloader">
+    @*<div id="hellopreloader">
         <div id="hellopreloader_preload"></div>
-    </div>
+    </div>*@
 </body>
 </html>

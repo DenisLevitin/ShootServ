@@ -16,7 +16,7 @@ function ShowInfo(text) {
 // Перевод на страницу логина
 function RedirectLoginPage(returnUrl) {
     if (confirm("Для данного действия требуется выполнить вход. Перейти на страницу авторизации?")) {
-        window.location = "@Url.Action("Login", "Account", new {Area = ""})" + "?ReturnUrl=" + returnUrl;
+        window.location = $("#newAccountUrl").val() + "?ReturnUrl=" + returnUrl;
     }
 }
 
@@ -50,11 +50,6 @@ function togetherContent(button, content, text) {
     });
 }
 
-//  Делаем кликабельные блоки в меню
-$(document).on("click", ".mainMenu div", function () {
-    window.location = $(this).find("a").attr("href"); return false;
-});
-
 // Форматируем дату для правильной передачи в контроллер
 function FormatDate(date) {
     var year = date.getFullYear();
@@ -62,9 +57,17 @@ function FormatDate(date) {
     var day = date.getDate();
 }
 
-//закрываем showInfo
-$(document).on("click", "#closeShowInfo", function () {
-    $("#InfoError").animate({ "opacity": "0" }, "slow");
+$(document).ready(function () {
+
+    //  Делаем кликабельные блоки в меню
+    $(document).on("click", ".mainMenu div", function () {
+        window.location = $(this).find("a").attr("href"); return false;
+    });
+
+    //закрываем showInfo
+    $(document).on("click", "#closeShowInfo", function () {
+        $("#InfoError").animate({ "opacity": "0" }, "slow");
+    });
 });
 
 var hellopreloader = document.getElementById("hellopreloader_preload");
