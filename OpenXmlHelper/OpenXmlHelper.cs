@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
 using ClosedXML.Excel;
 
 namespace OpenXmlHelpers
 {
     public class OpenXmlHelper
     {
-
         /// <summary>
         /// Получить Excel - list
         /// </summary>
