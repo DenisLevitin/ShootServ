@@ -1,8 +1,4 @@
 ﻿using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ShootingCompetitionsRequests.Models;
 using ShootingCompetitionsRequests.App_Start;
@@ -16,7 +12,6 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         // GET: /ShootingClub/ShootingClub/
         private readonly ShooterClubModelParams _modelLogic = new ShooterClubModelParams();
 
-        //[CustomAuthorize]
         public ActionResult Index()
         {
             var model = new ShooterClubModelParams();
@@ -31,7 +26,6 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
         [HttpGet]
-        //[CustomAuthorize]
         public ActionResult GetShootingRangesByRegion(int idRegion)
         {
             var res = _modelLogic.GetShootingRangesByRegion(idRegion);
@@ -50,7 +44,6 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
         [HttpGet]
-        //[CustomAuthorize]
         public ActionResult GetShootingClubsByRegion(int idCountry=-1, int idRegion=-1)
         {
             var model = _modelLogic.GetClubsByRegion(idCountry, idRegion);
@@ -77,11 +70,7 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         {
             get
             {
-                if (Session["user"] != null)
-                {
-                    return (UserParams)Session["user"];
-                }
-                else return null;
+                return Session["user"] as UserParams;
             }
         }
     }

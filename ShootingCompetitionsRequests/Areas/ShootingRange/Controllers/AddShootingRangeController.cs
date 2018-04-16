@@ -1,11 +1,6 @@
 ﻿using BO;
 using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.ShootingRange.Models;
-using ShootingCompetitionsRequests.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
@@ -18,13 +13,15 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
         //[CustomAuthorize]
         public ActionResult Index()
         {
-            var model = new ShootingRangeModelParams();
-            model.IsLogin = Session["user"] != null; // Определяем залогирован ли пользователь в системе
+            var model = new ShootingRangeModelParams
+            {
+                IsLogin = Session["user"] != null
+            };
+            // Определяем залогирован ли пользователь в системе
 
             return View("Index", model);
         }
 
-        //[CustomAuthorize]
         [HttpGet]
         public ActionResult GetListByRegion(int idRegion)
         {
@@ -36,8 +33,8 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
         [HttpGet]
         public ActionResult Add(ShootingRangeModelParams model)
         {
-           var res = ShootingRangeModelLogic.Add(model, _user.Id);
-           return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var res = ShootingRangeModelLogic.Add(model, _user.Id);
+            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         [CustomAuthorize]
@@ -48,13 +45,13 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
             return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        private UserParams _user { get {
-            if (Session["user"] != null)
+        private UserParams _user
+        {
+            get
             {
-                return (UserParams)Session["user"];
+                return Session["user"] as UserParams;
             }
-            else return null;
-        } }
+        }
 
     }
 }

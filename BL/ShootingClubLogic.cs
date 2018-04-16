@@ -3,8 +3,6 @@ using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -35,11 +33,9 @@ namespace BL
 
             if (!string.IsNullOrEmpty(shooterClub.Name))
             {
-
                 var listExists = _dalShootingClubLogic.GetByName(shooterClub.Name);
                 if (!listExists.Any())
                 {
-
                     shooterClub.DateCreate = DateTime.Now;
 
                     var queryUser = _userLogic.Get(shooterClub.UsId);
@@ -50,7 +46,8 @@ namespace BL
                         {
                             res = _dalShootingClubLogic.Add(shooterClub);
                         }
-                        else {
+                        else
+                        {
                             res.IsOk = false;
                             res.ErrorMessage = "Пользователь не является организатором";
                         }
@@ -67,7 +64,8 @@ namespace BL
                     res.ErrorMessage = "Стрелковый клуб с таким названием уже существует";
                 }
             }
-            else {
+            else
+            {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя добавить тир с пустым названием";
             }
@@ -91,10 +89,10 @@ namespace BL
         /// <param name="idCountry">ид. страны</param>
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
-        public List<ShooterClubDetalisationParams> GetByRegion(int idCountry =-1, int idRegion =-1)
+        public List<ShooterClubDetalisationParams> GetByRegion(int idCountry = -1, int idRegion = -1)
         {
-            return idRegion > 0 ? _dalShootingClubLogic.GetByRegion(idRegion) 
-                        : idCountry > 0 ? 
+            return idRegion > 0 ? _dalShootingClubLogic.GetByRegion(idRegion)
+                        : idCountry > 0 ?
                         _dalShootingClubLogic.GetByCountry(idCountry) : _dalShootingClubLogic.GetAll();
         }
 
@@ -146,13 +144,13 @@ namespace BL
                 {
                     res = _dalShootingClubLogic.Delete(idClub);
                 }
-                else 
+                else
                 {
                     res.IsOk = false;
                     res.ErrorMessage = "Нельзя удалить стрелковый клуб, т.к пользователь его не добавлял";
                 }
             }
-            else 
+            else
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя удалить стрелковый клуб, т.к к нему привязаны стрелки";

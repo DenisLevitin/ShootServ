@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using ShootingCompetitionsRequests.Models;
 
 namespace ShootingCompetitionsRequests.Controllers
@@ -19,7 +15,7 @@ namespace ShootingCompetitionsRequests.Controllers
         public PartialViewResult GetRegionsByCountry(int idCountry, string tagName, bool addAll)
         {
             var countries = StandartClassifierModelLogic.GetRegionsByCountry(idCountry, addAll);
-            var model = new ShootingCompetitionsRequests.Models.DropDownListModel
+            var model = new DropDownListModel
             {
                 Name = tagName,
                 Items = countries

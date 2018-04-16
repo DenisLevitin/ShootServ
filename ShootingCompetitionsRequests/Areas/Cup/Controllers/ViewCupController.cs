@@ -2,10 +2,6 @@
 using BO;
 using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.Cup.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
@@ -26,7 +22,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
             _entryLogic = new EntryForCompetitionsLogic();
         }
 
-        //[CustomAuthorize]
         public ActionResult Index(int idCup)
         {
             var model = _modelLogic.GetCup(idCup);
@@ -35,7 +30,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
             return View(model);
         }
 
-        //[CustomAuthorize]
         public ActionResult GetCompetitionsList(int idCup)
         {
             var user = (UserParams)Session["user"];
@@ -45,14 +39,13 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
             var model = new ViewCupCompetitionModel
             {
                 Competitions = competitions,
-                ShowEntryButton = (user != null ? _modelLogic.IsUserShooter(user) : false),
+                ShowEntryButton = (user != null && _modelLogic.IsUserShooter(user)),
                 IdCup = idCup
             };
 
             return PartialView("CompetitionsList", model);
         }
 
-        //[CustomAuthorize]
         public ActionResult GetEntryShootersList(int idCup)
         {
             var clubs = _viewCupModelLogic.GetClubsByCup(idCup);
@@ -79,7 +72,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
             else return new EmptyResult();
         }
 
-        //[CustomAuthorize]
         public ActionResult GetEntryShootersListByClub(int idCup, int idClub)
         {
             var shooters = _viewCupModelLogic.GetEntryShooters(idCup, idClub);

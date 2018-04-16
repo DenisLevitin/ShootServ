@@ -1,23 +1,11 @@
-﻿using BL;
-using BO;
+﻿using BO;
 using ShootingCompetitionsRequests.App_Start;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShootingCompetitionsRequests.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly UserLogic _userLogic;
-
-        public HomeController()
-        {
-            _userLogic = new UserLogic();
-        }
-
         /// <summary>
         /// 
         /// </summary>

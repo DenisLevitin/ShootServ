@@ -1,12 +1,7 @@
-﻿using System.Web.Services.Description;
-using BO;
+﻿using BO;
 using ShootingCompetitionsRequests.Areas.Registration.Models;
 using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
 using ShootingCompetitionsRequests.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShootingCompetitionsRequests.Areas.Registration.Controllers

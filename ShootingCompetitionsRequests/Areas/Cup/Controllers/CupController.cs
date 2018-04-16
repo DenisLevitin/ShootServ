@@ -4,9 +4,7 @@ using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.Cup.Models;
 using ShootingCompetitionsRequests.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShootingCompetitionsRequests.Areas.Cup.Controllers

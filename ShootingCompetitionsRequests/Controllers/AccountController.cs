@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Transactions;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
+﻿using System.Web.Mvc;
 using System.Web.Security;
-using System.Web.Services.Description;
-using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
-using WebMatrix.WebData;
-using ShootingCompetitionsRequests.Filters;
 using ShootingCompetitionsRequests.Models;
 using BL;
 
@@ -48,12 +38,13 @@ namespace ShootingCompetitionsRequests.Controllers
                     Session["user"] = query.Data;
                     return RedirectToLocal(returnUrl);
                 }
-                else 
+                else
                 {
                     ModelState.AddModelError("", query.Result.ErrorMessage);
                 }
             }
-            else {
+            else
+            {
                 ModelState.AddModelError("", "Неккоректно введены логин или пароль");
             }
 
@@ -72,12 +63,9 @@ namespace ShootingCompetitionsRequests.Controllers
         public ActionResult QueryRecoveryPassword(string login, string email)
         {
             var userLogic = new UserLogic();
-
-            string path = HttpContext.Request.ApplicationPath;
-
             var res = userLogic.QueryForRecoveryPassword(login, email);
 
-            return new JsonResult { Data = new {IsOk = res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior =  JsonRequestBehavior.AllowGet };
+            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
         public ActionResult RecoveryPasswordForm()
@@ -97,14 +85,7 @@ namespace ShootingCompetitionsRequests.Controllers
         #region Вспомогательные методы
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return Url.IsLocalUrl(returnUrl) ? (ActionResult) Redirect(returnUrl) : RedirectToAction("Index", "Home");
         }
 
         public enum ManageMessageId

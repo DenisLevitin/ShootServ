@@ -3,8 +3,6 @@ using DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BL
 {
@@ -108,9 +106,6 @@ namespace BL
                     if (!allInRegions.Any(x => string.Equals(x.Name, shootingRAnge.Name, StringComparison.InvariantCultureIgnoreCase)))
                     {
                         res.IsOk = _dalShootingRange.Add(shootingRAnge);
-                    }
-                    else {
- 
                     }
                 }
                 else {

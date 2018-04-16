@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BO
+﻿namespace BO
 {
     /// <summary>
     /// Тип оружия стрелка ( пистолет или винтовка(лучше название сменить))
@@ -23,8 +17,9 @@ namespace BO
 
         public string Keychar { get; set; }
 
-        public enum WeaponTypeEnum { 
-         Rifle = 1,
+        public enum WeaponTypeEnum
+        {
+            Rifle = 1,
             Pistol = 2,
             RifleMovingTarget = 3
         }
