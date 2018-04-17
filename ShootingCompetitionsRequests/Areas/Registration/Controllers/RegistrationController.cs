@@ -3,18 +3,17 @@ using ShootingCompetitionsRequests.Areas.Registration.Models;
 using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
 using ShootingCompetitionsRequests.Models;
 using System.Web.Mvc;
+using ShootingCompetitionsRequests.Controllers;
 
 namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
 {
-    public class RegistrationController : Controller
+    public class RegistrationController : BaseController
     {
         private readonly RegPageModelParams _modelLogic;
-        private readonly ShooterClubModelParams _shootingClubModel;
 
         public RegistrationController()
         {
             _modelLogic = new RegPageModelParams();
-            _shootingClubModel = new ShooterClubModelParams();
         }
 
         //
@@ -42,7 +41,7 @@ namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
             }
             else 
             {
-                if (((UserParams)Session["user"]).Id == idUser)
+                if (CurrentUser != null && CurrentUser.Id == idUser)
                 {
                     model = RegPageModelParams.GetModelByExistUser(idUser);
                 }

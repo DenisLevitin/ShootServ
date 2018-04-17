@@ -55,12 +55,10 @@ namespace BL
             var res = new ResultInfoRef<UserParams>() { Data = null };
 
             password = HashPassword(password);
-
-            /// TODO: Пароль здесь должен быть подвергнут шифрованию
-            var queryLogin = _dalUser.GetByLoginAndPassword(login, password);
-            if (queryLogin.Any())
+            var user = _dalUser.GetByLoginAndPassword(login, password).FirstOrDefault();
+            if (user != null)
             {
-                res.Data = queryLogin.First();
+                res.Data = user;
             }
             else 
             {
@@ -116,7 +114,7 @@ namespace BL
                                     {
                                         // Посылаем e-mail счастливому пользователю
 
-                                        string body = string.Format(@"Уважаемый пользователь, вы зарегистрировались на сервисе www.shoot-serv.ru . Через него вы можете подавать заявки на соревнования, либо создавать их и отслеживать список заявленных. Ваш логин {0}, пароль {1} ", user.Login, noHashPassword);
+                                        string body = $@"Уважаемый пользователь, вы зарегистрировались на сервисе www.shoot-serv.ru . Через него вы можете подавать заявки на соревнования, либо создавать их и отслеживать список заявленных. Ваш логин {user.Login}, пароль {noHashPassword} ";
                                         EmailSender.EmailHelper.SendMail(user.Email, "Регистрация на shoot-serv", body);
                                     }
                                 }

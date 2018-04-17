@@ -28,18 +28,21 @@ namespace EmailSender
             string password = ConfigurationManager.AppSettings["emailPassword"];
             string login = ConfigurationManager.AppSettings["emailLogin"];
 
-            var client = new SmtpClient(smtpHost, smptPort);
-            client.Credentials = new NetworkCredential(login, password);
+            var client = new SmtpClient(smtpHost, smptPort)
+            {
+                Credentials = new NetworkCredential(login, password)
+            };
 
             var mess = new MailMessage(from, receiver, subject, body);
 
             try
             {
-                client.Send(mess);
+                client.SendAsync(mess, Guid.NewGuid());
                 res = true;
             }
             catch (Exception ex)
             {
+                // to logger
             }
 
             return res;

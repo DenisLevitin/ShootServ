@@ -148,7 +148,8 @@ namespace DAL
         /// <summary>
         /// Получить пользователя по логину и паролю
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="login">логин</param>
+        /// <param name="password">пароль</param>
         public List<UserParams> GetByLoginAndPassword(string login, string password)
         {
             var res = new List<UserParams>();

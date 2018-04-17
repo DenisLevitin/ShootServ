@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Web
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootingCompetitionsRequestsWeb", "ShootingCompetitionsRequests\ShootingCompetitionsRequestsWeb.csproj", "{6991581B-BB7E-45DE-B537-326A8F1DBBA4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{1362B03B-C1DB-4D8B-95FA-CAC237D55B19}"
@@ -16,35 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenXmlHelpers", "OpenXmlHelper\OpenXmlHelpers.csproj", "{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://disa15.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = BL\\BL.csproj
-		SccProjectTopLevelParentUniqueName1 = ShootingCompetitionsRequests.sln
-		SccProjectName1 = BL
-		SccLocalPath1 = BL
-		SccProjectUniqueName2 = BO\\BO.csproj
-		SccProjectTopLevelParentUniqueName2 = ShootingCompetitionsRequests.sln
-		SccProjectName2 = BO
-		SccLocalPath2 = BO
-		SccProjectUniqueName3 = DAL\\DAL.csproj
-		SccProjectTopLevelParentUniqueName3 = ShootingCompetitionsRequests.sln
-		SccProjectName3 = DAL
-		SccLocalPath3 = DAL
-		SccProjectUniqueName4 = EmailSender\\EmailSender.csproj
-		SccProjectTopLevelParentUniqueName4 = ShootingCompetitionsRequests.sln
-		SccProjectName4 = EmailSender
-		SccLocalPath4 = EmailSender
-		SccProjectUniqueName5 = OpenXmlHelper\\OpenXmlHelpers.csproj
-		SccProjectTopLevelParentUniqueName5 = ShootingCompetitionsRequests.sln
-		SccProjectName5 = OpenXmlHelper
-		SccLocalPath5 = OpenXmlHelper
-		SccProjectUniqueName6 = ShootingCompetitionsRequests\\ShootingCompetitionsRequestsWeb.csproj
-		SccProjectName6 = ShootingCompetitionsRequests
-		SccLocalPath6 = ShootingCompetitionsRequests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -84,5 +57,8 @@ Global
 		{38BC1668-B865-4556-82C6-860FF873E0D1} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
 		{AC6C34AD-0140-4AE5-877C-4046A3B49A47} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
 		{A4F87EB8-BE08-4BE9-944F-9A839D95D70E} = {1362B03B-C1DB-4D8B-95FA-CAC237D55B19}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FB933C7D-DB54-4C48-BF7D-21205CE16993}
 	EndGlobalSection
 EndGlobal
