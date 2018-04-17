@@ -12,17 +12,17 @@ namespace BL
     /// </summary>
     public class CupLogic
     {
-        private readonly EFCup _dalCup;
+        private readonly CupRepository _dalCup;
         private readonly UserLogic _userLogic;
-        private readonly EFCupCompetitionType _dalCupCompType;
-        private readonly EFEntryForCompetitions _dalEntryComp;
+        private readonly CupCompetitionTypeRepository _dalCupCompType;
+        private readonly EntryForCompetitionsRepository _dalEntryComp;
 
         public CupLogic()
         {
-            _dalCup = new EFCup();
+            _dalCup = new CupRepository();
             _userLogic = new UserLogic();
-            _dalCupCompType = new EFCupCompetitionType();
-            _dalEntryComp = new EFEntryForCompetitions();
+            _dalCupCompType = new CupCompetitionTypeRepository();
+            _dalEntryComp = new EntryForCompetitionsRepository();
         }
 
         /// <summary>

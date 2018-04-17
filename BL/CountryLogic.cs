@@ -6,11 +6,11 @@ namespace BL
 {
     public class CountryLogic
     {
-        private readonly EFCountries _dalCountries;
+        private readonly CountriesRepository _dalCountries;
 
         public CountryLogic()
         {
-            _dalCountries = new EFCountries();
+            _dalCountries = new CountriesRepository();
         }
 
         /// <summary>

@@ -9,11 +9,11 @@ namespace BL
     /// </summary>
     public class CompetitionTypeLogic
     {
-        private readonly EFCompetitionType _dalCompetitionType;
+        private readonly CompetitionTypeRepository _dalCompetitionType;
 
         public CompetitionTypeLogic()
         {
-            _dalCompetitionType = new EFCompetitionType();
+            _dalCompetitionType = new CompetitionTypeRepository();
         }
 
         /// <summary>

@@ -11,13 +11,13 @@ namespace BL
     /// </summary>
     public class ShootingClubLogic
     {
-        private readonly EFShooterClub _dalShootingClubLogic;
+        private readonly ShooterClubRepository _dalShootingClubLogic;
         private readonly UserLogic _userLogic;
         private readonly ShooterLogic _shooterLogic;
 
         public ShootingClubLogic()
         {
-            _dalShootingClubLogic = new EFShooterClub();
+            _dalShootingClubLogic = new ShooterClubRepository();
             _userLogic = new UserLogic();
             _shooterLogic = new ShooterLogic();
         }

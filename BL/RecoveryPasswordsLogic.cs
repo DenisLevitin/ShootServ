@@ -10,11 +10,11 @@ namespace BL
     /// </summary>
     public class RecoveryPasswordsLogic
     {
-        private readonly EFRecoveryPasswords _dalRecoveryPasswords;
+        private readonly RecoveryPasswordsRepository _dalRecoveryPasswords;
 
         public RecoveryPasswordsLogic()
         {
-            _dalRecoveryPasswords = new EFRecoveryPasswords();
+            _dalRecoveryPasswords = new RecoveryPasswordsRepository();
         }
 
         /// <summary>

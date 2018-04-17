@@ -10,11 +10,11 @@ namespace BL
     /// </summary>
     public class ShooterCategoryLogic
     {
-        private readonly EFShooterCategory _dalShooterCategory;
+        private readonly ShooterCategoryRepository _dalShooterCategory;
 
         public ShooterCategoryLogic()
         {
-            _dalShooterCategory = new EFShooterCategory();
+            _dalShooterCategory = new ShooterCategoryRepository();
         }
 
         /// <summary>

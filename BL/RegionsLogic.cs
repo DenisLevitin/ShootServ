@@ -9,11 +9,11 @@ namespace BL
     /// </summary>
     public class RegionsLogic
     {
-        private readonly EFRegion _dalReginos;
+        private readonly RegionRepository _dalReginos;
 
         public RegionsLogic()
         {
-            _dalReginos = new EFRegion();
+            _dalReginos = new RegionRepository();
         }
 
         /// <summary>

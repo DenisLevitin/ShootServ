@@ -6,11 +6,11 @@ namespace BL
 {
     public class CupCompetitionTypeLogic
     {
-        private readonly EFCupCompetitionType _dalCupCompetitionType;
+        private readonly CupCompetitionTypeRepository _dalCupCompetitionType;
 
         public CupCompetitionTypeLogic()
         {
-            _dalCupCompetitionType = new EFCupCompetitionType();
+            _dalCupCompetitionType = new CupCompetitionTypeRepository();
         }
 
         /// <summary>

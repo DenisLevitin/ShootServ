@@ -15,19 +15,19 @@ namespace BL
     /// </summary>
     public class EntryForCompetitionsLogic
     {
-        private readonly EFEntryForCompetitions _dalEntryForCompetitions;
+        private readonly EntryForCompetitionsRepository _dalEntryForCompetitions;
         private readonly ShooterLogic _shooterLogic;
         private readonly UserLogic _userLogic;
-        private readonly EFCupCompetitionType _cupCompetitionType;
+        private readonly CupCompetitionTypeRepository _cupCompetitionType;
         private readonly CupLogic _cupLogic;
         private readonly ShootingClubLogic _clubLogic;
 
         public EntryForCompetitionsLogic()
         {
-            _dalEntryForCompetitions = new EFEntryForCompetitions();
+            _dalEntryForCompetitions = new EntryForCompetitionsRepository();
             _shooterLogic = new ShooterLogic();
             _userLogic = new UserLogic();
-            _cupCompetitionType = new EFCupCompetitionType();
+            _cupCompetitionType = new CupCompetitionTypeRepository();
             _cupLogic = new CupLogic();
             _clubLogic = new ShootingClubLogic();
         }
@@ -118,7 +118,6 @@ namespace BL
                 foreach(var item in entryDetails)
                 {
                     var col = 1;
-
                     workshheet.Cell(row, 1).Value = j.ToString();
                     workshheet.Cell(row, 2).Value = string.Format("{0} {1} {2}", item.FamilyName, item.Name, item.FatherName);
                     workshheet.Cell(row, 3).Value = item.Category;
@@ -144,10 +143,7 @@ namespace BL
                 }
 
                 OpenXmlHelper.Save(ms, workshheet.Workbook);
-
                 res.Data.Bytes = ms.ToArray();
-
-
             }
             catch (Exception exc)
             {
@@ -168,8 +164,7 @@ namespace BL
         /// <returns></returns>
         public ResultInfoRef<FileContent> PrintEntryList(string path, int idCup, SexEnum sex, int idClub = - 1)
         {
-            var res = new ResultInfoRef<FileContent>();
-            res.Data = new FileContent(); /// TODO: Приходится писать вот такую заглушку 
+            var res = new ResultInfoRef<FileContent> {Data = new FileContent()};
 
             //1. Получаем данные о заявках
             var queryEntrysList = idClub != -1 ? _shooterLogic.GetEntryShootersOnCupAndClub(idCup, idClub, true, sex) : _shooterLogic.GetEntryShootersOnCup(idCup, true, sex);

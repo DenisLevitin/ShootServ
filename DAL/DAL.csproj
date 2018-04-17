@@ -81,13 +81,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDMX.edmx</DependentUpon>
     </Compile>
-    <Compile Include="EFCategory.cs" />
-    <Compile Include="EFCompetitionType.cs" />
-    <Compile Include="EFCountries.cs" />
-    <Compile Include="EFCup.cs" />
-    <Compile Include="EFCupCompetitionType.cs" />
-    <Compile Include="EFCupType.cs" />
-    <Compile Include="EFEntryForCompetitions.cs" />
+    <Compile Include="ShooterCategoryRepository.cs" />
+    <Compile Include="CompetitionTypeRepository.cs" />
+    <Compile Include="CountriesRepository.cs" />
+    <Compile Include="CupRepository.cs" />
+    <Compile Include="CupCompetitionTypeRepository.cs" />
+    <Compile Include="CupTypeRepository.cs" />
+    <Compile Include="EntryForCompetitionsRepository.cs" />
     <Compile Include="EFModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -98,12 +98,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EFRecoveryPasswords.cs" />
-    <Compile Include="EFShooter.cs" />
-    <Compile Include="EFShooterClub.cs" />
-    <Compile Include="EFRegion.cs" />
-    <Compile Include="EFShootingRange.cs" />
-    <Compile Include="EFUser.cs" />
+    <Compile Include="RecoveryPasswordsRepository.cs" />
+    <Compile Include="ShooterRepository.cs" />
+    <Compile Include="ShooterClubRepository.cs" />
+    <Compile Include="RegionRepository.cs" />
+    <Compile Include="ShootingRangeRepository.cs" />
+    <Compile Include="UserRepository.cs" />
     <Compile Include="EntryForCompetitions.cs">
       <DependentUpon>EDMX.tt</DependentUpon>
     </Compile>

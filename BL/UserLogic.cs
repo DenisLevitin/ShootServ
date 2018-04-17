@@ -13,13 +13,13 @@ namespace BL
     /// </summary>
     public class UserLogic
     {
-        private readonly EFUser _dalUser;
+        private readonly UserRepository _dalUser;
         private readonly ShooterLogic _blShooter;
         private readonly RecoveryPasswordsLogic _recoveryPasswordsLogic;
 
         public UserLogic()
         {
-            _dalUser = new EFUser();
+            _dalUser = new UserRepository();
             _blShooter = new ShooterLogic();
             _recoveryPasswordsLogic = new RecoveryPasswordsLogic();
         }

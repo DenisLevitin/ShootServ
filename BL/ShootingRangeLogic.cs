@@ -11,14 +11,14 @@ namespace BL
     /// </summary>
     public class ShootingRangeLogic
     {
-        private readonly EFShootingRange _dalShootingRange;
+        private readonly ShootingRangeRepository _dalShootingRange;
         private readonly UserLogic _userLogic;
         private readonly CupLogic _cupLogic;
         private readonly ShootingClubLogic _clubLogic;
 
         public ShootingRangeLogic()
         {
-            _dalShootingRange = new EFShootingRange();
+            _dalShootingRange = new ShootingRangeRepository();
             _userLogic = new UserLogic();
             _cupLogic = new CupLogic();
             _clubLogic = new ShootingClubLogic();

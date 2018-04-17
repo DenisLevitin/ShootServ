@@ -9,11 +9,11 @@ namespace BL
     /// </summary>
     public class CupTypeLogic
     {
-        private readonly EFCupType _dalCupType;
+        private readonly CupTypeRepository _dalCupType;
 
         public CupTypeLogic()
         {
-            _dalCupType = new EFCupType();
+            _dalCupType = new CupTypeRepository();
         }
 
         public CupTypeParams Get(int id)
