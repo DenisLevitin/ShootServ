@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
     <Compile Include="CompetitionType.cs">
       <DependentUpon>EDMX.tt</DependentUpon>
     </Compile>
@@ -81,6 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDMX.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ResultRepository.cs" />
     <Compile Include="ShooterCategoryRepository.cs" />
     <Compile Include="CompetitionTypeRepository.cs" />
     <Compile Include="CountriesRepository.cs" />

@@ -3,8 +3,6 @@ using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -77,8 +75,8 @@ namespace DAL
         /// <summary>
         /// Обновить соревнование
         /// </summary>
-        /// <param name="idCup"></param>
-        /// <param name="cup"></param>
+        /// <param name="idCup">ид соревнования</param>
+        /// <param name="cup">соревнование</param>
         /// <returns></returns>
         public ResultInfo Update(int idCup, CupParams cup)
         {
@@ -127,7 +125,7 @@ namespace DAL
             {
                 try
                 {
-                    var query = db.Cups.Where(x=>x.IdCup == id).Single();
+                    var query = db.Cups.Single(x => x.IdCup == id);
                     res = Convert(query);
                 }
                 catch (Exception exc)
@@ -234,7 +232,7 @@ namespace DAL
             {
                 try
                 {
-                    var delete = db.Cups.Where(x => x.IdCup == idCup).Single();
+                    var delete = db.Cups.Single(x => x.IdCup == idCup);
                     db.Cups.Remove(delete);
                     db.SaveChanges();
                 }
@@ -294,23 +292,19 @@ namespace DAL
                                      ShootingRangePhone = shootingRange.Telefon
                                  }).ToList();
 
-                    foreach (var item in query)
+                    res.AddRange(query.Select(item => new CupDetailsParams
                     {
-                        res.Add(new CupDetailsParams
-                        {
-                            Id = item.Cup.IdCup,
-                            Name = item.Cup.Name,
-                            DateStart = item.Cup.DateStart,
-                            DateEnd = item.Cup.DateEnd,
-                            CupType = item.CupType,
-                            RangeName = item.ShootingRangeName,
-                            Town = item.Town,
-                            Region = item.Region,
-                            RangeAddress = item.ShootingRangeAddress,
-                            RangePhone = item.ShootingRangePhone
-                        });
-                    }
-
+                        Id = item.Cup.IdCup,
+                        Name = item.Cup.Name,
+                        DateStart = item.Cup.DateStart,
+                        DateEnd = item.Cup.DateEnd,
+                        CupType = item.CupType,
+                        RangeName = item.ShootingRangeName,
+                        Town = item.Town,
+                        Region = item.Region,
+                        RangeAddress = item.ShootingRangeAddress,
+                        RangePhone = item.ShootingRangePhone
+                    }));
                 }
             }
             catch (Exception exc)

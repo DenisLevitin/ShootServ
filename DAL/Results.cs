@@ -18,6 +18,13 @@ namespace DAL
         public int IdShooter { get; set; }
         public int IdCompetitionTypeCup { get; set; }
         public int ResultInPoints { get; set; }
+        public Nullable<double> Serie1 { get; set; }
+        public Nullable<double> Serie2 { get; set; }
+        public Nullable<double> Serie3 { get; set; }
+        public Nullable<double> Serie4 { get; set; }
+        public Nullable<double> Serie5 { get; set; }
+        public Nullable<double> Serie6 { get; set; }
+        public Nullable<double> ResultOfFinal { get; set; }
     
         public virtual CupCompetitionType CupCompetitionType { get; set; }
         public virtual Shooters Shooters { get; set; }
