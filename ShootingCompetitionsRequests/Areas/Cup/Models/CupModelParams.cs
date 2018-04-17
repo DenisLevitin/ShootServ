@@ -415,9 +415,9 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// <summary>
         /// Является ли пользователь стрелком
         /// </summary>
-        /// <param name="idUser">ид. пользователя</param>
+        /// <param name="user">пользователь</param>
         /// <returns></returns>
-        public bool IsUserShooter(UserParams user)
+        public static bool IsUserShooter(UserParams user)
         {
             return user.IdRole == (int) RoleParams.RoleEnum.Shooter;
         }

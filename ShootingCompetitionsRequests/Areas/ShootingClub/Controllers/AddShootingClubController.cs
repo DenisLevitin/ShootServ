@@ -3,10 +3,11 @@ using System.Web.Mvc;
 using ShootingCompetitionsRequests.Models;
 using ShootingCompetitionsRequests.App_Start;
 using BO;
+using ShootingCompetitionsRequests.Controllers;
 
 namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
 {
-    public class AddShootingClubController : Controller
+    public class AddShootingClubController : BaseController
     {
         //
         // GET: /ShootingClub/ShootingClub/
@@ -15,7 +16,7 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         public ActionResult Index()
         {
             var model = new ShooterClubModelParams();
-            model.IsLogin = Session["user"] != null;
+            model.IsLogin = CurrentUser != null;
 
             return View("Index", model);
         }
@@ -54,7 +55,7 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         [CustomAuthorize]
         public ActionResult Add(ShooterClubModelParams model)
         {
-            var res = _modelLogic.AddShootingClub(model, _user.Id);
+            var res = _modelLogic.AddShootingClub(model, CurrentUser.Id);
             return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
 
@@ -62,16 +63,8 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         [CustomAuthorize]
         public ActionResult Delete(int idClub)
         {
-            var res = _modelLogic.Delete(idClub, _user.Id);
+            var res = _modelLogic.Delete(idClub, CurrentUser.Id);
             return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
-        }
-
-        private UserParams _user
-        {
-            get
-            {
-                return Session["user"] as UserParams;
-            }
         }
     }
 }

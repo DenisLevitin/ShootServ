@@ -1,6 +1,5 @@
 ﻿using BO;
 using ShootingCompetitionsRequests.Areas.Registration.Models;
-using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
 using ShootingCompetitionsRequests.Models;
 using System.Web.Mvc;
 using ShootingCompetitionsRequests.Controllers;

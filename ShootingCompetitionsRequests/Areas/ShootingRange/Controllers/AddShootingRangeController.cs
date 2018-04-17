@@ -1,11 +1,11 @@
-﻿using BO;
-using ShootingCompetitionsRequests.App_Start;
+﻿using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.ShootingRange.Models;
 using System.Web.Mvc;
+using ShootingCompetitionsRequests.Controllers;
 
 namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
 {
-    public class AddShootingRangeController : Controller
+    public class AddShootingRangeController : BaseController
     {
         //
         // GET: /ShootingRange/AddShootingRange/
@@ -15,7 +15,7 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
         {
             var model = new ShootingRangeModelParams
             {
-                IsLogin = Session["user"] != null
+                IsLogin = CurrentUser != null
             };
             // Определяем залогирован ли пользователь в системе
 
@@ -33,7 +33,7 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
         [HttpGet]
         public ActionResult Add(ShootingRangeModelParams model)
         {
-            var res = ShootingRangeModelLogic.Add(model, _user.Id);
+            var res = ShootingRangeModelLogic.Add(model, CurrentUser.Id);
             return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
@@ -41,17 +41,8 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
         [HttpGet]
         public ActionResult Delete(int idShootingRange)
         {
-            var res = ShootingRangeModelLogic.Delete(idShootingRange, _user.Id);
+            var res = ShootingRangeModelLogic.Delete(idShootingRange, CurrentUser.Id);
             return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
-
-        private UserParams _user
-        {
-            get
-            {
-                return Session["user"] as UserParams;
-            }
-        }
-
     }
 }

@@ -1,11 +1,8 @@
 ﻿using BL;
 using BO;
 using ShootingCompetitionsRequests.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ShootingCompetitionsRequests.Areas.ShootingRange.Models
@@ -99,7 +96,6 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Models
 
     public class ShootingRangeModelLogic
     {
-
         /// <summary>
         /// Получить список тиров по региону
         /// </summary>
@@ -133,6 +129,7 @@ namespace ShootingCompetitionsRequests.Areas.ShootingRange.Models
         /// Добавить тир
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="userId"></param>
         public static ResultInfo Add(ShootingRangeModelParams model, int userId)
         {
             var blShootingRange = new ShootingRangeLogic();

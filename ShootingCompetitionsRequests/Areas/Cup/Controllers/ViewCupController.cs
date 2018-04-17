@@ -3,10 +3,11 @@ using BO;
 using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.Cup.Models;
 using System.Web.Mvc;
+using ShootingCompetitionsRequests.Controllers;
 
 namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
 {
-    public class ViewCupController : Controller
+    public class ViewCupController : BaseController
     {
         //
         // GET: /Cup/ViewCup/
@@ -26,20 +27,19 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         {
             var model = _modelLogic.GetCup(idCup);
 
-            ViewBag.IsLogin = Session["user"] != null;
+            ViewBag.IsLogin = CurrentUser != null;
             return View(model);
         }
 
         public ActionResult GetCompetitionsList(int idCup)
         {
-            var user = (UserParams)Session["user"];
-            int idUser = user != null ? user.Id : -1;
+            int idUser = CurrentUser?.Id ?? -1;
             var competitions = _viewCupModelLogic.GetCompetitionList(idCup, idUser);
 
             var model = new ViewCupCompetitionModel
             {
                 Competitions = competitions,
-                ShowEntryButton = (user != null && _modelLogic.IsUserShooter(user)),
+                ShowEntryButton = (CurrentUser != null && CupModelLogic.IsUserShooter(CurrentUser)),
                 IdCup = idCup
             };
 
@@ -47,9 +47,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         }
 
         public ActionResult GetEntryShootersList(int idCup)
-        {
-            var clubs = _viewCupModelLogic.GetClubsByCup(idCup);
-            
+        {            
             var model = new EntryShootersModel
             {
                 Shooters = _viewCupModelLogic.GetEntryShooters(idCup, -1),
@@ -65,11 +63,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
 
             var sexEnum = sex == 1 ? SexEnum.Men : SexEnum.Women;
             var query = _entryLogic.PrintEntryList(path, idCup, sexEnum, idClub);
-            if (query.Result.IsOk)
-            {
-                return File(query.Data.Content, System.Net.Mime.MediaTypeNames.Application.Octet, query.Data.FileName);
-            }
-            else return new EmptyResult();
+            return query.Result.IsOk ? (ActionResult) File(query.Data.Content, System.Net.Mime.MediaTypeNames.Application.Octet, query.Data.FileName) : new EmptyResult();
         }
 
         public ActionResult GetEntryShootersListByClub(int idCup, int idClub)
@@ -82,11 +76,10 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         public ActionResult CreateEntry(int idCompType, int idCup)
         {
             var res = new ResultInfo();
-            var user = Session["user"];
 
-            if (user != null && user is UserParams)
+            if (CurrentUser != null)
             {
-                res = _viewCupModelLogic.CreateEntry(((UserParams)user).Id, idCup, idCompType);
+                res = _viewCupModelLogic.CreateEntry(CurrentUser.Id, idCup, idCompType);
             }
             else
             {
