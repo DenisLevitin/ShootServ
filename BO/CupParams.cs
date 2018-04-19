@@ -5,13 +5,8 @@ namespace BO
     /// <summary>
     /// Соревнование
     /// </summary>
-    public class CupParams
+    public class CupParams : ModelBase
     {
-        /// <summary>
-        /// Ид
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Название
         /// </summary>

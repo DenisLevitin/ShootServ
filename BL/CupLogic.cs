@@ -37,7 +37,7 @@ namespace BL
             var queryUser = _userLogic.Get(cup.IdUser);
             if (queryUser.IdRole == (int)RolesEnum.Organization)
             {
-                res = _dalCup.Add(cup);
+                res.Data = _dalCup.Create(cup);
             }
             else 
             {
@@ -201,11 +201,8 @@ namespace BL
                             res = _dalCupCompType.DelRange(listDeleting);
                             if (res.IsOk)
                             {
-                                res = _dalCup.Update(idCup, cup);
-
-                                
-                                var intersectingIds = competitions.Select(x => x.IdCompetitionType).Intersect(competitionsExists.Select(y => y.IdCompetitionType)); // Определяем множество упражнений, которые остались
-
+                                _dalCup.Update(cup, idCup);
+                                var intersectingIds = new HashSet<int>(competitions.Select(x => x.IdCompetitionType).Intersect(competitionsExists.Select(y => y.IdCompetitionType))); // Определяем множество упражнений, которые остались
                                 var intersecting = competitions.Where(x => intersectingIds.Contains(x.IdCompetitionType));
 
                                 // 3. У упражнений, которые не надо удалить или добавить обновить все атрибуты ( пока что время начала первой смены )
@@ -224,15 +221,13 @@ namespace BL
                                 }
                             }
                         }
-                    }
-                    
+                    }     
                 }
                 else
                 {
                     res.IsOk = false;
                     res.ErrorMessage = "Невозможно отредактировать соревнование, т.к вы удаляете упражнения, на которые уже есть заявки";
                 }
-
             }
             else
             {
@@ -254,22 +249,24 @@ namespace BL
             var res = new ResultInfo();
 
             // Проверяем наличие заявок
-            var queryEntry = _dalEntryComp.GetByCup(idCup);
-            if (!queryEntry.Any())
+            var entries = _dalEntryComp.GetByCup(idCup);
+            if (entries.Count == 0)
             {
                 var cup = _dalCup.Get(idCup);
                 // Можем удалить соревнование, только если пользователь его создал
                 if (cup.IdUser == idUser)
                 {
                     /// ОБЯЗАТЕЛЬНО ДОЛЖНО БЫТЬ КАСКАДНОЕ УДАЛЕНИЕ УПРАЖНЕНИЙ НА СОРЕВНОВАНИИ
-                    res = _dalCup.Delete(idCup);
+                    _dalCup.Delete(idCup);
                 }
-                else {
+                else 
+                {
                     res.IsOk = false;
                     res.ErrorMessage = "Пользователь не может удалить соревнование, т.к не он его создал";
                 }
             }
-            else {
+            else 
+            {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя удалить соревнование, т.к на него уже поданы заявки";
             }

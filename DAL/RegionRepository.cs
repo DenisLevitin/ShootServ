@@ -26,12 +26,12 @@ namespace DAL
         /// <returns></returns>
         public RegionParams Get(int idRegion)
         {
-            RegionParams region = new RegionParams();
+            var region = new RegionParams();
             using (var db = DBContext.GetContext())
             {
                 try
                 {
-                    region = Convert(db.Regions.Where(x => x.IdRegion == idRegion).FirstOrDefault());
+                    region = Convert(db.Regions.FirstOrDefault(x => x.IdRegion == idRegion));
                 }
                 catch (Exception exc)
                 {

@@ -9,9 +9,9 @@ namespace DAL
     /// <summary>
     /// DAL класс для работы с таблицей Cups
     /// </summary>
-    public class CupRepository
+    public class CupRepository : BaseRepository<CupParams, Cups>
     {
-        private Cups Convert(CupParams cup)
+        protected override Cups ConvertToEntity(CupParams cup)
         {
             return new Cups
             {
@@ -27,7 +27,12 @@ namespace DAL
             };
         }
 
-        private CupParams Convert(Cups cup)
+        protected override Func<Cups, int> GetPrimaryKeyValue
+        {
+            get { return (x) => x.IdCup; }
+        }
+
+        protected override CupParams ConvertToModel(Cups cup)
         {
             return new CupParams
             {
@@ -42,124 +47,6 @@ namespace DAL
                 DateCreate = cup.DateCreate
             };
         }
-
-        /// <summary>
-        /// Добавить соревнование
-        /// </summary>
-        /// <param name="cup"></param>
-        /// <returns></returns>
-        public ResultInfoStruct<int> Add(CupParams cup)
-        {
-            var res = new ResultInfoStruct<int>();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var adding = Convert(cup);
-                    db.Cups.Add(adding);
-                    db.SaveChanges();
-
-                    res.Data = adding.IdCup;
-                }
-                catch (Exception exc)
-                {
-                    res.Result.IsOk = false;
-                    res.Result.ErrorMessage = "Не удалось добавить соревнование в базу";
-                    res.Result.Exc = exc;
-                }
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Обновить соревнование
-        /// </summary>
-        /// <param name="idCup">ид соревнования</param>
-        /// <param name="cup">соревнование</param>
-        /// <returns></returns>
-        public ResultInfo Update(int idCup, CupParams cup)
-        {
-            var res = new ResultInfo();
-
-            try
-            {
-                using (var db = DBContext.GetContext())
-                {
-                    var updating = new Cups { IdCup = idCup};
-                    db.Cups.Attach(updating);
-
-                    updating.IdCupType = cup.IdCupType;
-                    updating.IdShootingRange = cup.IdShootingRange;
-                    updating.IdUser = cup.IdUser;
-                    updating.Name = cup.Name;
-                    updating.DateCreate = cup.DateCreate;
-                    updating.DateEnd = cup.DateEnd;
-                    updating.DateStart = cup.DateStart;
-                    updating.Document = cup.Document;
-
-                    db.Entry(updating).State = EntityState.Modified;
-
-                    db.SaveChanges();
-                }
-            }
-            catch (Exception exc)
-            {
-                res.IsOk = false;
-                res.ErrorMessage = "При обновлении соревнования произошла ошибка";
-                res.Exc = exc;
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Получить по ид.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public CupParams Get(int id)
-        {
-            CupParams res;
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var query = db.Cups.Single(x => x.IdCup == id);
-                    res = Convert(query);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении соревнования произошла ошибка");
-                }
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Получить по ид.
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public List<CupParams> GetAll()
-        {
-            List<CupParams> res;
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    res = db.Cups.ToList().ConvertAll(Convert);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении списка соревнования произошла ошибка");
-                }
-            }
-
-            return res;
-        }
-
         
         /// <summary>
         /// Получить список соревнований по региону и датам
@@ -180,7 +67,7 @@ namespace DAL
                            where shootingRange.IdRegion == idRegion && cup.DateStart >= dateFrom && cup.DateStart <= dateTo
                            select cup).ToList();
 
-                    res = query.ConvertAll(Convert);
+                    res = query.ConvertAll(ConvertToModel);
                 }
                 catch (Exception exc)
                 {
@@ -209,38 +96,11 @@ namespace DAL
                                  where cup.DateStart >= dateFrom && cup.DateStart <= dateTo && cup.IdShootingRange == idShootingRange
                                  select cup).ToList();
 
-                    res = query.ConvertAll(Convert);
+                    res = query.ConvertAll(ConvertToModel);
                 }
                 catch (Exception exc)
                 {
                     throw new Exception("При получении списка соревнований произошла ошибка");
-                }
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Удалить соревнование
-        /// </summary>
-        /// <param name="idCup"></param>
-        /// <returns></returns>
-        public ResultInfo Delete(int idCup)
-        {
-            var res = new ResultInfo();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var delete = db.Cups.Single(x => x.IdCup == idCup);
-                    db.Cups.Remove(delete);
-                    db.SaveChanges();
-                }
-                catch (Exception exc)
-                {
-                    res.IsOk = false;
-                    res.ErrorMessage = "Не удалось удалить соревнование из базы";
-                    res.Exc = exc;
                 }
             }
 
@@ -367,6 +227,5 @@ namespace DAL
 
             return res;
         }
-
     }
 }

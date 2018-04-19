@@ -53,6 +53,7 @@
     <Compile Include="EntryForCompetitionsParams.cs" />
     <Compile Include="EntryStatusParams.cs" />
     <Compile Include="FileContent.cs" />
+    <Compile Include="ModelBase.cs" />
     <Compile Include="RecoveryPasswordsParams.cs" />
     <Compile Include="RegionParams.cs" />
     <Compile Include="ResultInfo.cs" />
