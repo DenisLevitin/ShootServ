@@ -14,13 +14,18 @@ namespace BL
         }
 
         /// <summary>
-        /// Получить список соревнований на соревновании
+        /// Получить список выпоняемых упражнений на соревновании
         /// </summary>
         /// <param name="idCup">ид. соревнования</param>
         /// <returns></returns>
         public List<CupCompetitionTypeParams> GetByCup(int idCup)
         {
             return _dalCupCompetitionType.GetByCup(idCup);
+        }
+
+        public CupCompetitionTypeParams Get(int id)
+        {
+            return _dalCupCompetitionType.Get(id);
         }
     }
 }

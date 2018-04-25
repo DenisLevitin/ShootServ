@@ -27,7 +27,6 @@ namespace DAL
     
         public DbSet<CupTypes> CupTypes { get; set; }
         public DbSet<EntryStatus> EntryStatus { get; set; }
-        public DbSet<Results> Results { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<ShooterCategory> ShooterCategory { get; set; }
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
@@ -43,5 +42,6 @@ namespace DAL
         public DbSet<Regions> Regions { get; set; }
         public DbSet<RecoveredPasswords> RecoveredPasswords { get; set; }
         public DbSet<Countries> Countries { get; set; }
+        public DbSet<Results> Results { get; set; }
     }
 }

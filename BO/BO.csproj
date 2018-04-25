@@ -59,6 +59,7 @@
     <Compile Include="ResultInfo.cs" />
     <Compile Include="ResultInfoRef.cs" />
     <Compile Include="ResultInfoStruct.cs" />
+    <Compile Include="ResultModelParams.cs" />
     <Compile Include="RoleParams.cs" />
     <Compile Include="ShooterCategoryParams.cs" />
     <Compile Include="ShooterClubDetalisationParams.cs" />

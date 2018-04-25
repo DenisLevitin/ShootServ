@@ -98,7 +98,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdShooter" Type="int" Nullable="false" />
           <Property Name="IdCompetitionTypeCup" Type="int" Nullable="false" />
-          <Property Name="ResultInPoints" Type="float" Nullable="false" />
           <Property Name="Serie1" Type="float" />
           <Property Name="Serie2" Type="float" />
           <Property Name="Serie3" Type="float" />
@@ -578,7 +577,6 @@
         <EntityContainer Name="ShootingCompetitionRequestsEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="CupTypes" EntityType="ShootingCompetitionRequestsModel.CupTypes" />
           <EntitySet Name="EntryStatus" EntityType="ShootingCompetitionRequestsModel.EntryStatus" />
-          <EntitySet Name="Results" EntityType="ShootingCompetitionRequestsModel.Results" />
           <EntitySet Name="Roles" EntityType="ShootingCompetitionRequestsModel.Roles" />
           <EntitySet Name="ShooterCategory" EntityType="ShootingCompetitionRequestsModel.ShooterCategory" />
           <EntitySet Name="sysdiagrams" EntityType="ShootingCompetitionRequestsModel.sysdiagrams" />
@@ -611,18 +609,10 @@
             <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
             <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Results_CupCompetitionType" Association="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType">
-            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
-            <End Role="Results" EntitySet="Results" />
-          </AssociationSet>
           <EntitySet Name="Shooters" EntityType="ShootingCompetitionRequestsModel.Shooters" />
           <AssociationSet Name="FK_EntryForCompetitions_Shooters" Association="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_Shooters">
             <End Role="Shooters" EntitySet="Shooters" />
             <End Role="EntryForCompetitions" EntitySet="EntryForCompetitions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Results_Shooters" Association="ShootingCompetitionRequestsModel.FK_Results_Shooters">
-            <End Role="Shooters" EntitySet="Shooters" />
-            <End Role="Results" EntitySet="Results" />
           </AssociationSet>
           <AssociationSet Name="FK_Shooters_ShooterCategory" Association="ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory">
             <End Role="ShooterCategory" EntitySet="ShooterCategory" />
@@ -682,6 +672,15 @@
             <End Role="Countries" EntitySet="Countries" />
             <End Role="Regions" EntitySet="Regions" />
           </AssociationSet>
+          <EntitySet Name="Results" EntityType="ShootingCompetitionRequestsModel.Results" />
+          <AssociationSet Name="FK_Results_CupCompetitionType" Association="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType">
+            <End Role="CupCompetitionType" EntitySet="CupCompetitionType" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Results_Shooters" Association="ShootingCompetitionRequestsModel.FK_Results_Shooters">
+            <End Role="Shooters" EntitySet="Shooters" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="CupTypes">
           <Key>
@@ -700,24 +699,6 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Keychar" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EntryForCompetitions" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_EntryStatus" FromRole="EntryStatus" ToRole="EntryForCompetitions" />
-        </EntityType>
-        <EntityType Name="Results">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="IdShooter" Nullable="false" />
-          <Property Type="Int32" Name="IdCompetitionTypeCup" Nullable="false" />
-          <Property Type="Int32" Name="ResultInPoints" Nullable="false" />
-          <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType" FromRole="Results" ToRole="CupCompetitionType" />
-          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Results" ToRole="Shooters" />
-          <Property Name="Serie1" Type="Double" />
-          <Property Name="Serie2" Type="Double" />
-          <Property Name="Serie3" Type="Double" />
-          <Property Name="Serie4" Type="Double" />
-          <Property Name="Serie5" Type="Double" />
-          <Property Name="Serie6" Type="Double" />
-          <Property Name="ResultOfFinal" Type="Double" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -885,18 +866,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Results_CupCompetitionType">
-          <End Type="ShootingCompetitionRequestsModel.CupCompetitionType" Role="CupCompetitionType" Multiplicity="1" />
-          <End Type="ShootingCompetitionRequestsModel.Results" Role="Results" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CupCompetitionType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Results">
-              <PropertyRef Name="IdCompetitionTypeCup" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Shooters">
           <Key>
             <PropertyRef Name="IdShooter" />
@@ -914,11 +883,11 @@
           <Property Type="DateTime" Name="DateCreate" Nullable="false" Precision="3" />
           <Property Type="Boolean" Name="Sex" Nullable="false" />
           <NavigationProperty Name="EntryForCompetitions" Relationship="ShootingCompetitionRequestsModel.FK_EntryForCompetitions_Shooters" FromRole="Shooters" ToRole="EntryForCompetitions" />
-          <NavigationProperty Name="Results" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Shooters" ToRole="Results" />
           <NavigationProperty Name="ShooterCategory" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory" FromRole="Shooters" ToRole="ShooterCategory" />
           <NavigationProperty Name="WeaponTypes" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_WeaponTypes" FromRole="Shooters" ToRole="WeaponTypes" />
           <NavigationProperty Name="ShooterClubs" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterClubs" FromRole="Shooters" ToRole="ShooterClubs" />
           <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_Users" FromRole="Shooters" ToRole="Users" />
+          <NavigationProperty Name="Results" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Shooters" ToRole="Results" />
         </EntityType>
         <Association Name="FK_EntryForCompetitions_Shooters">
           <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="1" />
@@ -928,18 +897,6 @@
               <PropertyRef Name="IdShooter" />
             </Principal>
             <Dependent Role="EntryForCompetitions">
-              <PropertyRef Name="IdShooter" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Results_Shooters">
-          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="1" />
-          <End Type="ShootingCompetitionRequestsModel.Results" Role="Results" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Shooters">
-              <PropertyRef Name="IdShooter" />
-            </Principal>
-            <Dependent Role="Results">
               <PropertyRef Name="IdShooter" />
             </Dependent>
           </ReferentialConstraint>
@@ -1185,6 +1142,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdShooter" Type="Int32" Nullable="false" />
+          <Property Name="IdCompetitionTypeCup" Type="Int32" Nullable="false" />
+          <Property Name="Serie1" Type="Double" />
+          <Property Name="Serie2" Type="Double" />
+          <Property Name="Serie3" Type="Double" />
+          <Property Name="Serie4" Type="Double" />
+          <Property Name="Serie5" Type="Double" />
+          <Property Name="Serie6" Type="Double" />
+          <Property Name="ResultOfFinal" Type="Double" />
+          <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType" FromRole="Results" ToRole="CupCompetitionType" />
+          <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Results" ToRole="Shooters" />
+        </EntityType>
+        <Association Name="FK_Results_CupCompetitionType">
+          <End Type="ShootingCompetitionRequestsModel.CupCompetitionType" Role="CupCompetitionType" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CupCompetitionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdCompetitionTypeCup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Results_Shooters">
+          <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.Results" Role="Results" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shooters">
+              <PropertyRef Name="IdShooter" />
+            </Principal>
+            <Dependent Role="Results">
+              <PropertyRef Name="IdShooter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1206,23 +1204,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Keychar" ColumnName="Keychar" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Results">
-      <EntityTypeMapping TypeName="IsTypeOf(ShootingCompetitionRequestsModel.Results)">
-        <MappingFragment StoreEntitySet="Results">
-          <ScalarProperty Name="ResultOfFinal" ColumnName="ResultOfFinal" />
-                <ScalarProperty Name="Serie6" ColumnName="Serie6" />
-                <ScalarProperty Name="Serie5" ColumnName="Serie5" />
-                <ScalarProperty Name="Serie4" ColumnName="Serie4" />
-                <ScalarProperty Name="Serie3" ColumnName="Serie3" />
-                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
-                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdShooter" ColumnName="IdShooter" />
-          <ScalarProperty Name="IdCompetitionTypeCup" ColumnName="IdCompetitionTypeCup" />
-          <ScalarProperty Name="ResultInPoints" ColumnName="ResultInPoints" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1403,6 +1384,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Results">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="ResultOfFinal" ColumnName="ResultOfFinal" />
+                <ScalarProperty Name="Serie6" ColumnName="Serie6" />
+                <ScalarProperty Name="Serie5" ColumnName="Serie5" />
+                <ScalarProperty Name="Serie4" ColumnName="Serie4" />
+                <ScalarProperty Name="Serie3" ColumnName="Serie3" />
+                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
+                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
+                <ScalarProperty Name="IdCompetitionTypeCup" ColumnName="IdCompetitionTypeCup" />
+                <ScalarProperty Name="IdShooter" ColumnName="IdShooter" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

@@ -34,10 +34,10 @@ namespace DAL
         public bool Sex { get; set; }
     
         public virtual ICollection<EntryForCompetitions> EntryForCompetitions { get; set; }
-        public virtual ICollection<Results> Results { get; set; }
         public virtual ShooterCategory ShooterCategory { get; set; }
         public virtual WeaponTypes WeaponTypes { get; set; }
         public virtual ShooterClubs ShooterClubs { get; set; }
         public virtual Users Users { get; set; }
+        public virtual ICollection<Results> Results { get; set; }
     }
 }

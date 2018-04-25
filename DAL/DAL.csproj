@@ -83,6 +83,9 @@
       <DependentUpon>EDMX.edmx</DependentUpon>
     </Compile>
     <Compile Include="ResultRepository.cs" />
+    <Compile Include="Results.cs">
+      <DependentUpon>EDMX.tt</DependentUpon>
+    </Compile>
     <Compile Include="ShooterCategoryRepository.cs" />
     <Compile Include="CompetitionTypeRepository.cs" />
     <Compile Include="CountriesRepository.cs" />
@@ -122,9 +125,6 @@
       <DependentUpon>EDMX.tt</DependentUpon>
     </Compile>
     <Compile Include="Regions.cs">
-      <DependentUpon>EDMX.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Results.cs">
       <DependentUpon>EDMX.tt</DependentUpon>
     </Compile>
     <Compile Include="Roles.cs">

@@ -93,7 +93,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdShooter" Type="int" Nullable="false" />
     <Property Name="IdCompetitionTypeCup" Type="int" Nullable="false" />
-    <Property Name="ResultInPoints" Type="float" Nullable="false" />
     <Property Name="Serie1" Type="float" />
     <Property Name="Serie2" Type="float" />
     <Property Name="Serie3" Type="float" />

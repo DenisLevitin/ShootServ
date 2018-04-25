@@ -17,7 +17,6 @@ namespace DAL
         public int Id { get; set; }
         public int IdShooter { get; set; }
         public int IdCompetitionTypeCup { get; set; }
-        public int ResultInPoints { get; set; }
         public Nullable<double> Serie1 { get; set; }
         public Nullable<double> Serie2 { get; set; }
         public Nullable<double> Serie3 { get; set; }

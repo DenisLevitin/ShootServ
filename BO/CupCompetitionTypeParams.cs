@@ -5,13 +5,8 @@ namespace BO
     /// <summary>
     /// Упражнение на соревновании
     /// </summary>
-    public class CupCompetitionTypeParams
+    public class CupCompetitionTypeParams : ModelBase
     {
-        /// <summary>
-        /// Идентификатор связки
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Идентификатор соревнования
         /// </summary>
