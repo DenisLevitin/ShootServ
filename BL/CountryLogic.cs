@@ -17,7 +17,7 @@ namespace BL
         /// Получить все страны
         /// </summary>
         /// <returns></returns>
-        public ResultInfoRef<List<CountryParams>> GetAllCounties()
+        public List<CountryParams> GetAllCounties()
         {
             return _dalCountries.GetAll();
         }
