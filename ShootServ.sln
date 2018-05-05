@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailSender", "EmailSender\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenXmlHelpers", "OpenXmlHelper\OpenXmlHelpers.csproj", "{A4F87EB8-BE08-4BE9-944F-9A839D95D70E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootingCompetitionsRequestsWeb", "ShootingCompetitionsRequests\ShootingCompetitionsRequestsWeb.csproj", "{6991581B-BB7E-45DE-B537-326A8F1DBBA4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShootServ", "ShootServWeb\ShootServ.csproj", "{6991581B-BB7E-45DE-B537-326A8F1DBBA4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
