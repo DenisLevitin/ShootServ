@@ -65,3 +65,8 @@
 /packages/ClosedXML.0.85.0/lib/net35/ClosedXML.xml
 /packages/ClosedXML.0.85.0/lib/net40/ClosedXML.xml
 /packages/DocumentFormat.OpenXml.2.5/DocumentFormat.OpenXml.2.5.nupkg
+/.vs/ShootServ/v15/*.suo
+/.vs/ShootServ/v15/Server/sqlite3/*.lock
+/.vs/ShootServ/v15/Server/sqlite3/*.ide
+/.vs/ShootServ/v15/Server/sqlite3/*.ide-shm
+/.vs/ShootServ/v15/Server/sqlite3/*.ide-wal
