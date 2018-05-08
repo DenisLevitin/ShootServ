@@ -35,11 +35,11 @@ namespace BL
             var res = new ResultInfoStruct<int>();
 
             var queryUser = _userLogic.Get(cup.IdUser);
-            if (queryUser.IdRole == (int)RolesEnum.Organization)
+            if (queryUser.IdRole == (int) RolesEnum.Organization)
             {
                 res.Data = _dalCup.Create(cup);
             }
-            else 
+            else
             {
                 res.Result.IsOk = false;
                 res.Result.ErrorMessage = "Пользователь не является организатором, поэтому не может создать соревнование";
@@ -68,9 +68,7 @@ namespace BL
                     foreach (var item in compTypes)
                     {
                         item.IdCup = queryAddCup.Data;
-
-                        var queryAddComp = _dalCupCompType.Add(item);
-                        res.Result = queryAddComp;
+                        res.Data = _dalCupCompType.Create(item);
 
                         if (!res.Result.IsOk)
                         {
@@ -162,7 +160,7 @@ namespace BL
         /// <param name="cup">соревнование</param>
         /// <param name="competitions">список упражнений на обновление</param>
         /// <returns></returns>
-        public ResultInfo Update(int idCup, int idUser, CupParams cup, List<CupCompetitionTypeParams> competitions )
+        public ResultInfo Update(int idCup, int idUser, CupParams cup, List<CupCompetitionTypeParams> competitions)
         {
             var res = new ResultInfo();
 
@@ -179,7 +177,7 @@ namespace BL
                 var deleting = competitionsExists.Select(x => x.IdCompetitionType).Except(competitions.Select(x => x.IdCompetitionType)); // то, что следует удалить
 
                 var existCompetitionsWithEntry = _dalCupCompType.GetByCupWithEntry(idCup); // существующие заявки
-                bool isExistsEntryForDeleting = deleting.Any(x => existCompetitionsWithEntry.Select( y=>y.IdCompetitionType).Contains(x)); // определяем существуют ли заявки на упражнения, которые удаляются
+                bool isExistsEntryForDeleting = deleting.Any(x => existCompetitionsWithEntry.Select(y => y.IdCompetitionType).Contains(x)); // определяем существуют ли заявки на упражнения, которые удаляются
 
                 if (!isExistsEntryForDeleting)
                 {
@@ -191,37 +189,30 @@ namespace BL
                     using (var tran = new TransactionScope())
                     {
                         // 1. Добавляем упражнения, на соревнования
-                        res = _dalCupCompType.AddRange(listInserting);
+                        _dalCupCompType.AddRange(listInserting);
 
+                        var listDeleting = competitionsExists.Where(x => deleting.Contains(x.IdCompetitionType)).ToList();
+
+                        // 2. Удаляем упражнения с соревнование
+                        res = _dalCupCompType.DelRange(listDeleting);
                         if (res.IsOk)
                         {
-                            var listDeleting = competitionsExists.Where(x => deleting.Contains(x.IdCompetitionType)).ToList();
+                            _dalCup.Update(cup, idCup);
+                            var intersectingIds = new HashSet<int>(competitions.Select(x => x.IdCompetitionType).Intersect(competitionsExists.Select(y => y.IdCompetitionType))); // Определяем множество упражнений, которые остались
+                            var intersecting = competitions.Where(x => intersectingIds.Contains(x.IdCompetitionType));
 
-                            // 2. Удаляем упражнения с соревнование
-                            res = _dalCupCompType.DelRange(listDeleting);
+                            // 3. У упражнений, которые не надо удалить или добавить обновить все атрибуты ( пока что время начала первой смены )
+                            foreach (var item in intersecting)
+                            {
+                                _dalCupCompType.Update(item, item.Id); // Косяк в том, что не понятно как проинициализировать IdCupCompetitionType
+                            }
+
                             if (res.IsOk)
                             {
-                                _dalCup.Update(cup, idCup);
-                                var intersectingIds = new HashSet<int>(competitions.Select(x => x.IdCompetitionType).Intersect(competitionsExists.Select(y => y.IdCompetitionType))); // Определяем множество упражнений, которые остались
-                                var intersecting = competitions.Where(x => intersectingIds.Contains(x.IdCompetitionType));
-
-                                // 3. У упражнений, которые не надо удалить или добавить обновить все атрибуты ( пока что время начала первой смены )
-                                foreach (var item in intersecting)
-                                {
-                                    res = _dalCupCompType.Update(item.Id, item);  // Косяк в том, что не понятно как проинициализировать IdCupCompetitionType
-                                    if (!res.IsOk)
-                                    {
-                                        break;
-                                    }
-                                }
-
-                                if (res.IsOk)
-                                {
-                                    tran.Complete();
-                                }
+                                tran.Complete();
                             }
                         }
-                    }     
+                    }
                 }
                 else
                 {
@@ -259,13 +250,13 @@ namespace BL
                     /// ОБЯЗАТЕЛЬНО ДОЛЖНО БЫТЬ КАСКАДНОЕ УДАЛЕНИЕ УПРАЖНЕНИЙ НА СОРЕВНОВАНИИ
                     _dalCup.Delete(idCup);
                 }
-                else 
+                else
                 {
                     res.IsOk = false;
                     res.ErrorMessage = "Пользователь не может удалить соревнование, т.к не он его создал";
                 }
             }
-            else 
+            else
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя удалить соревнование, т.к на него уже поданы заявки";

@@ -21,6 +21,8 @@ namespace BL
 
         public ResultInfo AddNewResult(int idShooter, int idCompetitionCupType, int idCurrentUser, float[] series)
         {
+            throw new NotImplementedException();
+            
             var cupCompetitionType = _cupCompetitionTypeLogic.Get(idCompetitionCupType);
 
             if (cupCompetitionType == null)
@@ -32,10 +34,8 @@ namespace BL
             var cup = _cupLogic.Get(cupCompetitionType.IdCup);
             if (cup.IdUser == idCurrentUser)
             {
-
-
                 // проверить кол-во серий
-                _resultRepository.Create();
+                //_resultRepository.Create();
             }
             else
             {
