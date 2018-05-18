@@ -52,6 +52,7 @@
     <Compile Include="CupTypeParams.cs" />
     <Compile Include="EntryForCompetitionsParams.cs" />
     <Compile Include="EntryStatusParams.cs" />
+    <Compile Include="Exceptions\ObjectNotFoundException.cs" />
     <Compile Include="FileContent.cs" />
     <Compile Include="ModelBase.cs" />
     <Compile Include="RecoveryPasswordsParams.cs" />

@@ -23,6 +23,7 @@ namespace BL
         /// <returns></returns>
         public CompetitionTypeParams Get(int id)
         {
+            /// через кеш
             return _dalCompetitionType.Get(id);
         }
 
