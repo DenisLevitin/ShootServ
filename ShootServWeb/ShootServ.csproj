@@ -177,6 +177,7 @@
     <Compile Include="Areas\Registration\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Registration\Models\RegPageModelParams.cs" />
     <Compile Include="Areas\Registration\RegistrationAreaRegistration.cs" />
+    <Compile Include="Areas\Results\Controllers\ResultsController.cs" />
     <Compile Include="Areas\ShootingClub\Controllers\AddShootingClubController.cs" />
     <Compile Include="Areas\ShootingClub\Models\ShooterClubModelParams.cs" />
     <Compile Include="Areas\ShootingClub\ShootingClubAreaRegistration.cs" />

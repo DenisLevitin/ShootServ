@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BO;
 using BO.Exceptions;
 using DAL;
@@ -103,6 +104,18 @@ namespace BL
             }
 
             return res;
+        }
+
+        /// TODO: Возможно ниже придется альтернативу методу по IdCup и IdCompetitionType
+
+        /// <summary>
+        /// Получить результат соревнований в упражнении
+        /// </summary>
+        /// <param name="idCompetitionTypeCup"></param>
+        /// <returns></returns>
+        public List<ResultModelParams> GetByCompetitionInCup(int idCompetitionTypeCup)
+        {
+            return _resultRepository.GetByCompetitionInCup(idCompetitionTypeCup);
         }
     }
 }
