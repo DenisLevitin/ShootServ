@@ -3,13 +3,8 @@
     /// <summary>
     /// Страна
     /// </summary>
-    public class CountryParams
+    public class CountryParams : ModelBase
     {
-        /// <summary>
-        /// Ид. страны
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Код страны
         /// </summary>

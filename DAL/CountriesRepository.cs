@@ -5,9 +5,11 @@ using System.Linq;
 
 namespace DAL
 {
-    public class CountriesRepository
+    public class CountriesRepository : BaseRepository<CountryParams, Countries>
     {
-        private CountryParams Convert(Countries country)
+        protected override Func<Countries, int> GetPrimaryKeyValue { get { return x => x.Id; } }
+
+        protected override CountryParams ConvertToModel(Countries country)
         {
             return new CountryParams
             {
@@ -17,55 +19,14 @@ namespace DAL
             };
         }
 
-        /// <summary>
-        /// Получить страну по идентификатору
-        /// </summary>
-        /// <param name="id">ид</param>
-        /// <returns></returns>
-        public ResultInfoRef<CountryParams> GetCountryById(int id)
+        protected override Countries ConvertToEntity(CountryParams country)
         {
-            var res = new ResultInfoRef<CountryParams>();
-
-            try
+            return new Countries
             {
-                using (var db = DBContext.GetContext())
-                {
-                    res.Data = Convert(db.Countries.Single(x => x.Id == id));
-                }
-            }
-            catch (Exception exc)
-            {
-                res.Result.IsOk = false;
-                res.Result.ErrorMessage = "Произошла ошибка при получении страны";
-                res.Result.Exc = exc;
-            }
-
-            return res;
-        }
-
-        /// <summary>
-        /// Получить все страны
-        /// </summary>
-        /// <returns></returns>
-        public ResultInfoRef<List<CountryParams>> GetAll()
-        {
-            var res = new ResultInfoRef<List<CountryParams>>();
-
-            try
-            {
-                using (var db = DBContext.GetContext())
-                {
-                    res.Data = db.Countries.ToList().ConvertAll(Convert);
-                }
-            }
-            catch (Exception exc)
-            {
-                res.Result.IsOk = false;
-                res.Result.ErrorMessage = "Произошла ошибка при получении страны";
-                res.Result.Exc = exc;
-            }
-
-            return res;
+                Id = country.Id,
+                CountryName = country.CountryName,
+                CODE = country.Code
+            };
         }
 
         /// <summary>
@@ -81,10 +42,10 @@ namespace DAL
             {
                 using (var db = DBContext.GetContext())
                 {
-                    res.Data = Convert((from region in db.Regions
-                                    join country1 in db.Countries on region.IdCountry equals country1.Id
-                                    where region.IdRegion == idRegion
-                               select country1).Single());
+                    res.Data = ConvertToModel((from region in db.Regions
+                                               join country1 in db.Countries on region.IdCountry equals country1.Id
+                                               where region.IdRegion == idRegion
+                                               select country1).Single());
                 }
             }
             catch (Exception exc)

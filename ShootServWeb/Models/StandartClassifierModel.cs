@@ -70,26 +70,21 @@ namespace ShootingCompetitionsRequests.Models
         public static ResultInfoRef<List<SelectListItem>> GetCountryList(bool addAll = true)
         {
             var res = new ResultInfoRef<List<SelectListItem>>();
-           
-            var query = new CountryLogic().GetAllCounties();
-            if (query.Result.IsOk)
+
+            var countries = new CountryLogic().GetAllCounties();
+            if (addAll)
             {
-                if (addAll)
-                    res.Data.Add(new SelectListItem { Value = "-1", Text = "Все страны" });
-
-                foreach (var item in query.Data)
-                {
-                    res.Data.Add(new SelectListItem {Value = item.Id.ToString(), Text = item.CountryName});
-                }
-
-                if (res.Data.Any(x => x.Value == "1"))
-                {
-                    res.Data.Single(x => x.Value == "1").Selected = true;
-                }
+                res.Data.Add(new SelectListItem { Value = "-1", Text = "Все страны" });
             }
-            else
+
+            foreach (var item in countries)
             {
-                res.Result = query.Result;
+                res.Data.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.CountryName });
+            }
+
+            if (res.Data.Any(x => x.Value == "1"))
+            {
+                res.Data.Single(x => x.Value == "1").Selected = true;
             }
 
             return res;
