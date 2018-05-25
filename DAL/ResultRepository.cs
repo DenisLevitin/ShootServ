@@ -64,7 +64,8 @@ namespace DAL
         /// <returns></returns>
         public List<ResultModelParams> GetByCompetitionInCup(int idCompetitionTypeCup)
         {
-            return GetFiltered(x => x.IdCompetitionTypeCup == idCompetitionTypeCup).OrderByDescending(x=>x.ResultInPoints).ToList();
+            return GetFiltered(x => x.IdCompetitionTypeCup == idCompetitionTypeCup)
+                .OrderByDescending(x => x.Serie1.GetValueOrDefault() + x.Serie2.GetValueOrDefault() + x.Serie3.GetValueOrDefault() + x.Serie4.GetValueOrDefault() + x.Serie5.GetValueOrDefault() + x.Serie6.GetValueOrDefault()).ToList();
         }
     }
 }
