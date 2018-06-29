@@ -115,7 +115,7 @@
     <div id="divCupAttr" style="float:left; margin-right:10px; width:40%;">
         <fieldset>
             <legend>Соревнование</legend>
-        <table id="tableCupParams">
+            <table id="tableCupParams">
                 <tr>
                     <td>@Html.LabelFor(x=>x.Name)</td>
                     <td>@Html.TextBoxFor(x => x.Name, new { @readonly="readonly"})</td>
@@ -163,14 +163,19 @@
         <div id="divCompetitionsList" style="height:300px; margin-bottom:20px">
             <fieldset style="height:100%;">
                 <legend>Список упражнений</legend>
-            @{ Html.RenderAction("GetCompetitionsList", "ViewCup", new { idCup = Model.Id });}
+                @{ Html.RenderAction("GetCompetitionsList", "ViewCup", new { idCup = Model.Id });}
             </fieldset>
         </div>
         <div id="divEntryShootersList" style="height:auto">
             <fieldset style="height:100%; margin: 0 5px">
                 <legend>Список заявленных</legend>
-            @{ Html.RenderAction("GetEntryShootersList", "ViewCup", new { idCup = Model.Id });}
+                @{ Html.RenderAction("GetEntryShootersList", "ViewCup", new { idCup = Model.Id });}
             </fieldset>
         </div>
     </div>
+</div>
+
+<div class="dialog-add-result" style="display:none">
+    <h3></h3>
+    <button id="btSaveResult" title="Сохранить"></button>
 </div>
