@@ -82,3 +82,9 @@
 /.vs/ShootServ/v15/Server/sqlite3/*.ide
 /.vs/ShootServ/v15/Server/sqlite3/*.ide-shm
 /.vs/ShootServ/v15/Server/sqlite3/*.ide-wal
+/BL/bin/Debug/DAL.dll.config
+/.vs/ShootServ/v15/*.suo
+/.vs/ShootServ/DesignTimeBuild/*.dtbcache
+/.vs/config/applicationhost.config
+/ShootServWeb/obj/Debug/ShootServ.csproj.FileListAbsolute.txt
+/ShootServWeb/obj/Debug
