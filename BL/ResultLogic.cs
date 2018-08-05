@@ -60,10 +60,10 @@ namespace BL
         /// <summary>
         /// Добавить результат стрелка на соревновании
         /// </summary>
-        /// <param name="idShooter"></param>
+        /// <param name="idShooter">ид. стрелка</param>
         /// <param name="idCompetitionCupType">сквозной ид. упражнения на соревновании</param>
-        /// <param name="idCurrentUser"></param>
-        /// <param name="series"></param>
+        /// <param name="idCurrentUser">ид текущего пользователя</param>
+        /// <param name="series">серии по упражнению</param>
         /// <returns></returns>
         public ResultInfoStruct<int> AddNewResult(int idShooter, int idCompetitionCupType, int idCurrentUser, float[] series)
         {

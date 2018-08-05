@@ -1,8 +1,8 @@
-﻿using BO;
+﻿using System.Web.Mvc;
+using BO;
 using ShootingCompetitionsRequests.App_Start;
-using System.Web.Mvc;
 
-namespace ShootingCompetitionsRequests.Controllers
+namespace ShootServ.Controllers
 {
     public class HomeController : Controller
     {
@@ -21,7 +21,6 @@ namespace ShootingCompetitionsRequests.Controllers
             return View();
         }
 
-        //[CustomAuthorize]
         public ActionResult GetUserInfo()
         {
             var user = new UserParams();
@@ -37,7 +36,6 @@ namespace ShootingCompetitionsRequests.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Страница описания приложения.";
-
             return View();
         }
 

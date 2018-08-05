@@ -1,16 +1,15 @@
-﻿using BL;
-using BO;
-using ShootingCompetitionsRequests.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
+using BL;
+using BO;
+using ShootingCompetitionsRequests.Models;
 
-namespace ShootingCompetitionsRequests.Areas.Registration.Models
+namespace ShootServ.Models.Registration
 {
     /// <summary>
     /// Модель для страницы регистрации
@@ -291,6 +290,7 @@ namespace ShootingCompetitionsRequests.Areas.Registration.Models
                     }
                     catch (Exception exc)
                     {
+                        // что за долбанная жесть))
                         // Не удалось корректно показать стрелковый клуб и регион в модели, не беда )
                     }
 

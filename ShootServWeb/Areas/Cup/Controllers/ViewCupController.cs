@@ -1,11 +1,11 @@
-﻿using BL;
+﻿using System.Web.Mvc;
+using BL;
 using BO;
 using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.Cup.Models;
-using System.Web.Mvc;
 using ShootingCompetitionsRequests.Controllers;
 
-namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
+namespace ShootServ.Areas.Cup.Controllers
 {
     public class ViewCupController : BaseController
     {

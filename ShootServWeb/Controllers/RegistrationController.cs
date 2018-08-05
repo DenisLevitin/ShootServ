@@ -1,10 +1,10 @@
-﻿using BO;
-using ShootingCompetitionsRequests.Areas.Registration.Models;
-using ShootingCompetitionsRequests.Models;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using BO;
 using ShootingCompetitionsRequests.Controllers;
+using ShootingCompetitionsRequests.Models;
+using ShootServ.Models.Registration;
 
-namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
+namespace ShootServ.Controllers
 {
     public class RegistrationController : BaseController
     {
@@ -17,7 +17,6 @@ namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
 
         //
         // GET: /Registration/Registration/
-
         public ActionResult Index(int idUser = -1)
         {
             var model = new RegPageModelParams();

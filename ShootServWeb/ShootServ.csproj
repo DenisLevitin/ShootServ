@@ -174,11 +174,6 @@
     <Compile Include="Areas\Cup\CupAreaRegistration.cs" />
     <Compile Include="Areas\Cup\Models\CupModelParams.cs" />
     <Compile Include="Areas\Cup\Models\ViewCupCompetitionModel.cs" />
-    <Compile Include="Areas\Registration\Controllers\RegistrationController.cs" />
-    <Compile Include="Areas\Registration\Models\RegPageModelParams.cs" />
-    <Compile Include="Areas\Registration\RegistrationAreaRegistration.cs" />
-    <Compile Include="Areas\Results\Controllers\ResultsController.cs" />
-    <Compile Include="Areas\Results\ResultsAreaRegistration.cs" />
     <Compile Include="Areas\ShootingClub\Controllers\AddShootingClubController.cs" />
     <Compile Include="Areas\ShootingClub\Models\ShooterClubModelParams.cs" />
     <Compile Include="Areas\ShootingClub\ShootingClubAreaRegistration.cs" />
@@ -188,6 +183,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\StandartFiltersController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +193,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
+    <Compile Include="Models\Registration\RegPageModelParams.cs" />
     <Compile Include="Models\StandartClassifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -289,8 +287,6 @@
     <Content Include="Areas\ShootingClub\Views\Web.config" />
     <Content Include="Areas\ShootingClub\Views\AddShootingClub\Index.cshtml" />
     <Content Include="Areas\ShootingClub\Views\AddShootingClub\ListShootingClubs.cshtml" />
-    <Content Include="Areas\Registration\Views\Web.config" />
-    <Content Include="Areas\Registration\Views\Registration\Index.cshtml" />
     <Content Include="Areas\Cup\Views\Web.config" />
     <Content Include="Areas\Cup\Views\Cup\Index.cshtml" />
     <Content Include="Areas\Cup\Views\Cup\CompetitionsList.cshtml" />
@@ -300,7 +296,6 @@
     <Content Include="Areas\Cup\Views\ViewCup\EntryShootersList.cshtml" />
     <Content Include="Areas\Cup\Views\ViewCup\ShootersListTable.cshtml" />
     <Content Include="Content\Template\Шаблон_заявки_excel.xlsx" />
-    <Content Include="Areas\Results\Views\Index.cshtml" />
     <None Include="Properties\PublishProfiles\1.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Images\babax2.png" />
@@ -347,6 +342,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -397,8 +393,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Cup\Views\Shared\" />
-    <Folder Include="Areas\Registration\Views\Shared\" />
-    <Folder Include="Areas\Results\Model\" />
     <Folder Include="Areas\ShootingClub\Views\Shared\" />
     <Folder Include="Areas\ShootingRange\Views\Shared\" />
   </ItemGroup>
