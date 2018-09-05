@@ -15,8 +15,6 @@ namespace ShootServ.Controllers
             _modelLogic = new RegPageModelParams();
         }
 
-        //
-        // GET: /Registration/Registration/
         public ActionResult Index(int idUser = -1)
         {
             var model = new RegPageModelParams();
@@ -24,7 +22,6 @@ namespace ShootServ.Controllers
             if (idUser == -1)
             {
                 model.IsEditMode = false;
-                //model.RegionsList = //StandartClassifierModel.GetRegionsByCountry(-1);
                 model.RolesList = StandartClassifierModelLogic.GetRolesList();
 
                 var queryCountries = StandartClassifierModelLogic.GetCountryList();

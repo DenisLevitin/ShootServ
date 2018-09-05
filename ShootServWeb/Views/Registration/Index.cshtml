@@ -88,7 +88,7 @@ else
             if (ValidateInput(false)) {
 
                 $.ajax({
-                    url: "@Url.Action("AddUser", "Registration", new { Area = "Registration"})",
+                    url: "@Url.Action("AddUser", "Registration")",
                     dataType: "json",
                     data: $("form").serialize(),
                     async: false,

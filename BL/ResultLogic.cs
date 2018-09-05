@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BO;
 using BO.Exceptions;
 using DAL;
@@ -83,13 +84,23 @@ namespace BL
                 var competitionType = _competitionTypeLogic.Get(cupCompetitionType.IdCompetitionType);
                 if ( series.Length == competitionType.SeriesCount)
                 {
-                    var competitionResult = new ResultModelParams
+                    if (!series.Any(x => x > 100 || x < 0))
                     {
-                        IdShooter = idShooter,
-                        IdCompetitionTypeCup = idCompetitionCupType,
-                    };
-                    AddSeriesToResult(series, competitionResult);
-                    res.Data = _resultRepository.Create(competitionResult); /// TODO: Здесь по нормальному сделать надо, заполнение объекта с сериями сейчас некорректное
+                        var competitionResult = new ResultModelParams
+                        {
+                            IdShooter = idShooter,
+                            IdCompetitionTypeCup = idCompetitionCupType,
+                        };
+
+                        // Пока зашиваемся на логику без десятых, по простому
+                        AddSeriesToResult(series, competitionResult);
+                        res.Data = _resultRepository.Create(competitionResult); /// TODO: Здесь по нормальному сделать надо, заполнение объекта с сериями сейчас некорректное
+                    }
+                    else
+                    {
+                        res.Result.ErrorMessage = "Некорректное количество очков в серии";
+                        res.Result.IsOk = false;
+                    }
                 }
                 else
                 {

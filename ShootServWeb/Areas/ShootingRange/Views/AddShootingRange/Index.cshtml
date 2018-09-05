@@ -179,15 +179,10 @@
         }
     }
     //все для выпадающего контента
-    $(document).ready(togetherContent("#divAddShootingRange", "#divAddShootingR", 'Добавить тир'));
-    $(document).ready(togetherContent("#divShowShootingRange", "#divShowShootingR", 'Список тиров'));
-
-    $(document).ready(function () {
-        AddSumbol($("#divAddShootingRange"), true, 'Добавить тир');
-    });
-
-    $(document).ready(function () {
-        AddSumbol($("#divShowShootingRange"), true, 'Список тиров');
+    $(document).ready(function() {
+        togetherContent("#divAddShootingRange", "#divAddShootingR", 'Добавить тир');
+        addSumbol($("#divAddShootingRange"), true, 'Добавить тир');
+        addSumbol($("#divShowShootingRange"), true, 'Список тиров');
     });
    
 </script>
