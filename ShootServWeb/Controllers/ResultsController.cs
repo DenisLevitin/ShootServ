@@ -16,6 +16,5 @@ namespace ShootServ.Controllers
         {
             return View();
         }
-
     }
 }

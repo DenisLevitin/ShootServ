@@ -30,7 +30,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         }
 
         //[CustomAuthorize]
-        public ActionResult GetShootingRanges(int idRegion)
+        public ActionResult GetShootingRanges(int? idRegion)
         {
             var query = _modelLogic.GetShootingRangesByRegion(idRegion);
 

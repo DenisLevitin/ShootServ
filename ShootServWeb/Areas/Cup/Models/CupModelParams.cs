@@ -219,7 +219,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// </summary>
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
-        public List<SelectListItem> GetShootingRangesByRegion(int idRegion)
+        public List<SelectListItem> GetShootingRangesByRegion(int? idRegion)
         {
             return _shootingRangeLogic.GetByRegion(idRegion).ConvertAll(x => new SelectListItem { Text = string.Format("{0} {1}", x.Town, x.Name), Value = x.Id.ToString() });
         }
@@ -310,7 +310,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
                     model.IdRegion = region.Id;
                 }
 
-                model.ShootingRanges = this.GetShootingRangesByRegion(model.IdRegion);
+                model.ShootingRanges = GetShootingRangesByRegion(model.IdRegion);
 
                 model.IdShootingRange = cup.IdShootingRange;
                 model.IdUser = cup.IdUser;

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace ShootingCompetitionsRequests.Areas.ShootingRange
+namespace ShootServ.Areas.ShootingRange
 {
     public class ShootingRangeAreaRegistration : AreaRegistration
     {

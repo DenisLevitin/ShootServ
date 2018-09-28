@@ -178,7 +178,8 @@
     <Compile Include="Areas\ShootingClub\Models\ShooterClubModelParams.cs" />
     <Compile Include="Areas\ShootingClub\ShootingClubAreaRegistration.cs" />
     <Compile Include="Areas\ShootingRange\Controllers\AddShootingRangeController.cs" />
-    <Compile Include="Areas\ShootingRange\Models\ShootingRangeModel.cs" />
+    <Compile Include="Areas\ShootingRange\Models\ShootingRangeModelParams.cs" />
+    <Compile Include="Areas\ShootingRange\Models\ShootingRangeModelLogic.cs" />
     <Compile Include="Areas\ShootingRange\ShootingRangeAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />

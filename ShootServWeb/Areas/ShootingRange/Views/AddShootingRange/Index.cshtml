@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model ShootingCompetitionsRequests.Areas.ShootingRange.Models.ShootingRangeModelParams
+@model ShootServ.Areas.ShootingRange.Models.ShootingRangeModelParams
 
 @*@Html.ActionLink("На главную", "Index", "Home", new { Area = ""}, null)*@
 <h3>Создание и просмотр тиров</h3>
@@ -181,13 +181,12 @@
     //все для выпадающего контента
     $(document).ready(function() {
         togetherContent("#divAddShootingRange", "#divAddShootingR", 'Добавить тир');
+        togetherContent("#divShowShootingRange", "#divShowShootingR", 'Список тиров');
         addSumbol($("#divAddShootingRange"), true, 'Добавить тир');
         addSumbol($("#divShowShootingRange"), true, 'Список тиров');
     });
    
 </script>
-
-
 
 <div id="divShootingRange" style="margin-top: 15px; width: 100%;">
     <div id="divDiv" class="instr" style="width: 1000px; padding: 0;">
@@ -198,12 +197,14 @@
     </div>
 </div>
 
-
 <div id="list" style="margin-top: 15px; width: 100%; height: 80%;">
     <div id="divDiv1" class="instr" style="width: 1000px; padding: 0;">
         <div id="divShowShootingRange" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"></div>
-        <div id="divShowShootingR" style="display: none;">
+        <div id="divShowShootingR">
             <div id="listShootingRanges">
+                @{
+                    Html.RenderAction("GetListByRegion", Model.RegionId);
+                }
             </div>
         </div>
     </div>

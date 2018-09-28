@@ -126,23 +126,25 @@ namespace DAL
         /// </summary>
         /// <param name="regionId">ид. регоина</param>
         /// <returns></returns>
-        public List<ShootingRangeParams> GetByRegion(int regionId)
+        public List<ShootingRangeParams> GetByRegion(int? regionId)
         {
-            var res = new List<ShootingRangeParams>();
             using (var db = DBContext.GetContext())
             {
                 try
                 {
-                    var query = db.ShootingRanges.Where(x => x.IdRegion == regionId).OrderBy( x => x.Town).ThenBy(x=>x.Name).ToList();
-                    res = query.ConvertAll(Convert);
+                    var query = db.ShootingRanges.AsQueryable();
+                    if (regionId.HasValue)
+                    {
+                        query = query.Where(x => x.IdRegion == regionId).OrderBy(x => x.Town).ThenBy(x => x.Name);
+                    }
+
+                    return query.ToList().ConvertAll(Convert);
                 }
                 catch (Exception exc)
                 {
                     throw new Exception("При добавлении тира произошла ошибка");
                 }
             }
-
-            return res;
         }
     }
 }
