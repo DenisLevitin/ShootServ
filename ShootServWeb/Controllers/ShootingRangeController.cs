@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ShootingCompetitionsRequests.App_Start;
+using ShootServ.Helpers;
 using ShootServ.Models.ShootingRange;
 
 namespace ShootServ.Controllers
@@ -23,8 +24,13 @@ namespace ShootServ.Controllers
         [HttpGet]
         public ActionResult Add(ShootingRangeModelParams model)
         {
-            var res = ShootingRangeModelLogic.Add(model, CurrentUser.Id);
-            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            if (ModelState.IsValid)
+            {
+                var res = ShootingRangeModelLogic.Add(model, CurrentUser.Id);
+                return new JsonResult {Data = new {IsOk = res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            }
+
+            return new JsonResult { Data = new { IsOk = false, Message = string.Empty, ValidationMessages = ModelState.ToErrorsDictionary()}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
         [CustomAuthorize]
