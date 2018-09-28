@@ -29,7 +29,7 @@ namespace DAL
         public System.DateTime DateCreate { get; set; }
     
         public virtual ShootingRanges ShootingRanges { get; set; }
-        public virtual ICollection<Shooters> Shooters { get; set; }
         public virtual Users Users { get; set; }
+        public virtual ICollection<Shooters> Shooters { get; set; }
     }
 }

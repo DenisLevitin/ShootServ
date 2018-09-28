@@ -25,7 +25,7 @@ namespace DAL
         public string FederationTelefon { get; set; }
         public int IdCountry { get; set; }
     
-        public virtual ICollection<ShootingRanges> ShootingRanges { get; set; }
         public virtual Countries Countries { get; set; }
+        public virtual ICollection<ShootingRanges> ShootingRanges { get; set; }
     }
 }

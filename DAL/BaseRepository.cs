@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using BO;
 
 namespace DAL
@@ -31,7 +32,21 @@ namespace DAL
             }
         }
 
-        /// TODO: GetFiltered
+        public List<TModel> GetFiltered(Expression<Func<T, bool>> filter)
+        {
+            using (var db = DBContext.GetContext())
+            {
+                return db.Set<T>().Where(filter).Select(x => ConvertToModel(x)).ToList();
+            }
+        }
+
+        public List<TModel> GetFiltered<TKey>(Expression<Func<T, bool>> filter, Expression<Func<T, TKey>> order)
+        {
+            using (var db = DBContext.GetContext())
+            {
+                return db.Set<T>().Where(filter).OrderBy(order).Select(x => ConvertToModel(x)).ToList();
+            }
+        }
 
         /// <summary>
         /// 
@@ -76,6 +91,27 @@ namespace DAL
                 db.Entry(updating).State = EntityState.Modified;
                 db.SaveChanges();
             }
+        }
+
+        public void AddRange(IReadOnlyCollection<TModel> collection)
+        {
+            using (var db = DBContext.GetContext())
+            {
+                var set = db.Set<T>();
+                foreach (var item in collection)
+                {
+                    var entity = ConvertToEntity(item);
+                    set.Add(entity);
+                }
+                
+                db.SaveChanges();
+            }
+        }
+
+        public void DeleteRannge(IReadOnlyCollection<int> ids)
+        {
+            /// TODO: Тут надо EF обновлять скорее всего
+            throw new NotImplementedException();
         }
     }
 }

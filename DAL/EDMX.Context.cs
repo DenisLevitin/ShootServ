@@ -25,23 +25,22 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<CompetitionType> CompetitionType { get; set; }
+        public DbSet<Countries> Countries { get; set; }
+        public DbSet<CupCompetitionType> CupCompetitionType { get; set; }
+        public DbSet<Cups> Cups { get; set; }
         public DbSet<CupTypes> CupTypes { get; set; }
+        public DbSet<EntryForCompetitions> EntryForCompetitions { get; set; }
         public DbSet<EntryStatus> EntryStatus { get; set; }
+        public DbSet<RecoveredPasswords> RecoveredPasswords { get; set; }
+        public DbSet<Regions> Regions { get; set; }
         public DbSet<Results> Results { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<ShooterCategory> ShooterCategory { get; set; }
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public DbSet<WeaponTypes> WeaponTypes { get; set; }
-        public DbSet<CompetitionType> CompetitionType { get; set; }
-        public DbSet<Cups> Cups { get; set; }
-        public DbSet<EntryForCompetitions> EntryForCompetitions { get; set; }
-        public DbSet<CupCompetitionType> CupCompetitionType { get; set; }
+        public DbSet<ShooterClubs> ShooterClubs { get; set; }
         public DbSet<Shooters> Shooters { get; set; }
         public DbSet<ShootingRanges> ShootingRanges { get; set; }
-        public DbSet<ShooterClubs> ShooterClubs { get; set; }
         public DbSet<Users> Users { get; set; }
-        public DbSet<Regions> Regions { get; set; }
-        public DbSet<RecoveredPasswords> RecoveredPasswords { get; set; }
-        public DbSet<Countries> Countries { get; set; }
+        public DbSet<WeaponTypes> WeaponTypes { get; set; }
     }
 }

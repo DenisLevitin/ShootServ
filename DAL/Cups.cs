@@ -29,8 +29,8 @@ namespace DAL
         public int IdUser { get; set; }
         public System.DateTime DateCreate { get; set; }
     
-        public virtual CupTypes CupTypes { get; set; }
         public virtual ICollection<CupCompetitionType> CupCompetitionType { get; set; }
+        public virtual CupTypes CupTypes { get; set; }
         public virtual ShootingRanges ShootingRanges { get; set; }
         public virtual Users Users { get; set; }
     }

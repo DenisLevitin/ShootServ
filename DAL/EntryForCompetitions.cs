@@ -20,8 +20,8 @@ namespace DAL
         public System.DateTime DateCreate { get; set; }
         public int IdEntryStatus { get; set; }
     
-        public virtual EntryStatus EntryStatus { get; set; }
         public virtual CupCompetitionType CupCompetitionType { get; set; }
+        public virtual EntryStatus EntryStatus { get; set; }
         public virtual Shooters Shooters { get; set; }
     }
 }

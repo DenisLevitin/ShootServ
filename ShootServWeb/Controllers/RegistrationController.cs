@@ -1,10 +1,10 @@
-﻿using BO;
-using ShootingCompetitionsRequests.Areas.Registration.Models;
-using ShootingCompetitionsRequests.Models;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using BO;
 using ShootingCompetitionsRequests.Controllers;
+using ShootingCompetitionsRequests.Models;
+using ShootServ.Models.Registration;
 
-namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
+namespace ShootServ.Controllers
 {
     public class RegistrationController : BaseController
     {
@@ -15,9 +15,6 @@ namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
             _modelLogic = new RegPageModelParams();
         }
 
-        //
-        // GET: /Registration/Registration/
-
         public ActionResult Index(int idUser = -1)
         {
             var model = new RegPageModelParams();
@@ -25,7 +22,6 @@ namespace ShootingCompetitionsRequests.Areas.Registration.Controllers
             if (idUser == -1)
             {
                 model.IsEditMode = false;
-                //model.RegionsList = //StandartClassifierModel.GetRegionsByCountry(-1);
                 model.RolesList = StandartClassifierModelLogic.GetRolesList();
 
                 var queryCountries = StandartClassifierModelLogic.GetCountryList();

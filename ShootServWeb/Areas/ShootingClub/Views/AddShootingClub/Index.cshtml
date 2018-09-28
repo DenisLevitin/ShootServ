@@ -36,17 +36,17 @@
                         if (data.IsOk == true) {
                             ShowInfo("Стрелковый клуб удален"); // ShowInfo
                             a.closest("tr").remove();
-                        } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                        } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                     },
                     error: function (data) {
-                        ShowError("Ошибка ajax");
+                        showError("Ошибка ajax");
                     }
                 });
             }
             else
             {
                 var redirectUrl = "@Url.Action("Index", "AddShootingClub", new { Area = "ShootingClub"})";
-                RedirectLoginPage(redirectUrl);
+                redirectLoginPage(redirectUrl);
             }
 
         });
@@ -70,17 +70,17 @@
 
                                 GetShootingClubs(idCountry, idRegion);
                                 
-                            } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                            } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                         },
                         error: function (data) {
-                            ShowError("Ошибка ajax");
+                            showError("Ошибка ajax");
                         }
                     });
                 }
             }
             else {
                 var redirectUrl = "@Url.Action("Index", "AddShootingClub", new { Area = "ShootingClub"})";
-                RedirectLoginPage(redirectUrl);
+                redirectLoginPage(redirectUrl);
             }
 
         });
@@ -117,12 +117,12 @@
         var name = $("#Name").val();
         if (name == undefined || name == "")
         {
-            ShowError("Не введено название тира");
+            showError("Не введено название тира");
             return false;
         }
 
         if ($("#IdShootingRange").val() == undefined) {
-            ShowError("Не выбран тир");
+            showError("Не выбран тир");
             return false;
         }
 
@@ -151,7 +151,7 @@
                         $("#tdRegion").html(data);
                     },
                     error: function () {
-                        ShowError("Ошибка ajax");
+                        showError("Ошибка ajax");
                     }
                 });
     }
@@ -173,7 +173,7 @@
                     $("#list").html(data);
                 },
                 error: function () {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
         });
 
@@ -192,7 +192,7 @@
                     $("#tdShootingRange").html(data);
                 },
                 error: function () {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
     }

@@ -1,17 +1,17 @@
-﻿@model ShootingCompetitionsRequests.Areas.Registration.Models.RegPageModelParams
+﻿@model ShootServ.Models.Registration.RegPageModelParams
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if ( ! Model.IsEditMode) 
+@if (!Model.IsEditMode)
 {
-    <h3>Регистрация</h3> 
+    <h3>Регистрация</h3>
 }
-else 
+else
 {
-    <h3 >Пользовательские данные</h3>
+    <h3>Пользовательские данные</h3>
 }
 
 <script type="text/javascript">
@@ -29,7 +29,7 @@ else
         $(".datepicker").datepicker();
 
         if ( "@Model.Error.IsOk" != "True" ) {
-            ShowError("@Model.Error.ErrorMessage");
+            showError("@Model.Error.ErrorMessage");
         }
     });
 
@@ -42,13 +42,8 @@ else
     });
 
     $(document).on("change", "#IdRole", function() {
-
         var role = $("#IdRole").val();
-      
         registrationFormShifterByName(role);
-
-
-
     });
 
     function registrationFormShifterByName(role) {
@@ -58,7 +53,7 @@ else
         } else {
             $("#shooterTable").show();
             $("#content").css("width", "70%");
-           
+
         }
     }
     // клик на сохранить
@@ -79,10 +74,10 @@ else
                         ShowInfo("Данные обновлены"); // ShowInfo
                         window.location = "@Url.Action("Index", "Home", new { Area = ""})";
 
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function (data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
@@ -93,20 +88,20 @@ else
             if (ValidateInput(false)) {
 
                 $.ajax({
-                    url: "@Url.Action("AddUser", "Registration", new { Area = "Registration"})",
+                    url: "@Url.Action("AddUser", "Registration")",
                     dataType: "json",
                     data: $("form").serialize(),
                     async: false,
                     success: function (data) {
                         if (data.IsOk == true) {
-                        
+
                             ShowInfo("Регистрация проведена успешно"); // ShowInfo
                             window.location = "@Url.Action("Index", "Home", new { Area = ""})";
 
-                        } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                        } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                     },
                     error: function (data) {
-                        ShowError("Ошибка ajax");
+                        showError("Ошибка ajax");
                     }
                 });
             }
@@ -130,19 +125,19 @@ else
             var name = $("#Name").val();
             if (name == undefined || name == "")
             {
-                ShowError("Не введено имя");
+                showError("Не введено имя");
                 return false;
             }
 
             var family = $("#Family").val();
             if (family == undefined || family == "") {
-                ShowError("Не введена фамилия");
+                showError("Не введена фамилия");
                 return false;
             }
 
             var login = $("#Login").val();
             if (login == undefined || login == "") {
-                ShowError("Не введена фамилия");
+                showError("Не введена фамилия");
                 return false;
             }
 
@@ -150,23 +145,23 @@ else
             // если валидация при редактировании, то пароли не валидируем и не сравниваем. Если какой-либо пароль введен, то считаем, что его надо обновить
             if ( ! isEditing || password.length > 0) {
                 if (password == undefined || password == "") {
-                    ShowError("Не введен пароль");
+                    showError("Не введен пароль");
                     return false;
                 }
 
                 if ($("#Password").val() != $("#Password2").val()) {
-                    ShowError("Пароли не совпадают");
+                    showError("Пароли не совпадают");
                     return false;
                 }
             }
 
             if ($("#IdRole").val() == undefined) {
-                ShowError("Не введена роль");
+                showError("Не введена роль");
                 return false;
             }
 
             if ( $("#Email").val() == undefined || $("#Email").val() == "") {
-                ShowError("Не введен email");
+                showError("Не введен email");
                 return false;
             }
 
@@ -176,23 +171,23 @@ else
             else {
                 // доп. проверка стрелка
                 if ($("#IdWeaponType").val() == undefined) {
-                    ShowError("Не введен тип оружия стрелка");
+                    showError("Не введен тип оружия стрелка");
                     return false;
                 }
 
                 if ($("#IdClub").val() == undefined) {
-                    ShowError("Не введен стрелковый клуб");
+                    showError("Не введен стрелковый клуб");
                     return false;
                 }
 
                 if ($("#IdShooterCategory").val() == undefined) {
-                    ShowError("Не введен разряд стрелка");
+                    showError("Не введен разряд стрелка");
                     return false;
                 }
 
                 var dateBirthday = $("#DateBirthday").val();
                 if (dateBirthday == undefined || dateBirthday == "") {
-                    ShowError("Не введена дата рождения");
+                    showError("Не введена дата рождения");
                     return false;
                 }
 
@@ -217,7 +212,7 @@ else
                         $("#tdClubsList").html(data);
                     },
                     error: function () {
-                        ShowError("Ошибка ajax");
+                        showError("Ошибка ajax");
                     }
                 });
             }
@@ -241,7 +236,7 @@ else
                     $("#tdRegionsList").html(data);
                 },
                 error: function () {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
 
@@ -252,98 +247,98 @@ else
 </script>
 
 @using (Html.BeginForm("AddUser", "Registration", FormMethod.Post, new { id = "addform", @style = "width:100%; padding:0;" }))
-{ <div style="width:1200px;margin:auto;">
-    <div id="content" class="instr" style="margin-bottom:40px; padding:0; margin:auto;height:380px;padding:10px;">
-        <div id="divUser"  style="float: left; position:relative;">
-        <table id="userTable">
-        <tr>
-            <td>@Html.LabelFor(x => x.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : ""})</td>
-            <td>@Html.DropDownListFor(x => x.IdRole, Model.RolesList)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.Name)</td>
-            <td>@Html.TextBoxFor(x => x.Name)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.FatherName)</td>
-            <td>@Html.TextBoxFor(x => x.FatherName)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.Family)</td>
-            <td>@Html.TextBoxFor(x => x.Family)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.Sex, new { @readonly = Model.IsEditMode ? "readonly" : ""})</td>
-            <td>@Html.DropDownListFor(x => x.Sex, Model.SexList)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.Login)</td>
-            <td>@Html.TextBoxFor(x => x.Login)</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.Password)</td>
-            <td>@Html.PasswordFor(x => x.Password)</td>
-        </tr>
-        <tr>
-            <td>@Html.Label("Повторите пароль")</td>
-            <td>@Html.Password("Password2", "")</td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(x => x.Email)</td>
-            <td>@Html.TextBoxFor(x => x.Email)</td>
-        </tr>
-        </table>
+{<div style="width:1200px;margin:auto;">
+        <div id="content" class="instr" style="margin-bottom:40px; padding:0; margin:auto;height:380px;padding:10px;">
+            <div id="divUser" style="float: left; position:relative;">
+                <table id="userTable">
+                    <tr>
+                        <td>@Html.LabelFor(x => x.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
+                        <td>@Html.DropDownListFor(x => x.IdRole, Model.RolesList)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Name)</td>
+                        <td>@Html.TextBoxFor(x => x.Name)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.FatherName)</td>
+                        <td>@Html.TextBoxFor(x => x.FatherName)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Family)</td>
+                        <td>@Html.TextBoxFor(x => x.Family)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
+                        <td>@Html.DropDownListFor(x => x.Sex, Model.SexList)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Login)</td>
+                        <td>@Html.TextBoxFor(x => x.Login)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Password)</td>
+                        <td>@Html.PasswordFor(x => x.Password)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Label("Повторите пароль")</td>
+                        <td>@Html.Password("Password2", "")</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Email)</td>
+                        <td>@Html.TextBoxFor(x => x.Email)</td>
+                    </tr>
+                </table>
 
-            @if (! Model.IsEditMode) 
-            {
-                <input type="button" id="addBt" value="Зарегистрировать" style="width:200px" />
-            }
-            else 
-            {
-                <input type="button" id="editBt" value="Сохранить" style="width:200px" />
-            }
+                @if (!Model.IsEditMode)
+                {
+                    <input type="button" id="addBt" value="Зарегистрировать" style="width:200px" />
+                }
+                else
+                {
+                    <input type="button" id="editBt" value="Сохранить" style="width:200px" />
+                }
+            </div>
+            <div id="divShooterInput" style="float:right;">
+                <table id="shooterTable">
+                    <tr>
+                        <td>@Html.Label("Страна")</td>
+                        <td>@Html.DropDownList("idCountry", Model.CountriesList)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.Label("Регион")</td>
+                        <td id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.DateBirthday)</td>
+                        <td>@Html.TextBoxFor(x => x.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.IdClub, new { style = "display:inline" }) *</td>
+                        <td id="tdClubsList">@Html.DropDownListFor(x => x.IdClub, Model.ShooterClubs)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.IdWeaponType)</td>
+                        <td>@Html.DropDownListFor(x => x.IdWeaponType, Model.WeaponTypes)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.IdShooterCategory)</td>
+                        <td>@Html.DropDownListFor(x => x.IdShooterCategory, Model.Categories)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.LabelFor(x => x.Address)</td>
+                        <td>@Html.TextAreaFor(x => x.Address)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:200px">
+                            <p style="font-size:10px">
+                                * - Если вашего стрелкового клуба нет в списке, создайте тир, зарегистрировавшись под ролью организатора, затем создайте стрелковый клуб.
+                                Далее стрелки смогут при регистрации выбрать появившийся стрелковый клуб.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div id="divShooterInput" style="float:right;" >
-            <table id="shooterTable">   
-            <tr>
-                <td>@Html.Label("Страна")</td>
-                <td>@Html.DropDownList("idCountry", Model.CountriesList)</td>
-            </tr>
-            <tr>
-                <td>@Html.Label("Регион")</td>
-                <td id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList)</td>
-            </tr>    
-            <tr>
-                <td>@Html.LabelFor(x => x.DateBirthday)</td>
-                <td>@Html.TextBoxFor(x => x.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.IdClub, new { style="display:inline"}) *</td>
-                <td id="tdClubsList">@Html.DropDownListFor(x => x.IdClub, Model.ShooterClubs)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.IdWeaponType)</td>
-                <td>@Html.DropDownListFor(x => x.IdWeaponType, Model.WeaponTypes)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.IdShooterCategory)</td>
-                <td>@Html.DropDownListFor(x => x.IdShooterCategory, Model.Categories)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Address)</td>
-                <td>@Html.TextAreaFor(x => x.Address)</td>
-            </tr>
-            <tr>
-                <td style="width:200px">
-                    <p style="font-size:10px">
-                        * - Если вашего стрелкового клуба нет в списке, создайте тир, зарегистрировавшись под ролью организатора, затем создайте стрелковый клуб.
-                        Далее стрелки смогут при регистрации выбрать появившийся стрелковый клуб.
-                    </p>
-                </td>
-            </tr>
-        </table>
-        </div>
+
     </div>
-    
-      </div>  
 }

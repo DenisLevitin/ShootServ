@@ -4,11 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using WebGrease.Css.Extensions;
 using ShootingCompetitionsRequests.Models;
 
 namespace ShootingCompetitionsRequests.Areas.Cup.Models
@@ -189,7 +186,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         private readonly ShootingRangeLogic _shootingRangeLogic;
         private readonly CompetitionTypeLogic _competitionTypeLogic;
         private readonly CupCompetitionTypeLogic _cupCompetitionTypeLogic;
-        private readonly UserLogic _userLogic;
 
         public CupModelLogic()
         {
@@ -198,7 +194,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
             _regionLogic = new RegionsLogic();
             _shootingRangeLogic = new ShootingRangeLogic();
             _competitionTypeLogic = new CompetitionTypeLogic();
-            _userLogic = new UserLogic();
             _cupCompetitionTypeLogic = new CupCompetitionTypeLogic();
         }
 
@@ -224,7 +219,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// </summary>
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
-        public List<SelectListItem> GetShootingRangesByRegion(int idRegion)
+        public List<SelectListItem> GetShootingRangesByRegion(int? idRegion)
         {
             return _shootingRangeLogic.GetByRegion(idRegion).ConvertAll(x => new SelectListItem { Text = string.Format("{0} {1}", x.Town, x.Name), Value = x.Id.ToString() });
         }
@@ -315,7 +310,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
                     model.IdRegion = region.Id;
                 }
 
-                model.ShootingRanges = this.GetShootingRangesByRegion(model.IdRegion);
+                model.ShootingRanges = GetShootingRangesByRegion(model.IdRegion);
 
                 model.IdShootingRange = cup.IdShootingRange;
                 model.IdUser = cup.IdUser;
@@ -351,10 +346,8 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
                         item.IsInCup = true;
                         item.IdCupCompetitionType = cupCompTypeFirst.Id;
                         item.TimeFirstShift = cupCompTypeFirst.TimeFirstShift ?? default(DateTime);
-                    }
-                    
+                    }  
                 } 
-
             }
 
             return model;

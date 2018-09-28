@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using BO;
 
-namespace ShootingCompetitionsRequests.Controllers
+namespace ShootServ.Controllers
 {
     public class BaseController : Controller
     {

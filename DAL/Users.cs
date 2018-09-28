@@ -17,10 +17,10 @@ namespace DAL
         public Users()
         {
             this.Cups = new HashSet<Cups>();
+            this.RecoveredPasswords = new HashSet<RecoveredPasswords>();
             this.ShooterClubs = new HashSet<ShooterClubs>();
             this.Shooters = new HashSet<Shooters>();
             this.ShootingRanges = new HashSet<ShootingRanges>();
-            this.RecoveredPasswords = new HashSet<RecoveredPasswords>();
         }
     
         public int Id { get; set; }
@@ -34,10 +34,10 @@ namespace DAL
         public string E_mail { get; set; }
     
         public virtual ICollection<Cups> Cups { get; set; }
+        public virtual ICollection<RecoveredPasswords> RecoveredPasswords { get; set; }
         public virtual Roles Roles { get; set; }
         public virtual ICollection<ShooterClubs> ShooterClubs { get; set; }
         public virtual ICollection<Shooters> Shooters { get; set; }
         public virtual ICollection<ShootingRanges> ShootingRanges { get; set; }
-        public virtual ICollection<RecoveredPasswords> RecoveredPasswords { get; set; }
     }
 }

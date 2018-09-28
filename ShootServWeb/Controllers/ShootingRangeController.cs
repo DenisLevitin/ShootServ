@@ -1,29 +1,25 @@
-﻿using ShootingCompetitionsRequests.App_Start;
-using ShootingCompetitionsRequests.Areas.ShootingRange.Models;
-using System.Web.Mvc;
-using ShootingCompetitionsRequests.Controllers;
+﻿using System.Web.Mvc;
+using ShootingCompetitionsRequests.App_Start;
+using ShootServ.Areas.ShootingRange.Models;
+using ShootServ.Models.ShootingRange;
 
-namespace ShootingCompetitionsRequests.Areas.ShootingRange.Controllers
+namespace ShootServ.Controllers
 {
-    public class AddShootingRangeController : BaseController
+    public class ShootingRangeController : BaseController
     {
-        //
-        // GET: /ShootingRange/AddShootingRange/
-
-        //[CustomAuthorize]
         public ActionResult Index()
         {
             var model = new ShootingRangeModelParams
             {
                 IsLogin = CurrentUser != null
             };
+            
             // Определяем залогирован ли пользователь в системе
-
             return View("Index", model);
         }
 
         [HttpGet]
-        public ActionResult GetListByRegion(int idRegion)
+        public ActionResult GetListByRegion(int? idRegion)
         {
             var model = ShootingRangeModelLogic.GetAllByRegion(idRegion);
             return PartialView("ListShootingRanges", model);

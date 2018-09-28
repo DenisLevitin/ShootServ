@@ -58,6 +58,7 @@
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RecoveryPasswordsLogic.cs" />
     <Compile Include="RegionsLogic.cs" />
+    <Compile Include="ResultLogic.cs" />
     <Compile Include="ShooterCategoryLogic.cs" />
     <Compile Include="CupTypeLogic.cs" />
     <Compile Include="ShootingClubLogic.cs" />

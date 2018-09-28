@@ -30,8 +30,8 @@ namespace DAL
         public int IdUser { get; set; }
     
         public virtual ICollection<Cups> Cups { get; set; }
+        public virtual Regions Regions { get; set; }
         public virtual ICollection<ShooterClubs> ShooterClubs { get; set; }
         public virtual Users Users { get; set; }
-        public virtual Regions Regions { get; set; }
     }
 }

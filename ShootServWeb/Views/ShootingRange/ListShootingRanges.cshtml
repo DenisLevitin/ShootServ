@@ -1,0 +1,28 @@
+﻿@model List<ShootServ.Models.ShootingRange.ShootingRangeModelParams>
+
+<table style="width:95%">
+    <thead>
+        <th>Название тира</th>
+        <th>Город</th>
+        <th>Регион</th>
+        <th>Адрес</th>
+        <th>Информация</th>
+        <th>Телефон</th>
+        <th></th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Town</td>
+                <td>@item.RegionName</td>
+                <td>@item.Address</td>
+                <td>@item.Info</td>
+                <td>@item.Phone</td>
+                <td><a class="delRange" idShootRange="@item.Id" href="#">Удалить </a></td>
+            </tr> 
+        }
+    </tbody>    
+</table>
+

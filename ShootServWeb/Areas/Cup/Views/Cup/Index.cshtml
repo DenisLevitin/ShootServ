@@ -10,14 +10,12 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-
         $.datepicker.setDefaults($.datepicker.regional['ru']);
         $(".datepicker").datepicker();
 
         if ("@Model.IsEditMode" == "False") {
             ChangeRegion();
         }
-
     });
 
     $(document).on("change", "#CountryFilter", function() {
@@ -33,13 +31,10 @@
     });
 
     $(document).on("click", "#Show", function () {
-
         var dateFromDate = $("#DateFrom").datepicker("getDate");
         var dateToDate = $("#DateTo").datepicker("getDate");
-
         var dateFrom = dateFromDate != null && dateFromDate != undefined ? dateFromDate.toISOString() : new Date(1970,1,1).toISOString();
         var dateTo = dateToDate != null && dateToDate != undefined ? dateToDate.toISOString() : new Date(2100, 1, 1).toISOString();
-
         var regionId = $("#RegionFilter").val();
 
         GetCupsList(regionId, dateFrom, dateTo);
@@ -53,7 +48,7 @@
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
     });
 
@@ -65,7 +60,7 @@
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
     });
 
@@ -94,24 +89,22 @@
                         var tr = a.closest("tr");
                         $(tr).remove();
 
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function (data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
-
     });
 
     // Получить список регионов по стране
     function GetRegions(idCountry, element, tagName) {
-
         $.ajax({
                 url: "@Url.Action("GetRegionsByCountry", "StandartFilters", new { Area = ""})",
                 dataType: "html",
@@ -129,27 +122,26 @@
                 ChangeRegion();
             },
             error: function () {
-                ShowError("Ошибка ajax");
+                showError("Ошибка ajax");
             }
         });
-
     }
 
     // Валидация ввода
     function ValidateInput() {
 
-        if ($("#Name").val() == undefined || $("#Name").val() == "") {
-            ShowError("Не введено название соревнования");
+        if (!$("#Name").val()) {
+            showError("Не введено название соревнования");
             return false;
         }
 
-        if ($("#IdCupType").val() == undefined || $("#IdCupType").val() == "") {
-            ShowError("Не введен тип соревнования");
+        if (!$("#IdCupType").val()) {
+            showError("Не введен тип соревнования");
             return false;
         }
 
-        if ($("#IdShootingRange").val() == undefined || $("#IdShootingRange").val() == "") {
-            ShowError("Не введен тир, где будет проходить соревнование");
+        if (!$("#IdShootingRange").val()) {
+            showError("Не введен тир, где будет проходить соревнование");
             return false;
         }
 
@@ -157,12 +149,12 @@
         var dateEnd = $("#DateEnd").datepicker("getDate");
 
         if (dateStart > dateEnd) {
-            ShowError("Дата начала соревнования не может быть позже даты окончания");
+            showError("Дата начала соревнования не может быть позже даты окончания");
             return false;
         }
 
-        if ($("#IdShootingRange").val() == undefined || $("#IdShootingRange").val() == "") {
-            ShowError("Не введен тир, где будет проходить соревнование");
+        if (!$("#IdShootingRange").val()) {
+            showError("Не введен тир, где будет проходить соревнование");
             return false;
         }
 
@@ -172,7 +164,7 @@
 
     // Получить в формате Json добавляемый список упражнений
     function GetCompetitionsJson() {
-        
+
         var trList = $("#tableCompList tr");
 
         var tmp = new Array();
@@ -198,9 +190,8 @@
                 });
 
             }
-            
-        });
 
+        });
         //tmp.append("}");
 
         return $.toJSON(tmp);
@@ -208,7 +199,7 @@
 
     // Редактировать соревнование
     function EditCup() {
-        
+
         if ( ValidateInput() ) {
 
             var competitionsJson = GetCompetitionsJson();
@@ -217,10 +208,7 @@
             var dateEnd = FormatDate($("#DateEnd").datepicker("getDate"));
 
             // dataSend собирается говнокодом, то что ниже желательно не трогать. Очень важен порядок конкатенации
-            var dataSend = "DateStart=" + dateStart + "&DateEnd=" + dateEnd + "&" + $("#add").serialize() + "&competitionTypes=" + competitionsJson + "&idEditCup=" + "@Model.Id"; 
-
-            //var competitionsJson = GetCompetitionsJson();
-            //var dataSend = $("form").serialize() + "&competitionTypes=" + competitionsJson + "&idEditCup=" + "@Model.Id";
+            var dataSend = "DateStart=" + dateStart + "&DateEnd=" + dateEnd + "&" + $("#add").serialize() + "&competitionTypes=" + competitionsJson + "&idEditCup=" + "@Model.Id";
 
             $.ajax({
                 url: "@Url.Action("UpdateCup")",
@@ -230,27 +218,21 @@
                 success: function(data) {
                     if (data.IsOk == true) {
                         ShowInfo("Соревнование отредактировано"); // ShowInfo
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function(data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
-
         }
-
     }
 
     // Добавить соревнование
     function AddCup() {
-
         if (ValidateInput()) {
-
             var competitionsJson = GetCompetitionsJson();
-
             var dateStart = FormatDate($("#DateStart").datepicker("getDate"));
             var dateEnd = FormatDate($("#DateEnd").datepicker("getDate"));
-
             // dataSend собирается говнокодом, то что ниже желательно не трогать. Очень важен порядок конкатенации
             var dataSend = "DateStart=" + dateStart + "&DateEnd=" + dateEnd + "&" + $("#add").serialize() + "&competitionTypes=" + competitionsJson
 
@@ -262,12 +244,11 @@
                 success: function(data) {
                     if (data.IsOk == true) {
                         ShowInfo("Соревнование добавлено успешно"); // ShowInfo
-
                         window.location = "@Url.Action("Index", "ViewCup", new {Area = "Cup"})" + "?idCup=" + data.IdCup;
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function(data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
 
@@ -289,7 +270,6 @@
     // Должна вызываться при изменении региона
     function  ChangeRegion() {
         var idRegion = $("#IdRegion").val();
-
         GetShootingRanges(idRegion);
     }
 
@@ -297,7 +277,6 @@
     function GetShootingRanges(idRegion) {
 
         if (idRegion != undefined) {
-
             $.ajax({
                     url: "@Url.Action("GetShootingRanges")",
                     dataType: "html",
@@ -308,14 +287,11 @@
                         $("#tdRange").html(data);
                     },
                     error: function (data) {
-                       ShowError("Ошибка ajax");
+                       showError("Ошибка ajax");
                     }
             });
         }
     }
-
-
-  
 
     // Получить список соревнований
     function GetCupsList(idRegion, dateFrom, dateTo)
@@ -331,7 +307,7 @@
                     $("#divCupsList").html(data);
                 },
                 error: function (data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
@@ -356,109 +332,96 @@
 </script>
 
 <style>
-
     .tableInfo {
-        font-size:11px;
-     
+        font-size: 11px;
     }
 
-    .tableInfo a {
-        font-size:9px;
-    }
-
+        .tableInfo a {
+            font-size: 9px;
+        }
 </style>
 
 <div id="divContentAddCup" style="margin-top:15px; width:100%; height:80%;">
     <div id="divAdd" class="instr" style="width:1000px;padding:0;">
-       
-        <div id="divAddCup" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;">	 	</div>
+        <div id="divAddCup" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;"/>	 	
         <div id="divAddHidden" style="display:none;">
-        <div style="position:relative; height:330px; margin-top: 20px;">
-       <div style="float:left;">
-         <form id="add" action="@Url.Action("AddCup")" >
-       
-            <table>
-                <tr>
-                    <td>@Html.LabelFor(x=>x.Name)</td>
-                    <td>@Html.TextBoxFor(x=>x.Name)</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x=>x.IdCupType)</td>
-                    <td>@Html.DropDownListFor(x=>x.IdCupType, Model.CupTypes)</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x => x.IdCountry)</td>
-                    <td>@Html.DropDownListFor(x => x.IdCountry, Model.Countries)</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x=>x.IdRegion)</td>
-                    <td id="tdRegion">@Html.DropDownListFor(x=>x.IdRegion, Model.Regions)</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x=>x.IdShootingRange)</td>
-                    <td id="tdRange">@Html.DropDownListFor(x=>x.IdShootingRange, Model.ShootingRanges)</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>@Html.ActionLink("Добавить тир", "Index", "AddShootingRange", new { Area = "ShootingRange" }, new { target = "blank"})</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x=>x.DateStart)</td>
-                    <td>@Html.TextBoxFor(x => x.DateStart, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x=>x.DateEnd)</td>
-                    <td>@Html.TextBoxFor(x => x.DateEnd, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
-                </tr>
-            </table>
-           
-            </form>
-        </div>
+            <div style="position:relative; height:330px; margin-top: 20px;">
+                <div style="float:left;">
+                    <form id="add" action="@Url.Action("AddCup")">
 
-            <div id="divComp" style="float:right;">
-                <form id="frmCompetitions">
-                    <div >
-                        <span style="margin-bottom:15px;">Упражнения</span>
-                      
-                        @{Html.RenderPartial("CompetitionsList", Model.CompetitionTypes); }
-                    </div>
-                </form>
-            </div>
-            </div>
+                        <table>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.Name)</td>
+                                <td>@Html.TextBoxFor(x => x.Name)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdCupType)</td>
+                                <td>@Html.DropDownListFor(x => x.IdCupType, Model.CupTypes)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdCountry)</td>
+                                <td>@Html.DropDownListFor(x => x.IdCountry, Model.Countries)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdRegion)</td>
+                                <td id="tdRegion">@Html.DropDownListFor(x => x.IdRegion, Model.Regions)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdShootingRange)</td>
+                                <td id="tdRange">@Html.DropDownListFor(x => x.IdShootingRange, Model.ShootingRanges)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>@Html.ActionLink("Добавить тир", "Index", "ShootingRange", new { Area = "ShootingRange" }, new { target = "blank" })</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.DateStart)</td>
+                                <td>@Html.TextBoxFor(x => x.DateStart, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.DateEnd)</td>
+                                <td>@Html.TextBoxFor(x => x.DateEnd, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                            </tr>
+                        </table>
 
-            @if (! Model.IsEditMode)
+                    </form>
+                </div>
+
+                <div id="divComp" style="float:right;">
+                    <form id="frmCompetitions">
+                        <div>
+                            <span style="margin-bottom:15px;">Упражнения</span>
+
+                            @{Html.RenderPartial("CompetitionsList", Model.CompetitionTypes); }
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @if (!Model.IsEditMode)
             {
                 <input type="button" id="addBt" value="Добавить" />
             }
             else
             {
-                <input type="button" id="editBt" value="Сохранить" >
-            } 
-
-               
-    </div>
+                <input type="button" id="editBt" value="Сохранить">
+            }
         </div>
-
+    </div>
 
     <div class="instr" style="width:1000px; padding:0; margin-bottom:30px;">
-      
-            <div id="divListCup" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;"></div>
-            <div id="rightDiv" style="display:none;">
-                <div id="divFiltres">
-
-                    <table style="margin:auto;">
-                        <tr><td>Страна</td><td>@Html.DropDownList("CountryFilter", Model.Countries)</td></tr>
-                        <tr><td>Соревнование в регионе</td><td id="cupRegionFilter">@Html.DropDownList("RegionFilter", Model.Regions)</td></tr>
-                        <tr><td>Проводящиеся с</td><td>@Html.TextBox("DateFrom", null, new { @class = "datepicker" })</td></tr>
-                        <tr><td>Проводящиеся по</td><td>@Html.TextBox("DateTo", null, new { @class = "datepicker" })</td></tr>
-                    </table>
-
-                    <input type="button" id="Show" Value="Показать" />
-
-                </div>
-                <div id="divCupsList">
-                </div>
+        <div id="divListCup" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;"></div>
+        <div id="rightDiv" style="display:none;">
+            <div id="divFiltres">
+                <table style="margin:auto;">
+                    <tr><td>Страна</td><td>@Html.DropDownList("CountryFilter", Model.Countries)</td></tr>
+                    <tr><td>Соревнование в регионе</td><td id="cupRegionFilter">@Html.DropDownList("RegionFilter", Model.Regions)</td></tr>
+                    <tr><td>Проводящиеся с</td><td>@Html.TextBox("DateFrom", null, new { @class = "datepicker" })</td></tr>
+                    <tr><td>Проводящиеся по</td><td>@Html.TextBox("DateTo", null, new { @class = "datepicker" })</td></tr>
+                </table>
+                <input type="button" id="Show" Value="Показать" />
             </div>
-       
+            <div id="divCupsList">
+            </div>
+        </div>
     </div>
 </div>

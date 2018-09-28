@@ -2,23 +2,23 @@
 
 <table style="height:100%; width:100%">
     <thead>
+    <tr>
         <th>ФИО</th>
         <th>Пол</th>
         <th>Год рождения</th>
         <th>Разряд</th>
         <th>Стрелковый клуб</th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-        
         @foreach (var item in Model)
         {
-            
-                string listCompetitions = "";     
-                foreach (var comp in item.Competitions)
-                {
-                    listCompetitions += comp + " ";
-                }
-                   
+            string listCompetitions = "";
+            foreach (var comp in item.Competitions)
+            {
+                listCompetitions += comp + " ";
+            }
             <tr>
                 <td>@string.Format("{0} {1}", item.FamilyName, item.Name)</td>
                 <td>@item.Sex</td>
@@ -26,12 +26,12 @@
                 <td>@item.Category</td>
                 <td>@item.ClubName</td>
                 <td>@listCompetitions</td>
-            </tr>     
+                <td><input class="add-result-btn" type="button" value="+" /></td>   <!-- Здесь нужна кнопочка "Добавить результат" -->
+            </tr>
         }
-
     </tbody>
 </table>
 
 <input type="button" id="btPrintEntryMen" value="Печать бланка заявки (мужчины)" style="width:300px" />
-<br/>
+<br />
 <input type="button" id="btPrintEntryWomen" value="Печать бланка заявки (женщины)" style="width:300px" />

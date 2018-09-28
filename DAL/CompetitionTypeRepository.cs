@@ -126,35 +126,6 @@ namespace DAL
         }
 
         /// <summary>
-        /// Добавить упражнение
-        /// </summary>
-        /// <param name="compType"></param>
-        /// <returns></returns>
-        public ResultInfoStruct<int> Add(CompetitionTypeParams compType)
-        {
-            var res = new ResultInfoStruct<int>();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var adding = Convert(compType);
-                    db.CompetitionType.Add(adding);
-                    db.SaveChanges();
-
-                    res.Data = adding.Id;
-                }
-                catch (Exception exc)
-                {
-                    res.Result.IsOk = false;
-                    res.Result.ErrorMessage = "Не удалось добавить упражнение в базу";
-                    res.Result.Exc = exc;
-                }
-            }
-
-            return res;
-        }
-
-        /// <summary>
         /// Получить детализацию упражнений на соревновании с состоянием о заявке стрелков
         /// </summary>
         /// <param name="idCup">ид. соревнования</param>
