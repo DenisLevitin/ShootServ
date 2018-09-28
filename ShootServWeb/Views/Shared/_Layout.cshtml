@@ -55,14 +55,14 @@
             </nav>
             <div id="InfoError" class="instr" style="opacity: 0; padding: 0; padding-bottom: 6px; width: 15%; text-align: center; position: fixed; bottom: 30px; top: 150px; height: 15%;">
         
-                <div id="closeShowInfo">Закрыть</div>
+                <div id="closeshowInfo">Закрыть</div>
                 <div style="position: relative; margin: 2px; border-radius: 4px; border: 3px solid red; height: 80%; background-color: white;">
                     <div id="divShowError" style="display: inline; padding: 5px; color: red; font-family: tahoma; font-size: 14px"></div>
-                    <div id="ShowInfo" style="display: inline; padding: 5px; color: green; font-family: tahoma; font-size: 14px;"></div>
+                    <div id="showInfo" style="display: inline; padding: 5px; color: green; font-family: tahoma; font-size: 14px;"></div>
                 </div>
             </div>
         
-            <script>
+            <script type="text/javascript">
                 
                 //функция вызова ошибки
                 function showError(text) {
@@ -75,15 +75,15 @@
                         5000);
                 }
         
-                function ShowInfo(text) {
-                    $("#ShowInfo").text(text);
+                function showInfo(text) {
+                    $("#showInfo").text(text);
                 }
         
                 // Перевод на страницу логина
-                function redirectLoginPage(returnUrl) {
+                function redirectToLoginPage(returnUrl) {
                     if (confirm("Для данного действия требуется выполнить вход. Перейти на страницу авторизации?")) {
                         window.location =
-                            "@Url.Action("Login", "Account", new {Area = ""})" + "?ReturnUrl=" + returnUrl;
+                            "@Url.Action("Login", "Account")" + "?ReturnUrl=" + returnUrl;
                     }          
                 }
         
@@ -92,6 +92,7 @@
                     var topcoords = $(div).offset().top;
                     window.scrollTo(0, topcoords);
                 }
+                
                 // Добавление стрелок на все дивы - кнопки с выпадающим контентом
                 function addSumbol(div, isUp, text) {
                     var a = isUp ? "&#8659;" : "&#8657;"
@@ -134,7 +135,7 @@
         
                 //закрываем showInfo
                 $(document).on("click",
-                    "#closeShowInfo",
+                    "#closeshowInfo",
                     function() {
                         $("#InfoError").animate({ "opacity": "0" }, "slow");
                     });
@@ -207,6 +208,8 @@
         var linksCommon = {
             GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
         }
+
+        var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
     </script>
     </body>
 </html>

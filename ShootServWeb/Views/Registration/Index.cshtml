@@ -71,7 +71,7 @@ else
                 success: function (data) {
                     if (data.IsOk == true) {
 
-                        ShowInfo("Данные обновлены"); // ShowInfo
+                        showInfo("Данные обновлены"); // showInfo
                         window.location = "@Url.Action("Index", "Home", new { Area = ""})";
 
                     } else showError(data.Message); // сообщение об ошибке как -то показать на странице
@@ -95,7 +95,7 @@ else
                     success: function (data) {
                         if (data.IsOk == true) {
 
-                            ShowInfo("Регистрация проведена успешно"); // ShowInfo
+                            showInfo("Регистрация проведена успешно"); // showInfo
                             window.location = "@Url.Action("Index", "Home", new { Area = ""})";
 
                         } else showError(data.Message); // сообщение об ошибке как -то показать на странице

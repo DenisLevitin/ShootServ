@@ -3,7 +3,6 @@ using BL;
 using BO;
 using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.Cup.Models;
-using ShootingCompetitionsRequests.Controllers;
 using ShootServ.Controllers;
 
 namespace ShootServ.Areas.Cup.Controllers
@@ -27,8 +26,6 @@ namespace ShootServ.Areas.Cup.Controllers
         public ActionResult Index(int idCup)
         {
             var model = _modelLogic.GetCup(idCup);
-
-            ViewBag.IsLogin = CurrentUser != null;
             return View(model);
         }
 

@@ -73,11 +73,6 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Models
         /// </summary>
         public List<SelectListItem> Regions { get; set; }
 
-        /// <summary>
-        /// Осуществил ли пользователь вход
-        /// </summary>
-        public bool IsLogin { get; set; }
-
         private readonly ShootingClubLogic _shootingClubLogic;
         private readonly ShootingRangeLogic _shootingRangeLogic;
         private readonly RegionsLogic _regionsLogic;

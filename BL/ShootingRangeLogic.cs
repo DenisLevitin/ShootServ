@@ -28,6 +28,7 @@ namespace BL
         /// Удаляем тир
         /// </summary>
         /// <param name="idShootRange">ид. тира</param>
+        /// <param name="idUser">ид. пользователя</param>
         /// <returns></returns>
         public ResultInfo Delete(int idShootRange, int idUser)
         {
@@ -44,7 +45,7 @@ namespace BL
                     if (idUser == shootRange.IdUser)
                     {
                         var cups = _cupLogic.GetByShootingRangeAndDates(idShootRange, new DateTime(1970, 1, 1), new DateTime(2080, 1, 1));
-                        if (!cups.Any())
+                        if (cups.Count == 0)
                         {
                             res = _dalShootingRange.Delete(idShootRange);
                         }
@@ -71,25 +72,26 @@ namespace BL
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя удалить тир, к которому привязан стрелковый клуб";
             }
+            
             return res;
         }
 
         /// <summary>
         /// Добавить тир
         /// </summary>
-        /// <param name="shootingRAnge">тир</param>
+        /// <param name="shootingRange">тир</param>
         /// <returns></returns>
-        public ResultInfo Add(ShootingRangeParams shootingRAnge, int userId)
+        public ResultInfo Add(ShootingRangeParams shootingRange, int userId)
         {
             var res = new ResultInfo();
-            if (string.IsNullOrEmpty(shootingRAnge.Name))
+            if (string.IsNullOrEmpty(shootingRange.Name))
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя добавить тир без названия";
                 return res;
             }
 
-            if (string.IsNullOrEmpty(shootingRAnge.Address))
+            if (string.IsNullOrEmpty(shootingRange.Address))
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя добавить тир без адреса";
@@ -100,18 +102,20 @@ namespace BL
             {
                 if (queryUser.IdRole == (int)RolesEnum.Organization)
                 {
-                    var allInRegions = _dalShootingRange.GetByRegion(shootingRAnge.IdRegion);
-                    if (!allInRegions.Any(x => string.Equals(x.Name, shootingRAnge.Name, StringComparison.InvariantCultureIgnoreCase)))
+                    var allInRegions = _dalShootingRange.GetByRegion(shootingRange.IdRegion);
+                    if (!allInRegions.Any(x => string.Equals(x.Name, shootingRange.Name, StringComparison.InvariantCultureIgnoreCase)))
                     {
-                        res.IsOk = _dalShootingRange.Add(shootingRAnge);
+                        res.IsOk = _dalShootingRange.Add(shootingRange);
                     }
                 }
-                else {
+                else 
+                {
                     res.IsOk = false;
                     res.ErrorMessage = "Роль пользователя не является организатором";
                 }
             }
-            else {
+            else 
+            {
                 res.IsOk = false;
                 res.ErrorMessage = "Не найден пользователь";
             }

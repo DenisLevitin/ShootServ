@@ -107,11 +107,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// </summary>
         public bool IsEditMode { get; set; }
 
-        /// <summary>
-        /// Осуществил ли пользователь вход на страницу
-        /// </summary>
-        public bool IsLogin { get; set; }
-
         public CupModelParams()
         {
             CompetitionTypes = new List<CompetitionModelParams>();
@@ -124,7 +119,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
             DateEnd = DateTime.Now.AddDays(12);
 
             IsEditMode = false;
-            IsLogin = false;
         }
     }
 

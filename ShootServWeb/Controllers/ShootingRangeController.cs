@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using ShootingCompetitionsRequests.App_Start;
-using ShootServ.Areas.ShootingRange.Models;
 using ShootServ.Models.ShootingRange;
 
 namespace ShootServ.Controllers
@@ -9,12 +8,7 @@ namespace ShootServ.Controllers
     {
         public ActionResult Index()
         {
-            var model = new ShootingRangeModelParams
-            {
-                IsLogin = CurrentUser != null
-            };
-            
-            // Определяем залогирован ли пользователь в системе
+            var model = new ShootingRangeModelParams();            
             return View("Index", model);
         }
 

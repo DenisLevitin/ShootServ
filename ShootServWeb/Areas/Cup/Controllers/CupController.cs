@@ -6,7 +6,6 @@ using ShootingCompetitionsRequests.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
-using ShootingCompetitionsRequests.Controllers;
 using ShootServ.Controllers;
 
 namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
@@ -26,7 +25,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         public ActionResult Index(int idCup = -1)
         {
             var model = _modelLogic.GetModelForIndex(idCup);
-            model.IsLogin = CurrentUser != null;
             return View("Index", model);
         }
 

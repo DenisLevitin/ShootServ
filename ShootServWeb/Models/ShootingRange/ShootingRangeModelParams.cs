@@ -71,11 +71,6 @@ namespace ShootServ.Models.ShootingRange
         public string Info { get; set; }
 
         /// <summary>
-        /// Залогирован ли пользователь в системе
-        /// </summary>
-        public bool IsLogin { get; set; }
-
-        /// <summary>
         /// Список доступных регионов
         /// </summary>
         public List<SelectListItem> Regions { get; set; }

@@ -15,18 +15,19 @@ $(document).ready(function ()
     // Клик на ссылке удалить тир
     $(document).on("click", ".delRange", function () {
 
-        var a = $(this);
-        var tr = a.closest("tr");
-        var id = a.attr("idShootRange");
-        
+        if ( isAuthorize) {
+            var a = $(this);
+            var tr = a.closest("tr");
+            var id = a.attr("idShootRange");
+
             $.ajax({
                 url: linksShootingRange.Delete,
                 dataType: "json",
-                data: { idShootingRange: id },
+                data: {idShootingRange: id},
                 async: false,
                 success: function (data) {
                     if (data.IsOk) {
-                        ShowInfo("Тир удален");
+                        showInfo("Тир удален");
                         tr.remove();
                     } else showError(data.Message);
                 },
@@ -34,10 +35,15 @@ $(document).ready(function ()
                     showError("Ошибка ajax");
                 }
             });
+        }
+        else {
+            redirectToLoginPage(linksShootingRange.Index);
+        }
     });
 
     $(document).on("click", "#addBt", function ()
     {
+        if( isAuthorize) {
             if (actor.validateInput()) {
                 $.ajax({
                     url: linksShootingRange.Add,
@@ -55,6 +61,10 @@ $(document).ready(function ()
                     }
                 });
             }
+        }
+        else {
+            redirectToLoginPage(linksShootingRange.Index);
+        }
     });
 
     actor.changeCountry();

@@ -29,7 +29,7 @@
     // клик на "Заявиться"
     $(document).on("click", ".hrefAddEntry", function () {
         
-        if (CheckLogin()) {
+        if (isAuthorize) {
 
             var idCup = $(this).attr("idCup");
             var idCompType = $(this).attr("idCompType");
@@ -41,7 +41,7 @@
                 async: false,
                 success: function (data) {
                     if (data.IsOk == true) {
-                        ShowInfo("заявка создана");
+                        showInfo("заявка создана");
                     }
                     else { showError(data.Message); }
                 },
@@ -52,7 +52,7 @@
         }
         else {
             var redirectUrl = "@Url.Action("Index", "ViewCup", new { Area = "ViewCup", idCup = Model.Id})";
-            redirectLoginPage(redirectUrl);
+            redirectToLoginPage(redirectUrl);
         }
     });
 
@@ -95,14 +95,6 @@
                  showError("Ошибка ajax");
              }
          });
-    }
-
-
-    // Проверка залогированности
-    function CheckLogin()
-    {
-        var isLogin = "@ViewBag.IsLogin";
-        return isLogin.toLowerCase() === "true";
     }
 
 </script>

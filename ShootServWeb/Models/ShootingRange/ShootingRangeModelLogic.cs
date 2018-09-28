@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using BL;
 using BO;
-using ShootServ.Models.ShootingRange;
 
-namespace ShootServ.Areas.ShootingRange.Models
+namespace ShootServ.Models.ShootingRange
 {
     public static class ShootingRangeModelLogic
     {

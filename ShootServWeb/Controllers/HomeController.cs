@@ -4,7 +4,7 @@ using ShootingCompetitionsRequests.App_Start;
 
 namespace ShootServ.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {     
         /// <summary>
         /// 
@@ -24,10 +24,9 @@ namespace ShootServ.Controllers
         public ActionResult GetUserInfo()
         {
             var user = new UserParams();
-            var sessionUser = Session["user"];
-            if (sessionUser != null)
+            if (CurrentUser != null)
             {
-                user = sessionUser as UserParams;
+                user = CurrentUser;
             }
 
             return PartialView("UserInfo", user);

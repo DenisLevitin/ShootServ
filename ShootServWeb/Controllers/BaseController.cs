@@ -9,5 +9,16 @@ namespace ShootServ.Controllers
         {
             get { return Session["user"] as UserParams; }
         }
+
+        public bool IsLogin
+        {
+            get { return CurrentUser != null; }
+        }
+
+        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            ViewBag.IsLogin = IsLogin;
+            base.OnActionExecuted(filterContext);
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using BL;
 using Microsoft.Web.WebPages.OAuth;
 using ShootingCompetitionsRequests.Models;
-using BL;
 
-namespace ShootingCompetitionsRequests.Controllers
+namespace ShootServ.Controllers
 {
     //[Authorize]
     //[InitializeSimpleMembership]

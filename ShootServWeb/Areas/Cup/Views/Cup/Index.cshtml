@@ -42,25 +42,25 @@
     });
 
     $(document).on("click", "#addBt", function() {
-        if (CheckLogin()) {
+        if (isAuthorize) {
             AddCup();
         }
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            redirectLoginPage(redirectUrl);
+            redirectToLoginPage(redirectUrl);
         }
     });
 
     // Клик на кнопке редактировать
     $(document).on("click", "#editBt", function() {
-        if (CheckLogin()) {
+        if (isAuthorize) {
             EditCup();
         }
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            redirectLoginPage(redirectUrl);
+            redirectToLoginPage(redirectUrl);
         }
     });
 
@@ -73,7 +73,7 @@
     });
 
     $(document).on("click", ".delCup", function () {
-        if (CheckLogin()) {
+        if (isAuthorize) {
 
             var a = $(this);
             var id = a.attr("idcup");
@@ -99,7 +99,7 @@
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            redirectLoginPage(redirectUrl);
+            redirectToLoginPage(redirectUrl);
         }
     });
 
@@ -217,7 +217,7 @@
                 async: false,
                 success: function(data) {
                     if (data.IsOk == true) {
-                        ShowInfo("Соревнование отредактировано"); // ShowInfo
+                        showInfo("Соревнование отредактировано"); // showInfo
                     } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function(data) {
@@ -243,7 +243,7 @@
                 async: false,
                 success: function(data) {
                     if (data.IsOk == true) {
-                        ShowInfo("Соревнование добавлено успешно"); // ShowInfo
+                        showInfo("Соревнование добавлено успешно"); // showInfo
                         window.location = "@Url.Action("Index", "ViewCup", new {Area = "Cup"})" + "?idCup=" + data.IdCup;
                     } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
@@ -311,12 +311,6 @@
                 }
             });
         }
-    }
-
-    // Проверка залогированности
-    function CheckLogin() {
-        var val = "@Model.IsLogin";
-        return val.toLowerCase() === "true";
     }
 
     $(document).ready(togetherContent("#divAddCup", "#divAddHidden", 'Добавить соревнование'));

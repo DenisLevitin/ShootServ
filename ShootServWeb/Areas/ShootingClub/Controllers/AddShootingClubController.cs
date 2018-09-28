@@ -1,12 +1,10 @@
-﻿using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
-using System.Web.Mvc;
-using ShootingCompetitionsRequests.Models;
+﻿using System.Web.Mvc;
 using ShootingCompetitionsRequests.App_Start;
-using BO;
-using ShootingCompetitionsRequests.Controllers;
+using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
+using ShootingCompetitionsRequests.Models;
 using ShootServ.Controllers;
 
-namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
+namespace ShootServ.Areas.ShootingClub.Controllers
 {
     public class AddShootingClubController : BaseController
     {
@@ -17,8 +15,6 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Controllers
         public ActionResult Index()
         {
             var model = new ShooterClubModelParams();
-            model.IsLogin = CurrentUser != null;
-
             return View("Index", model);
         }
 
