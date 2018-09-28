@@ -1,13 +1,15 @@
 $(document).ready(function ()
 {
-    changeRegion();
+    var actor = new shootingRangePageActor();
+
+    actor.changeRegion();
     $(document).on("change", "#RegionId", function ()
     {
-        changeRegion();
+        actor.changeRegion();
     });
 
     $(document).on("change", "#CountryId", function () {
-        changeCountry();
+        actor.changeCountry();
     });
 
     // Клик на ссылке удалить тир
@@ -16,10 +18,9 @@ $(document).ready(function ()
         var a = $(this);
         var tr = a.closest("tr");
         var id = a.attr("idShootRange");
-
-        if (checkLogin()) {
+        
             $.ajax({
-                url: linksShootingRange.ShootingRangeDelete,
+                url: linksShootingRange.Delete,
                 dataType: "json",
                 data: { idShootingRange: id },
                 async: false,
@@ -33,16 +34,11 @@ $(document).ready(function ()
                     showError("Ошибка ajax");
                 }
             });
-        }
-        else {
-            redirectLoginPage(linksShootingRange.Index);
-        }
     });
 
     $(document).on("click", "#addBt", function ()
     {
-        if (checkLogin()) {
-            if (validateInput()) {
+            if (actor.validateInput()) {
                 $.ajax({
                     url: linksShootingRange.Add,
                     dataType: "json",
@@ -51,7 +47,7 @@ $(document).ready(function ()
                     success: function (data) {
                         if (data.IsOk) {
                             var idRegion = $("#RegionId").val();
-                            getListByRegion(idRegion);
+                            actor.getListByRegion(idRegion);
                         } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                     },
                     error: function (data) {
@@ -59,97 +55,96 @@ $(document).ready(function ()
                     }
                 });
             }
-        }
-        else {
-            redirectLoginPage(linksShootingRange.Index);
-        }
     });
 
-    changeCountry();
+    actor.changeCountry();
 });
 
-// Нужно вызвать эту функцию при изменении региона
-function changeRegion()
-{
-    var idRegion = $("#RegionId").val();
-    getListByRegion(idRegion);
-}
-
-// Нужно вызвать эту функцию при изменении региона
-function changeCountry() {
-    var idCountry = $("#CountryId").val();
-    getRegionsByCountry(idCountry);
-}
-
-// Проверить ввод
-function validateInput()
-{
-    if ($("#RegionId").val() <= 0)
+var shootingRangePageActor = function () {
+    
+    // Нужно вызвать эту функцию при изменении региона
+    this.changeRegion = function()
     {
-        showError("Не выбран регион");
-        return false;
-    }
+        var idRegion = $("#RegionId").val();
+        this.getListByRegion(idRegion);
+    };
+    
+    // Нужно вызвать эту функцию при изменении региона
+    this.changeCountry = function() {
+        var idCountry = $("#CountryId").val();
+        this.getRegionsByCountry(idCountry);
+    };
 
-    if (!$("#Name").val())
+    this.construct = function(){
+    };
+    
+    // Проверить ввод
+    this.validateInput = function()
     {
-        showError("Не введено название тира");
-        return false;
+        if ($("#RegionId").val() <= 0)
+        {
+            showError("Не выбран регион");
+            return false;
+        }
+    
+        if (!$("#Name").val())
+        {
+            showError("Не введено название тира");
+            return false;
+        }
+    
+        if (!$("#Address").val()) {
+            showError("Не введен адрес тира");
+            return false;
+        }
+    
+        return true;
+    };
+    
+    // Получить список тиров по региону
+    this.getListByRegion = function(idRegion)
+    {
+        if (idRegion) {
+            $.ajax({
+                url: links.GetListByRegion,
+                dataType: "html",
+                data: { idRegion: idRegion },
+                async: false,
+                success: function (data) {
+                    $("#listShootingRanges").html("");
+                    $("#listShootingRanges").html(data);
+                },
+                error: function ()
+                {
+                    showError("Ошибка ajax");
+                }
+            });
+        }
+    };
+    
+    // Получить список регионов по стране
+    this.getRegionsByCountry = function(idCountry) {
+        if (idCountry) {
+            $.ajax({
+                url: linksCommon.GetRegionsByCountry,
+                dataType: "html",
+                data: {
+                    idCountry: idCountry,
+                    tagName: "RegionId",
+                    addAll : true
+                },
+                async: false,
+                success: function (data) {
+                    $("#tdRegionId").html("");
+                    $("#tdRegionId").html(data);
+                },
+                error: function () {
+                    showError("Ошибка ajax");
+                }
+            });
+        }
     }
-
-    if (!$("#Address").val()) {
-        showError("Не введен адрес тира");
-        return false;
-    }
-
-    return true;
-}
-
-// Получить список тиров по региону
-function getListByRegion(idRegion)
-{
-    if (idRegion) {
-        $.ajax({
-            url: links.shootingRangeGetListByRegion,
-            dataType: "html",
-            data: { idRegion: idRegion },
-            async: false,
-            success: function (data) {
-                $("#listShootingRanges").html("");
-                $("#listShootingRanges").html(data);
-            },
-            error: function ()
-            {
-                showError("Ошибка ajax");
-            }
-        });
-    }
-}
-
-// Получить список регионов по стране
-function getRegionsByCountry (idCountry) {
-    if (idCountry) {
-
-        var tagName = "RegionId";
-
-        $.ajax({
-            url: linksCommon.GetRegionsByCountry,
-            dataType: "html",
-            data: {
-                idCountry: idCountry,
-                tagName: tagName,
-                addAll : true
-            },
-            async: false,
-            success: function (data) {
-                $("#tdRegionId").html("");
-                $("#tdRegionId").html(data);
-            },
-            error: function () {
-                showError("Ошибка ajax");
-            }
-        });
-    }
-}
+};
 
 //все для выпадающего контента
 $(document).ready(function() {

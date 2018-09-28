@@ -1,14 +1,10 @@
 ﻿using System.Web.Mvc;
 using ShootingCompetitionsRequests.Models;
 
-namespace ShootingCompetitionsRequests.Controllers
+namespace ShootServ.Controllers
 {
     public class StandartFiltersController : Controller
     {
-        public StandartFiltersController()
-        { 
-        }
-
         //
         // GET: /StandartFilters/
 

@@ -34,10 +34,8 @@ namespace BL
             var res = new ResultInfo();
 
             var clubs = _clubLogic.GetByShootingRange(idShootRange);
-
-            if (!clubs.Any())
+            if (clubs.Count == 0)
             {
-
                 var user = _userLogic.Get(idUser);
                 if (user != null)
                 {
