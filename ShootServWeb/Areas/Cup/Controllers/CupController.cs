@@ -7,6 +7,7 @@ using System;
 using System.Linq;
 using System.Web.Mvc;
 using ShootingCompetitionsRequests.Controllers;
+using ShootServ.Controllers;
 
 namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
 {

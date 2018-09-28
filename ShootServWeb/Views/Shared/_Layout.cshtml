@@ -36,7 +36,7 @@
                     <a href="@Url.Action("Login", "Account", new {Area = "", returnUrl = Url.Action("Index", "Home", new {Area = ""})})">Войти</a>
                 </div>
                 <div id="shootingRangeButton">
-                    <a href="@Url.Action("Index", "AddShootingRange", new {Area = "ShootingRange"})">Тиры</a>
+                    <a href="@Url.Action("Index", "ShootingRange")">Тиры</a>
                 </div>
                 <div>
                     <a href="@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})">Команды</a>
@@ -63,13 +63,14 @@
             </div>
         
             <script>
+                
                 //функция вызова ошибки
-                function ShowError(text) {
-                    $("#divShowError").text(text)
+                function showError(text) {
+                    $("#divShowError").text(text);
                     $("#InfoError").animate({ "opacity": "100%" }, "slow");
         
                     setTimeout(function() {
-                            $("#InfoError").animate({ "opacity": "0" }, "slow")
+                            $("#InfoError").animate({ "opacity": "0" }, "slow");
                         },
                         5000);
                 }
@@ -79,7 +80,7 @@
                 }
         
                 // Перевод на страницу логина
-                function RedirectLoginPage(returnUrl) {
+                function redirectLoginPage(returnUrl) {
                     if (confirm("Для данного действия требуется выполнить вход. Перейти на страницу авторизации?")) {
                         window.location =
                             "@Url.Action("Login", "Account", new {Area = ""})" + "?ReturnUrl=" + returnUrl;
@@ -137,7 +138,7 @@
                     function() {
                         $("#InfoError").animate({ "opacity": "0" }, "slow");
                     });
-        
+
             </script>
             <article>
                 <div id="divRenderBody" class="divRenderBody">
@@ -172,27 +173,40 @@
             <div id="hellopreloader_preload"></div>     
         </div>
         
-        <script type="text/javascript">
-            var hellopreloader = document.getElementById("hellopreloader_preload");
+    <script type="text/javascript">
+        var hellopreloader = document.getElementById("hellopreloader_preload");
         
-            function fadeOutnojquery(el) {
-                el.style.opacity = 1;
-                var interhellopreloader = setInterval(function() {
-                        el.style.opacity = el.style.opacity - 0.05;
-                        if (el.style.opacity <= 0.05) {
-                            clearInterval(interhellopreloader);
-                            hellopreloader.style.display = "none";
-                        }
-                    },
-                    16);
-            }
+        function fadeOutnojquery(el) {
+            el.style.opacity = 1;
+            var interhellopreloader = setInterval(function() {
+                    el.style.opacity = el.style.opacity - 0.05;
+                    if (el.style.opacity <= 0.05) {
+                        clearInterval(interhellopreloader);
+                        hellopreloader.style.display = "none";
+                    }
+                },
+                16);
+        }
         
-            window.onload = function() {
-                setTimeout(function() {
-                        fadeOutnojquery(hellopreloader);
-                    },
-                    1000);
-            };
-        </script>
+        window.onload = function() {
+            setTimeout(function() {
+                    fadeOutnojquery(hellopreloader);
+                },
+                1000);
+        };
+    </script>
+    
+    <script type="text/javascript">
+        var linksShootingRange = {
+            Index: "@Url.Action("Index", "ShootingRange")",
+            Add: "@Url.Action("Add", "ShootingRange")",
+            Delete: "@Url.Action("Delete", "ShootingRange")",
+            GetListByRegion: "@Url.Action("GetListByRegion", "ShootingRange")"
+        };
+            
+        var linksCommon = {
+            GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
+        }
+    </script>
     </body>
 </html>

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace ShootingCompetitionsRequests
+namespace ShootServ
 {
     public class RouteConfig
     {
@@ -20,6 +20,12 @@ namespace ShootingCompetitionsRequests
                 url : "Registration/{idUser}",
                 defaults : new {  controller = "Registration", idUser = UrlParameter.Optional, action = "Index" }
                 );
+            
+            routes.MapRoute(
+                name: "ShootingRange",
+                url: "ShootingRange/{action}",
+                defaults: new { controller = "ShootingRange", action = "Index" }
+            );
         }
     }
 }

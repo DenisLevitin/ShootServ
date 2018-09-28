@@ -43,16 +43,16 @@
                     if (data.IsOk == true) {
                         ShowInfo("заявка создана");
                     }
-                    else { ShowError(data.Message); }
+                    else { showError(data.Message); }
                 },
                 error: function (data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
         else {
             var redirectUrl = "@Url.Action("Index", "ViewCup", new { Area = "ViewCup", idCup = Model.Id})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
     });
 
@@ -92,7 +92,7 @@
                  $("#divShootersList").html(data);
              },
              error: function (data) {
-                 ShowError("Ошибка ajax");
+                 showError("Ошибка ajax");
              }
          });
     }

@@ -1,0 +1,38 @@
+﻿@model ShootServ.Models.ShootingRange.ShootingRangeModelParams
+
+ @using (Html.BeginForm("Add", "ShootingRange", FormMethod.Post, new { id="addform", @style="width:98%"}))
+    {
+     
+        <table style="width:99%;height:99%">
+            <tr>
+                <td>@Html.LabelFor(x => x.Name)</td>
+                <td>@Html.TextBoxFor(x => x.Name)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.CountryId)</td>
+                <td>@Html.DropDownListFor(x => x.CountryId, Model.Countries)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.RegionId)</td>
+                <td id="tdRegionId">@Html.DropDownListFor(x => x.RegionId, Model.Regions)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.Town)</td>
+                <td>@Html.TextBoxFor(x => x.Town)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.Address)</td>
+                <td>@Html.TextAreaFor(x => x.Address)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.Phone)</td>
+                <td>@Html.TextBoxFor(x => x.Phone)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(x => x.Info)</td>
+                <td>@Html.TextAreaFor(x => x.Info)</td>
+            </tr>
+        </table>
+
+        <input id="addBt" type="button" value="Добавить" />
+    }

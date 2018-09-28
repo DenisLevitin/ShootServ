@@ -48,7 +48,7 @@
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
     });
 
@@ -60,7 +60,7 @@
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
     });
 
@@ -89,17 +89,17 @@
                         var tr = a.closest("tr");
                         $(tr).remove();
 
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function (data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
         else
         {
             var redirectUrl = "@Url.Action("Index", "Cup", new { Area = "Cup"})";
-            RedirectLoginPage(redirectUrl);
+            redirectLoginPage(redirectUrl);
         }
     });
 
@@ -122,7 +122,7 @@
                 ChangeRegion();
             },
             error: function () {
-                ShowError("Ошибка ajax");
+                showError("Ошибка ajax");
             }
         });
     }
@@ -131,17 +131,17 @@
     function ValidateInput() {
 
         if (!$("#Name").val()) {
-            ShowError("Не введено название соревнования");
+            showError("Не введено название соревнования");
             return false;
         }
 
         if (!$("#IdCupType").val()) {
-            ShowError("Не введен тип соревнования");
+            showError("Не введен тип соревнования");
             return false;
         }
 
         if (!$("#IdShootingRange").val()) {
-            ShowError("Не введен тир, где будет проходить соревнование");
+            showError("Не введен тир, где будет проходить соревнование");
             return false;
         }
 
@@ -149,12 +149,12 @@
         var dateEnd = $("#DateEnd").datepicker("getDate");
 
         if (dateStart > dateEnd) {
-            ShowError("Дата начала соревнования не может быть позже даты окончания");
+            showError("Дата начала соревнования не может быть позже даты окончания");
             return false;
         }
 
         if (!$("#IdShootingRange").val()) {
-            ShowError("Не введен тир, где будет проходить соревнование");
+            showError("Не введен тир, где будет проходить соревнование");
             return false;
         }
 
@@ -218,10 +218,10 @@
                 success: function(data) {
                     if (data.IsOk == true) {
                         ShowInfo("Соревнование отредактировано"); // ShowInfo
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function(data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
@@ -245,10 +245,10 @@
                     if (data.IsOk == true) {
                         ShowInfo("Соревнование добавлено успешно"); // ShowInfo
                         window.location = "@Url.Action("Index", "ViewCup", new {Area = "Cup"})" + "?idCup=" + data.IdCup;
-                    } else ShowError(data.Message); // сообщение об ошибке как -то показать на странице
+                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function(data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
 
@@ -287,7 +287,7 @@
                         $("#tdRange").html(data);
                     },
                     error: function (data) {
-                       ShowError("Ошибка ajax");
+                       showError("Ошибка ajax");
                     }
             });
         }
@@ -307,7 +307,7 @@
                     $("#divCupsList").html(data);
                 },
                 error: function (data) {
-                    ShowError("Ошибка ajax");
+                    showError("Ошибка ajax");
                 }
             });
         }
@@ -372,7 +372,7 @@
                             </tr>
                             <tr>
                                 <td></td>
-                                <td>@Html.ActionLink("Добавить тир", "Index", "AddShootingRange", new { Area = "ShootingRange" }, new { target = "blank" })</td>
+                                <td>@Html.ActionLink("Добавить тир", "Index", "ShootingRange", new { Area = "ShootingRange" }, new { target = "blank" })</td>
                             </tr>
                             <tr>
                                 <td>@Html.LabelFor(x => x.DateStart)</td>

@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using BL;
 using ShootingCompetitionsRequests.Models;
 
-namespace ShootServ.Areas.ShootingRange.Models
+namespace ShootServ.Models.ShootingRange
 {
     /// <summary>
     /// Модель для страницы добавления тира

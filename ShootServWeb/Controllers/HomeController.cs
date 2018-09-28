@@ -5,7 +5,7 @@ using ShootingCompetitionsRequests.App_Start;
 namespace ShootServ.Controllers
 {
     public class HomeController : Controller
-    {
+    {     
         /// <summary>
         /// 
         /// </summary>

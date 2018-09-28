@@ -177,15 +177,12 @@
     <Compile Include="Areas\ShootingClub\Controllers\AddShootingClubController.cs" />
     <Compile Include="Areas\ShootingClub\Models\ShooterClubModelParams.cs" />
     <Compile Include="Areas\ShootingClub\ShootingClubAreaRegistration.cs" />
-    <Compile Include="Areas\ShootingRange\Controllers\AddShootingRangeController.cs" />
-    <Compile Include="Areas\ShootingRange\Models\ShootingRangeModelParams.cs" />
-    <Compile Include="Areas\ShootingRange\Models\ShootingRangeModelLogic.cs" />
-    <Compile Include="Areas\ShootingRange\ShootingRangeAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\ShootingRangeController.cs" />
     <Compile Include="Controllers\StandartFiltersController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -195,6 +192,8 @@
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
     <Compile Include="Models\Registration\RegPageModelParams.cs" />
+    <Compile Include="Models\ShootingRange\ShootingRangeModelLogic.cs" />
+    <Compile Include="Models\ShootingRange\ShootingRangeModelParams.cs" />
     <Compile Include="Models\StandartClassifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -281,10 +280,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\ShootingRange\Views\Web.config" />
-    <Content Include="Areas\ShootingRange\Views\AddShootingRange\Index.cshtml" />
-    <Content Include="Areas\ShootingRange\Views\AddShootingRange\ListShootingRanges.cshtml" />
-    <Content Include="Areas\ShootingRange\Views\AddShootingRange\Add.cshtml" />
     <Content Include="Areas\ShootingClub\Views\Web.config" />
     <Content Include="Areas\ShootingClub\Views\AddShootingClub\Index.cshtml" />
     <Content Include="Areas\ShootingClub\Views\AddShootingClub\ListShootingClubs.cshtml" />
@@ -343,7 +338,11 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\ShootServ\shootingRange.js" />
     <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\ShootingRange\Add.cshtml" />
+    <Content Include="Views\ShootingRange\Index.cshtml" />
+    <Content Include="Views\ShootingRange\ListShootingRanges.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -395,7 +394,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Cup\Views\Shared\" />
     <Folder Include="Areas\ShootingClub\Views\Shared\" />
-    <Folder Include="Areas\ShootingRange\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BL;
 using BO;
+using ShootServ.Models.ShootingRange;
 
 namespace ShootServ.Areas.ShootingRange.Models
 {
@@ -16,7 +17,7 @@ namespace ShootServ.Areas.ShootingRange.Models
             var res = new List<ShootingRangeModelParams>();
             
             var blShootingRange = new ShootingRangeLogic();
-            var list = regionId.HasValue ? blShootingRange.GetByRegion(regionId.Value) : new List<ShootingRangeParams>();
+            var list = blShootingRange.GetByRegion(regionId);
 
             foreach (var item in list)
             {

@@ -4,6 +4,7 @@ using BO;
 using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.Cup.Models;
 using ShootingCompetitionsRequests.Controllers;
+using ShootServ.Controllers;
 
 namespace ShootServ.Areas.Cup.Controllers
 {
