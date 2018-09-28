@@ -116,7 +116,7 @@ var shootingRangePageActor = function () {
     {
         if (idRegion) {
             $.ajax({
-                url: links.GetListByRegion,
+                url: linksShootingRange.GetListByRegion,
                 dataType: "html",
                 data: { idRegion: idRegion },
                 async: false,
