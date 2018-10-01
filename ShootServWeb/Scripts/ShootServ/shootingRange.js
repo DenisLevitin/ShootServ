@@ -14,7 +14,7 @@ $(document).ready(function ()
 
     // Клик на ссылке удалить тир
     $(document).on("click", ".delRange", function () {
-
+// hello, denis
         if ( isAuthorize) {
             var a = $(this);
             var tr = a.closest("tr");
