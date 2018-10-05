@@ -20,5 +20,10 @@ namespace ShootServ.Controllers
             ViewBag.IsLogin = IsLogin;
             base.OnActionExecuted(filterContext);
         }
+
+        protected override void OnException(ExceptionContext filterContext)
+        {
+            // logger
+        }
     }
 }

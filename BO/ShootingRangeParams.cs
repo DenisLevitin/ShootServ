@@ -3,13 +3,8 @@
     /// <summary>
     /// Тир
     /// </summary>
-    public class ShootingRangeParams
+    public class ShootingRangeParams : ModelBase
     {
-        /// <summary>
-        /// Ид.
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Название
         /// </summary>

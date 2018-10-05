@@ -47,7 +47,7 @@ namespace BL
                         var cups = _cupLogic.GetByShootingRangeAndDates(idShootRange, new DateTime(1970, 1, 1), new DateTime(2080, 1, 1));
                         if (cups.Count == 0)
                         {
-                            res = _dalShootingRange.Delete(idShootRange);
+                            _dalShootingRange.Delete(idShootRange);
                         }
                         else
                         {
@@ -80,18 +80,19 @@ namespace BL
         /// Добавить тир
         /// </summary>
         /// <param name="shootingRange">тир</param>
+        /// <param name="userId">ид. пользователя</param>
         /// <returns></returns>
         public ResultInfo Add(ShootingRangeParams shootingRange, int userId)
         {
             var res = new ResultInfo();
-            if (string.IsNullOrEmpty(shootingRange.Name))
+            if (string.IsNullOrWhiteSpace(shootingRange.Name))
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя добавить тир без названия";
                 return res;
             }
 
-            if (string.IsNullOrEmpty(shootingRange.Address))
+            if (string.IsNullOrWhiteSpace(shootingRange.Address))
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя добавить тир без адреса";
@@ -105,7 +106,7 @@ namespace BL
                     var allInRegions = _dalShootingRange.GetByRegion(shootingRange.IdRegion);
                     if (!allInRegions.Any(x => string.Equals(x.Name, shootingRange.Name, StringComparison.InvariantCultureIgnoreCase)))
                     {
-                        res.IsOk = _dalShootingRange.Add(shootingRange);
+                        _dalShootingRange.Create(shootingRange);
                     }
                 }
                 else 

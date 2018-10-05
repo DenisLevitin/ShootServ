@@ -27,7 +27,7 @@ namespace ShootServ.Controllers
             if (ModelState.IsValid)
             {
                 var res = ShootingRangeModelLogic.Add(model, CurrentUser.Id);
-                return new JsonResult {Data = new {IsOk = res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+                return new JsonResult {Data = new {res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
             }
 
             return new JsonResult { Data = new { IsOk = false, Message = string.Empty, ValidationMessages = ModelState.ToErrorsDictionary()}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
@@ -38,7 +38,7 @@ namespace ShootServ.Controllers
         public ActionResult Delete(int idShootingRange)
         {
             var res = ShootingRangeModelLogic.Delete(idShootingRange, CurrentUser.Id);
-            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult { Data = new {res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
     }
 }
