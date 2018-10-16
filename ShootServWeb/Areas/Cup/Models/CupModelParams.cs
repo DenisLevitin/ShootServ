@@ -175,7 +175,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
     public class CupModelLogic
     {
         private readonly CupLogic _cupLogic;
-        private readonly CupTypeLogic _cupTypeLogic;
         private readonly RegionsLogic _regionLogic;
         private readonly ShootingRangeLogic _shootingRangeLogic;
         private readonly CompetitionTypeLogic _competitionTypeLogic;
@@ -184,7 +183,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         public CupModelLogic()
         {
             _cupLogic = new CupLogic();
-            _cupTypeLogic = new CupTypeLogic();
             _regionLogic = new RegionsLogic();
             _shootingRangeLogic = new ShootingRangeLogic();
             _competitionTypeLogic = new CompetitionTypeLogic();
@@ -195,17 +193,10 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// Получить список типов соревнований
         /// </summary>
         /// <returns></returns>
-        public List<SelectListItem> GetCupTypes()
+        private List<SelectListItem> GetCupTypes()
         {
-            var res = new List<SelectListItem>();
-
-            var query = _cupTypeLogic.GetAll();
-            foreach (var item in query)
-            {
-                res.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
-            }
-
-            return res;
+            var enumValues = EnumHelper.GetEnumValues<CupTypeParams>();
+            return enumValues.Select(item => new SelectListItem {Value = item.Id.ToString(), Text = item.EnumDescription}).ToList();
         }
 
         /// <summary>
@@ -218,9 +209,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
             return _shootingRangeLogic.GetByRegion(idRegion).ConvertAll(x => new SelectListItem { Text = string.Format("{0} {1}", x.Town, x.Name), Value = x.Id.ToString() });
         }
 
-        //public ResultInfo LoadDocument(int idCup, Http)
-        //{ }
-
         /// TODO: Добавить загрузку основания
 
         public List<CupDetailsParams> GetListCupsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
@@ -232,7 +220,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// Получить список упражнений
         /// </summary>
         /// <returns></returns>
-        public List<CompetitionModelParams> GetCompetitionsList()
+        private List<CompetitionModelParams> GetCompetitionsList()
         {
             var query = _competitionTypeLogic.GetAll();
 
@@ -277,13 +265,15 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
         /// <returns></returns>
         public CupModelParams GetModelForIndex(int idCup)
         {
-            var model = new CupModelParams();
+            var model = new CupModelParams
+            {
+                Countries = StandartClassifierModelLogic.GetCountryList().Data, 
+                CupTypes = GetCupTypes(),
+                CompetitionTypes = GetCompetitionsList(), 
+                IsEditMode = false
+            };
 
-            model.Countries = StandartClassifierModelLogic.GetCountryList().Data; // немного говнокода
-            model.CupTypes = GetCupTypes();
-            model.CompetitionTypes = GetCompetitionsList();
-            model.IsEditMode = false;
-
+            // немного говнокода
             if (idCup != -1) // Если надо получить модель для соревнования, которое уже существует
             {
                 model.IsEditMode = true; // Модель в режиме редактирования
@@ -326,6 +316,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
                 }
                 catch (Exception exc)
                 {
+                    // logger 
                 }
 
                 // Отмечаем упражнения, которые есть на соревновании
@@ -333,8 +324,8 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
 
                 foreach (var item in model.CompetitionTypes)
                 {
-                    var cupCompType = competitions.Where(x => x.IdCompetitionType == item.IdCompetitionType);
-                    if (cupCompType.Any())
+                    var cupCompType = competitions.Where(x => x.IdCompetitionType == item.IdCompetitionType).ToList();
+                    if (cupCompType.Count > 0)
                     {
                         var cupCompTypeFirst = cupCompType.First();
                         item.IsInCup = true;

@@ -109,7 +109,6 @@
     <Compile Include="CountriesRepository.cs" />
     <Compile Include="CupRepository.cs" />
     <Compile Include="CupCompetitionTypeRepository.cs" />
-    <Compile Include="CupTypeRepository.cs" />
     <Compile Include="EntryForCompetitionsRepository.cs" />
     <Compile Include="EFModel.Context.cs">
       <AutoGen>True</AutoGen>
