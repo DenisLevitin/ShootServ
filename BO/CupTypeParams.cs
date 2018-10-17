@@ -1,23 +1,34 @@
-﻿namespace BO
+using System.ComponentModel;
+
+namespace BO
 {
     /// <summary>
-    /// Тип соревнования
+    /// Вид соревнования, масштаб
     /// </summary>
-    public class CupTypeParams
+    public enum CupTypeParams
     {
         /// <summary>
-        /// ид.
+        /// Городские
         /// </summary>
-        public int Id { get; set; }
-
+        [Description("Городские")]
+        City = 1,
+        
         /// <summary>
-        /// Название
+        /// Региональные
         /// </summary>
-        public string Name { get; set; }
-
+        [Description("Региональные")]
+        Region = 2,
+        
         /// <summary>
-        /// кейчар
+        /// Всероссийские
         /// </summary>
-        public string Keychar { get; set; }
+        [Description("Всероссийские")]
+        Country = 3,
+        
+        /// <summary>
+        /// Мировые
+        /// </summary>
+        [Description("Мировые")]
+        World = 4
     }
 }

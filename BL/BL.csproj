@@ -55,12 +55,12 @@
     <Compile Include="CupCompetitionTypeLogic.cs" />
     <Compile Include="CupLogic.cs" />
     <Compile Include="EntryForCompetitionsLogic.cs" />
+    <Compile Include="EnumHelper.cs" />
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RecoveryPasswordsLogic.cs" />
     <Compile Include="RegionsLogic.cs" />
     <Compile Include="ResultLogic.cs" />
     <Compile Include="ShooterCategoryLogic.cs" />
-    <Compile Include="CupTypeLogic.cs" />
     <Compile Include="ShootingClubLogic.cs" />
     <Compile Include="ShooterLogic.cs" />
     <Compile Include="ShootingRangeLogic.cs" />
