@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using ShootingCompetitionsRequests.App_Start;
 using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
 using ShootingCompetitionsRequests.Models;
 using ShootServ.Controllers;

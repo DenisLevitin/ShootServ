@@ -19,12 +19,18 @@ namespace ShootServ
                 name: "Registration",
                 url : "Registration/{idUser}",
                 defaults : new {  controller = "Registration", idUser = UrlParameter.Optional, action = "Index" }
-                );
-            
+            );
+
             routes.MapRoute(
                 name: "ShootingRange",
                 url: "ShootingRange/{action}",
-                defaults: new { controller = "ShootingRange", action = "Index" }
+                defaults: new {controller = "ShootingRange", action = "Index"}
+            );
+                
+            routes.MapRoute(
+                name: "Cup",
+                url: "Cup/{action}",
+                defaults: new { controller = "Cup", action = "Index" }
             );
         }
     }

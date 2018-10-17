@@ -1,85 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using BL;
 using BO;
-using System.Web.Mvc;
 
-namespace ShootingCompetitionsRequests.Areas.Cup.Models
+namespace ShootServ.Models.Cup
 {
-    /// <summary>
-    /// Модель для детализации упражнения на странице просмотра соревнований
-    /// </summary>
-    public class ViewCupShooterCompetitionModel
-    {
-        /// <summary>
-        /// Ид. упражнения на соревновании
-        /// </summary>
-        public int IdCupCompetitionType { get; set; }
-
-        /// <summary>
-        /// Ид. типа упражнения
-        /// </summary>
-        public int IdCompetitionType { get; set; }
-
-        /// <summary>
-        /// Название упражнения
-        /// </summary>
-        public string NameCompetition { get; set; }
-
-        /// <summary>
-        /// Время первой смены
-        /// </summary>
-        public DateTime TimeFirstShift { get; set; }
-
-        /// <summary>
-        /// Был ли стрелок заявлен на упражнение
-        /// </summary>
-        public bool IsShooterWasEntried { get; set; }
-    }
-
-    /// <summary>
-    /// Модель для просмотра упражнений на странице просмотра соревнований
-    /// </summary>
-    public class ViewCupCompetitionModel
-    {
-        /// <summary>
-        /// Список упражнений
-        /// </summary>
-        public List<ViewCupShooterCompetitionModel> Competitions { get; set; }
-
-        /// <summary>
-        /// Показывать ли кнопку добавления на соревнования
-        /// </summary>
-        public bool ShowEntryButton { get; set; }
-
-        /// <summary>
-        /// Ид. соревнования
-        /// </summary>
-        public int IdCup { get; set; }
-    }
-
-    /// <summary>
-    /// Модель для отображения завляенных стрелков на соревновании
-    /// </summary>
-    public class EntryShootersModel
-    {
-        /// <summary>
-        /// Список стрелков
-        /// </summary>
-        public List<ShooterEntryDetailsParams> Shooters { get; set; }
-
-        /// <summary>
-        /// Список стрелковых команд
-        /// </summary>
-        public List<SelectListItem> Clubs { get; set; }
-             
-    }
-
     public class ViewCupModelLogic
     {
-        private readonly UserLogic _userLogic;
         private readonly EntryForCompetitionsLogic _entryLogic;
         private readonly ShooterLogic _shooterLogic;
         private readonly ShootingClubLogic _clubLogic;
@@ -87,7 +14,6 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Models
 
         public ViewCupModelLogic()
         {
-            _userLogic = new UserLogic();
             _entryLogic = new EntryForCompetitionsLogic();
             _clubLogic = new ShootingClubLogic();
             _shooterLogic = new ShooterLogic();

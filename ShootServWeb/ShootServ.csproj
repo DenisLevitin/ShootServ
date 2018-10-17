@@ -169,27 +169,31 @@
     <Compile Include="App_Start\ModelDateBinder.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Cup\Controllers\CupController.cs" />
-    <Compile Include="Areas\Cup\Controllers\ViewCupController.cs" />
-    <Compile Include="Areas\Cup\CupAreaRegistration.cs" />
-    <Compile Include="Areas\Cup\Models\CupModelParams.cs" />
-    <Compile Include="Areas\Cup\Models\ViewCupCompetitionModel.cs" />
     <Compile Include="Areas\ShootingClub\Controllers\AddShootingClubController.cs" />
     <Compile Include="Areas\ShootingClub\Models\ShooterClubModelParams.cs" />
     <Compile Include="Areas\ShootingClub\ShootingClubAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\ShootingRangeController.cs" />
     <Compile Include="Controllers\StandartFiltersController.cs" />
+    <Compile Include="Controllers\ViewCupController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ModelStateExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Cup\CompetitionModelParams.cs" />
+    <Compile Include="Models\Cup\CupModelLogic.cs" />
+    <Compile Include="Models\Cup\CupModelParams.cs" />
+    <Compile Include="Models\Cup\EntryShootersModel.cs" />
+    <Compile Include="Models\Cup\ViewCupCompetitionModel.cs" />
+    <Compile Include="Models\Cup\ViewCupModelLogic.cs" />
+    <Compile Include="Models\Cup\ViewCupShooterCompetitionModel.cs" />
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
     <Compile Include="Models\Registration\RegPageModelParams.cs" />
@@ -284,14 +288,6 @@
     <Content Include="Areas\ShootingClub\Views\Web.config" />
     <Content Include="Areas\ShootingClub\Views\AddShootingClub\Index.cshtml" />
     <Content Include="Areas\ShootingClub\Views\AddShootingClub\ListShootingClubs.cshtml" />
-    <Content Include="Areas\Cup\Views\Web.config" />
-    <Content Include="Areas\Cup\Views\Cup\Index.cshtml" />
-    <Content Include="Areas\Cup\Views\Cup\CompetitionsList.cshtml" />
-    <Content Include="Areas\Cup\Views\Cup\CupsList.cshtml" />
-    <Content Include="Areas\Cup\Views\ViewCup\Index.cshtml" />
-    <Content Include="Areas\Cup\Views\ViewCup\CompetitionsList.cshtml" />
-    <Content Include="Areas\Cup\Views\ViewCup\EntryShootersList.cshtml" />
-    <Content Include="Areas\Cup\Views\ViewCup\ShootersListTable.cshtml" />
     <Content Include="Content\Template\Шаблон_заявки_excel.xlsx" />
     <None Include="Properties\PublishProfiles\1.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -339,11 +335,19 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\ShootServ\cup.js" />
     <Content Include="Scripts\ShootServ\shootingRange.js" />
+    <Content Include="Views\Cup\CompetitionsList.cshtml" />
+    <Content Include="Views\Cup\CupsList.cshtml" />
+    <Content Include="Views\Cup\Index.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\ShootingRange\Add.cshtml" />
     <Content Include="Views\ShootingRange\Index.cshtml" />
     <Content Include="Views\ShootingRange\ListShootingRanges.cshtml" />
+    <Content Include="Views\ViewCup\CompetitionsList.cshtml" />
+    <Content Include="Views\ViewCup\EntryShootersList.cshtml" />
+    <Content Include="Views\ViewCup\Index.cshtml" />
+    <Content Include="Views\ViewCup\ShootersListTable.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -393,7 +397,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Cup\Views\Shared\" />
     <Folder Include="Areas\ShootingClub\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>

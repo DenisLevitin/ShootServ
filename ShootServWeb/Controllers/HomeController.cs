@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using BO;
-using ShootingCompetitionsRequests.App_Start;
 
 namespace ShootServ.Controllers
 {

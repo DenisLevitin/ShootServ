@@ -22,8 +22,7 @@
     });
 
     $(document).on("click", "#btEdit", function () {
-
-        window.location = "@Url.Action("Index", "Cup", new { Area = "Cup", idCup = Model.Id })";
+        window.location = "@Url.Action("Index", "Cup", new { idCup = Model.Id })";
     });
 
     // клик на "Заявиться"
@@ -51,7 +50,7 @@
             });
         }
         else {
-            var redirectUrl = "@Url.Action("Index", "ViewCup", new { Area = "ViewCup", idCup = Model.Id})";
+            var redirectUrl = "@Url.Action("Index", "ViewCup", new { idCup = Model.Id})";
             redirectToLoginPage(redirectUrl);
         }
     });
@@ -71,7 +70,7 @@
     {
         var idClub = $("#IdClub").val();
 
-        var url = "@Url.Action("PrintEntry", "ViewCup", new { Area = "Cup", idCup = Model.Id })";
+        var url = "@Url.Action("PrintEntry", "ViewCup", new { idCup = Model.Id })";
 
         url += "&sex=" + sex;
          if (idClub != undefined && idClub > 0) {

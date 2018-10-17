@@ -1,24 +1,24 @@
-﻿using BO;
-using Newtonsoft.Json;
-using ShootingCompetitionsRequests.App_Start;
-using ShootingCompetitionsRequests.Areas.Cup.Models;
-using ShootingCompetitionsRequests.Models;
-using System;
+﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using ShootServ.Controllers;
+using BL;
+using Newtonsoft.Json;
+using ShootingCompetitionsRequests.Models;
+using ShootServ.Models.Cup;
 
-namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
+namespace ShootServ.Controllers
 {
     public class CupController : BaseController
     {
         //
         // GET: /Cup/Cup/
         private readonly CupModelLogic _modelLogic;
-
+        private readonly CupLogic _cupLogic;
+        
         public CupController()
         {
             _modelLogic = new CupModelLogic();
+            _cupLogic = new CupLogic();
         }
 
         //[CustomAuthorize]
@@ -37,9 +37,9 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         }
 
         //[CustomAuthorize]
-        public ActionResult GetCupLists(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public ActionResult GetCupsList(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
         {
-            var model = _modelLogic.GetListCupsByRegionAndDates(idRegion, dateFrom, dateTo);
+            var model = _modelLogic.GetCupsByRegionAndDates(idRegion, dateFrom, dateTo);
 
             return PartialView("CupsList", model);
         }
@@ -60,7 +60,7 @@ namespace ShootingCompetitionsRequests.Areas.Cup.Controllers
         [CustomAuthorize]
         public ActionResult DeleteCup(int idCup)
         {
-            var res = _modelLogic.DeleteCup(idCup, CurrentUser.Id);
+            var res = _cupLogic.Delete(idCup, CurrentUser.Id);
             return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
 

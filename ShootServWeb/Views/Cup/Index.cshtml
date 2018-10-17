@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model ShootServ.Models.Cup.CupModelParams
+
+<h3>Создание и просмотр соревнований</h3>
+
+<script type="text/javascript">
+
+</script>
+
+<style>
+    .tableInfo {
+        font-size: 11px;
+    }
+
+        .tableInfo a {
+            font-size: 9px;
+        }
+</style>
+
+<div id="divContentAddCup" style="margin-top:15px; width:100%; height:80%;">
+    <div id="divAdd" class="instr" style="width:1000px;padding:0;">
+        <div id="divAddCup" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;"/>	 	
+        <div id="divAddHidden" style="display:none;">
+            <div style="position:relative; height:330px; margin-top: 20px;">
+                <div style="float:left;">
+                    <form id="add" action="@Url.Action("AddCup")">
+                        <table>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.Name)</td>
+                                <td>@Html.TextBoxFor(x => x.Name)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdCupType)</td>
+                                <td>@Html.DropDownListFor(x => x.IdCupType, Model.CupTypes)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdCountry)</td>
+                                <td>@Html.DropDownListFor(x => x.IdCountry, Model.Countries)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdRegion)</td>
+                                <td id="tdRegion">@Html.DropDownListFor(x => x.IdRegion, Model.Regions)</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.IdShootingRange)</td>
+                                <td id="tdRange">@Html.DropDownListFor(x => x.IdShootingRange, Model.ShootingRanges)</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>@Html.ActionLink("Добавить тир", "Index", "ShootingRange", new { Area = "ShootingRange" }, new { target = "blank" })</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.DateStart)</td>
+                                <td>@Html.TextBoxFor(x => x.DateStart, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(x => x.DateEnd)</td>
+                                <td>@Html.TextBoxFor(x => x.DateEnd, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                            </tr>
+                        </table>
+
+                    </form>
+                </div>
+
+                <div id="divComp" style="float:right;">
+                    <form id="frmCompetitions">
+                        <div>
+                            <span style="margin-bottom:15px;">Упражнения</span>
+
+                            @{Html.RenderPartial("CompetitionsList", Model.CompetitionTypes); }
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @if (!Model.IsEditMode)
+            {
+                <input type="button" id="addBt" value="Добавить" />
+            }
+            else
+            {
+                <input type="button" id="editBt" value="Сохранить">
+            }
+        </div>
+    </div>
+
+    <div class="instr" style="width:1000px; padding:0; margin-bottom:30px;">
+        <div id="divListCup" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;"></div>
+        <div id="rightDiv" style="display:none;">
+            <div id="divFiltres">
+                <table style="margin:auto;">
+                    <tr><td>Страна</td><td>@Html.DropDownList("CountryFilter", Model.Countries)</td></tr>
+                    <tr><td>Соревнование в регионе</td><td id="cupRegionFilter">@Html.DropDownList("RegionFilter", Model.Regions)</td></tr>
+                    <tr><td>Проводящиеся с</td><td>@Html.TextBox("DateFrom", null, new { @class = "datepicker" })</td></tr>
+                    <tr><td>Проводящиеся по</td><td>@Html.TextBox("DateTo", null, new { @class = "datepicker" })</td></tr>
+                </table>
+                <input type="button" id="Show" Value="Показать" />
+            </div>
+            <div id="divCupsList">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,31 +1,28 @@
 ﻿using System.Web.Mvc;
 using BL;
 using BO;
-using ShootingCompetitionsRequests.App_Start;
-using ShootingCompetitionsRequests.Areas.Cup.Models;
-using ShootServ.Controllers;
+using ShootServ.Models.Cup;
 
-namespace ShootServ.Areas.Cup.Controllers
+namespace ShootServ.Controllers
 {
     public class ViewCupController : BaseController
     {
         //
         // GET: /Cup/ViewCup/
-
-        private readonly CupModelLogic _modelLogic;
         private readonly ViewCupModelLogic _viewCupModelLogic;
         private readonly EntryForCompetitionsLogic _entryLogic;
-
+        private readonly CupLogic _cupLogic;
+        
         public ViewCupController()
         {
-            _modelLogic = new CupModelLogic();
             _viewCupModelLogic = new ViewCupModelLogic();
             _entryLogic = new EntryForCompetitionsLogic();
+            _cupLogic = new CupLogic();
         }
 
         public ActionResult Index(int idCup)
         {
-            var model = _modelLogic.GetCup(idCup);
+            var model = _cupLogic.GetDetailsCup(idCup);
             return View(model);
         }
 

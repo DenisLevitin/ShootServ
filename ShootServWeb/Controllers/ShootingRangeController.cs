@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using ShootingCompetitionsRequests.App_Start;
 using ShootServ.Helpers;
 using ShootServ.Models.ShootingRange;
 

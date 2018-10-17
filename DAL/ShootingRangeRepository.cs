@@ -10,15 +10,11 @@ namespace DAL
     /// </summary>
     public class ShootingRangeRepository : BaseRepository<ShootingRangeParams, ShootingRanges>
     {
-        public IQueryable<ShootingRanges> GetQueryShootingRangesByRegion(ShootingCompetitionRequestsEntities db, int idRegion)
+        protected override Func<ShootingRanges, int> GetPrimaryKeyValue
         {
-            return idRegion > 0 ? db.ShootingRanges.Where(x => x.IdRegion == idRegion) : db.ShootingRanges;
-        }
-
-        protected override Func<ShootingRanges, int> GetPrimaryKeyValue {
             get { return (x) => x.Id; }
         }
-        
+
         protected override ShootingRangeParams ConvertToModel(ShootingRanges entity)
         {
             return new ShootingRangeParams
@@ -58,20 +54,13 @@ namespace DAL
         {
             using (var db = DBContext.GetContext())
             {
-                try
+                var query = db.ShootingRanges.AsQueryable();
+                if (regionId.HasValue)
                 {
-                    var query = db.ShootingRanges.AsQueryable();
-                    if (regionId.HasValue)
-                    {
-                        query = query.Where(x => x.IdRegion == regionId).OrderBy(x => x.Town).ThenBy(x => x.Name);
-                    }
+                    query = query.Where(x => x.IdRegion == regionId).OrderBy(x => x.Town).ThenBy(x => x.Name);
+                }
 
-                    return query.ToList().Select(ConvertToModel).ToList();
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При добавлении тира произошла ошибка");
-                }
+                return query.ToList().Select(ConvertToModel).ToList();
             }
         }
     }

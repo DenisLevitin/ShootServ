@@ -1,5 +1,4 @@
-﻿using System.Data;
-using BO;
+﻿using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +46,7 @@ namespace DAL
                 DateCreate = cup.DateCreate
             };
         }
-        
+
         /// <summary>
         /// Получить список соревнований по региону и датам
         /// </summary>
@@ -57,25 +56,15 @@ namespace DAL
         /// <returns></returns>
         public List<CupParams> GetByRegionAndDates(int idRegion, DateTime dateFrom, DateTime dateTo)
         {
-            List<CupParams> res;
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    var query = (from cup in db.Cups
-                           join shootingRange in db.ShootingRanges on cup.IdShootingRange equals shootingRange.Id
-                           where shootingRange.IdRegion == idRegion && cup.DateStart >= dateFrom && cup.DateStart <= dateTo
-                           select cup).ToList();
+                var query = (from cup in db.Cups
+                    join shootingRange in db.ShootingRanges on cup.IdShootingRange equals shootingRange.Id
+                    where shootingRange.IdRegion == idRegion && cup.DateStart >= dateFrom && cup.DateStart <= dateTo
+                    select cup).ToList();
 
-                    res = query.ConvertAll(ConvertToModel);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении списка соревнования произошла ошибка");
-                }
+                return query.ConvertAll(ConvertToModel);
             }
-
-            return res;
         }
 
         /// <summary>
@@ -87,24 +76,14 @@ namespace DAL
         /// <returns></returns>
         public List<CupParams> GetByShootingRangeAndDates(int idShootingRange, DateTime dateFrom, DateTime dateTo)
         {
-            List<CupParams> res;
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    var query = (from cup in db.Cups
-                                 where cup.DateStart >= dateFrom && cup.DateStart <= dateTo && cup.IdShootingRange == idShootingRange
-                                 select cup).ToList();
+                var query = (from cup in db.Cups
+                    where cup.DateStart >= dateFrom && cup.DateStart <= dateTo && cup.IdShootingRange == idShootingRange
+                    select cup).ToList();
 
-                    res = query.ConvertAll(ConvertToModel);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении списка соревнований произошла ошибка");
-                }
+                return query.ConvertAll(ConvertToModel);
             }
-
-            return res;
         }
 
         /// <summary>
@@ -126,53 +105,42 @@ namespace DAL
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
         /// <returns></returns>
-        public List<CupDetailsParams> GetDetailsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public List<CupDetailsParams> GetCupsDetailsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
         {
-            var res = new List<CupDetailsParams>();
-
-            try
+            using (var db = DBContext.GetContext())
             {
-                using (var db = DBContext.GetContext())
-                {
-                    var cups = this.GetQueryCupsByDates(db, dateFrom, dateTo); // запрос по соревнованиям
-                    var shootingRanges = new ShootingRangeRepository().GetQueryShootingRangesByRegion(db, idRegion); // запрс по тирам
+                var cups = GetQueryCupsByDates(db, dateFrom, dateTo); // запрос по соревнованиям
+                var shootingRanges = idRegion > 0 ? db.ShootingRanges.Where(x => x.IdRegion == idRegion) : db.ShootingRanges;
 
-                    var query = (from cup in cups
-                                 join shootingRange in shootingRanges on cup.IdShootingRange equals shootingRange.Id
-                                 join cupType in db.CupTypes on cup.IdCupType equals cupType.Id
-                                 join region in db.Regions on shootingRange.IdRegion equals region.IdRegion
-                                 select new
-                                 {
-                                     Cup = cup,
-                                     ShootingRangeName = shootingRange.Name,
-                                     CupType = cupType.Name,
-                                     Region = region.Name,
-                                     Town = shootingRange.Town,
-                                     ShootingRangeAddress = shootingRange.Address,
-                                     ShootingRangePhone = shootingRange.Telefon
-                                 }).ToList();
-
-                    res.AddRange(query.Select(item => new CupDetailsParams
+                var query = (from cup in cups
+                    join shootingRange in shootingRanges on cup.IdShootingRange equals shootingRange.Id
+                    join cupType in db.CupTypes on cup.IdCupType equals cupType.Id
+                    join region in db.Regions on shootingRange.IdRegion equals region.IdRegion
+                    select new
                     {
-                        Id = item.Cup.IdCup,
-                        Name = item.Cup.Name,
-                        DateStart = item.Cup.DateStart,
-                        DateEnd = item.Cup.DateEnd,
-                        CupType = item.CupType,
-                        RangeName = item.ShootingRangeName,
-                        Town = item.Town,
-                        Region = item.Region,
-                        RangeAddress = item.ShootingRangeAddress,
-                        RangePhone = item.ShootingRangePhone
-                    }));
-                }
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Не удалось получить список соревнований");
-            }
+                        Cup = cup,
+                        ShootingRangeName = shootingRange.Name,
+                        CupType = cupType.Name,
+                        Region = region.Name,
+                        Town = shootingRange.Town,
+                        ShootingRangeAddress = shootingRange.Address,
+                        ShootingRangePhone = shootingRange.Telefon
+                    }).ToList();
 
-            return res;
+                return query.Select(item => new CupDetailsParams
+                {
+                    Id = item.Cup.IdCup,
+                    Name = item.Cup.Name,
+                    DateStart = item.Cup.DateStart,
+                    DateEnd = item.Cup.DateEnd,
+                    CupType = item.CupType,
+                    RangeName = item.ShootingRangeName,
+                    Town = item.Town,
+                    Region = item.Region,
+                    RangeAddress = item.ShootingRangeAddress,
+                    RangePhone = item.ShootingRangePhone
+                }).ToList();
+            }
         }
 
         /// <summary>
@@ -182,50 +150,38 @@ namespace DAL
         /// <returns></returns>
         public CupDetailsParams GetDetailsCup(int idCup)
         {
-            var res = new CupDetailsParams();
-
-            try
+            using (var db = DBContext.GetContext())
             {
-                using (var db = DBContext.GetContext())
+                var query = (from cup in db.Cups
+                    join shootingRange in db.ShootingRanges on cup.IdShootingRange equals shootingRange.Id
+                    join cupType in db.CupTypes on cup.IdCupType equals cupType.Id
+                    join region in db.Regions on shootingRange.IdRegion equals region.IdRegion
+                    where cup.IdCup == idCup
+                    select new
+                    {
+                        Cup = cup,
+                        ShootingRangeName = shootingRange.Name,
+                        CupType = cupType.Name,
+                        Region = region.Name,
+                        Town = shootingRange.Town,
+                        ShootingRangeAddress = shootingRange.Address,
+                        ShootingRangePhone = shootingRange.Telefon
+                    }).Single();
+
+                return new CupDetailsParams
                 {
-                    var query = (from cup in db.Cups
-                                 join shootingRange in db.ShootingRanges on cup.IdShootingRange equals shootingRange.Id
-                                 join cupType in db.CupTypes on cup.IdCupType equals cupType.Id
-                                 join region in db.Regions on shootingRange.IdRegion equals region.IdRegion
-                                 where cup.IdCup == idCup
-                                 select new
-                                 {
-                                     Cup = cup,
-                                     ShootingRangeName = shootingRange.Name,
-                                     CupType = cupType.Name,
-                                     Region = region.Name,
-                                     Town = shootingRange.Town,
-                                     ShootingRangeAddress = shootingRange.Address,
-                                     ShootingRangePhone = shootingRange.Telefon
-                                 }).Single();
-
-                        res = new CupDetailsParams
-                        {
-                            Id = query.Cup.IdCup,
-                            Name = query.Cup.Name,
-                            DateStart = query.Cup.DateStart,
-                            DateEnd = query.Cup.DateEnd,
-                            CupType = query.CupType,
-                            RangeName = query.ShootingRangeName,
-                            Town = query.Town,
-                            Region = query.Region,
-                            RangeAddress = query.ShootingRangeAddress,
-                            RangePhone = query.ShootingRangePhone
-                        };
-
-                }
+                    Id = query.Cup.IdCup,
+                    Name = query.Cup.Name,
+                    DateStart = query.Cup.DateStart,
+                    DateEnd = query.Cup.DateEnd,
+                    CupType = query.CupType,
+                    RangeName = query.ShootingRangeName,
+                    Town = query.Town,
+                    Region = query.Region,
+                    RangeAddress = query.ShootingRangeAddress,
+                    RangePhone = query.ShootingRangePhone
+                };
             }
-            catch (Exception exc)
-            {
-                throw new Exception("Не удалось получить соревнование");
-            }
-
-            return res;
         }
     }
 }

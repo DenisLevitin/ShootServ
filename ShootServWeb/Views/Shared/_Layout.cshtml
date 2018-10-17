@@ -42,7 +42,7 @@
                     <a href="@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})">Команды</a>
                 </div>
                 <div>
-                    <a href="@Url.Action("Index", "Cup", new {Area = "Cup"})">Соревнования</a>
+                    <a href="@Url.Action("Index", "Cup")">Соревнования</a>
                 </div>
                 <div id="liUserInfo">
                     @{ Html.RenderAction("GetUserInfo", "Home", new {Area = ""}); }
@@ -95,7 +95,7 @@
                 
                 // Добавление стрелок на все дивы - кнопки с выпадающим контентом
                 function addSumbol(div, isUp, text) {
-                    var a = isUp ? "&#8659;" : "&#8657;"
+                    var a = isUp ? "&#8659;" : "&#8657;";
                     var text = a + a + a + text + a + a + a;
                     div.html(text);
                 }
@@ -127,7 +127,7 @@
                     });
         
                 // Форматируем дату для правильной передачи в контроллер
-                function FormatDate(date) {
+                function formatDate(date) {
                     var year = date.getFullYear();
                     var month = date.getMonth() + 1;
                     var day = date.getDate();
@@ -209,6 +209,13 @@
             GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
         }
 
+        var linksCup = {
+            CupIndex : "@Url.Action("Index", "Cup")",
+            Delete: "@Url.Action("DeleteCup", "Cup")",
+            Update: "@Url.Action("UpdateCup", "Cup")",
+            AddCup: "@Url.Action("AddCup", "Cup")"
+        };
+        
         var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
     </script>
     </body>

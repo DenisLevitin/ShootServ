@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace ShootingCompetitionsRequests.App_Start
+namespace ShootServ
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {

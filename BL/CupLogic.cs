@@ -98,27 +98,15 @@ namespace BL
         }
 
         /// <summary>
-        /// Получить список соревнований по региону и периоду
-        /// </summary>
-        /// <param name="idRegion"></param>
-        /// <param name="dateFrom"></param>
-        /// <param name="dateTo"></param>
-        /// <returns></returns>
-        public List<CupParams> GetByRegionAndDates(int idRegion, DateTime dateFrom, DateTime dateTo)
-        {
-            return _dalCup.GetByRegionAndDates(idRegion, dateFrom, dateTo);
-        }
-
-        /// <summary>
         /// Получить список соревнований с детализацией
         /// </summary>
         /// <param name="idRegion">ид. региона</param>
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
         /// <returns></returns>
-        public List<CupDetailsParams> GetDetailsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public List<CupDetailsParams> GetCupsDetailsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
         {
-            return _dalCup.GetDetailsByRegionAndDates(idRegion, dateFrom, dateTo);
+            return _dalCup.GetCupsDetailsByRegionAndDates(idRegion, dateFrom, dateTo);
         }
 
         /// <summary>
