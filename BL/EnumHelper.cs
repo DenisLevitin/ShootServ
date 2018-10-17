@@ -18,9 +18,18 @@ namespace BL
                 foreach (var item in enumValues)
                 {
                     var converted = (System.Enum)item;
+                    string description = String.Empty;
+                    
                     var memInfo = enumType.GetMember(converted.ToString());
-                    var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-                    res.Add(new EnumView(Convert.ToInt32(converted), converted.ToString(), ((DescriptionAttribute)attributes[0]).Description ));
+                    if (memInfo.Length > 0)
+                    {
+                        var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                        if (attributes.Length > 0)
+                        {
+                            description = ((DescriptionAttribute) attributes[0]).Description;
+                        }
+                    }
+                    res.Add(new EnumView(Convert.ToInt32(converted), converted.ToString(), description));
                 }
             }
             else
