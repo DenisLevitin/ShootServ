@@ -104,7 +104,7 @@ namespace BL
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
         /// <returns></returns>
-        public List<CupDetailsParams> GetCupsDetailsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public List<CupDetailsParams> GetCupsDetailsByRegionAndDates(int? idRegion, DateTime? dateFrom, DateTime? dateTo)
         {
             return _dalCup.GetCupsDetailsByRegionAndDates(idRegion, dateFrom, dateTo);
         }

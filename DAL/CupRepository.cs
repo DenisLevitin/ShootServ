@@ -93,9 +93,9 @@ namespace DAL
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
         /// <returns></returns>
-        private IQueryable<Cups> GetQueryCupsByDates(ShootingCompetitionRequestsEntities db, DateTime dateFrom, DateTime dateTo)
+        private IQueryable<Cups> GetQueryCupsByDates(ShootingCompetitionRequestsEntities db, DateTime? dateFrom, DateTime? dateTo)
         {
-            return dateFrom != default(DateTime) && dateTo != default(DateTime) ? db.Cups.Where(x => x.DateStart >= dateFrom && x.DateStart <= dateTo) : db.Cups;
+            return dateFrom.HasValue && dateTo.HasValue ? db.Cups.Where(x => x.DateStart >= dateFrom.Value && x.DateStart <= dateTo.Value) : db.Cups.AsQueryable();
         }
 
         /// <summary>
@@ -105,12 +105,12 @@ namespace DAL
         /// <param name="dateFrom"></param>
         /// <param name="dateTo"></param>
         /// <returns></returns>
-        public List<CupDetailsParams> GetCupsDetailsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public List<CupDetailsParams> GetCupsDetailsByRegionAndDates(int? idRegion, DateTime? dateFrom, DateTime? dateTo)
         {
             using (var db = DBContext.GetContext())
             {
                 var cups = GetQueryCupsByDates(db, dateFrom, dateTo); // запрос по соревнованиям
-                var shootingRanges = idRegion > 0 ? db.ShootingRanges.Where(x => x.IdRegion == idRegion) : db.ShootingRanges;
+                var shootingRanges = idRegion.HasValue ? db.ShootingRanges.Where(x => x.IdRegion == idRegion) : db.ShootingRanges.AsQueryable();
 
                 var query = (from cup in cups
                     join shootingRange in shootingRanges on cup.IdShootingRange equals shootingRange.Id

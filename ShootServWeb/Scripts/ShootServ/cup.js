@@ -61,6 +61,7 @@ $(document).ready(function () {
             var id = a.attr("idcup");
 
             $.ajax({
+                method:"POST",
                 url: linksCup.Delete,
                 dataType: "JSON",
                 data: { idCup: id },
@@ -147,7 +148,6 @@ function validateInput() {
     return true;
 }
 
-
 // Получить в формате Json добавляемый список упражнений
 function getCompetitionsJson() {
 
@@ -172,9 +172,7 @@ function getCompetitionsJson() {
                 Name: name,
                 TimeFirstShift: $(element).find(":text").datepicker("getDate")
             });
-
         }
-
     });
 
     return $.toJSON(tmp);
@@ -260,7 +258,7 @@ function getShootingRanges(idRegion) {
 
     if (idRegion) {
         $.ajax({
-            url: "@Url.Action("GetShootingRanges")",
+            url: linksCommon.GetShootingRangesByRegion,
             dataType: "html",
             data: { idRegion: idRegion},
             async: false,
@@ -277,10 +275,8 @@ function getShootingRanges(idRegion) {
 // Получить список соревнований
 function getCupsList(idRegion, dateFrom, dateTo)
 {
-    if (dateFrom && dateTo) {
-
         $.ajax({
-            url: "@Url.Action("GetCupLists")",
+            url: linksCup.GetCupsList,
             dataType: "html",
             data: { idRegion: idRegion, dateFrom : dateFrom, dateTo : dateTo },
             async: false,
@@ -291,5 +287,4 @@ function getCupsList(idRegion, dateFrom, dateTo)
                 showError("Ошибка ajax");
             }
         });
-    }
 }

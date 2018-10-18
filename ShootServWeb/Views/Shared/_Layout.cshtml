@@ -10,7 +10,8 @@
         @* @Styles.Render("~/Content/css")*@
         <link href="~/Content/Site.css" rel="stylesheet"/>
         <link href="~/Content/themes/base/minified/jquery-ui-1.10.4.custom.css" rel="stylesheet"/>
-    
+        <script src="~/Scripts/LayoutScripts/preloader.js"></script>
+        
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
         @Scripts.Render("~/bundles/datepicker")
@@ -62,8 +63,7 @@
                 </div>
             </div>
         
-            <script type="text/javascript">
-                
+            <script type="text/javascript">         
                 //функция вызова ошибки
                 function showError(text) {
                     $("#divShowError").text(text);
@@ -139,8 +139,8 @@
                     function() {
                         $("#InfoError").animate({ "opacity": "0" }, "slow");
                     });
-
             </script>
+            
             <article>
                 <div id="divRenderBody" class="divRenderBody">
                     @RenderBody()
@@ -173,29 +173,6 @@
         <div id="hellopreloader">
             <div id="hellopreloader_preload"></div>     
         </div>
-        
-    <script type="text/javascript">
-        var hellopreloader = document.getElementById("hellopreloader_preload");
-        
-        function fadeOutnojquery(el) {
-            el.style.opacity = 1;
-            var interhellopreloader = setInterval(function() {
-                    el.style.opacity = el.style.opacity - 0.05;
-                    if (el.style.opacity <= 0.05) {
-                        clearInterval(interhellopreloader);
-                        hellopreloader.style.display = "none";
-                    }
-                },
-                16);
-        }
-        
-        window.onload = function() {
-            setTimeout(function() {
-                    fadeOutnojquery(hellopreloader);
-                },
-                1000);
-        };
-    </script>
     
     <script type="text/javascript">
         var linksShootingRange = {
@@ -206,14 +183,17 @@
         };
             
         var linksCommon = {
-            GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
+            GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")",
+            GetShootingRangesByRegion: "@Url.Action("GetShootingRanges", "Cup")",
         }
 
         var linksCup = {
             CupIndex : "@Url.Action("Index", "Cup")",
             Delete: "@Url.Action("DeleteCup", "Cup")",
             Update: "@Url.Action("UpdateCup", "Cup")",
-            AddCup: "@Url.Action("AddCup", "Cup")"
+            AddCup: "@Url.Action("AddCup", "Cup")",
+            GetCupsList: "@Url.Action("GetCupsList","Cup")",
+            ViewCup: "@Url.Action("Index","ViewCup")"
         };
         
         var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";

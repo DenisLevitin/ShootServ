@@ -21,14 +21,12 @@ namespace ShootServ.Controllers
             _cupLogic = new CupLogic();
         }
 
-        //[CustomAuthorize]
         public ActionResult Index(int idCup = -1)
         {
             var model = _modelLogic.GetModelForIndex(idCup);
             return View("Index", model);
         }
 
-        //[CustomAuthorize]
         public ActionResult GetShootingRanges(int? idRegion)
         {
             var query = _modelLogic.GetShootingRangesByRegion(idRegion);
@@ -36,9 +34,18 @@ namespace ShootServ.Controllers
             return PartialView("DropDownListModel", new DropDownListModel { Name = "IdShootingRange", Items = query });
         }
 
-        //[CustomAuthorize]
-        public ActionResult GetCupsList(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public ActionResult GetCupsList(int? idRegion, DateTime? dateFrom, DateTime? dateTo)
         {
+            if (!dateFrom.HasValue)
+            {
+                dateFrom = DateTime.Now.AddDays(-14);
+            }
+
+            if (!dateTo.HasValue)
+            {
+                dateTo = DateTime.Now.AddDays(30);
+            }
+            
             var model = _modelLogic.GetCupsByRegionAndDates(idRegion, dateFrom, dateTo);
 
             return PartialView("CupsList", model);
@@ -49,21 +56,23 @@ namespace ShootServ.Controllers
         /// </summary>
         /// <returns></returns>
         [CustomAuthorize]
+        [HttpPost]
         public ActionResult AddCup(CupModelParams model, string competitionTypes)
         {
             var listCompetitions = JsonConvert.DeserializeObject<CompetitionModelParams[]>(competitionTypes);
             var res = _modelLogic.AddCup(model, listCompetitions.ToList(), CurrentUser.Id);
 
-            return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.Result.IsOk, Message = res.Result.ErrorMessage, IdCup = res.Data } };
+            return new JsonResult { Data = new { IsOk = res.Result.IsOk, Message = res.Result.ErrorMessage, IdCup = res.Data } };
         }
 
         [CustomAuthorize]
+        [HttpPost]
         public ActionResult DeleteCup(int idCup)
         {
             var res = _cupLogic.Delete(idCup, CurrentUser.Id);
-            return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
+            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
-
+        
         /// <summary>
         /// Обновить соревнование
         /// </summary>
@@ -71,6 +80,7 @@ namespace ShootServ.Controllers
         /// <param name="cupModel">соревнование</param>
         /// <param name="competitionTypes">список упражнений</param>
         [HttpGet]
+        [CustomAuthorize]
         public ActionResult UpdateCup(int idEditCup, CupModelParams cupModel, string competitionTypes)
         {
             var listCompetitions = JsonConvert.DeserializeObject<CompetitionModelParams[]>(competitionTypes);

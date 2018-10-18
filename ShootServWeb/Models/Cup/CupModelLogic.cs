@@ -50,7 +50,7 @@ namespace ShootServ.Models.Cup
 
         /// TODO: Добавить загрузку основания
 
-        public List<CupDetailsParams> GetCupsByRegionAndDates(int idRegion = -1, DateTime dateFrom = default(DateTime), DateTime dateTo = default(DateTime))
+        public List<CupDetailsParams> GetCupsByRegionAndDates(int? idRegion, DateTime? dateFrom, DateTime? dateTo)
         {
             return _cupLogic.GetCupsDetailsByRegionAndDates(idRegion, dateFrom, dateTo);
         }
