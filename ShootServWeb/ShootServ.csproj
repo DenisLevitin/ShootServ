@@ -302,6 +302,7 @@
     <Content Include="Models\Images\grass.jpg" />
     <Content Include="Models\Images\Vintovochnik.png" />
     <Content Include="Scripts\common\common.js" />
+    <Content Include="Scripts\common\commonQueries.js" />
     <Content Include="Scripts\datepicker.translate.js" />
     <Content Include="Scripts\DatepickerRegionRus.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />

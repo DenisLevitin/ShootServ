@@ -1,6 +1,7 @@
 var hellopreloader = document.getElementById("hellopreloader_preload");
 
 function fadeOutnojquery(el) {
+    if (!el) return;
     el.style.opacity = 1;
     var interhellopreloader = setInterval(function() {
             el.style.opacity = el.style.opacity - 0.05;

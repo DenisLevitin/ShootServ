@@ -10,7 +10,7 @@
         @* @Styles.Render("~/Content/css")*@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/themes/base/minified/jquery-ui-1.10.4.custom.css" rel="stylesheet" />
-    <script src="~/Scripts/LayoutScripts/preloader.js"></script>
+    
     <script src="~/Scripts/common/common.js"></script>
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
@@ -170,9 +170,10 @@
                 background-size: 101px;
             }
         </style>
-        <div id="hellopreloader">
-            <div id="hellopreloader_preload"></div>     
-        </div>
+    <div id="hellopreloader">
+        <div id="hellopreloader_preload"></div>     
+    </div>
+    <script src="~/Scripts/LayoutScripts/preloader.js"></script>
     <script type="text/javascript">
         var linksShootingRange = {
             Index: "@Url.Action("Index", "ShootingRange")",
