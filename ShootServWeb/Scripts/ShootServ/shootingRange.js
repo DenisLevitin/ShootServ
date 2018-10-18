@@ -54,7 +54,14 @@ $(document).ready(function ()
                         if (data.IsOk) {
                             var idRegion = $("#RegionId").val();
                             actor.getListByRegion(idRegion);
-                        } else showError(data.Message); // сообщение об ошибке как -то показать на странице
+                        } else {
+                            if (data.Message) {
+                                showError(data.Message); // сообщение об ошибке как -то показать на странице 
+                            }
+                            console.dir(data.ValidateMessages);
+                            // чтобы было совсем хорошо
+                            window.common.lightValidationMessagesOnForm($("form"), data.ValidationMessages);
+                        }
                     },
                     error: function (data) {
                         showError("Ошибка ajax");
