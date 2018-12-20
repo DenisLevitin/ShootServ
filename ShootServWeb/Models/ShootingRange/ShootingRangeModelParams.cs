@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using BL;
 using ShootingCompetitionsRequests.Models;
@@ -15,18 +16,23 @@ namespace ShootServ.Models.ShootingRange
         /// Название тира
         /// </summary>
         [DisplayName("Название тира")]
+        [Required]
+        [StringLength(100, MinimumLength = 10, ErrorMessage = "Длина названия должна быть от 10 до 100 символов")]
         public string Name { get; set; }
 
         /// <summary>
         /// Адрес тира
         /// </summary>
         [DisplayName("Адрес")]
+        [Required]
+        [StringLength(100, MinimumLength = 10, ErrorMessage = "Длина адреса должна быть от 20 до 200 символов")]
         public string Address { get; set; }
 
         /// <summary>
         /// Телефон
         /// </summary>
         [DisplayName("Телефон")]
+        [StringLength(12, MinimumLength = 7, ErrorMessage = "Длина адреса должна быть от 7 до 12 символов")]
         public string Phone { get; set; }
 
         /// <summary>
@@ -45,6 +51,8 @@ namespace ShootServ.Models.ShootingRange
         /// Город
         /// </summary>
         [DisplayName("Город")]
+        [Required]
+        [StringLength(25, MinimumLength = 3, ErrorMessage = "Длина названия города должна быть от 3 до 25 символов")]
         public string Town { get; set; }
 
         /// <summary>

@@ -188,6 +188,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ModelStateExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\style.min.css" />
     <Content Include="Content\themes\base\datePicker.css" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
