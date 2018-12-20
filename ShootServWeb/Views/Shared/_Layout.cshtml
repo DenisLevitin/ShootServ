@@ -1,215 +1,325 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
 
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8"/>
-        <title>Shoot-Serv</title>
-    
-        <meta name="viewport" content="width=device-width"/>
-        @* @Styles.Render("~/Content/css")*@
-        <link href="~/Content/Site.css" rel="stylesheet"/>
-        <link href="~/Content/themes/base/minified/jquery-ui-1.10.4.custom.css" rel="stylesheet"/>
-    
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/datepicker")
-        @RenderSection("scripts", required: false)
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>Shoot-Serv</title>
 
-    <body>
-    @RenderSection("featured", required: false)
-        <div id="divContent">
-            @*/*шапка**@
-            <header style="margin-bottom: 5px; vertical-align: bottom; text-align: center; width: 100%; height: 100px; background: #50321A; position: relative; background-image: url(../Models/Images/TKAN.jpg); background-position: left bottom; background-repeat: repeat-x; background-size: auto; position: relative;">
-                <img src="~/Models/Images/Vintovochnik.png" alt="винтовочник" style="height: 100%; float: left;"/>
-                <span id="siteName"> Shoot-Serv </span>
-                <img src="~/Models/Images/PIST.png"alt="пистолетчик" style="height: 100%; float: right;"/>
-            </header>
-        
-            @* меню*@
-            <nav class="mainMenu">
-                <div>
-                    <a href="@Url.Action("Index", "Home", new {Area = ""})">На главную</a>
-                </div>
-                <div>
-                    <a href="@Url.Action("Login", "Account", new {Area = "", returnUrl = Url.Action("Index", "Home", new {Area = ""})})">Войти</a>
-                </div>
-                <div id="shootingRangeButton">
-                    <a href="@Url.Action("Index", "ShootingRange")">Тиры</a>
-                </div>
-                <div>
-                    <a href="@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})">Команды</a>
-                </div>
-                <div>
-                    <a href="@Url.Action("Index", "Cup", new {Area = "Cup"})">Соревнования</a>
-                </div>
-                <div id="liUserInfo">
-                    @{ Html.RenderAction("GetUserInfo", "Home", new {Area = ""}); }
-                </div>
-        
-                <div style="float: right;">
-                    <a href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>
-                </div>
-        
-            </nav>
-            <div id="InfoError" class="instr" style="opacity: 0; padding: 0; padding-bottom: 6px; width: 15%; text-align: center; position: fixed; bottom: 30px; top: 150px; height: 15%;">
-        
-                <div id="closeshowInfo">Закрыть</div>
-                <div style="position: relative; margin: 2px; border-radius: 4px; border: 3px solid red; height: 80%; background-color: white;">
-                    <div id="divShowError" style="display: inline; padding: 5px; color: red; font-family: tahoma; font-size: 14px"></div>
-                    <div id="showInfo" style="display: inline; padding: 5px; color: green; font-family: tahoma; font-size: 14px;"></div>
-                </div>
-            </div>
-        
-            <script type="text/javascript">
-                
-                //функция вызова ошибки
-                function showError(text) {
-                    $("#divShowError").text(text);
-                    $("#InfoError").animate({ "opacity": "100%" }, "slow");
-        
-                    setTimeout(function() {
-                            $("#InfoError").animate({ "opacity": "0" }, "slow");
-                        },
-                        5000);
-                }
-        
-                function showInfo(text) {
-                    $("#showInfo").text(text);
-                }
-        
-                // Перевод на страницу логина
-                function redirectToLoginPage(returnUrl) {
-                    if (confirm("Для данного действия требуется выполнить вход. Перейти на страницу авторизации?")) {
-                        window.location =
-                            "@Url.Action("Login", "Account")" + "?ReturnUrl=" + returnUrl;
-                    }          
-                }
-        
-                //скролл
-                function scroll(div) {
-                    var topcoords = $(div).offset().top;
-                    window.scrollTo(0, topcoords);
-                }
-                
-                // Добавление стрелок на все дивы - кнопки с выпадающим контентом
-                function addSumbol(div, isUp, text) {
-                    var a = isUp ? "&#8659;" : "&#8657;"
-                    var text = a + a + a + text + a + a + a;
-                    div.html(text);
-                }
-        
-                //на весь выпадоющий контент
-                function togetherContent(button, content, text) {
-                    $(document).on("click",
-                        button,
-                        function() {
-                            if ($(content).is(":hidden")) {
-                                $(content).slideDown();
-                                addSumbol($(button), false, text);
-                                $(button).addClass("light");
-                                scroll(button);
-                            } else {
-                                $(content).slideUp();
-                                addSumbol($(button), true, text);
-                                $(button).removeClass("light");
-                            }
-                        });
-                }
-                
-                //  Делаем кликабельные блоки в меню
-                $(document).on("click",
-                    ".mainMenu div",
-                    function() {
-                        window.location = $(this).find("a").attr("href");
-                        return false;
-                    });
-        
-                // Форматируем дату для правильной передачи в контроллер
-                function FormatDate(date) {
-                    var year = date.getFullYear();
-                    var month = date.getMonth() + 1;
-                    var day = date.getDate();
-                }
-        
-                //закрываем showInfo
-                $(document).on("click",
-                    "#closeshowInfo",
-                    function() {
-                        $("#InfoError").animate({ "opacity": "0" }, "slow");
-                    });
+    <meta name="viewport" content="width=device-width" />
+    @* @Styles.Render("~/Content/css")*@
+    <link href="~/Content/style.min.css" rel="stylesheet" />
+    <title>Shoot-Serv</title>
+    @* @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryui")
+            @Scripts.Render("~/bundles/datepicker")
+        @RenderSection("scripts", required: false)*@
 
-            </script>
-            <article>
-                <div id="divRenderBody" class="divRenderBody">
+</head>
+
+<body class="main-bg">
+    @*  @RenderSection("featured", required: false)*@
+            <div class="container container-bg">
+                <header class="blog-header py-3">
+                    <div class="row flex-nowrap justify-content-between align-items-center">
+                        <div class="col-4 pt-1">
+                            <a class="text-muted" href="#">
+                                <img src="./img/logo.svg" alt="logo" width="100px" height="100px">
+                            </a>
+                        </div>
+                        <div class="col-4 text-center">
+                            <a class="display-4 text-dark" href="#">Shoot-Serv</a>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end align-items-center">
+                            <a class="btn btn-sm btn-outline-secondary mx-2" data-toggle="modal" data-target="#signUpPopup" href="">
+                                Регистрация
+                            </a>
+                            <a class="btn btn-sm btn-outline-secondary mx-2" data-toggle="modal" data-target="#autologizationModal" href="">Вход</a>
+                        </div>
+                    </div>
+                </header>
+                <div class="nav-scroller py-1 mb-2">
+                    <nav class="nav d-flex justify-content-between">
+                        <a class="p-2 text-muted" href="@Url.Action("Index", "Home", new {Area = ""})">На главную</a>
+                        <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingRange")">Тиры</a>
+                        <a class="p-2 text-muted" href="@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})">Команды</a>
+                        <a class="p-2 text-muted" href="@Url.Action("Index", "Cup", new {Area = "Cup"})">Соревнования</a>
+                        <a class="p-2 text-muted" href="">О проекте</a>
+                        <a class="p-2 text-muted" href="#">
+                            @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
+                        </a>
+                        @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
+                    </nav>
+                </div>
+
+
+                <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+                    <div class="col-md-6 px-0">
+                        <h1 class="display-5 font-italic">Shoot-Serv для стрелкового спорта</h1>
+                        <p class="lead my-3">
+                            Этот ресурс предназначен для облегчения регистрации на соревнования по пулевой
+                            стрельбе и урощения отчености для огранизаторов соревнований.
+                        </p>
+                        <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Продолжить чтение...</a></p>
+                    </div>
+                </div>
+                <main role="main" class="container">
                     @RenderBody()
-                </div>
-            </article>
-        
-            <footer style="height: 40px;">
-                <div id="footer" style="text-align: center;">
-                    <h5 style="display: inline; color: black;">D&V Applications</h5><br/>
-                    <a style="color: black" href="mailto:disa15@rambler.ru">Обратная связь</a>
+                </main>
+            </div>
+
+            <footer class="blog-footer">
+                <div class="container container-bg d-flex justify-content-between">
+                    <p >
+                        <a href="https://getbootstrap.com/">D&V Applications</a>
+                    </p>
+                    <p >
+                        <a href="mailto:disa15@rambler.ru">Обратная связь</a>
+                    </p>
                 </div>
             </footer>
-        
-        </div>
-        <!--Preload  -->
-        <style>
-            #hellopreloader_preload {
-                display: block;
-                position: fixed;
-                z-index: 99999;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                min-width: 1000px;
-                background: #2574A9 url(http://hello-site.ru//main/images/preloads/rings.svg) center center no-repeat;
-                background-size: 101px;
-            }
-        </style>
-        <div id="hellopreloader">
-            <div id="hellopreloader_preload"></div>     
-        </div>
-        
-    <script type="text/javascript">
-        var hellopreloader = document.getElementById("hellopreloader_preload");
-        
-        function fadeOutnojquery(el) {
-            el.style.opacity = 1;
-            var interhellopreloader = setInterval(function() {
-                    el.style.opacity = el.style.opacity - 0.05;
-                    if (el.style.opacity <= 0.05) {
-                        clearInterval(interhellopreloader);
-                        hellopreloader.style.display = "none";
-                    }
-                },
-                16);
-        }
-        
-        window.onload = function() {
-            setTimeout(function() {
-                    fadeOutnojquery(hellopreloader);
-                },
-                1000);
-        };
-    </script>
-    
-    <script type="text/javascript">
-        var linksShootingRange = {
-            Index: "@Url.Action("Index", "ShootingRange")",
-            Add: "@Url.Action("Add", "ShootingRange")",
-            Delete: "@Url.Action("Delete", "ShootingRange")",
-            GetListByRegion: "@Url.Action("GetListByRegion", "ShootingRange")"
-        };
-            
-        var linksCommon = {
-            GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
-        }
 
-        var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
-    </script>
-    </body>
-</html>
+
+            <!-- Modal sign in-->
+            <section class="modal fade text-center" id="autologizationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <button type="button" class="close popup-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <form class="form-signin">
+                            <div class="mb-4">
+                                <h3 class="h3 mb-3 font-weight-normal">Авторизация</h3>
+                                <p> Войдите для полного доступа ко всем возможностям сайта</p>
+                            </div>
+                            <div class="form-label-group">
+                                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                                <label for="inputEmail">Ваш e-mail или логин</label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                                <label for="inputPassword">Пароль</label>
+                            </div>
+
+                            <div class="checkbox mb-3">
+                                <label>
+                                    <input type="checkbox" value="remember-me"> Запомнить меня
+                                </label>
+                            </div>
+                            <div class="mb-4">
+                                <a href="#">Забыли пароль?</a>
+
+                            </div>
+
+                            <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <!-- Modal sign out-->
+            <section class="modal fade" id="signUpPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <button type="button" class="close popup-close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link  disabled" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                здесть что-то 1
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">здесть что-то 2</div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                здесть что-то 3<div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        </body>
+        </html>
+
+
+        @*<div id="InfoError" class="instr" style="opacity: 0; padding: 0; padding-bottom: 6px; width: 15%; text-align: center; position: fixed; bottom: 30px; top: 150px; height: 15%;">
+
+                        <div id="closeshowInfo">Закрыть</div>
+                        <div style="position: relative; margin: 2px; border-radius: 4px; border: 3px solid red; height: 80%; background-color: white;">
+                            <div id="divShowError" style="display: inline; padding: 5px; color: red; font-family: tahoma; font-size: 14px"></div>
+                            <div id="showInfo" style="display: inline; padding: 5px; color: green; font-family: tahoma; font-size: 14px;"></div>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+
+                            //функция вызова ошибки
+                            function showError(text) {
+                                $("#divShowError").text(text);
+                                $("#InfoError").animate({ "opacity": "100%" }, "slow");
+
+                                setTimeout(function() {
+                                        $("#InfoError").animate({ "opacity": "0" }, "slow");
+                                    },
+                                    5000);
+                            }
+
+                            function showInfo(text) {
+                                $("#showInfo").text(text);
+                            }
+
+                            // Перевод на страницу логина
+                            function redirectToLoginPage(returnUrl) {
+                                if (confirm("Для данного действия требуется выполнить вход. Перейти на страницу авторизации?")) {
+                                    window.location =
+                                        "@Url.Action("Login", "Account")" + "?ReturnUrl=" + returnUrl;
+                                }
+                            }
+
+                            //скролл
+                            function scroll(div) {
+                                var topcoords = $(div).offset().top;
+                                window.scrollTo(0, topcoords);
+                            }
+
+                            // Добавление стрелок на все дивы - кнопки с выпадающим контентом
+                            function addSumbol(div, isUp, text) {
+                                var a = isUp ? "&#8659;" : "&#8657;"
+                                var text = a + a + a + text + a + a + a;
+                                div.html(text);
+                            }
+
+                            //на весь выпадоющий контент
+                            function togetherContent(button, content, text) {
+                                $(document).on("click",
+                                    button,
+                                    function() {
+                                        if ($(content).is(":hidden")) {
+                                            $(content).slideDown();
+                                            addSumbol($(button), false, text);
+                                            $(button).addClass("light");
+                                            scroll(button);
+                                        } else {
+                                            $(content).slideUp();
+                                            addSumbol($(button), true, text);
+                                            $(button).removeClass("light");
+                                        }
+                                    });
+                            }
+
+                            //  Делаем кликабельные блоки в меню
+                            $(document).on("click",
+                                ".mainMenu div",
+                                function() {
+                                    window.location = $(this).find("a").attr("href");
+                                    return false;
+                                });
+
+                            // Форматируем дату для правильной передачи в контроллер
+                            function FormatDate(date) {
+                                var year = date.getFullYear();
+                                var month = date.getMonth() + 1;
+                                var day = date.getDate();
+                            }
+
+                            //закрываем showInfo
+                            $(document).on("click",
+                                "#closeshowInfo",
+                                function() {
+                                    $("#InfoError").animate({ "opacity": "0" }, "slow");
+                                });
+
+                    </script>
+                    <article>
+                        <div id="divRenderBody" class="divRenderBody">
+                            @RenderBody()
+                        </div>
+                    </article>
+
+                    <footer style="height: 40px;">
+                        <div id="footer" style="text-align: center;">
+                            <h5 style="display: inline; color: black;">D&V Applications</h5><br />
+                            <a style="color: black" href="mailto:disa15@rambler.ru">Обратная связь</a>
+                        </div>
+                    </footer>
+
+                </div>
+                <!--Preload  -->
+                <style>
+                    #hellopreloader_preload {
+                        display: block;
+                        position: fixed;
+                        z-index: 99999;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        min-width: 1000px;
+                        background: #2574A9 url(http://hello-site.ru//main/images/preloads/rings.svg) center center no-repeat;
+                        background-size: 101px;
+                    }
+                </style>
+                <div id="hellopreloader">
+                    <div id="hellopreloader_preload"></div>
+                </div>
+
+                <script type="text/javascript">
+                    var hellopreloader = document.getElementById("hellopreloader_preload");
+
+                    function fadeOutnojquery(el) {
+                        el.style.opacity = 1;
+                        var interhellopreloader = setInterval(function () {
+                            el.style.opacity = el.style.opacity - 0.05;
+                            if (el.style.opacity <= 0.05) {
+                                clearInterval(interhellopreloader);
+                                hellopreloader.style.display = "none";
+                            }
+                        },
+                            16);
+                    }
+
+                    window.onload = function () {
+                        setTimeout(function () {
+                            fadeOutnojquery(hellopreloader);
+                        },
+                            1000);
+                    };
+                </script>
+
+                <script type="text/javascript">
+                    var linksShootingRange = {
+                        Index: "@Url.Action("Index", "ShootingRange")",
+                        Add: "@Url.Action("Add", "ShootingRange")",
+                        Delete: "@Url.Action("Delete", "ShootingRange")",
+                        GetListByRegion: "@Url.Action("GetListByRegion", "ShootingRange")"
+                    };
+
+                    var linksCommon = {
+                        GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
+                    }
+
+                    var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
+                </script>
+            </body>
+            </html>  *@
