@@ -3,7 +3,7 @@ $(document).ready(function ()
     var actor = new shootingRangePageActor();
 
     actor.changeRegion();
-    $(document).on("change", "#RegionId", function ()
+    $(document).on("change", "#region-choise", function ()
     {
         actor.changeRegion();
     });
@@ -128,8 +128,8 @@ var shootingRangePageActor = function () {
                 data: { idRegion: idRegion },
                 async: false,
                 success: function (data) {
-                    $("#listShootingRanges").html("");
-                    $("#listShootingRanges").html(data);
+                    /// TODO: в data json, надо построить в listShootingRanges таблицу
+                    $("#listShootingRanges").html(data); 
                 },
                 error: function ()
                 {

@@ -56,18 +56,6 @@ namespace ShootServ.Models.ShootingRange
         public string Town { get; set; }
 
         /// <summary>
-        /// Название региона
-        /// </summary>
-        public string RegionName
-        {
-            get
-            {
-                var region = new RegionsLogic().Get(RegionId);
-                return region != null ? region.Name : "";
-            }
-        }
-
-        /// <summary>
         /// Идентификатор тира
         /// </summary>
         public int Id { get; set; }
@@ -89,9 +77,9 @@ namespace ShootServ.Models.ShootingRange
         public List<SelectListItem> Countries { get; set; }
 
         public ShootingRangeModelParams()
-        {
-            Regions = new List<SelectListItem>();
+        { 
             Countries = StandartClassifierModelLogic.GetCountryList().Data;
+            Regions = StandartClassifierModelLogic.GetRegionsByCountry(1); /// TODO : HardCode
         }
 
     }

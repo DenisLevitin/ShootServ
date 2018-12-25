@@ -197,7 +197,6 @@
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
     <Compile Include="Models\Registration\RegPageModelParams.cs" />
-    <Compile Include="Models\ShootingRange\ShootingRangeModelLogic.cs" />
     <Compile Include="Models\ShootingRange\ShootingRangeModelParams.cs" />
     <Compile Include="Models\StandartClassifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -347,7 +346,6 @@
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\ShootingRange\Add.cshtml" />
     <Content Include="Views\ShootingRange\Index.cshtml" />
-    <Content Include="Views\ShootingRange\ListShootingRanges.cshtml" />
     <Content Include="Views\ViewCup\CompetitionsList.cshtml" />
     <Content Include="Views\ViewCup\EntryShootersList.cshtml" />
     <Content Include="Views\ViewCup\Index.cshtml" />

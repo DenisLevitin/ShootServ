@@ -21,6 +21,7 @@ namespace BL
         private readonly CupCompetitionTypeRepository _cupCompetitionType;
         private readonly CupLogic _cupLogic;
         private readonly ShootingClubLogic _clubLogic;
+        private readonly ShootingRangeLogic _shootingRangeLogic;
 
         public EntryForCompetitionsLogic()
         {
@@ -30,6 +31,7 @@ namespace BL
             _cupCompetitionType = new CupCompetitionTypeRepository();
             _cupLogic = new CupLogic();
             _clubLogic = new ShootingClubLogic();
+            _shootingRangeLogic = new ShootingRangeLogic();
         }
 
        /// <summary>
@@ -173,7 +175,7 @@ namespace BL
             ShooterClubParams club = null;
             var cup = _cupLogic.Get(idCup);
 
-            var town = new ShootingRangeLogic().Get(cup.IdShootingRange).Town;
+            var town = _shootingRangeLogic.Get(cup.IdShootingRange).Town;
             string sexStr = sex == SexEnum.Men ? "мужчины" : "женщины";
             if (idClub != -1)
             {

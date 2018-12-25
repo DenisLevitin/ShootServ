@@ -1,4 +1,6 @@
 ﻿using System.Web.Mvc;
+using BL;
+using BO;
 using ShootServ.Helpers;
 using ShootServ.Models.ShootingRange;
 
@@ -6,6 +8,13 @@ namespace ShootServ.Controllers
 {
     public class ShootingRangeController : BaseController
     {
+        private readonly ShootingRangeLogic _shootingRangeLogic;
+
+        public ShootingRangeController()
+        {
+            _shootingRangeLogic = new ShootingRangeLogic();
+        }
+        
         public ActionResult Index()
         {
             var model = new ShootingRangeModelParams();            
@@ -15,8 +24,8 @@ namespace ShootServ.Controllers
         [HttpGet]
         public ActionResult GetListByRegion(int? idRegion)
         {
-            var model = ShootingRangeModelLogic.GetAllByRegion(idRegion);
-            return PartialView("ListShootingRanges", model);
+            var model = _shootingRangeLogic.GetByRegion(idRegion);
+            return new JsonResult() { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
         [CustomAuthorize]
@@ -25,7 +34,19 @@ namespace ShootServ.Controllers
         {
             if (ModelState.IsValid)
             {
-                var res = ShootingRangeModelLogic.Add(model, CurrentUser.Id);
+                var shootingRange = new ShootingRangeParams
+                {
+                    Id = model.Id,
+                    IdRegion = model.RegionId,
+                    Address = model.Address,
+                    Name = model.Name,
+                    Info = model.Info,
+                    IdUser = CurrentUser.Id,
+                    Phone = model.Phone,
+                    Town = model.Town
+                };
+                
+                var res = _shootingRangeLogic.Add(shootingRange, CurrentUser.Id);
                 return new JsonResult {Data = new {res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
             }
 
@@ -33,11 +54,11 @@ namespace ShootServ.Controllers
         }
 
         [CustomAuthorize]
-        [HttpGet]
+        [HttpPost]
         public ActionResult Delete(int idShootingRange)
         {
-            var res = ShootingRangeModelLogic.Delete(idShootingRange, CurrentUser.Id);
-            return new JsonResult { Data = new {res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            var res = _shootingRangeLogic.Delete(idShootingRange, CurrentUser.Id);
+            return new JsonResult { Data = new { res.IsOk, Message = res.ErrorMessage } };
         }
     }
 }

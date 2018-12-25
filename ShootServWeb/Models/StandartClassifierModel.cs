@@ -1,10 +1,10 @@
-﻿using BL;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using BL;
 using BO;
 
-namespace ShootingCompetitionsRequests.Models
+namespace ShootServ.Models
 {
     /// <summary>
     /// Стандартная логика получения моделей для справочников

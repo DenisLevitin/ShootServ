@@ -1,14 +1,12 @@
-﻿using BL;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Web.Mvc;
+using BL;
 using BO;
 using ShootingCompetitionsRequests.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using ShootServ.Models;
 
-namespace ShootingCompetitionsRequests.Areas.ShootingClub.Models
+namespace ShootServ.Areas.ShootingClub.Models
 {
     /// <summary>
     /// Модель стрелкового клуба для добавления
@@ -75,13 +73,11 @@ namespace ShootingCompetitionsRequests.Areas.ShootingClub.Models
 
         private readonly ShootingClubLogic _shootingClubLogic;
         private readonly ShootingRangeLogic _shootingRangeLogic;
-        private readonly RegionsLogic _regionsLogic;
 
         public ShooterClubModelParams()
         {
             _shootingClubLogic = new ShootingClubLogic();
             _shootingRangeLogic = new ShootingRangeLogic();
-            _regionsLogic = new RegionsLogic();
 
             ShootingRange = new List<SelectListItem>();
             Regions = new List<SelectListItem>();

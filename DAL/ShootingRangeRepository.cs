@@ -1,6 +1,8 @@
 ﻿using BO;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Data.Common.CommandTrees;
 using System.Linq;
 
 namespace DAL
@@ -50,17 +52,39 @@ namespace DAL
         /// </summary>
         /// <param name="regionId">ид. регоина</param>
         /// <returns></returns>
-        public List<ShootingRangeParams> GetByRegion(int? regionId)
+        public List<ShootingRangeListItem> GetByRegion(int? regionId)
         {
             using (var db = DBContext.GetContext())
             {
-                var query = db.ShootingRanges.AsQueryable();
+                var query = from sr in db.ShootingRanges
+                    join creator in db.Users on sr.IdUser equals creator.Id
+                    join region in db.Regions on sr.IdRegion equals region.IdRegion
+                    select new ShootingRangeListItem()
+                    {
+                        Id = sr.Id,
+                        Address = sr.Address,
+                        Name = sr.Name,
+                        IdRegion = sr.IdRegion,
+                        Info = sr.Info,
+                        Phone = sr.Telefon,
+                        RegionName = region.Name,
+                        Town = sr.Town,
+                        Creator = new UserParams()
+                        {
+                            DateCreate = creator.DateCreate,
+                            Email = creator.E_mail,
+                            FamilyName = creator.FatherName,
+                            FatherName = creator.FatherName,
+                            Name = creator.Name
+                        }
+                    };
+                
                 if (regionId.HasValue)
                 {
-                    query = query.Where(x => x.IdRegion == regionId).OrderBy(x => x.Town).ThenBy(x => x.Name);
+                    query = query.Where(x => x.IdRegion == regionId);
                 }
 
-                return query.ToList().Select(ConvertToModel).ToList();
+                return query.OrderBy(x => x.Town).ThenBy(x => x.Name).ToList();
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using ShootingCompetitionsRequests.Models;
+using ShootServ.Models;
 
 namespace ShootServ.Controllers
 {

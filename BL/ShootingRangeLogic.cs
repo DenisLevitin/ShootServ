@@ -139,7 +139,7 @@ namespace BL
         /// </summary>
         /// <param name="regionId">ид. региона</param>
         /// <returns></returns>
-        public List<ShootingRangeParams> GetByRegion(int? regionId)
+        public List<ShootingRangeListItem> GetByRegion(int? regionId)
         {
             return _dalShootingRange.GetByRegion(regionId);
         }

@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using ShootingCompetitionsRequests.Areas.ShootingClub.Models;
 using ShootingCompetitionsRequests.Models;
+using ShootServ.Areas.ShootingClub.Models;
 using ShootServ.Controllers;
 
 namespace ShootServ.Areas.ShootingClub.Controllers
