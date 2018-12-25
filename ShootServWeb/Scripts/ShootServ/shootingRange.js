@@ -82,7 +82,7 @@ var shootingRangePageActor = function () {
     // Нужно вызвать эту функцию при изменении региона
     this.changeRegion = function()
     {
-        var idRegion = $("#RegionId").val();
+        var idRegion = $("#region-choise").val();
         this.getListByRegion(idRegion);
     };
     
