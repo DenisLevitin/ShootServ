@@ -5,13 +5,8 @@ namespace BO
     /// <summary>
     /// Стрелковый клуб ( команда )
     /// </summary>
-    public class ShooterClubParams
+    public class ShooterClubParams : ModelBase
     {
-        /// <summary>
-        /// Ид. клуба
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Название стрелкового клуба
         /// </summary>
@@ -40,7 +35,7 @@ namespace BO
         /// <summary>
         /// Пользователь, создавший
         /// </summary>
-        public int UsId { get; set; }
+        public int CreatorId { get; set; }
 
         /// <summary>
         /// Дата - время создания

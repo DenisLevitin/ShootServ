@@ -1,5 +1,7 @@
-﻿using System.Web.Mvc;
-using ShootingCompetitionsRequests.Models;
+﻿using System.Linq;
+using System.Web.Mvc;
+using BL;
+using BO;
 using ShootServ.Areas.ShootingClub.Models;
 using ShootServ.Controllers;
 
@@ -9,29 +11,17 @@ namespace ShootServ.Areas.ShootingClub.Controllers
     {
         //
         // GET: /ShootingClub/ShootingClub/
-        private readonly ShooterClubModelParams _modelLogic = new ShooterClubModelParams();
+        private readonly ShootingClubLogic _shootingClubLogic;
+
+        public AddShootingClubController()
+        {
+            _shootingClubLogic = new ShootingClubLogic();
+        }
 
         public ActionResult Index()
         {
-            var model = new ShooterClubModelParams();
+            var model = new ShooterClubModelParams(); /// TODO: Другая модель для вьюхи нужна
             return View("Index", model);
-        }
-
-        /// <summary>
-        /// Получить список тиров по региону
-        /// </summary>
-        /// <param name="idRegion">ид. региона</param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult GetShootingRangesByRegion(int idRegion)
-        {
-            var res = _modelLogic.GetShootingRangesByRegion(idRegion);
-            var model = new DropDownListModel
-            {
-                Name = "IdShootingRange",
-                Items = res
-            };
-            return PartialView("DropDownListModel", model);
         }
 
         /// <summary>
@@ -43,23 +33,33 @@ namespace ShootServ.Areas.ShootingClub.Controllers
         [HttpGet]
         public ActionResult GetShootingClubsByRegion(int idCountry=-1, int idRegion=-1)
         {
-            var model = _modelLogic.GetClubsByRegion(idCountry, idRegion);
-            return PartialView("ListShootingClubs", model);
+            var list = _shootingClubLogic.GetByRegion(idCountry, idRegion);       
+            return new JsonResult{ Data = list, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
 
-        [HttpGet]
+        [HttpPost]
         [CustomAuthorize]
         public ActionResult Add(ShooterClubModelParams model)
         {
-            var res = _modelLogic.AddShootingClub(model, CurrentUser.Id);
-            return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
+            var shootingClub = new ShooterClubParams
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Address = model.Address,
+                MainCoach = model.MainCoach,
+                IdShootingRange = model.IdShootingRange,
+                Phone = model.Phone,
+                CreatorId = CurrentUser.Id
+            };
+            var res = _shootingClubLogic.Add(shootingClub, CurrentUser.Id);
+            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
 
-        [HttpGet]
+        [HttpPost]
         [CustomAuthorize]
         public ActionResult Delete(int idClub)
         {
-            var res = _modelLogic.Delete(idClub, CurrentUser.Id);
+            var res = _shootingClubLogic.Delete(idClub, CurrentUser.Id);
             return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
     }

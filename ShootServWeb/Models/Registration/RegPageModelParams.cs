@@ -198,7 +198,7 @@ namespace ShootServ.Models.Registration
         /// <returns></returns>
         public List<SelectListItem> GetShooterClubsByRegion(int idCountry, int idRegion)
         {
-            return _shootingClubLogic.GetByRegion(idCountry, idRegion).ConvertAll(x => new SelectListItem { Value = x.Club.Id.ToString(), Text = x.Club.Name });
+            return _shootingClubLogic.GetByRegion(idCountry, idRegion).ConvertAll(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
         }
 
         /// <summary>

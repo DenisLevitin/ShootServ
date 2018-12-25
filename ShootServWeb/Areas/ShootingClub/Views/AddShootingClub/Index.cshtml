@@ -7,96 +7,99 @@
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         //ChangeRegion();
 
-        $(document).on("change", "#idCountry", function () {
-            ChangeCountry();
-        });
+        $(document).on("change",
+            "#idCountry",
+            function() {
+                ChangeCountry();
+            });
 
-        $(document).on("change", "#idRegion", function () {
-            ChangeRegion();
-        });
+        $(document).on("change",
+            "#idRegion",
+            function() {
+                ChangeRegion();
+            });
 
         // Клик на "Удалить"
-        $(document).on("click", ".delClub", function () {
+        $(document).on("click",
+            ".delClub",
+            function() {
 
-            if (isAuthorize) {
+                if (isAuthorize) {
 
-                var a = $(this);
-                var idClub = a.attr("idClub");
-
-                $.ajax({
-                    url: "@Url.Action("Delete")",
-                    dataType: "json",
-                    data: { idClub: idClub },
-                    async: false,
-                    success: function (data) {
-                        if (data.IsOk == true) {
-                            showInfo("Стрелковый клуб удален"); // showInfo
-                            a.closest("tr").remove();
-                        } else showError(data.Message); // сообщение об ошибке как -то показать на странице
-                    },
-                    error: function (data) {
-                        showError("Ошибка ajax");
-                    }
-                });
-            }
-            else
-            {
-                var redirectUrl = "@Url.Action("Index", "AddShootingClub", new { Area = "ShootingClub"})";
-                redirectToLoginPage(redirectUrl);
-            }
-
-        });
-
-        $(document).on("click", "#addBt", function () {
-            if (isAuthorize) {
-
-                if (ValidateInput()) {
+                    var a = $(this);
+                    var idClub = a.attr("idClub");
 
                     $.ajax({
-                        url: "@Url.Action("Add")",
+                        url: "@Url.Action("Delete")",
                         dataType: "json",
-                        data: $("form").serialize(),
+                        data: { idClub: idClub },
                         async: false,
-                        success: function (data) {
+                        success: function(data) {
                             if (data.IsOk == true) {
-                                showInfo("Стрелковый клуб добавлен"); // showInfo
-                                
-                                var idRegion = $("#idRegion").val();
-                                var idCountry = $("#idCountry").val();
-
-                                GetShootingClubs(idCountry, idRegion);
-                                
+                                showInfo("Стрелковый клуб удален"); // showInfo
+                                a.closest("tr").remove();
                             } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                         },
-                        error: function (data) {
+                        error: function(data) {
                             showError("Ошибка ajax");
                         }
                     });
+                } else {
+                    var redirectUrl = "@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})";
+                    redirectToLoginPage(redirectUrl);
                 }
-            }
-            else {
-                var redirectUrl = "@Url.Action("Index", "AddShootingClub", new { Area = "ShootingClub"})";
-                redirectToLoginPage(redirectUrl);
-            }
 
-        });
+            });
+
+        $(document).on("click",
+            "#addBt",
+            function() {
+                if (isAuthorize) {
+
+                    if (ValidateInput()) {
+
+                        $.ajax({
+                            url: "@Url.Action("Add")",
+                            dataType: "json",
+                            data: $("form").serialize(),
+                            async: false,
+                            success: function(data) {
+                                if (data.IsOk == true) {
+                                    showInfo("Стрелковый клуб добавлен"); // showInfo
+
+                                    var idRegion = $("#idRegion").val();
+                                    var idCountry = $("#idCountry").val();
+
+                                    GetShootingClubs(idCountry, idRegion);
+
+                                } else showError(data.Message); // сообщение об ошибке как -то показать на странице
+                            },
+                            error: function(data) {
+                                showError("Ошибка ajax");
+                            }
+                        });
+                    }
+                } else {
+                    var redirectUrl = "@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})";
+                    redirectToLoginPage(redirectUrl);
+                }
+
+            });
 
         ChangeCountry();
 
     });
 
-    function ChangeCountry()
-    {
+    function ChangeCountry() {
         var idCountry = $("#idCountry").val();
         GetRegionsByCountry(idCountry);
     }
 
-    function ChangeRegion()
-    {
+    function ChangeRegion() {
         var idRegion = $("#idRegion").val();
         var idCountry = $("#idCountry").val();
 
@@ -105,12 +108,10 @@
     }
 
 
-
     function ValidateInput() {
 
         var name = $("#Name").val();
-        if (name == undefined || name == "")
-        {
+        if (name == undefined || name == "") {
             showError("Не введено название тира");
             return false;
         }
@@ -127,27 +128,27 @@
 
     // Получить регионы по стране
     function GetRegionsByCountry(idCountry) {
-        
+
         var tagName = "idRegion";
 
         $.ajax({
-            url: "@Url.Action("GetRegionsByCountry", "StandartFilters", new { Area = ""})",
-                    dataType: "html",
-                    type: "GET",
-                    async: false,
-                    data: {
-                        idCountry: idCountry,
-                        tagName: tagName,
-                        addAll : true
-                    },
-                    success: function (data) {
-                        $("#tdRegion").html("");
-                        $("#tdRegion").html(data);
-                    },
-                    error: function () {
-                        showError("Ошибка ajax");
-                    }
-                });
+            url: "@Url.Action("GetRegionsByCountry", "StandartFilters", new {Area = ""})",
+            dataType: "html",
+            type: "GET",
+            async: false,
+            data: {
+                idCountry: idCountry,
+                tagName: tagName,
+                addAll: true
+            },
+            success: function(data) {
+                $("#tdRegion").html("");
+                $("#tdRegion").html(data);
+            },
+            error: function() {
+                showError("Ошибка ajax");
+            }
+        });
     }
 
     // Получить список стрелковых клубов в регионе
@@ -156,19 +157,19 @@
         $.ajax({
             url: "@Url.Action("GetShootingClubsByRegion", "AddShootingClub")",
             dataType: "html",
-            type : "GET",
-                async: false,
-                data: {
-                    idCountry: idCountry,
-                    idRegion: idRegion
-                },
-                success: function (data) {
-                    $("#list").html("");
-                    $("#list").html(data);
-                },
-                error: function () {
-                    showError("Ошибка ajax");
-                }
+            type: "GET",
+            async: false,
+            data: {
+                idCountry: idCountry,
+                idRegion: idRegion
+            },
+            success: function(data) {
+                $("#list").html("");
+                $("#list").html(data);
+            },
+            error: function() {
+                showError("Ошибка ajax");
+            }
         });
 
     }
@@ -178,91 +179,89 @@
         $.ajax({
             url: "@Url.Action("GetShootingRangesByRegion", "AddShootingClub")",
             dataType: "html",
-            type : "GET",
-                data: { idRegion: idRegion },
-                async: false,
-                success: function (data) {
-                    $("#tdShootingRange").html("");
-                    $("#tdShootingRange").html(data);
-                },
-                error: function () {
-                    showError("Ошибка ajax");
-                }
-            });
+            type: "GET",
+            data: { idRegion: idRegion },
+            async: false,
+            success: function(data) {
+                $("#tdShootingRange").html("");
+                $("#tdShootingRange").html(data);
+            },
+            error: function() {
+                showError("Ошибка ajax");
+            }
+        });
     }
+
     //выпадающий контент
     $(document).ready(togetherContent("#divAddClab", "#divAddClabHidden", 'Добавить команду'));
     $(document).ready(togetherContent("#divShowClab", "#divShowClabHidden", 'Список команд'));
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         AddSumbol($("#divAddClab"), true, 'Добавить команду');
     });
 
-    $(document).ready(function () {
+    $(document).ready(function() {
         AddSumbol($("#divShowClab"), true, 'Список команд');
     });
 </script>
 
 <h3>Добавление и просмотр стрелковых клубов</h3>
 
-@Html.Partial("ErrorCustom", Model.Error) 
-
 <div id="addDiv">
 
-   <div id="divAddAdd" class="instr" style="width:1000px;padding:0;">
-       
-        <div id="divAddClab" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;">	 	</div>
-        <div id="divAddClabHidden" style="display:none;">
-        <div style="position:relative; height:330px; margin-top: 20px;">
+    <div id="divAddAdd" class="instr" style="width: 1000px; padding: 0;">
 
-@using (Html.BeginForm("Add", "AddShootingClub",FormMethod.Post, new { id="addform"}))
-    {
-     
-        <table style="margin:auto;">
-            <tr>
-                <td>Страна</td>
-                <td>@Html.DropDownList("idCountry" , Model.Countries)</td>
-            </tr>
-            <tr>
-                <td>Регион</td>
-                <td id="tdRegion">@Html.DropDownList("idRegion" ,Model.Regions)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Name)</td>
-                <td>@Html.TextBoxFor(x => x.Name)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.IdShootingRange)</td>
-                <td id="tdShootingRange">@Html.DropDownListFor(x => x.IdShootingRange, Model.ShootingRange)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Address)</td>
-                <td>@Html.TextAreaFor(x => x.Address)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Phone)</td>
-                <td>@Html.TextBoxFor(x => x.Phone)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.MainCoach)</td>
-                <td>@Html.TextBoxFor(x => x.MainCoach)</td>
-            </tr>
-        </table>
+        <div id="divAddClab" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"> </div>
+        <div id="divAddClabHidden" style="display: none;">
+            <div style="position: relative; height: 330px; margin-top: 20px;">
 
-        <input id="addBt" type="button" value="Добавить" />
-    }
-      </div>
+                @using (Html.BeginForm("Add", "AddShootingClub", FormMethod.Post, new {id = "addform"}))
+                {
+                    <table style="margin: auto;">
+                        <tr>
+                            <td>Страна</td>
+                            <td>@Html.DropDownList("idCountry", Model.Countries)</td>
+                        </tr>
+                        <tr>
+                            <td>Регион</td>
+                            <td id="tdRegion">@Html.DropDownList("idRegion", Model.Regions)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(x => x.Name)</td>
+                            <td>@Html.TextBoxFor(x => x.Name)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(x => x.IdShootingRange)</td>
+                            <td id="tdShootingRange">@Html.DropDownListFor(x => x.IdShootingRange, Model.ShootingRange)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(x => x.Address)</td>
+                            <td>@Html.TextAreaFor(x => x.Address)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(x => x.Phone)</td>
+                            <td>@Html.TextBoxFor(x => x.Phone)</td>
+                        </tr>
+                        <tr>
+                            <td>@Html.LabelFor(x => x.MainCoach)</td>
+                            <td>@Html.TextBoxFor(x => x.MainCoach)</td>
+                        </tr>
+                    </table>
+
+                    <input id="addBt" type="button" value="Добавить"/>
+                }
             </div>
-       </div>
+        </div>
     </div>
+</div>
 
-   <div id="divShowShow" class="instr" style="width:1000px;padding:0;">
-     <div id="divShowClab" class="addListStyle" style="width:100%;padding-bottom:20px;padding-top:20px;">	 	</div>
-        <div id="divShowClabHidden" style="display:none;">
+<div id="divShowShow" class="instr" style="width: 1000px; padding: 0;">
+    <div id="divShowClab" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"> </div>
+    <div id="divShowClabHidden" style="display: none;">
         <div >
 
-<div id="list" style="height:90%">
+            <div id="list" style="height: 90%">
+            </div>
+        </div>
+    </div>
 </div>
-            </div>
-            </div>
-       </div>

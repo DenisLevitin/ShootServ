@@ -26,25 +26,27 @@ namespace BL
         /// Добавить стрелковый клую
         /// </summary>
         /// <param name="shooterClub"></param>
+        /// <param name="currentUserId">текущий пользователь</param>
         /// <returns></returns>
-        public ResultInfo Add(ShooterClubParams shooterClub)
+        public ResultInfo Add(ShooterClubParams shooterClub, int currentUserId)
         {
             var res = new ResultInfo();
 
             if (!string.IsNullOrEmpty(shooterClub.Name))
             {
                 var listExists = _dalShootingClubLogic.GetByName(shooterClub.Name);
-                if (!listExists.Any())
+                if (listExists.Count == 0)
                 {
                     shooterClub.DateCreate = DateTime.Now;
 
-                    var queryUser = _userLogic.Get(shooterClub.UsId);
+                    var queryUser = _userLogic.Get(currentUserId);
 
                     if (queryUser != null)
                     {
                         if (queryUser.IdRole == (int)RolesEnum.Organization)
                         {
-                            res = _dalShootingClubLogic.Add(shooterClub);
+                            shooterClub.CreatorId = currentUserId;
+                            _dalShootingClubLogic.Create(shooterClub);
                         }
                         else
                         {
@@ -93,7 +95,7 @@ namespace BL
         {
             return idRegion > 0 ? _dalShootingClubLogic.GetByRegion(idRegion)
                         : idCountry > 0 ?
-                        _dalShootingClubLogic.GetByCountry(idCountry) : _dalShootingClubLogic.GetAll();
+                        _dalShootingClubLogic.GetByCountry(idCountry) : _dalShootingClubLogic.GetAllDetailed();
         }
 
         /// <summary>
@@ -103,7 +105,8 @@ namespace BL
         /// <param name="shooterClub"></param>
         public void Update(int idClub, ShooterClubParams shooterClub)
         {
-            _dalShootingClubLogic.Update(idClub, shooterClub);
+            /// TODO: Проверка на обновляющего пользователя нужна
+            _dalShootingClubLogic.Update(shooterClub, idClub);
         }
 
         /// <summary>
@@ -137,12 +140,12 @@ namespace BL
             var res = new ResultInfo();
 
             var shooters = _shooterLogic.GetByClub(idClub);
-            if (!shooters.Any())
+            if (shooters.Count == 0)
             {
                 var club = _dalShootingClubLogic.Get(idClub);
-                if (club.UsId == idUser)
+                if (club.CreatorId == idUser)
                 {
-                    res = _dalShootingClubLogic.Delete(idClub);
+                    _dalShootingClubLogic.Delete(idClub);
                 }
                 else
                 {
@@ -152,6 +155,7 @@ namespace BL
             }
             else
             {
+                /// TODO: Возможно здесь можно всё-таки удаление произвести, и почистить команду у стрелка
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя удалить стрелковый клуб, т.к к нему привязаны стрелки";
             }
