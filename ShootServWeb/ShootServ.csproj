@@ -300,6 +300,7 @@
     <Content Include="Models\Images\TKAN.jpg" />
     <Content Include="Models\Images\grass.jpg" />
     <Content Include="Models\Images\Vintovochnik.png" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common\common.js" />
     <Content Include="Scripts\common\commonQueries.js" />
     <Content Include="Scripts\common\layout.js" />
@@ -338,6 +339,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\LayoutScripts\preloader.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\ShootServ\cup.js" />
     <Content Include="Scripts\ShootServ\shootingRange.js" />
     <Content Include="Views\Cup\CompetitionsList.cshtml" />
