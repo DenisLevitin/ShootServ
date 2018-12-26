@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ShootServ.Areas.ShootingClub.Models
+namespace ShootServ.Models.ShootingClub
 {
     /// <summary>
     /// Модель стрелкового клуба для добавления

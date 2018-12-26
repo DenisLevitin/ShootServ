@@ -3,13 +3,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model ShootServ.Areas.ShootingClub.Models.ShooterClubModelParams
+@model ShootServ.Models.ShootingClub.ShooterClubModelParams
 
 <script type="text/javascript">
 
     $(document).ready(function() {
-
-        //ChangeRegion();
 
         $(document).on("change",
             "#idCountry",
@@ -27,9 +25,7 @@
         $(document).on("click",
             ".delClub",
             function() {
-
                 if (isAuthorize) {
-
                     var a = $(this);
                     var idClub = a.attr("idClub");
 
@@ -49,7 +45,7 @@
                         }
                     });
                 } else {
-                    var redirectUrl = "@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})";
+                    var redirectUrl = "@Url.Action("Index", "ShootingClub")";
                     redirectToLoginPage(redirectUrl);
                 }
 
@@ -59,7 +55,6 @@
             "#addBt",
             function() {
                 if (isAuthorize) {
-
                     if (ValidateInput()) {
 
                         $.ajax({
@@ -84,7 +79,7 @@
                         });
                     }
                 } else {
-                    var redirectUrl = "@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})";
+                    var redirectUrl = "@Url.Action("Index", "ShootingClub")";
                     redirectToLoginPage(redirectUrl);
                 }
 
@@ -104,12 +99,9 @@
         var idCountry = $("#idCountry").val();
 
         GetShootingClubs(idCountry, idRegion);
-        GetRangesList(idRegion);
     }
 
-
     function ValidateInput() {
-
         var name = $("#Name").val();
         if (name == undefined || name == "") {
             showError("Не введено название тира");
@@ -121,41 +113,14 @@
             return false;
         }
 
-        //var phone = $("#Phone").val()
-
         return true;
-    }
-
-    // Получить регионы по стране
-    function GetRegionsByCountry(idCountry) {
-
-        var tagName = "idRegion";
-
-        $.ajax({
-            url: "@Url.Action("GetRegionsByCountry", "StandartFilters", new {Area = ""})",
-            dataType: "html",
-            type: "GET",
-            async: false,
-            data: {
-                idCountry: idCountry,
-                tagName: tagName,
-                addAll: true
-            },
-            success: function(data) {
-                $("#tdRegion").html("");
-                $("#tdRegion").html(data);
-            },
-            error: function() {
-                showError("Ошибка ajax");
-            }
-        });
     }
 
     // Получить список стрелковых клубов в регионе
     function GetShootingClubs(idCountry, idRegion) {
 
         $.ajax({
-            url: "@Url.Action("GetShootingClubsByRegion", "AddShootingClub")",
+            url: "@Url.Action("GetShootingClubsByRegion", "ShootingClub")",
             dataType: "html",
             type: "GET",
             async: false,
@@ -164,27 +129,7 @@
                 idRegion: idRegion
             },
             success: function(data) {
-                $("#list").html("");
                 $("#list").html(data);
-            },
-            error: function() {
-                showError("Ошибка ajax");
-            }
-        });
-
-    }
-
-    // Получить список тиров
-    function GetRangesList(idRegion) {
-        $.ajax({
-            url: "@Url.Action("GetShootingRangesByRegion", "AddShootingClub")",
-            dataType: "html",
-            type: "GET",
-            data: { idRegion: idRegion },
-            async: false,
-            success: function(data) {
-                $("#tdShootingRange").html("");
-                $("#tdShootingRange").html(data);
             },
             error: function() {
                 showError("Ошибка ajax");
@@ -215,7 +160,7 @@
         <div id="divAddClabHidden" style="display: none;">
             <div style="position: relative; height: 330px; margin-top: 20px;">
 
-                @using (Html.BeginForm("Add", "AddShootingClub", FormMethod.Post, new {id = "addform"}))
+                @using (Html.BeginForm("Add", "ShootingClub", FormMethod.Post, new {id = "addform"}))
                 {
                     <table style="margin: auto;">
                         <tr>
@@ -259,7 +204,6 @@
     <div id="divShowClab" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"> </div>
     <div id="divShowClabHidden" style="display: none;">
         <div >
-
             <div id="list" style="height: 90%">
             </div>
         </div>

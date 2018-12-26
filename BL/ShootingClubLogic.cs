@@ -91,11 +91,11 @@ namespace BL
         /// <param name="idCountry">ид. страны</param>
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
-        public List<ShooterClubDetalisationParams> GetByRegion(int idCountry = -1, int idRegion = -1)
+        public List<ShooterClubDetalisationParams> GetByRegion(int? idCountry, int? idRegion)
         {
-            return idRegion > 0 ? _dalShootingClubLogic.GetByRegion(idRegion)
-                        : idCountry > 0 ?
-                        _dalShootingClubLogic.GetByCountry(idCountry) : _dalShootingClubLogic.GetAllDetailed();
+            return idRegion.HasValue ? _dalShootingClubLogic.GetByRegion(idRegion.Value)
+                        : idCountry.HasValue ?
+                        _dalShootingClubLogic.GetByCountry(idCountry.Value) : _dalShootingClubLogic.GetAllDetailed();
         }
 
         /// <summary>

@@ -169,15 +169,13 @@
     <Compile Include="App_Start\ModelDateBinder.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\ShootingClub\Controllers\AddShootingClubController.cs" />
-    <Compile Include="Areas\ShootingClub\Models\ShooterClubModelParams.cs" />
-    <Compile Include="Areas\ShootingClub\ShootingClubAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CupController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\ShootingClubController.cs" />
     <Compile Include="Controllers\ShootingRangeController.cs" />
     <Compile Include="Controllers\StandartFiltersController.cs" />
     <Compile Include="Controllers\ViewCupController.cs" />
@@ -197,6 +195,7 @@
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
     <Compile Include="Models\Registration\RegPageModelParams.cs" />
+    <Compile Include="Models\ShootingClub\ShooterClubModelParams.cs" />
     <Compile Include="Models\ShootingRange\ShootingRangeModelParams.cs" />
     <Compile Include="Models\StandartClassifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -284,9 +283,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Areas\ShootingClub\Views\Web.config" />
-    <Content Include="Areas\ShootingClub\Views\AddShootingClub\Index.cshtml" />
-    <Content Include="Areas\ShootingClub\Views\AddShootingClub\ListShootingClubs.cshtml" />
     <Content Include="Content\Template\Шаблон_заявки_excel.xlsx" />
     <None Include="Properties\PublishProfiles\1.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
@@ -346,6 +342,8 @@
     <Content Include="Views\Cup\CupsList.cshtml" />
     <Content Include="Views\Cup\Index.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\ShootingClub\Index.cshtml" />
+    <Content Include="Views\ShootingClub\ListShootingClubs.cshtml" />
     <Content Include="Views\ShootingRange\Add.cshtml" />
     <Content Include="Views\ShootingRange\Index.cshtml" />
     <Content Include="Views\ViewCup\CompetitionsList.cshtml" />
@@ -401,7 +399,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\ShootingClub\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

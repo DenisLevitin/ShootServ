@@ -1,19 +1,17 @@
-﻿using System.Linq;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using BL;
 using BO;
-using ShootServ.Areas.ShootingClub.Models;
-using ShootServ.Controllers;
+using ShootServ.Models.ShootingClub;
 
-namespace ShootServ.Areas.ShootingClub.Controllers
+namespace ShootServ.Controllers
 {
-    public class AddShootingClubController : BaseController
+    public class ShootingClubController : BaseController
     {
         //
         // GET: /ShootingClub/ShootingClub/
         private readonly ShootingClubLogic _shootingClubLogic;
 
-        public AddShootingClubController()
+        public ShootingClubController()
         {
             _shootingClubLogic = new ShootingClubLogic();
         }
@@ -31,7 +29,7 @@ namespace ShootServ.Areas.ShootingClub.Controllers
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult GetShootingClubsByRegion(int idCountry=-1, int idRegion=-1)
+        public ActionResult GetShootingClubsByRegion(int? idCountry, int? idRegion)
         {
             var list = _shootingClubLogic.GetByRegion(idCountry, idRegion);       
             return new JsonResult{ Data = list, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -60,7 +58,7 @@ namespace ShootServ.Areas.ShootingClub.Controllers
         public ActionResult Delete(int idClub)
         {
             var res = _shootingClubLogic.Delete(idClub, CurrentUser.Id);
-            return new JsonResult { JsonRequestBehavior = JsonRequestBehavior.AllowGet, Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
+            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
     }
 }
