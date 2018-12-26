@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using BL;
 using BO;
+using ShootServ.Models;
 using ShootServ.Models.ShootingClub;
 
 namespace ShootServ.Controllers
@@ -18,7 +19,10 @@ namespace ShootServ.Controllers
 
         public ActionResult Index()
         {
-            var model = new ShooterClubModelParams(); /// TODO: Другая модель для вьюхи нужна
+            var model = new ShooterClubPageModel()
+            {
+                Countries = StandartClassifierModelLogic.GetCountryList()
+            };
             return View("Index", model);
         }
 

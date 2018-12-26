@@ -196,6 +196,7 @@
     <Compile Include="Models\ErrorModelParams.cs" />
     <Compile Include="Models\Registration\RegPageModelParams.cs" />
     <Compile Include="Models\ShootingClub\ShooterClubModelParams.cs" />
+    <Compile Include="Models\ShootingClub\ShooterClubPageModel.cs" />
     <Compile Include="Models\ShootingRange\ShootingRangeModelParams.cs" />
     <Compile Include="Models\StandartClassifierModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

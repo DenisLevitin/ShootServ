@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model ShootServ.Models.ShootingClub.ShooterClubModelParams
+@model ShootServ.Models.ShootingClub.ShooterClubPageModel
 
 <script type="text/javascript">
 
@@ -172,24 +172,24 @@
                             <td id="tdRegion">@Html.DropDownList("idRegion", Model.Regions)</td>
                         </tr>
                         <tr>
-                            <td>@Html.LabelFor(x => x.Name)</td>
-                            <td>@Html.TextBoxFor(x => x.Name)</td>
+                            <td>@Html.LabelFor(x => x.SavingShooterClub.Name)</td>
+                            <td>@Html.TextBoxFor(x => x.SavingShooterClub.Name)</td>
                         </tr>
                         <tr>
-                            <td>@Html.LabelFor(x => x.IdShootingRange)</td>
-                            <td id="tdShootingRange">@Html.DropDownListFor(x => x.IdShootingRange, Model.ShootingRange)</td>
+                            <td>@Html.LabelFor(x => x.SavingShooterClub.IdShootingRange)</td>
+                            <td id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges)</td>
                         </tr>
                         <tr>
-                            <td>@Html.LabelFor(x => x.Address)</td>
-                            <td>@Html.TextAreaFor(x => x.Address)</td>
+                            <td>@Html.LabelFor(x => x.SavingShooterClub.Address)</td>
+                            <td>@Html.TextAreaFor(x => x.SavingShooterClub.Address)</td>
                         </tr>
                         <tr>
-                            <td>@Html.LabelFor(x => x.Phone)</td>
-                            <td>@Html.TextBoxFor(x => x.Phone)</td>
+                            <td>@Html.LabelFor(x => x.SavingShooterClub.Phone)</td>
+                            <td>@Html.TextBoxFor(x => x.SavingShooterClub.Phone)</td>
                         </tr>
                         <tr>
-                            <td>@Html.LabelFor(x => x.MainCoach)</td>
-                            <td>@Html.TextBoxFor(x => x.MainCoach)</td>
+                            <td>@Html.LabelFor(x => x.SavingShooterClub.MainCoach)</td>
+                            <td>@Html.TextBoxFor(x => x.SavingShooterClub.MainCoach)</td>
                         </tr>
                     </table>
 

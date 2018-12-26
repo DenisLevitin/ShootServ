@@ -78,7 +78,7 @@ namespace ShootServ.Models.ShootingRange
 
         public ShootingRangeModelParams()
         { 
-            Countries = StandartClassifierModelLogic.GetCountryList().Data;
+            Countries = StandartClassifierModelLogic.GetCountryList();
             Regions = StandartClassifierModelLogic.GetRegionsByCountry(1); /// TODO : HardCode
         }
 

@@ -251,7 +251,7 @@ namespace ShootServ.Models.Registration
             model.RolesList = StandartClassifierModelLogic.GetRolesList();
             model.SexList = StandartClassifierModelLogic.GetSexList();
             model.WeaponTypes = StandartClassifierModelLogic.GetWeaponTypeList();
-            model.CountriesList = StandartClassifierModelLogic.GetCountryList().Data;
+            model.CountriesList = StandartClassifierModelLogic.GetCountryList();
             model.Categories = model.GetCategoies();
 
             model.IsEditMode = true;

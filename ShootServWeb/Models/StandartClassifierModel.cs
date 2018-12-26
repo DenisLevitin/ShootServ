@@ -67,24 +67,24 @@ namespace ShootServ.Models
         /// Получить список регионов
         /// </summary>
         /// <returns></returns>
-        public static ResultInfoRef<List<SelectListItem>> GetCountryList(bool addAll = true)
+        public static List<SelectListItem> GetCountryList(bool addAll = true) /// TODO: Выкинуть из сигнатуры ResultInfoRef
         {
-            var res = new ResultInfoRef<List<SelectListItem>>();
+            var res = new List<SelectListItem>();
 
             var countries = new CountryLogic().GetAllCounties();
             if (addAll)
             {
-                res.Data.Add(new SelectListItem { Value = "-1", Text = "Все страны" });
+                res.Add(new SelectListItem { Value = "-1", Text = "Все страны" });
             }
 
             foreach (var item in countries)
             {
-                res.Data.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.CountryName });
+                res.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.CountryName });
             }
 
-            if (res.Data.Any(x => x.Value == "1"))
+            if (res.Any(x => x.Value == "1"))
             {
-                res.Data.Single(x => x.Value == "1").Selected = true;
+                res.Single(x => x.Value == "1").Selected = true;
             }
 
             return res;

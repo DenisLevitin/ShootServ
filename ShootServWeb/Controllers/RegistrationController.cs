@@ -23,26 +23,20 @@ namespace ShootServ.Controllers
             {
                 model.IsEditMode = false;
                 model.RolesList = StandartClassifierModelLogic.GetRolesList();
-
-                var queryCountries = StandartClassifierModelLogic.GetCountryList();
-                if (queryCountries.Result.IsOk)
-                {
-                    model.CountriesList = queryCountries.Data;
-                    model.SexList = StandartClassifierModelLogic.GetSexList();
-                    model.WeaponTypes = StandartClassifierModelLogic.GetWeaponTypeList();
-                    model.Categories = _modelLogic.GetCategoies();
-                }
-                else model.Error = new ErrorModelParams(queryCountries.Result);
+                model.CountriesList = StandartClassifierModelLogic.GetCountryList();
+                model.SexList = StandartClassifierModelLogic.GetSexList();
+                model.WeaponTypes = StandartClassifierModelLogic.GetWeaponTypeList();
+                model.Categories = _modelLogic.GetCategoies();
             }
-            else 
+            else
             {
                 if (CurrentUser != null && CurrentUser.Id == idUser)
                 {
                     model = RegPageModelParams.GetModelByExistUser(idUser);
                 }
-                else 
+                else
                 {
-                    return Redirect(Url.Action("Login", "Home", new { Area = ""} ));
+                    return Redirect(Url.Action("Login", "Home", new {Area = ""}));
                 }
             }
 
@@ -64,7 +58,7 @@ namespace ShootServ.Controllers
                 }
             }
 
-            return new JsonResult { Data = new { IsOk = res.Result.IsOk, Message = res.Result.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult {Data = new {IsOk = res.Result.IsOk, Message = res.Result.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
         /// <summary>
@@ -87,8 +81,8 @@ namespace ShootServ.Controllers
         [HttpGet]
         public ActionResult UpdateUser(int idExistingUser, bool needUpdatePassword, RegPageModelParams model)
         {
-            var res = new ResultInfo { IsOk = false };
-            if (((UserParams)Session["user"]).Id == idExistingUser)
+            var res = new ResultInfo {IsOk = false};
+            if (((UserParams) Session["user"]).Id == idExistingUser)
             {
                 res = _modelLogic.UpdateUser(idExistingUser, model, needUpdatePassword);
             }
@@ -99,8 +93,7 @@ namespace ShootServ.Controllers
                 Session["user"] = updatingUser;
             }
 
-            return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage }, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            return new JsonResult {Data = new {IsOk = res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
-
     }
 }
