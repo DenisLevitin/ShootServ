@@ -338,6 +338,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\ShootServ\cup.js" />
+    <Content Include="Scripts\ShootServ\shootingClub.js" />
     <Content Include="Scripts\ShootServ\shootingRange.js" />
     <Content Include="Views\Cup\CompetitionsList.cshtml" />
     <Content Include="Views\Cup\CupsList.cshtml" />

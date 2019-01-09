@@ -140,7 +140,7 @@ var shootingRangePageActor = function () {
     };
     
     // Получить список регионов по стране
-    this.getRegionsByCountry = function(idCountry) {
+    this.getRegionsByCountry = function (idCountry) {
         if (idCountry) {
             $.ajax({
                 url: linksCommon.GetRegionsByCountry,
@@ -152,7 +152,6 @@ var shootingRangePageActor = function () {
                 },
                 async: false,
                 success: function (data) {
-                    $("#tdRegionId").html("");
                     $("#tdRegionId").html(data);
                 },
                 error: function () {
