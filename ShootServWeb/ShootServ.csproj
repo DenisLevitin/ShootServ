@@ -286,7 +286,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Template\Шаблон_заявки_excel.xlsx" />
     <None Include="Properties\PublishProfiles\1.pubxml" />
-    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Models\Images\babax2.png" />
     <Content Include="Models\Images\favicon.png" />
     <Content Include="Models\Images\gilza.png" />
@@ -303,11 +302,8 @@
     <Content Include="Scripts\common\layout.js" />
     <Content Include="Scripts\datepicker.translate.js" />
     <Content Include="Scripts\DatepickerRegionRus.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
-    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery-2.0.0.js" />
     <Content Include="Scripts\jquery.datePicker.js" />
     <Content Include="Scripts\jquery.json-2.4.js" />
     <Content Include="Scripts\jquery.ui.core.js" />
