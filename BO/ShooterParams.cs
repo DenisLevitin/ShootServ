@@ -65,8 +65,7 @@ namespace BO
         /// <summary>
         /// Пол
         /// </summary>
-        public int Sex { get; set; }
-
+        public int Sex { get; set; } /// TODO: Переделать на enum
     }
 
     public enum SexEnum

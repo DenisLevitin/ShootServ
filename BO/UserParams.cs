@@ -54,14 +54,7 @@ namespace BO
 
         public UserParams()
         {
-            Login = "";
-            Password = "";
-            Name = "";
-            FamilyName = "";
-            FatherName = "";
-            Email = "";
             IdRole = 1;
-            DateCreate = new DateTime();
         }
     }
 

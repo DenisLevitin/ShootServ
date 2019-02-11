@@ -194,7 +194,8 @@
     <Compile Include="Models\Cup\ViewCupShooterCompetitionModel.cs" />
     <Compile Include="Models\DropDownListModel.cs" />
     <Compile Include="Models\ErrorModelParams.cs" />
-    <Compile Include="Models\Registration\RegPageModelParams.cs" />
+    <Compile Include="Models\Registration\RegistrationPageModel.cs" />
+    <Compile Include="Models\Registration\RegistrationPostModel.cs" />
     <Compile Include="Models\ShootingClub\ShooterClubModelParams.cs" />
     <Compile Include="Models\ShootingClub\ShooterClubPageModel.cs" />
     <Compile Include="Models\ShootingRange\ShootingRangeModelParams.cs" />
@@ -334,6 +335,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\ShootServ\cup.js" />
+    <Content Include="Scripts\ShootServ\registration.js" />
     <Content Include="Scripts\ShootServ\shootingClub.js" />
     <Content Include="Scripts\ShootServ\shootingRange.js" />
     <Content Include="Views\Cup\CompetitionsList.cshtml" />

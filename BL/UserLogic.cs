@@ -88,7 +88,7 @@ namespace BL
         /// </summary>
         /// <param name="user">пользователь</param>
         /// <returns></returns>
-        private ResultInfoStruct<int> AddUser(UserParams user)
+        private ResultInfoStruct<int> AddUserInternal(UserParams user)
         {
             var res = new ResultInfoStruct<int>();
             user.DateCreate = DateTime.Now;
@@ -164,6 +164,11 @@ namespace BL
         /// <returns>ид. добавленного usera</returns>
         public ResultInfoStruct<int> AddShooter(UserParams user, ShooterParams shooter)
         {
+            if (user.IdRole != (int) RolesEnum.Shooter)
+            {
+                throw new Exception("Некорректно указан роль пользователя");
+            }
+            
             var res = new ResultInfoStruct<int>();
 
             shooter.Name = user.Name;
@@ -173,7 +178,7 @@ namespace BL
 
             using (var tran = new TransactionScope())
             {
-                var queryAddUser = this.AddUser(user);
+                var queryAddUser = this.AddUserInternal(user);
                 if (queryAddUser.Result.IsOk)
                 {
                     res.Data = queryAddUser.Data;
@@ -196,10 +201,13 @@ namespace BL
         /// <returns></returns>
         public ResultInfoStruct<int> AddOrganizator(UserParams user)
         {
-            user.IdRole = (int)RolesEnum.Organization;
-            return AddUser(user);
+            if (user.IdRole != (int) RolesEnum.Organization)
+            {
+                throw new Exception("Некорректно указан роль пользователя");
+            }
+            return AddUserInternal(user);
         }
-
+        
         /// <summary>
         /// Получить пользователя
         /// </summary>

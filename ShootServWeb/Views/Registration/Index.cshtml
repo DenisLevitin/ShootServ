@@ -1,8 +1,9 @@
-﻿@model ShootServ.Models.Registration.RegPageModelParams
+﻿@model ShootServ.Models.Registration.RegistrationPageModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var postModel = Model.PostModel;
 }
 
 @if (!Model.IsEditMode)
@@ -14,237 +15,7 @@ else
     <h3>Пользовательские данные</h3>
 }
 
-<script type="text/javascript">
-
-    $(document).ready(function() {
-        $("#shooterTable").hide();
-
-        var editMode = "@Model.IsEditMode";
-        if (editMode) {
-            var role = $("#IdRole").val();
-            registrationFormShifterByName(role);
-        }
-
-        $.datepicker.setDefaults($.datepicker.regional['ru']);
-        $(".datepicker").datepicker();
-
-        if ( "@Model.Error.IsOk" != "True" ) {
-            showError("@Model.Error.ErrorMessage");
-        }
-    });
-
-    $(document).on("change", "#idCountry", function () {
-        ChangeCountry();
-    });
-
-    $(document).on("change", "#idRegion", function() {
-        ChangeRegion();
-    });
-
-    $(document).on("change", "#IdRole", function() {
-        var role = $("#IdRole").val();
-        registrationFormShifterByName(role);
-    });
-
-    function registrationFormShifterByName(role) {
-        if (role == 1) {
-            $("#shooterTable").hide();
-            $("#content").css("width", "360px");
-        } else {
-            $("#shooterTable").show();
-            $("#content").css("width", "70%");
-
-        }
-    }
-    // клик на сохранить
-    $(document).on("click", "#editBt", function () {
-
-        var needUpdatePassword = $("#Password").val().length > 0; // требуется ли обновить пароль пользователя
-
-        if (ValidateInput(true))
-        {
-            $.ajax({
-                url: "@Url.Action("UpdateUser")",
-                dataType: "json",
-                data: $("form").serialize() + "&idExistingUser="+"@Model.IdExistingUser"+"&needUpdatePassword="+needUpdatePassword,
-                async: false,
-                success: function (data) {
-                    if (data.IsOk == true) {
-
-                        showInfo("Данные обновлены"); // showInfo
-                        window.location = "@Url.Action("Index", "Home", new { Area = ""})";
-
-                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
-                },
-                error: function (data) {
-                    showError("Ошибка ajax");
-                }
-            });
-        }
-    });
-
-        // клик на добавить
-        $(document).on("click", "#addBt", function() {
-            if (ValidateInput(false)) {
-
-                $.ajax({
-                    url: "@Url.Action("AddUser", "Registration")",
-                    dataType: "json",
-                    data: $("form").serialize(),
-                    async: false,
-                    success: function (data) {
-                        if (data.IsOk == true) {
-
-                            showInfo("Регистрация проведена успешно"); // showInfo
-                            window.location = "@Url.Action("Index", "Home", new { Area = ""})";
-
-                        } else showError(data.Message); // сообщение об ошибке как -то показать на странице
-                    },
-                    error: function (data) {
-                        showError("Ошибка ajax");
-                    }
-                });
-            }
-        });
-
-        // Изменить страну
-        function ChangeCountry() {
-            var idCountry = $("#idCountry").val();
-            GetRegions(idCountry);
-        }
-
-        // Изменить регион
-        function ChangeRegion() {
-            var idRegion = $("#idRegion").val();
-            GetShootingClubs(idRegion);
-        }
-
-        // валидация ввода
-        function ValidateInput(isEditing) {
-
-            var name = $("#Name").val();
-            if (name == undefined || name == "")
-            {
-                showError("Не введено имя");
-                return false;
-            }
-
-            var family = $("#Family").val();
-            if (family == undefined || family == "") {
-                showError("Не введена фамилия");
-                return false;
-            }
-
-            var login = $("#Login").val();
-            if (login == undefined || login == "") {
-                showError("Не введена фамилия");
-                return false;
-            }
-
-            var password = $("#Password").val();
-            // если валидация при редактировании, то пароли не валидируем и не сравниваем. Если какой-либо пароль введен, то считаем, что его надо обновить
-            if ( ! isEditing || password.length > 0) {
-                if (password == undefined || password == "") {
-                    showError("Не введен пароль");
-                    return false;
-                }
-
-                if ($("#Password").val() != $("#Password2").val()) {
-                    showError("Пароли не совпадают");
-                    return false;
-                }
-            }
-
-            if ($("#IdRole").val() == undefined) {
-                showError("Не введена роль");
-                return false;
-            }
-
-            if ( $("#Email").val() == undefined || $("#Email").val() == "") {
-                showError("Не введен email");
-                return false;
-            }
-
-            if ($("#IdRole").val() == 1) {
-                // доп. проверка организатора
-            }
-            else {
-                // доп. проверка стрелка
-                if ($("#IdWeaponType").val() == undefined) {
-                    showError("Не введен тип оружия стрелка");
-                    return false;
-                }
-
-                if ($("#IdClub").val() == undefined) {
-                    showError("Не введен стрелковый клуб");
-                    return false;
-                }
-
-                if ($("#IdShooterCategory").val() == undefined) {
-                    showError("Не введен разряд стрелка");
-                    return false;
-                }
-
-                var dateBirthday = $("#DateBirthday").val();
-                if (dateBirthday == undefined || dateBirthday == "") {
-                    showError("Не введена дата рождения");
-                    return false;
-                }
-
-            }
-
-            return true;
-        }
-
-        // Получить список стрелковых клубов в регионе
-        function GetShootingClubs(idRegion) {
-
-            if (idRegion != undefined) {
-
-                $.ajax({
-                    url: "@Url.Action("GetShootingClubsByRegion", "Registration")",
-                    dataType: "html",
-                    type: "GET",
-                    async: false,
-                    data: { idRegion: idRegion },
-                    success: function (data) {
-                        $("#tdClubsList").html("");
-                        $("#tdClubsList").html(data);
-                    },
-                    error: function () {
-                        showError("Ошибка ajax");
-                    }
-                });
-            }
-        }
-
-        // Получить список регионов по стране
-        function GetRegions(idCountry) {
-            var tagName = "idRegion";
-
-            $.ajax({
-                url: "@Url.Action("GetRegionsByCountry", "StandartFilters", new { Area = ""})",
-                dataType: "html",
-                type: "GET",
-                async: false,
-                data: {
-                    idCountry: idCountrtdRegionsListy,
-                    tagName: tagName,
-                    addAll: true
-                },
-                success: function (data) {
-                    $("#tdRegionsList").html(data);
-                },
-                error: function () {
-                    showError("Ошибка ajax");
-                }
-            });
-
-            //ChangeRegion();
-
-            //выравнивание поля в зависимости от позиции стрелок.организатор
-        }
-</script>
+<script src="~/Scripts/ShootServ/registration.js"></script>
 
 @using (Html.BeginForm("AddUser", "Registration", FormMethod.Post, new { id = "addform", @style = "width:100%; padding:0;" }))
 {<div style="width:1200px;margin:auto;">
@@ -252,40 +23,40 @@ else
             <div id="divUser" style="float: left; position:relative;">
                 <table id="userTable">
                     <tr>
-                        <td>@Html.LabelFor(x => x.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
-                        <td>@Html.DropDownListFor(x => x.IdRole, Model.RolesList)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Name)</td>
-                        <td>@Html.TextBoxFor(x => x.Name)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Name)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Name)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.FatherName)</td>
-                        <td>@Html.TextBoxFor(x => x.FatherName)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.FatherName)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.FatherName)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Family)</td>
-                        <td>@Html.TextBoxFor(x => x.Family)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Family)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Family)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
-                        <td>@Html.DropDownListFor(x => x.Sex, Model.SexList)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Login)</td>
-                        <td>@Html.TextBoxFor(x => x.Login)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Login)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Login)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Password)</td>
-                        <td>@Html.PasswordFor(x => x.Password)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Password)</td>
+                        <td>@Html.PasswordFor(x => x.PostModel.Password)</td>
                     </tr>
                     <tr>
                         <td>@Html.Label("Повторите пароль")</td>
                         <td>@Html.Password("Password2", "")</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Email)</td>
-                        <td>@Html.TextBoxFor(x => x.Email)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Email)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Email)</td>
                     </tr>
                 </table>
 
@@ -309,24 +80,24 @@ else
                         <td id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.DateBirthday)</td>
-                        <td>@Html.TextBoxFor(x => x.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                        <td>@Html.LabelFor(x => x.PostModel.DateBirthday)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.IdClub, new { style = "display:inline" }) *</td>
-                        <td id="tdClubsList">@Html.DropDownListFor(x => x.IdClub, Model.ShooterClubs)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.IdClub, new { style = "display:inline" }) *</td>
+                        <td id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.IdWeaponType)</td>
-                        <td>@Html.DropDownListFor(x => x.IdWeaponType, Model.WeaponTypes)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.IdWeaponType)</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.IdShooterCategory)</td>
-                        <td>@Html.DropDownListFor(x => x.IdShooterCategory, Model.Categories)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.IdShooterCategory)</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories)</td>
                     </tr>
                     <tr>
-                        <td>@Html.LabelFor(x => x.Address)</td>
-                        <td>@Html.TextAreaFor(x => x.Address)</td>
+                        <td>@Html.LabelFor(x => x.PostModel.Address)</td>
+                        <td>@Html.TextAreaFor(x => x.PostModel.Address)</td>
                     </tr>
                     <tr>
                         <td style="width:200px">
@@ -339,6 +110,5 @@ else
                 </table>
             </div>
         </div>
-
     </div>
 }
