@@ -26,6 +26,12 @@ namespace ShootServ
                 url: "ShootingRange/{action}",
                 defaults: new {controller = "ShootingRange", action = "Index"}
             );
+            
+            routes.MapRoute(
+                name: "ShootingClub",
+                url: "ShootingClub/{action}",
+                defaults: new {controller = "ShootingClub", action = "Index"}
+            );
                 
             routes.MapRoute(
                 name: "Cup",

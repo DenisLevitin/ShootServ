@@ -198,7 +198,7 @@ namespace ShootServ.Models.Registration
         /// <returns></returns>
         public List<SelectListItem> GetShooterClubsByRegion(int idCountry, int idRegion)
         {
-            return _shootingClubLogic.GetByRegion(idCountry, idRegion).ConvertAll(x => new SelectListItem { Value = x.Club.Id.ToString(), Text = x.Club.Name });
+            return _shootingClubLogic.GetByRegion(idCountry, idRegion).ConvertAll(x => new SelectListItem { Value = x.Id.ToString(), Text = x.Name });
         }
 
         /// <summary>
@@ -251,7 +251,7 @@ namespace ShootServ.Models.Registration
             model.RolesList = StandartClassifierModelLogic.GetRolesList();
             model.SexList = StandartClassifierModelLogic.GetSexList();
             model.WeaponTypes = StandartClassifierModelLogic.GetWeaponTypeList();
-            model.CountriesList = StandartClassifierModelLogic.GetCountryList().Data;
+            model.CountriesList = StandartClassifierModelLogic.GetCountryList();
             model.Categories = model.GetCategoies();
 
             model.IsEditMode = true;

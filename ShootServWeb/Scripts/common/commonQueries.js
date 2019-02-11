@@ -1,5 +1,5 @@
 // Получить список регионов по стране ( это много где копируется )
-function getRegions(idCountry, element, tagName, callback) {
+function getRegions(idCountry, tagName, callback) {
     $.ajax({
         url: linksCommon.GetRegionsByCountry,
         dataType: "html",

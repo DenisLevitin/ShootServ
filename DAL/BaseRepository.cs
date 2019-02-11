@@ -108,7 +108,7 @@ namespace DAL
             }
         }
 
-        public void DeleteRannge(IReadOnlyCollection<int> ids)
+        public void DeleteRange(IReadOnlyCollection<int> ids)
         {
             /// TODO: Тут надо EF обновлять скорее всего
             throw new NotImplementedException();

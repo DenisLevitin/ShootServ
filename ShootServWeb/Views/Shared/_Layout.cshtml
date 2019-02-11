@@ -44,8 +44,8 @@
                 <nav class="nav d-flex justify-content-between">
                     <a class="p-2 text-muted" href="@Url.Action("Index", "Home", new {Area = ""})">На главную</a>
                     <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingRange")">Тиры</a>
-                    <a class="p-2 text-muted" href="@Url.Action("Index", "AddShootingClub", new {Area = "ShootingClub"})">Команды</a>
-                    <a class="p-2 text-muted" href="@Url.Action("Index", "Cup", new {Area = "Cup"})">Соревнования</a>
+                    <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
+                    <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
                     <a class="p-2 text-muted" href="#">О проекте</a>
                     <a class="p-2 text-muted" href="#">
                         @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
@@ -163,6 +163,13 @@
                         }
 
                         var linkslogin = "@Url.Action("Login", "Account")";
+                        
+                        var linksClub = {
+                            Get: "@Url.Action("GetShootingClubsByRegion", "ShootingClub")",
+                            Delete: "@Url.Action("Delete", "ShootingClub")",
+                            Index: "@Url.Action("Index", "ShootingClub")",
+                            Add: "@Url.Action("Add", "ShootingClub")"
+                        }
 
                         var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
         </script>

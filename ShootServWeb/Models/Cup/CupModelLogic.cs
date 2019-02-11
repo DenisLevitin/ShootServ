@@ -106,7 +106,7 @@ namespace ShootServ.Models.Cup
         {
             var model = new CupModelParams
             {
-                Countries = StandartClassifierModelLogic.GetCountryList().Data, 
+                Countries = StandartClassifierModelLogic.GetCountryList(), 
                 CupTypes = GetCupTypes(),
                 CompetitionTypes = GetCompetitionsList(), 
                 IsEditMode = false

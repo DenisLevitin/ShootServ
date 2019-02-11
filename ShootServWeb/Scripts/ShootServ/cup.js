@@ -67,7 +67,7 @@ $(document).ready(function () {
                 data: { idCup: id },
                 async: false,
                 success: function (data) {
-                    if (data.IsOk == true) {
+                    if (data.IsOk) {
 
                         var tr = a.closest("tr");
                         $(tr).remove();
@@ -197,7 +197,7 @@ function editCup() {
             data: dataSend,
             async: false,
             success: function(data) {
-                if (data.IsOk == true) {
+                if (data.IsOk) {
                     showInfo("Соревнование отредактировано"); // showInfo
                 } else showError(data.Message); // сообщение об ошибке как -то показать на странице
             },
