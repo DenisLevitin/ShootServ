@@ -23,31 +23,21 @@ namespace BL
         /// </summary>
         /// <param name="shooter"></param>
         /// <returns></returns>
-        public ResultInfo Add(ShooterParams shooter)
+        public ResultInfoStruct<int> Add(ShooterParams shooter)
         {
-            var res = new ResultInfo();
+            var res = new ResultInfoStruct<int>();
             if (!String.IsNullOrEmpty(shooter.Name) && !string.IsNullOrEmpty(shooter.Family))
             {
                 shooter.DateCreate = DateTime.Now;
-                res = _dalShooter.Add(shooter);
+                res.Data = _dalShooter.Create(shooter);
             }
             else 
             {
-                res.IsOk = false;
-                res.ErrorMessage = "Фамилия и имя стрелка не могут быть пустыми";
+                res.Result.IsOk = false;
+                res.Result.ErrorMessage = "Фамилия и имя стрелка не могут быть пустыми";
             }
 
             return res;
-        }
-
-        /// <summary>
-        /// Получить стрелка
-        /// </summary>
-        /// <param name="idShooter"></param>
-        /// <returns></returns>
-        public ShooterParams Get(int idShooter)
-        {
-            return _dalShooter.GetById(idShooter);
         }
 
         /// <summary>
@@ -128,9 +118,9 @@ namespace BL
         /// <param name="idShooter">ид. стрелка</param>
         /// <param name="shooter">стрелок</param>
         /// <returns></returns>
-        public ResultInfo Update(int idShooter, ShooterParams shooter)
+        public void Update(int idShooter, ShooterParams shooter)
         {
-            return _dalShooter.Update(idShooter, shooter);
+            _dalShooter.Update(shooter, idShooter);
         }
     }
 }

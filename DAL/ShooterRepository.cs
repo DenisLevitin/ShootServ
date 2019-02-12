@@ -8,90 +8,47 @@ namespace DAL
     /// <summary>
     /// Класс для работы с таблицей Shooters
     /// </summary>
-    public class ShooterRepository
+    public class ShooterRepository : BaseRepository<ShooterParams, Shooters>
     {
-        private ShooterParams Convert(Shooters dalShooter)
+        protected override Func<Shooters, int> GetPrimaryKeyValue
+        {
+            get { return (x) => x.IdShooter; }
+        }
+
+        protected override ShooterParams ConvertToModel(Shooters entity)
         {
             return new ShooterParams
             {
-                Address = dalShooter.Address ?? "",
-                BirthDate = dalShooter.BirthDate,
-                Family = dalShooter.Family,
-                FatherName = dalShooter.FatherName,
-                Id = dalShooter.IdShooter,
-                IdCategory = dalShooter.IdCategory,
-                IdClub = dalShooter.IdClub,
-                IdWeaponType= dalShooter.IdWeaponType, // поменять тип в базе с  Nullable
-                Name = dalShooter.Name,
-                Sex = System.Convert.ToInt32( dalShooter.Sex )
+                Address = entity.Address ?? "",
+                BirthDate = entity.BirthDate,
+                Family = entity.Family,
+                FatherName = entity.FatherName,
+                Id = entity.IdShooter,
+                IdCategory = entity.IdCategory,
+                IdClub = entity.IdClub,
+                IdWeaponType = entity.IdWeaponType, // поменять тип в базе с  Nullable
+                Name = entity.Name,
+                Sex = System.Convert.ToInt32(entity.Sex)
             };
         }
 
-        private Shooters Convert(ShooterParams shooter)
+        protected override Shooters ConvertToEntity(ShooterParams model)
         {
             return new Shooters
             {
-                Address = shooter.Address,
-                BirthDate = shooter.BirthDate,
-                DateCreate = shooter.DateCreate,
-                Name = shooter.Name,
-                Family = shooter.Family,
-                FatherName = shooter.FatherName,
-                IdCategory = shooter.IdCategory,
-                IdClub = shooter.IdClub,
-                IdUser = shooter.IdUser,
-                IdWeaponType = shooter.IdWeaponType,
-                IdShooter = shooter.Id,
-                Sex = System.Convert.ToBoolean(shooter.Sex)
+                Address = model.Address,
+                BirthDate = model.BirthDate,
+                DateCreate = model.DateCreate,
+                Name = model.Name,
+                Family = model.Family,
+                FatherName = model.FatherName,
+                IdCategory = model.IdCategory,
+                IdClub = model.IdClub,
+                IdUser = model.IdUser,
+                IdWeaponType = model.IdWeaponType,
+                IdShooter = model.Id,
+                Sex = System.Convert.ToBoolean(model.Sex)
             };
-        }
-
-        /// <summary>
-        /// Добавить стрелка
-        /// </summary>
-        /// <param name="shooter">стрелок</param>
-        public ResultInfo Add(ShooterParams shooter)
-        {
-            var res = new ResultInfo();
-             using (var db = DBContext.GetContext())
-             {
-                try
-                {
-                    db.Shooters.Add(Convert(shooter));
-                    db.SaveChanges();
-                } 
-                catch(Exception exc)
-                {
-                    res.IsOk = false;
-                    res.ErrorMessage = "Не удалось добавить стрелка в базу";
-                    res.Exc = exc;
-                }
-             }
-
-             return res;
-        }
-
-        /// <summary>
-        /// Получить стрелка по Id
-        /// </summary>
-        /// <param name="idShooter">ид стрелка</param>
-        /// <returns></returns>
-        public ShooterParams GetById(int idShooter)
-        {
-            ShooterParams shooter;
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    shooter = Convert(db.Shooters.Where(x => x.IdShooter == idShooter).First());
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("Не найден стрелок по идентификатору");
-                }
-            }
-
-            return shooter;
         }
 
         /// <summary>
@@ -100,24 +57,7 @@ namespace DAL
         /// <returns></returns>
         public ShooterParams GetByUser(int idUser)
         {
-            ShooterParams res;
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var query = (from shooter in db.Shooters
-                        where shooter.IdUser == idUser
-                        select shooter).Single();
-
-                    res = Convert(query);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("Не найден стрелок по идентификатору пользователя");
-                }
-            }
-
-            return res;
+            return GetFirstOrDefault(x => x.IdUser == idUser);
         }
 
         /// <summary>
@@ -125,23 +65,9 @@ namespace DAL
         /// </summary>
         /// <param name="clubId">ид. клуба</param>
         /// <returns></returns>
-        public List<ShooterParams> GetByClub(int clubId) 
+        public List<ShooterParams> GetByClub(int clubId)
         {
-            List<ShooterParams> shooters = new List<ShooterParams>();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var query = db.Shooters.Where(x => x.IdClub == clubId).ToList();
-                    shooters = query.ConvertAll(Convert);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении списка стрелков произошла ошибка");
-                }
-            }
-
-            return shooters;
+            return GetFiltered(x => x.IdClub == clubId);
         }
 
         /// <summary>
@@ -151,22 +77,17 @@ namespace DAL
         /// <returns></returns>
         public List<ShooterParams> GetShootersWasEntryOnCup(int cupId)
         {
-            List<ShooterParams> shooters = new List<ShooterParams>();
+            /// TODO: Сделать через запрос filtered
+
+            var shooters = new List<ShooterParams>();
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    var query = (from shooter in db.Shooters
-                                 join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
-                                 join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
-                                 where cupCompetitionType.IdCup == cupId
-                                 select shooter).ToList();
-                    shooters = query.ConvertAll(Convert);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении списка стрелков произошла ошибка");
-                }
+                var query = (from shooter in db.Shooters
+                    join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
+                    join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
+                    where cupCompetitionType.IdCup == cupId
+                    select shooter).ToList();
+                shooters = query.ConvertAll(ConvertToModel);
             }
 
             return shooters;
@@ -179,22 +100,17 @@ namespace DAL
         /// <returns></returns>
         public List<ShooterParams> GetShootersWasEntryOnCupInClub(int cupId, int clubId)
         {
-            List<ShooterParams> shooters = new List<ShooterParams>();
+            /// TODO: Сделать через запрос filtered
+            
+            var shooters = new List<ShooterParams>();
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    var query = (from shooter in db.Shooters
-                                 join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
-                                 join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
-                                 where cupCompetitionType.IdCup == cupId && shooter.IdClub == clubId
-                                 select shooter).ToList();
-                    shooters = query.ConvertAll(Convert);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении списка стрелков произошла ошибка");
-                }
+                var query = (from shooter in db.Shooters
+                    join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
+                    join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
+                    where cupCompetitionType.IdCup == cupId && shooter.IdClub == clubId
+                    select shooter).ToList();
+                shooters = query.ConvertAll(ConvertToModel);
             }
 
             return shooters;
@@ -208,51 +124,44 @@ namespace DAL
         public List<ShooterEntryDetailsParams> GetEntryShootersOnCup(int idCup)
         {
             var res = new List<ShooterEntryDetailsParams>();
-
-            try
+            using (var db = DBContext.GetContext())
             {
-                using (var db = DBContext.GetContext())
-                {
-                    var query = (from shooter in db.Shooters
-                                 join club in db.ShooterClubs on shooter.IdClub equals club.IdClub
-                                 join shootRange in db.ShootingRanges on club.IdShootingRange equals shootRange.Id
-                                 join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
-                                 join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
-                                 join competitionType in db.CompetitionType on cupCompetitionType.IdCompetitionType equals competitionType.Id
-                                 join category in db.ShooterCategory on shooter.IdCategory equals category.Id
-                                 where cupCompetitionType.IdCup == idCup
-                                 group new { competitionType } by new { shooter, category, club, shootRange } into gr
-                                 select new
-                                 {
-                                     shooter = gr.Key.shooter,
-                                     category = gr.Key.category,
-                                     competitionType = gr.Select(x => x.competitionType),
-                                     club = gr.Key.club,
-                                     shootRange = gr.Key.shootRange
-                                 }).ToList();
-
-                    foreach (var item in query)
+                var query = (from shooter in db.Shooters
+                    join club in db.ShooterClubs on shooter.IdClub equals club.IdClub
+                    join shootRange in db.ShootingRanges on club.IdShootingRange equals shootRange.Id
+                    join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
+                    join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
+                    join competitionType in db.CompetitionType on cupCompetitionType.IdCompetitionType equals competitionType.Id
+                    join category in db.ShooterCategory on shooter.IdCategory equals category.Id
+                    where cupCompetitionType.IdCup == idCup
+                    group new {competitionType} by new {shooter, category, club, shootRange}
+                    into gr
+                    select new
                     {
-                        res.Add(new ShooterEntryDetailsParams
-                        {
-                            IdShooter = item.shooter.IdShooter,
-                            FamilyName = item.shooter.Family,
-                            Name = item.shooter.Name,
-                            FatherName = item.shooter.FatherName,
-                            SexEnum = item.shooter.Sex ? SexEnum.Men : SexEnum.Women, 
-                            BirthDate = item.shooter.BirthDate,
-                            ClubName = item.club.Name,
-                            Category = item.category.Name,
-                            Competitions = item.competitionType.Select(x => x.Name).ToList(),
-                            Town = item.shootRange.Town,
-                            ShootRangeName = item.shootRange.Name
-                        });
-                    }
+                        shooter = gr.Key.shooter,
+                        category = gr.Key.category,
+                        competitionType = gr.Select(x => x.competitionType),
+                        club = gr.Key.club,
+                        shootRange = gr.Key.shootRange
+                    }).ToList();
+
+                foreach (var item in query)
+                {
+                    res.Add(new ShooterEntryDetailsParams
+                    {
+                        IdShooter = item.shooter.IdShooter,
+                        FamilyName = item.shooter.Family,
+                        Name = item.shooter.Name,
+                        FatherName = item.shooter.FatherName,
+                        SexEnum = item.shooter.Sex ? SexEnum.Men : SexEnum.Women,
+                        BirthDate = item.shooter.BirthDate,
+                        ClubName = item.club.Name,
+                        Category = item.category.Name,
+                        Competitions = item.competitionType.Select(x => x.Name).ToList(),
+                        Town = item.shootRange.Town,
+                        ShootRangeName = item.shootRange.Name
+                    });
                 }
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Не удалось получить список заявленных на соревнование стрелков");
             }
 
             return res;
@@ -268,88 +177,44 @@ namespace DAL
         {
             var res = new List<ShooterEntryDetailsParams>();
 
-            try
+            using (var db = DBContext.GetContext())
             {
-                using (var db = DBContext.GetContext())
-                {
-                    var query = (from shooter in db.Shooters
-                                 join club in db.ShooterClubs on shooter.IdClub equals club.IdClub
-                                 join shootRange in db.ShootingRanges on club.IdShootingRange equals shootRange.Id
-                                 join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
-                                 join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
-                                 join competitionType in db.CompetitionType on cupCompetitionType.IdCompetitionType equals competitionType.Id
-                                 join category in db.ShooterCategory on shooter.IdCategory equals category.Id
-                                 where cupCompetitionType.IdCup == idCup && shooter.IdClub == idClub
-                                 group new { competitionType } by new { shooter, category, club, shootRange } into gr
-                                 select new
-                                 {
-                                     shooter = gr.Key.shooter,
-                                     category = gr.Key.category,
-                                     competitionType = gr.Select(x => x.competitionType),
-                                     club = gr.Key.club,
-                                     shootRange = gr.Key.shootRange
-                                 }).ToList();
-
-                    foreach (var item in query)
+                var query = (from shooter in db.Shooters
+                    join club in db.ShooterClubs on shooter.IdClub equals club.IdClub
+                    join shootRange in db.ShootingRanges on club.IdShootingRange equals shootRange.Id
+                    join entry in db.EntryForCompetitions on shooter.IdShooter equals entry.IdShooter
+                    join cupCompetitionType in db.CupCompetitionType on entry.IdCupCompetitionType equals cupCompetitionType.Id
+                    join competitionType in db.CompetitionType on cupCompetitionType.IdCompetitionType equals competitionType.Id
+                    join category in db.ShooterCategory on shooter.IdCategory equals category.Id
+                    where cupCompetitionType.IdCup == idCup && shooter.IdClub == idClub
+                    group new {competitionType} by new {shooter, category, club, shootRange}
+                    into gr
+                    select new
                     {
-                        res.Add(new ShooterEntryDetailsParams
-                        {
-                            IdShooter = item.shooter.IdShooter,
-                            FamilyName = item.shooter.Family,
-                            Name = item.shooter.Name,
-                            FatherName = item.shooter.FatherName,
-                            SexEnum = item.shooter.Sex ? SexEnum.Men : SexEnum.Women, //item.shooter.Sex ? "мужской" : "женский",
-                            BirthDate = item.shooter.BirthDate,
-                            ClubName = item.club.Name,
-                            Category = item.category.Name,
-                            Competitions = item.competitionType.Select(x => x.Name).ToList(),
-                            Town = item.shootRange.Town,
-                            ShootRangeName = item.shootRange.Name
-                        });
-                    }
-                }
-            }
-            catch (Exception exc)
-            {
-                throw new Exception("Не удалось получить список заявленных на соревнование стрелков");
-            }
+                        shooter = gr.Key.shooter,
+                        category = gr.Key.category,
+                        competitionType = gr.Select(x => x.competitionType),
+                        club = gr.Key.club,
+                        shootRange = gr.Key.shootRange
+                    }).ToList();
 
-            return res;
-        }
-
-        /// <summary>
-        /// Обновить стрелка
-        /// </summary>
-        /// <param name="idShooter">ид. стрелка</param>
-        /// <param name="shooter">стрелок</param>
-        /// <returns></returns>
-        public ResultInfo Update(int idShooter, ShooterParams shooter)
-        {
-            var res = new ResultInfo();
-
-            try
-            {
-                using (var db = DBContext.GetContext())
+                foreach (var item in query)
                 {
-                    var updating = db.Shooters.Single(x => x.IdShooter == idShooter);
-
-                    updating.Address = shooter.Address;
-                    updating.BirthDate = shooter.BirthDate;
-                    updating.Family = shooter.Family;
-                    updating.Name = shooter.Name;
-                    updating.FatherName = shooter.FatherName;
-                    updating.IdClub = shooter.IdClub;
-                    updating.IdWeaponType = shooter.IdWeaponType;
-                    updating.IdCategory = shooter.IdCategory;
-
-                    db.SaveChanges();
+                    res.Add(new ShooterEntryDetailsParams
+                    {
+                        IdShooter = item.shooter.IdShooter,
+                        FamilyName = item.shooter.Family,
+                        Name = item.shooter.Name,
+                        FatherName = item.shooter.FatherName,
+                        SexEnum = item.shooter.Sex ? SexEnum.Men : SexEnum.Women, //item.shooter.Sex ? "мужской" : "женский",
+                        BirthDate = item.shooter.BirthDate,
+                        ClubName = item.club.Name,
+                        Category = item.category.Name,
+                        Competitions = item.competitionType.Select(x => x.Name).ToList(),
+                        Town = item.shootRange.Town,
+                        ShootRangeName = item.shootRange.Name
+                    });
                 }
-            }
-            catch (Exception exc)
-            {
-                res.IsOk = false;
-                res.ErrorMessage = "Произошла ошибка при обновлении данных стрелка";
-                res.Exc = exc;
             }
 
             return res;

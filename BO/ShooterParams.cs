@@ -5,13 +5,8 @@ namespace BO
     /// <summary>
     /// Класс стрелка
     /// </summary>
-    public class ShooterParams
+    public class ShooterParams : ModelBase
     {
-        /// <summary>
-        /// Ид. стрелка
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Фамилия
         /// </summary>

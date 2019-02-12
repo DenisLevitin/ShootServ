@@ -174,10 +174,13 @@ namespace BL
                 {
                     res.Data = queryAddUser.Data;
                     shooter.IdUser = queryAddUser.Data;
-                    res.Result = _blShooter.Add(shooter);
-
+                    
+                    var addResult = _blShooter.Add(shooter);
+                    res.Result = addResult.Result;
                     if (res.Result.IsOk)
+                    {
                         tran.Complete();
+                    }
                 }
                 else res.Result = queryAddUser.Result;
             }
