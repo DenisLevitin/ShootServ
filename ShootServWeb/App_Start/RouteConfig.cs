@@ -10,15 +10,9 @@ namespace ShootServ
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
-            routes.MapRoute(
                 name: "Registration",
-                url : "Registration/{idUser}",
-                defaults : new {  controller = "Registration", idUser = UrlParameter.Optional, action = "Index" }
+                url : "Registration/{action}",
+                defaults : new {  controller = "Registration", action = "Index" }
             );
 
             routes.MapRoute(
@@ -38,6 +32,12 @@ namespace ShootServ
                 url: "Cup/{action}",
                 defaults: new { controller = "Cup", action = "Index" }
             );
+            
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );            
         }
     }
 }

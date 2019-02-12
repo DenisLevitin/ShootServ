@@ -58,7 +58,6 @@ namespace BL
                     var getUser = userLogic.Get(idUser);
 
                     if (getUser != null)
-                        /// TODO: Привести результат вызова в божеский вид, чтоб не обрабатывать исключения
                     {
                         using (var tran = new TransactionScope())
                         {
@@ -67,12 +66,9 @@ namespace BL
                             if (queryUpdate.IsOk)
                             {
                                 getUser.Password = queryLastRec.Data.Password;
-                                res = userLogic.Update(idUser, getUser, false); // обновляем пароль в таблице Users
+                                userLogic.Update(idUser, getUser, false); // обновляем пароль в таблице Users
 
-                                if (res.IsOk)
-                                {
-                                    tran.Complete();
-                                }
+                                tran.Complete();
                             }
                             else res = queryUpdate;
                         }

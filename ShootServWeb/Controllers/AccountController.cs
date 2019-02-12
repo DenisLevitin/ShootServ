@@ -1,13 +1,9 @@
 ﻿using System.Web.Mvc;
-using System.Web.Security;
 using BL;
-using Microsoft.Web.WebPages.OAuth;
 using ShootingCompetitionsRequests.Models;
 
 namespace ShootServ.Controllers
 {
-    //[Authorize]
-    //[InitializeSimpleMembership]
     public class AccountController : Controller
     {
         //
@@ -22,7 +18,6 @@ namespace ShootServ.Controllers
 
         //
         // POST: /Account/Login
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -88,67 +83,6 @@ namespace ShootServ.Controllers
             return Url.IsLocalUrl(returnUrl) ? (ActionResult) Redirect(returnUrl) : RedirectToAction("Index", "Home");
         }
 
-        public enum ManageMessageId
-        {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-        }
-
-        internal class ExternalLoginResult : ActionResult
-        {
-            public ExternalLoginResult(string provider, string returnUrl)
-            {
-                Provider = provider;
-                ReturnUrl = returnUrl;
-            }
-
-            public string Provider { get; private set; }
-            public string ReturnUrl { get; private set; }
-
-            public override void ExecuteResult(ControllerContext context)
-            {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
-        }
-
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-        {
-            // Полный список кодов состояния см. по адресу http://go.microsoft.com/fwlink/?LinkID=177550
-            //.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "Имя пользователя уже существует. Введите другое имя пользователя.";
-
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "Имя пользователя для данного адреса электронной почты уже существует. Введите другой адрес электронной почты.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "Указан недопустимый пароль. Введите допустимое значение пароля.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "Указан недопустимый адрес электронной почты. Проверьте значение и повторите попытку.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "Указан недопустимый ответ на вопрос для восстановления пароля. Проверьте значение и повторите попытку.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "Указан недопустимый вопрос для восстановления пароля. Проверьте значение и повторите попытку.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "Указано недопустимое имя пользователя. Проверьте значение и повторите попытку.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "Поставщик проверки подлинности вернул ошибку. Проверьте введенное значение и повторите попытку. Если проблему устранить не удастся, обратитесь к системному администратору.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "Запрос создания пользователя был отменен. Проверьте введенное значение и повторите попытку. Если проблему устранить не удастся, обратитесь к системному администратору.";
-
-                default:
-                    return "Произошла неизвестная ошибка. Проверьте введенное значение и повторите попытку. Если проблему устранить не удастся, обратитесь к системному администратору.";
-            }
-        }
         #endregion
     }
 }

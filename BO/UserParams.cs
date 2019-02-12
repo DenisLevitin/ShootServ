@@ -5,13 +5,8 @@ namespace BO
     /// <summary>
     /// Пользователь
     /// </summary>
-    public class UserParams
+    public class UserParams : ModelBase
     {
-        /// <summary>
-        /// Ид. пользователя
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Имя пользователя
         /// </summary>

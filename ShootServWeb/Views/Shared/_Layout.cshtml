@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BO
+<!DOCTYPE html>
 <html lang="ru">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -172,6 +173,18 @@
                         }
 
                         var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
+                        
+                        var linksRegistration = {
+                            UpdateUser : "@Url.Action("UpdateUser","Registration")",
+                            AddUser : "@Url.Action("AddUser", "Registration")"
+                        }
+
+                        var linkHome = "@Url.Action("Index","Home")";
+                        
+                        var roles = {
+                            shooterRoleId : "@RoleParams.RoleEnum.Shooter",
+                            organizationRoleId: "@RolesEnum.Organization"
+                        }
         </script>
     </body>
 </html>

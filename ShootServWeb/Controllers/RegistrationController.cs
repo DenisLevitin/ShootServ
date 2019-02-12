@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using BL;
 using BO;
@@ -9,7 +10,6 @@ namespace ShootServ.Controllers
 {
     public class RegistrationController : BaseController
     {
-        private readonly RegistrationPostModel _modelLogic;
         private readonly ShooterCategoryLogic _categoryLogic;
         private readonly UserLogic _userLogic;
         private readonly ShooterLogic _shooterLogic;
@@ -19,7 +19,6 @@ namespace ShootServ.Controllers
 
         public RegistrationController()
         {
-            _modelLogic = new RegistrationPostModel();
             _categoryLogic = new ShooterCategoryLogic();
             _userLogic = new UserLogic();
             _shooterLogic = new ShooterLogic();
@@ -88,26 +87,9 @@ namespace ShootServ.Controllers
             return model;
         }
 
-        public ActionResult Index(int? idUser)
+        public ActionResult Index()
         {
-            RegistrationPageModel model = null;
-
-            if (idUser.HasValue)
-            {
-                model = GetPageModel();
-            }
-            else
-            {
-                if (CurrentUser != null)
-                {
-                    model = GetModelByExistUser(idUser.Value);
-                }
-                else
-                {
-                    return Redirect(Url.Action("Index", "Home", new {Area = ""}));
-                }
-            }
-
+            var model = CurrentUser != null ? GetModelByExistUser(CurrentUser.Id) : GetPageModel();
             return View("Index", model);
         }
 
@@ -125,27 +107,29 @@ namespace ShootServ.Controllers
                 Email = model.Email
             };
             
-            if (model.IdRole == (int)RolesEnum.Organization)
+            switch (model.IdRole)
             {
-                addResult = _userLogic.AddOrganizator(userParams);
+                case (int)RolesEnum.Organization:
+                    addResult = _userLogic.AddOrganizator(userParams);
+                    break;
+                case (int) RolesEnum.Shooter:
+                    addResult = _userLogic.AddShooter(userParams, new ShooterParams()
+                    {
+                        Family = model.Family,
+                        Name = model.Name,
+                        FatherName = model.FatherName,
+                        IdClub = model.IdClub,
+                        Address = model.Address,
+                        BirthDate = model.DateBirthday,
+                        IdCategory = model.IdShooterCategory,
+                        IdWeaponType = model.IdWeaponType,
+                        Sex = model.Sex
+                    });
+                   break;
+                default: throw new Exception("Неизвестная роль пользователя");
+                    break;
             }
 
-            if (model.IdRole == (int) RolesEnum.Shooter)
-            {
-                addResult = _userLogic.AddShooter(userParams, new ShooterParams()
-                {
-                    Family = model.Family,
-                    Name = model.Name,
-                    FatherName = model.FatherName,
-                    IdClub = model.IdClub,
-                    Address = model.Address,
-                    BirthDate = model.DateBirthday,
-                    IdCategory = model.IdShooterCategory,
-                    IdWeaponType = model.IdWeaponType,
-                    Sex = model.Sex
-                });
-            }
-            
             if (addResult.Result.IsOk)
             {
                 // Регистрация прошла успешно, сразу пишем юзера в сессию
@@ -159,22 +143,26 @@ namespace ShootServ.Controllers
             return new JsonResult { Data = new { IsOk = addResult.Result.IsOk, Message = addResult.Result.ErrorMessage }};
         }
 
-        [HttpGet]
-        public ActionResult UpdateUser(int idExistingUser, bool needUpdatePassword, RegistrationPostModel model)
+        [HttpPost]
+        [CustomAuthorize]
+        public ActionResult UpdateUser(RegistrationPostModel model)
         {
-            var res = new ResultInfo {IsOk = false};
-            if (((UserParams) Session["user"]).Id == idExistingUser)
+            if (IsLogin)
             {
-                res = _modelLogic.UpdateUser(idExistingUser, model, needUpdatePassword);
+                var userParams = new UserParams()
+                {
+                    IdRole = model.IdRole,
+                    Email = model.Email,
+                    Login = model.Login,
+                    FamilyName = model.Family,
+                    Password = model.Password
+                };
+                
+                _userLogic.Update(CurrentUser.Id, userParams, false);
+                Session["user"] = _userLogic.Get(CurrentUser.Id);
             }
 
-            if (res.IsOk)
-            {
-                var updatingUser = _modelLogic.GetUser(idExistingUser);
-                Session["user"] = updatingUser;
-            }
-
-            return new JsonResult {Data = new {IsOk = res.IsOk, Message = res.ErrorMessage}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            return new JsonResult {Data = new {IsOk = true, Message = string.Empty}};
         }
     }
 }

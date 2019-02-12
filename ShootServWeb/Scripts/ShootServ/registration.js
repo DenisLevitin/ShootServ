@@ -2,11 +2,10 @@
 $(document).ready(function() {
     var actor = new registrationActor();
     $("#shooterTable").hide();
-
-    var editMode = "@Model.IsEditMode";
-    if (editMode) {
-        var role = $("#IdRole").val();
-        registrationFormShifterByName(role);
+    
+    if (isAuthorize) {
+        var roleId = $("#IdRole").val();
+        actor.registrationFormShifterByName(roleId);
     }
 
     $.datepicker.setDefaults($.datepicker.regional['ru']);
@@ -21,28 +20,24 @@ $(document).ready(function() {
     });
 
     $(document).on("change", "#IdRole", function() {
-        var role = $("#IdRole").val();
-        registrationFormShifterByName(role);
+        var roleId = $("#IdRole").val();
+        actor.registrationFormShifterByName(roleId);
     });
 
     // клик на сохранить
     $(document).on("click", "#editBt", function () {
-
-        var needUpdatePassword = $("#Password").val().length > 0; // требуется ли обновить пароль пользователя
-
-        if (ValidateInput(true))
+        if (actor.validateInput(true))
         {
             $.ajax({
-                url: "@Url.Action("UpdateUser")",
+                url: linksRegistration.UpdateUser,
                 dataType: "json",
-                data: $("form").serialize() + "&idExistingUser="+"@Model.IdExistingUser"+"&needUpdatePassword="+needUpdatePassword,
+                data: $("form").serialize(),
                 async: false,
+                method: "POST",
                 success: function (data) {
                     if (data.IsOk) {
-
                         showInfo("Данные обновлены"); // showInfo
-                        window.location = "@Url.Action("Index", "Home", new { Area = ""})";
-
+                        window.location = linkHome;
                     } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function (data) {
@@ -54,19 +49,16 @@ $(document).ready(function() {
 
     // клик на добавить
     $(document).on("click", "#addBt", function() {
-        if (ValidateInput(false)) {
-
+        if (actor.validateInput(false)) {
             $.ajax({
-                url: "@Url.Action("AddUser", "Registration")",
+                url: linksRegistration.AddUser,
                 dataType: "json",
                 data: $("form").serialize(),
                 async: false,
                 success: function (data) {
                     if (data.IsOk == true) {
-
                         showInfo("Регистрация проведена успешно"); // showInfo
-                        window.location = "@Url.Action("Index", "Home", new { Area = ""})";
-
+                        window.location = linkHome;
                     } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                 },
                 error: function (data) {
@@ -79,6 +71,16 @@ $(document).ready(function() {
 
 var registrationActor = function () {
 
+    this.registrationFormShifterByName = function (idRole) {
+        if ( idRole == roles.shooterRoleId)
+        {
+            $("#shooterTable").show();
+        }
+        else {
+            $("#shooterTable").hide();
+        }
+    };
+    
     // Изменить страну
     this.changeCountry = function() {
         var idCountry = $("#idCountry").val();
@@ -95,28 +97,28 @@ var registrationActor = function () {
     this.validateInput = function(isEditing) {
 
         var name = $("#Name").val();
-        if (name == undefined || name == "")
+        if (!name)
         {
             showError("Не введено имя");
             return false;
         }
 
         var family = $("#Family").val();
-        if (family == undefined || family == "") {
+        if (!family) {
             showError("Не введена фамилия");
             return false;
         }
 
         var login = $("#Login").val();
-        if (login == undefined || login == "") {
+        if (!login) {
             showError("Не введена фамилия");
             return false;
         }
 
         var password = $("#Password").val();
         // если валидация при редактировании, то пароли не валидируем и не сравниваем. Если какой-либо пароль введен, то считаем, что его надо обновить
-        if ( ! isEditing || password.length > 0) {
-            if (password == undefined || password == "") {
+        if (!isEditing || password.length > 0) {
+            if (!password) {
                 showError("Не введен пароль");
                 return false;
             }
@@ -127,38 +129,38 @@ var registrationActor = function () {
             }
         }
 
-        if ($("#IdRole").val() == undefined) {
+        if (!$("#IdRole").val()) {
             showError("Не введена роль");
             return false;
         }
 
-        if ( $("#Email").val() == undefined || $("#Email").val() == "") {
+        if (!$("#Email").val()) {
             showError("Не введен email");
             return false;
         }
 
-        if ($("#IdRole").val() == 1) {
+        if ($("#IdRole").val() == roles.organizationRoleId) {
             // доп. проверка организатора
         }
         else {
             // доп. проверка стрелка
-            if ($("#IdWeaponType").val() == undefined) {
+            if (!$("#IdWeaponType").val()) {
                 showError("Не введен тип оружия стрелка");
                 return false;
             }
 
-            if ($("#IdClub").val() == undefined) {
+            if (!$("#IdClub").val()) {
                 showError("Не введен стрелковый клуб");
                 return false;
             }
 
-            if ($("#IdShooterCategory").val() == undefined) {
+            if (!$("#IdShooterCategory").val()) {
                 showError("Не введен разряд стрелка");
                 return false;
             }
 
             var dateBirthday = $("#DateBirthday").val();
-            if (dateBirthday == undefined || dateBirthday == "") {
+            if (!dateBirthday) {
                 showError("Не введена дата рождения");
                 return false;
             }
@@ -166,4 +168,4 @@ var registrationActor = function () {
 
         return true;
     }
-}
+};

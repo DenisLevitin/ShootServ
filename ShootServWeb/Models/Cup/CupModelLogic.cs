@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web.Mvc;
 using BL;
 using BO;
-using ShootingCompetitionsRequests.Models;
 
 namespace ShootServ.Models.Cup
 {

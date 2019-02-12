@@ -12,8 +12,20 @@ namespace DAL
     {
         protected abstract Func<T, int> GetPrimaryKeyValue { get; }
 
+        /// TODO: Рассмотреть вариант как virtual, AutoMapper
+        
+        /// <summary>
+        ///  сконвертить в модель
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
         protected abstract TModel ConvertToModel(T entity);
 
+        /// <summary>
+        /// сконвертить в dbEntity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         protected abstract T ConvertToEntity(TModel model);
 
         public TModel Get(int id)
@@ -48,6 +60,15 @@ namespace DAL
             }
         }
 
+        public TModel GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        {
+            using (var db = DBContext.GetContext())
+            {
+                var entity = db.Set<T>().FirstOrDefault(filter);
+                return entity != null ? ConvertToModel(entity) : null;
+            }
+        }
+        
         /// <summary>
         /// 
         /// </summary>
