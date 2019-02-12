@@ -18,3 +18,26 @@ function getRegions(idCountry, tagName, callback) {
         }
     });
 }
+
+// Получить список стрелковых клубов в регионе
+function getShootingClubs(idCountry, idRegion) {
+    var result = null;
+    $.ajax({
+        url: linksClub.Get,
+        dataType: "html",
+        type: "GET",
+        async: false,
+        data: {
+            idCountry: idCountry,
+            idRegion: idRegion
+        },
+        success: function(data) {
+            result = data;
+        },
+        error: function() {
+            showError("Ошибка ajax");
+        }
+    });
+    
+    return result;
+}

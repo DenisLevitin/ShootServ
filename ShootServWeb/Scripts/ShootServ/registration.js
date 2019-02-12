@@ -57,7 +57,7 @@ $(document).ready(function() {
                 async: false,
                 method: "POST",
                 success: function (data) {
-                    if (data.IsOk == true) {
+                    if (data.IsOk) {
                         showInfo("Регистрация проведена успешно"); // showInfo
                         window.location = linkHome;
                     } else showError(data.Message); // сообщение об ошибке как -то показать на странице
@@ -85,13 +85,17 @@ var registrationActor = function () {
     // Изменить страну
     this.changeCountry = function() {
         var idCountry = $("#idCountry").val();
-        GetRegions(idCountry);
+        getRegions(idCountry, "idRegion", function (data) {
+            $("#tdRegionsList").html(data);
+        });
     };
 
     // Изменить регион
     this.changeRegion = function() {
         var idRegion = $("#idRegion").val();
-        GetShootingClubs(idRegion);
+        var idCountry = $("#idCountry").val();
+        var shootingClubs = getShootingClubs(idCountry, idRegion);
+        /// todo: нужно отрендерить shootingClubs каким-либо образом
     };
 
     // валидация ввода

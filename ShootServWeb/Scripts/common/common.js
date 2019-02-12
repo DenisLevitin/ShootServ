@@ -4,7 +4,7 @@
     var createVisualError = function (errorInput, message) {
         errorInput.css("border-color","red");
         alert(message);
-    }
+    };
 
     window.common.lightValidationMessagesOnForm = function (form, validationMessages) {
         $.each(validationMessages, function (key, value) {

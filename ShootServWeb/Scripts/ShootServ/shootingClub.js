@@ -60,8 +60,9 @@ $(document).ready(function () {
                                 var idRegion = $("#idRegion").val();
                                 var idCountry = $("#idCountry").val();
 
-                                actor.getShootingClubs(idCountry, idRegion);
-
+                                var clubs = getShootingClubs(idCountry, idRegion); /// todo: Здесь не работает, т.к возвращается json, найти способ отрендерить
+                                renderClubs(clubs);
+                                
                             } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                         },
                         error: function(data) {
@@ -78,28 +79,11 @@ $(document).ready(function () {
     ChangeCountry();
 });
 
-var shootingClubPageActor = function () {
-    
-    // Получить список стрелковых клубов в регионе
-    this.getShootingClubs = function(idCountry, idRegion) {
-        $.ajax({
-            url: linksClub.Get,
-            dataType: "html",
-            type: "GET",
-            async: false,
-            data: {
-                idCountry: idCountry,
-                idRegion: idRegion
-            },
-            success: function(data) {
-                $("#list").html(data);
-            },
-            error: function() {
-                showError("Ошибка ajax");
-            }
-        });
-    };
+var renderClubs = function (data) {
+    // not implemented
+};
 
+var shootingClubPageActor = function () {
     this.validateInput = function() {
         var name = $("#Name").val();
         if (!name) {
@@ -125,8 +109,7 @@ var shootingClubPageActor = function () {
         var idRegion = $("#idRegion").val();
         var idCountry = $("#idCountry").val();
 
-        this.getShootingClubs(idCountry, idRegion, function(data) {
-            $("#tdRegion").html(data);
-        });
+        var clubs = getShootingClubs(idCountry, idRegion);
+        renderClubs(clubs);
     };
 };
