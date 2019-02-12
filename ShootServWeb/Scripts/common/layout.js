@@ -1,10 +1,10 @@
 ﻿ //функция вызова ошибки
 function showError(text) {
-    // notImplemented
+    alert(text);
 }
 
 function showInfo(text) {
-    // notImplemented
+    alert(text);
 }
 
 function redirectToLoginPage(returnUrl) 

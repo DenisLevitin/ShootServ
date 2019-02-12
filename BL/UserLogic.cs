@@ -106,7 +106,7 @@ namespace BL
                             var queryExistLogin = IsExistsLogin(user.Login);
                             if (!queryExistLogin)
                             {
-                                _dalUser.Create(user);
+                                res.Data = _dalUser.Create(user);
                                 
                                 // Посылаем e-mail счастливому пользователю
                                 string body = $@"Уважаемый пользователь, вы зарегистрировались на сервисе www.shoot-serv.ru

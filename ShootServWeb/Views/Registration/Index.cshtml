@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var postModel = Model.PostModel;
 }
 
 @if (!Model.IsEditMode)
@@ -24,39 +23,39 @@ else
                 <table id="userTable">
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
-                        <td>@Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList)</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList, new { id="idRole", @Name="idRole" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Name)</td>
-                        <td>@Html.TextBoxFor(x => x.PostModel.Name)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Name, new { id="name", @Name="name" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.FatherName)</td>
-                        <td>@Html.TextBoxFor(x => x.PostModel.FatherName)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.FatherName, new { id="fatherName", @Name="fatherName" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Family)</td>
-                        <td>@Html.TextBoxFor(x => x.PostModel.Family)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Family, new { id="family", @Name="family" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "" })</td>
-                        <td>@Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList)</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id="sex", @Name="sex" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Login)</td>
-                        <td>@Html.TextBoxFor(x => x.PostModel.Login)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Login, new { id="login", @Name="login" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Password)</td>
-                        <td>@Html.PasswordFor(x => x.PostModel.Password)</td>
+                        <td>@Html.PasswordFor(x => x.PostModel.Password, new { id="password", @Name="password" })</td>
                     </tr>
                     <tr>
                         <td>@Html.Label("Повторите пароль")</td>
-                        <td>@Html.Password("Password2", "")</td>
+                        <td>@Html.Password("password2", "")</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Email)</td>
-                        <td>@Html.TextBoxFor(x => x.PostModel.Email)</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.Email, new { id="email", @Name="email" })</td>
                     </tr>
                 </table>
 
@@ -81,23 +80,23 @@ else
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.DateBirthday)</td>
-                        <td>@Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker" })</td>
+                        <td>@Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker", id="dateBirthday", @Name="dateBirthday" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.IdClub, new { style = "display:inline" }) *</td>
-                        <td id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs)</td>
+                        <td id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs, new { id="idClub", @Name="idClub" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.IdWeaponType)</td>
-                        <td>@Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes)</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes, new { id="idWeaponType", @Name="idWeaponType" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.IdShooterCategory)</td>
-                        <td>@Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories)</td>
+                        <td>@Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories, new { id="idShooterCategory", @Name="idShooterCategory" })</td>
                     </tr>
                     <tr>
                         <td>@Html.LabelFor(x => x.PostModel.Address)</td>
-                        <td>@Html.TextAreaFor(x => x.PostModel.Address)</td>
+                        <td>@Html.TextAreaFor(x => x.PostModel.Address, new { id="address", @Name="address" })</td>
                     </tr>
                     <tr>
                         <td style="width:200px">

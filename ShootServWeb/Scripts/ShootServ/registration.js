@@ -4,7 +4,7 @@ $(document).ready(function() {
     $("#shooterTable").hide();
     
     if (isAuthorize) {
-        var roleId = $("#IdRole").val();
+        var roleId = $("#idRole").val();
         actor.registrationFormShifterByName(roleId);
     }
 
@@ -19,8 +19,8 @@ $(document).ready(function() {
         actor.changeRegion();
     });
 
-    $(document).on("change", "#IdRole", function() {
-        var roleId = $("#IdRole").val();
+    $(document).on("change", "#idRole", function() {
+        var roleId = $("#idRole").val();
         actor.registrationFormShifterByName(roleId);
     });
 
@@ -55,6 +55,7 @@ $(document).ready(function() {
                 dataType: "json",
                 data: $("form").serialize(),
                 async: false,
+                method: "POST",
                 success: function (data) {
                     if (data.IsOk == true) {
                         showInfo("Регистрация проведена успешно"); // showInfo
@@ -96,26 +97,26 @@ var registrationActor = function () {
     // валидация ввода
     this.validateInput = function(isEditing) {
 
-        var name = $("#Name").val();
+        var name = $("#name").val();
         if (!name)
         {
             showError("Не введено имя");
             return false;
         }
 
-        var family = $("#Family").val();
+        var family = $("#family").val();
         if (!family) {
             showError("Не введена фамилия");
             return false;
         }
 
-        var login = $("#Login").val();
+        var login = $("#login").val();
         if (!login) {
             showError("Не введена фамилия");
             return false;
         }
 
-        var password = $("#Password").val();
+        var password = $("#password").val();
         // если валидация при редактировании, то пароли не валидируем и не сравниваем. Если какой-либо пароль введен, то считаем, что его надо обновить
         if (!isEditing || password.length > 0) {
             if (!password) {
@@ -123,43 +124,43 @@ var registrationActor = function () {
                 return false;
             }
 
-            if ($("#Password").val() != $("#Password2").val()) {
+            if ($("#password").val() != $("#password2").val()) {
                 showError("Пароли не совпадают");
                 return false;
             }
         }
 
-        if (!$("#IdRole").val()) {
+        if (!$("#idRole").val()) {
             showError("Не введена роль");
             return false;
         }
 
-        if (!$("#Email").val()) {
+        if (!$("#email").val()) {
             showError("Не введен email");
             return false;
         }
 
-        if ($("#IdRole").val() == roles.organizationRoleId) {
+        if ($("#idRole").val() == roles.organizationRoleId) {
             // доп. проверка организатора
         }
         else {
             // доп. проверка стрелка
-            if (!$("#IdWeaponType").val()) {
+            if (!$("#idWeaponType").val()) {
                 showError("Не введен тип оружия стрелка");
                 return false;
             }
 
-            if (!$("#IdClub").val()) {
+            if (!$("#idClub").val()) {
                 showError("Не введен стрелковый клуб");
                 return false;
             }
 
-            if (!$("#IdShooterCategory").val()) {
+            if (!$("#idShooterCategory").val()) {
                 showError("Не введен разряд стрелка");
                 return false;
             }
 
-            var dateBirthday = $("#DateBirthday").val();
+            var dateBirthday = $("#dateBirthday").val();
             if (!dateBirthday) {
                 showError("Не введена дата рождения");
                 return false;

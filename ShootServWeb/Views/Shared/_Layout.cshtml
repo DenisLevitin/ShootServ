@@ -181,9 +181,14 @@
 
                         var linkHome = "@Url.Action("Index","Home")";
                         
+                        @{
+                            var shooterRoleId = (int)RoleParams.RoleEnum.Shooter;
+                            var organizationRoleId = (int)RoleParams.RoleEnum.Organization;
+                        }
+                        
                         var roles = {
-                            shooterRoleId : "@RoleParams.RoleEnum.Shooter",
-                            organizationRoleId: "@RolesEnum.Organization"
+                            shooterRoleId : "@shooterRoleId",
+                            organizationRoleId: "@organizationRoleId"
                         }
         </script>
     </body>

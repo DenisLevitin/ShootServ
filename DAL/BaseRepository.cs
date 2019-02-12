@@ -32,7 +32,8 @@ namespace DAL
         {
             using (var db = DBContext.GetContext())
             {
-                return ConvertToModel(db.Set<T>().FirstOrDefault(x => GetPrimaryKeyValue(x) == id ));
+                var entity = db.Set<T>().Find(id);
+                return entity != null ? ConvertToModel(entity) : null;
             }
         }
 
@@ -48,7 +49,7 @@ namespace DAL
         {
             using (var db = DBContext.GetContext())
             {
-                return db.Set<T>().Where(filter).Select(x => ConvertToModel(x)).ToList();
+                return db.Set<T>().Where(filter).ToList().Select(ConvertToModel).ToList();
             }
         }
 
@@ -56,7 +57,7 @@ namespace DAL
         {
             using (var db = DBContext.GetContext())
             {
-                return db.Set<T>().Where(filter).OrderBy(order).Select(x => ConvertToModel(x)).ToList();
+                return db.Set<T>().Where(filter).OrderBy(order).ToList().Select(ConvertToModel).ToList();
             }
         }
 
