@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DAL.Entities;
 
 namespace DAL
 {
@@ -56,7 +57,7 @@ namespace DAL
             {
                 try
                 {
-                    return db.ShooterClubs.Where(x => x.Name == name).ToList().Select(x => ConvertToModel(x)).ToList();
+                    return db.ShooterClubs.Where(x => x.Name == name).ToList().Select(ConvertToModel).ToList();
                 }
                 catch (Exception exc)
                 {
@@ -65,67 +66,46 @@ namespace DAL
             }
         }
 
-        /// <summary>
-        /// Получить стрелковый клуб
-        /// </summary>
-        /// <param name="idRegion">ид. региона</param>
-        /// <returns></returns>
-        public List<ShooterClubDetalisationParams> GetByRegion(int idRegion)
-        {
-            using (var db = DBContext.GetContext())
-            {
-                var query = GetDetailedQuery(db);
-                return query.Where(x => x.region.IdRegion == idRegion).ToList().Select(ConvertToDetailedModel).ToList();
-            }
-        }
-
-        private IQueryable<(ShooterClubs shooterClub, Regions region)> GetDetailedQuery(ShootingCompetitionRequestsEntities db)
+        private IQueryable<ClubDetailedEntity> GetDetailedQuery(ShootingCompetitionRequestsEntities db)
         {
             return from shooterClub in db.ShooterClubs
                 join shooterRange in db.ShootingRanges on shooterClub.IdShootingRange equals shooterRange.Id
                 join region in db.Regions on shooterRange.IdRegion equals region.IdRegion
-                select System.ValueTuple.Create(shooterClub, region);
+                select new ClubDetailedEntity { Club = shooterClub, Region = region};
         }
 
-        private ShooterClubDetalisationParams ConvertToDetailedModel((ShooterClubs shooterClub, Regions region) valueTuple)
+        private ShooterClubDetalisationParams ConvertToDetailedModel(ClubDetailedEntity entity)
         {
             return new ShooterClubDetalisationParams
             {
-                Id = valueTuple.shooterClub.IdClub,
-                Name = valueTuple.shooterClub.Name,
-                IdShootingRange = valueTuple.shooterClub.IdShootingRange,
-                MainCoach = valueTuple.shooterClub.MainCoach,
-                CreatorId = valueTuple.shooterClub.IdUser,
-                Address = valueTuple.shooterClub.Address,
-                Phone = valueTuple.shooterClub.Phone,
-                DateCreate = valueTuple.shooterClub.DateCreate,
-                RegionName = valueTuple.region.Name
+                Id = entity.Club.IdClub,
+                Name = entity.Club.Name,
+                IdShootingRange = entity.Club.IdShootingRange,
+                MainCoach = entity.Club.MainCoach,
+                CreatorId = entity.Club.IdUser,
+                Address = entity.Club.Address,
+                Phone = entity.Club.Phone,
+                DateCreate = entity.Club.DateCreate,
+                RegionName = entity.Region.Name
             };
         }
 
-        /// <summary>
-        /// Получить стрелковый клуб
-        /// </summary>
-        /// <param name="idCountry">ид. страны</param>
-        /// <returns></returns>
-        public List<ShooterClubDetalisationParams> GetByCountry(int idCountry)
+        public List<ShooterClubDetalisationParams> GetDetailed(int? regionId, int? countryId)
         {
             using (var db = DBContext.GetContext())
             {
                 var query = GetDetailedQuery(db);
-                return query.Where(x => x.region.IdCountry == idCountry).ToList().Select(ConvertToDetailedModel).ToList();
-            }
-        }
+                if (countryId.HasValue)
+                {
+                    query = query.Where(x => x.Region.IdCountry == countryId);
+                }
+                
+                if (regionId.HasValue)
+                {
+                    query = query.Where(x => x.Region.IdRegion == regionId);
+                }
 
-        /// <summary>
-        /// Получить все стрелковые клубы
-        /// </summary>
-        /// <returns></returns>
-        public List<ShooterClubDetalisationParams> GetAllDetailed()
-        {
-            using (var db = DBContext.GetContext())
-            {
-                return GetDetailedQuery(db).ToList().Select(ConvertToDetailedModel).ToList();
+                return query.ToList().Select(ConvertToDetailedModel).ToList();
             }
         }
 

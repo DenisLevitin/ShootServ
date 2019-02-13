@@ -73,14 +73,21 @@ namespace ShootServ.Controllers
                 postModel.DateBirthday = shooter.BirthDate;
                 postModel.Address = shooter.Address;
 
-                var region = _regionsLogic.GetRegionByClub(postModel.IdClub);
-                var country = _countryLogic.GetCountryByRegion(region.Id).Data;
+                var region = postModel.IdClub.HasValue ? _regionsLogic.GetRegionByClub(postModel.IdClub.Value) : null;
+                var country = region != null ? _countryLogic.GetCountryByRegion(region.Id).Data : null;
 
-                model.RegionsList = _regionsLogic.GetByCountry(country.Id).Data
-                    .Select((x) => new SelectListItem { Value = x.Id.ToString(), Text = x.Name, Selected = x.Id == region.Id }).ToList();
-                model.CountriesList.Single(x => x.Value == country.Id.ToString()).Selected = true;
+                model.RegionsList = _regionsLogic.GetByCountry(country?.Id).Data
+                    .Select((x) => new SelectListItem { Value = x.Id.ToString(), Text = x.Name, Selected = x.Id == region?.Id }).ToList();
                 
-                model.ShooterClubs = _shootingClubLogic.GetByRegion(country.Id, region.Id)
+                model.CountriesList.ForEach((x) =>
+                {
+                    if (x.Value == country?.Id.ToString())
+                    {
+                        x.Selected = true;
+                    }
+                });
+                
+                model.ShooterClubs = _shootingClubLogic.GetByRegion(country?.Id, region?.Id)
                     .Select((x) => new SelectListItem { Value = x.Id.ToString(), Text = x.Name, Selected = x.Id == postModel.IdClub }).ToList();
             }
 

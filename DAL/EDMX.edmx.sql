@@ -255,7 +255,7 @@ CREATE TABLE [dbo].[Shooters] (
     [Family] varchar(50)  NOT NULL,
     [Name] varchar(50)  NOT NULL,
     [FatherName] varchar(50)  NULL,
-    [IdClub] int  NOT NULL,
+    [IdClub] int NULL,
     [Address] varchar(50)  NULL,
     [IdCategory] int  NOT NULL,
     [BirthDate] datetime  NOT NULL,

@@ -19,9 +19,9 @@ namespace BL
         /// <summary>
         /// Получить список всех регионов
         /// </summary>
-        public ResultInfoRef<List<RegionParams>> GetByCountry(int idCountry)
+        public ResultInfoRef<List<RegionParams>> GetByCountry(int? idCountry)
         {
-            return idCountry != -1 ? _dalReginos.GetByCountry(idCountry) : _dalReginos.GetAll();
+            return idCountry.HasValue ? _dalReginos.GetByCountry(idCountry.Value) : _dalReginos.GetAll();
         }
 
         /// <summary>

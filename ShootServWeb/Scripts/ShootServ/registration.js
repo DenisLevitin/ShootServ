@@ -154,11 +154,6 @@ var registrationActor = function () {
                 return false;
             }
 
-            if (!$("#idClub").val()) {
-                showError("Не введен стрелковый клуб");
-                return false;
-            }
-
             if (!$("#idShooterCategory").val()) {
                 showError("Не введен разряд стрелка");
                 return false;

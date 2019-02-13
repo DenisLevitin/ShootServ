@@ -93,9 +93,7 @@ namespace BL
         /// <returns></returns>
         public List<ShooterClubDetalisationParams> GetByRegion(int? idCountry, int? idRegion)
         {
-            return idRegion.HasValue ? _dalShootingClubLogic.GetByRegion(idRegion.Value)
-                        : idCountry.HasValue ?
-                        _dalShootingClubLogic.GetByCountry(idCountry.Value) : _dalShootingClubLogic.GetAllDetailed();
+            return _dalShootingClubLogic.GetDetailed(idRegion, idCountry);
         }
 
         /// <summary>

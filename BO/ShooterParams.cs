@@ -25,7 +25,7 @@ namespace BO
         /// <summary>
         /// Ид. клуба
         /// </summary>
-        public int IdClub { get; set; }
+        public int? IdClub { get; set; }
 
         /// <summary>
         /// Адрес

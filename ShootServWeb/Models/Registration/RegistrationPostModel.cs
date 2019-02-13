@@ -84,7 +84,7 @@ namespace ShootServ.Models.Registration
         /// Ид. стрелкового клуба
         /// </summary>
         [DisplayName("Стрелковый клуб")]
-        public int IdClub { get; set; }
+        public int? IdClub { get; set; }
 
         /// <summary>
         /// Тип оружия стрелка

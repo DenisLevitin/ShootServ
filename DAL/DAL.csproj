@@ -86,6 +86,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDMX.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entities\ClubDetailedEntity.cs" />
     <Compile Include="EntryForCompetitions.cs">
       <DependentUpon>EDMX.tt</DependentUpon>
     </Compile>
