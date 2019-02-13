@@ -68,6 +68,9 @@ $(document).ready(function() {
             });
         }
     });
+
+    actor.changeCountry();
+    actor.changeRegion();
 });
 
 var registrationActor = function () {
@@ -101,7 +104,7 @@ var registrationActor = function () {
     this.renderClubs = function(data)
     {
         renderJsonArrayToSelect($("#idClub"), "Id", "Name", data);
-    }
+    };
     
     // валидация ввода
     this.validateInput = function(isEditing) {

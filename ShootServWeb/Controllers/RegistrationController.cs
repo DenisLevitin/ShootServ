@@ -29,14 +29,17 @@ namespace ShootServ.Controllers
 
         private RegistrationPageModel GetPageModel()
         {
-            return new RegistrationPageModel
+            var result = new RegistrationPageModel
             {
                 RolesList = StandartClassifierModelLogic.GetRolesList(),
                 SexList = StandartClassifierModelLogic.GetSexList(),
                 WeaponTypes = StandartClassifierModelLogic.GetWeaponTypeList(),
                 CountriesList = StandartClassifierModelLogic.GetCountryList(),
-                Categories = _categoryLogic.GetAll().ConvertAll(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name})
+                Categories = _categoryLogic.GetAll().ConvertAll(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name}),
             };
+            
+            result.PostModel.DateBirthday = DateTime.Now.AddYears(-18);
+            return result;
         }
 
         /// <summary>

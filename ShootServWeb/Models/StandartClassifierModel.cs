@@ -17,7 +17,7 @@ namespace ShootServ.Models
         /// <returns></returns>
         public static List<SelectListItem> GetWeaponTypeList()
         {
-            return new List<SelectListItem> { new SelectListItem { Value = ((int)BO.WeaponTypeParams.WeaponTypeEnum.Rifle).ToString(), Text = "Винтовка"},
+            return new List<SelectListItem> { new SelectListItem { Value = ((int)BO.WeaponTypeParams.WeaponTypeEnum.Rifle).ToString(), Text = "Винтовка", Selected = true },
                                               new SelectListItem { Value = ((int)BO.WeaponTypeParams.WeaponTypeEnum.Pistol).ToString(), Text = "Пистолет"},
                                               new SelectListItem { Value = ((int)BO.WeaponTypeParams.WeaponTypeEnum.RifleMovingTarget).ToString(), Text = "Винтовка, движущаяся мишень"}  };
         }
@@ -28,7 +28,7 @@ namespace ShootServ.Models
         /// <returns></returns>
         public static List<SelectListItem> GetSexList()
         {
-            return new List<SelectListItem> { new SelectListItem { Value = ((int)BO.SexEnum.Men).ToString(), Text = "Мужской"},
+            return new List<SelectListItem> { new SelectListItem { Value = ((int)BO.SexEnum.Men).ToString(), Text = "Мужской", Selected = true },
                                               new SelectListItem { Value = ((int)BO.SexEnum.Women).ToString(), Text = "Женский"} };
         }
 
@@ -67,14 +67,14 @@ namespace ShootServ.Models
         /// Получить список регионов
         /// </summary>
         /// <returns></returns>
-        public static List<SelectListItem> GetCountryList(bool addAll = true) /// TODO: Выкинуть из сигнатуры ResultInfoRef
+        public static List<SelectListItem> GetCountryList(bool addAll = true)
         {
             var res = new List<SelectListItem>();
 
             var countries = new CountryLogic().GetAllCounties();
             if (addAll)
             {
-                res.Add(new SelectListItem { Value = "-1", Text = "Все страны" });
+                res.Add(new SelectListItem { Value = "", Text = "Все страны" });
             }
 
             foreach (var item in countries)
