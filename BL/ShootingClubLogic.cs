@@ -32,7 +32,7 @@ namespace BL
         {
             var res = new ResultInfo();
 
-            if (!string.IsNullOrEmpty(shooterClub.Name))
+            if (!string.IsNullOrWhiteSpace(shooterClub.Name))
             {
                 var listExists = _dalShootingClubLogic.GetByName(shooterClub.Name);
                 if (listExists.Count == 0)
@@ -40,19 +40,10 @@ namespace BL
                     shooterClub.DateCreate = DateTime.Now;
 
                     var queryUser = _userLogic.Get(currentUserId);
-
                     if (queryUser != null)
                     {
-                        if (queryUser.IdRole == (int)RolesEnum.Organization)
-                        {
-                            shooterClub.CreatorId = currentUserId;
-                            _dalShootingClubLogic.Create(shooterClub);
-                        }
-                        else
-                        {
-                            res.IsOk = false;
-                            res.ErrorMessage = "Пользователь не является организатором";
-                        }
+                        shooterClub.CreatorId = currentUserId;
+                        _dalShootingClubLogic.Create(shooterClub);
                     }
                     else
                     {

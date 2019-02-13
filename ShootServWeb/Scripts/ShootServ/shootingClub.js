@@ -102,7 +102,9 @@ var shootingClubPageActor = function () {
 
     this.changeCountry = function() {
         var idCountry = $("#idCountry").val();
-        getRegions(idCountry, "idRegion", ""); /// TODO: не работает
+        getRegions(idCountry, "idRegion", function (data) {
+            $("#tdRegion").html(data);
+        });
     };
 
     this.changeRegion = function() {
