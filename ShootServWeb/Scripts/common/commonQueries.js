@@ -41,3 +41,26 @@ function getShootingClubs(idCountry, idRegion) {
     
     return result;
 }
+
+// получить тиры по региону
+function getShootingRanges(idRegion)
+{
+    var result = null;
+    $.ajax({
+        url: linksShootingRange.GetListByRegion,
+        dataType: "html",
+        type: "GET",
+        async: false,
+        data: {
+            idRegion: idRegion
+        },
+        success: function(data) {
+            result = data;
+        },
+        error: function() {
+            showError("Ошибка ajax");
+        }
+    });
+
+    return result;
+}

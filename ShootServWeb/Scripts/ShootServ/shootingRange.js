@@ -161,11 +161,3 @@ var shootingRangePageActor = function () {
         }
     }
 };
-
-//все для выпадающего контента
-$(document).ready(function() {
-    togetherContent("#divAddShootingRange", "#divAddShootingR", 'Добавить тир');
-    togetherContent("#divShowShootingRange", "#divShowShootingR", 'Список тиров');
-    addSumbol($("#divAddShootingRange"), true, 'Добавить тир');
-    addSumbol($("#divShowShootingRange"), true, 'Список тиров');
-});

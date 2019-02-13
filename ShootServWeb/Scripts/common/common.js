@@ -19,3 +19,18 @@
         });
     }
 })();
+
+function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
+{
+    var select = $(select);
+    select.html("");
+
+    if ( typeof(json) === "string")
+    {
+        json = JSON.parse(json);
+    }
+    
+    $.each(json, function(i, val){
+        select.append($('<option />', { value: val[valueFieldName], text: val[textFieldName] }));
+    });
+}

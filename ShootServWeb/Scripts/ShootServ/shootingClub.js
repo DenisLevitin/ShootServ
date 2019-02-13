@@ -53,6 +53,7 @@ $(document).ready(function () {
                         dataType: "json",
                         data: $("form").serialize(),
                         async: false,
+                        method: "POST",
                         success: function(data) {
                             if (data.IsOk) {
                                 showInfo("Стрелковый клуб добавлен"); // showInfo
@@ -76,22 +77,27 @@ $(document).ready(function () {
 
         });
 
-    ChangeCountry();
+    actor.changeCountry();
 });
 
 var renderClubs = function (data) {
     // not implemented
 };
 
+var renderShootingRanges = function(data)
+{
+    renderJsonArrayToSelect($("#idShootingRange"), "Id", "Name", data);
+};
+
 var shootingClubPageActor = function () {
     this.validateInput = function() {
-        var name = $("#Name").val();
+        var name = $("#name").val();
         if (!name) {
-            showError("Не введено название тира");
+            showError("Не введено название стрелкового клуба");
             return false;
         }
 
-        var idShootingRange = $("#IdShootingRange").val();
+        var idShootingRange = $("#idShootingRange").val();
         if (!idShootingRange) {
             showError("Не выбран тир");
             return false;
@@ -109,9 +115,8 @@ var shootingClubPageActor = function () {
 
     this.changeRegion = function() {
         var idRegion = $("#idRegion").val();
-        var idCountry = $("#idCountry").val();
 
-        var clubs = getShootingClubs(idCountry, idRegion);
-        renderClubs(clubs);
+        var shootingRanges = getShootingRanges(idRegion);
+        renderShootingRanges(shootingRanges);
     };
 };

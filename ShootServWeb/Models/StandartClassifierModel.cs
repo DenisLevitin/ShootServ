@@ -52,7 +52,7 @@ namespace ShootServ.Models
         {
             var res = new List<SelectListItem>();
             if (addAll)
-                res.Add(new SelectListItem { Value = "-1", Text = "Все регионы" });
+                res.Add(new SelectListItem { Value = "", Text = "Все регионы" });
 
             var query = new RegionsLogic().GetByCountry(idCountry).Data;
             foreach (var item in query)

@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta charset="utf-8"/>
         <title>Shoot-Serv</title>
     
-        <meta name="viewport" content="width=device-width" />
-        <link href="~/Content/style.min.css" rel="stylesheet" />      
+        <meta name="viewport" content="width=device-width"/>
+        <link href="~/Content/style.min.css" rel="stylesheet"/>
         <title>Shoot-Serv</title>
     
         @Scripts.Render("~/bundles/jquery")
@@ -16,13 +16,13 @@
         @RenderSection("scripts", required: false)
         <script src="~/Scripts/popper.min.js"></script>
         <script src="~/Scripts/bootstrap.min.js"></script>
-        
+    
         <script src="~/Scripts/common/layout.js"></script>
         <script src="~/Scripts/common/commonQueries.js"></script>
+        <script src="~/Scripts/common/common.js"></script>
     </head>
 
     <body class="main-bg">
-        @*  @RenderSection("featured", required: false)*@
         <div class="container container-bg">
             <header class="blog-header py-3">
                 <div class="row flex-nowrap justify-content-between align-items-center">
@@ -32,13 +32,13 @@
                         </a>
                     </div>
                     <div class="col-4 text-center">
-                        <a class="display-4 text-dark" href="@Url.Action("Index", "Home", new {Area = ""})">Shoot-Serv</a>
+                        <a class="display-4 text-dark" href="@Url.Action("Index", "Home")">Shoot-Serv</a>
                     </div>
                     <div class="col-4 d-flex justify-content-end align-items-center">
-                        <a class="btn btn-sm btn-outline-secondary mx-2" data-toggle="modal" data-target="#signUpPopup" href="">
+                        <a class="btn btn-sm btn-outline-secondary mx-2" href="@Url.Action("Index", "Registration")">
                             Регистрация
                         </a>
-                        <a class="btn btn-sm btn-outline-secondary mx-2" data-toggle="modal" data-target="#autologizationModal" href="">Вход</a>
+                        <a class="btn btn-sm btn-outline-secondary mx-2" href="@Url.Action("Login", "Account")">Вход</a>
                     </div>
                 </div>
             </header>
@@ -55,7 +55,7 @@
                     @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
                 </nav>
             </div>
-
+        
             <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
                 <div class="col-md-6 px-0">
                     <h1 class="display-5 font-italic">Shoot-Serv для стрелкового спорта</h1>
@@ -63,14 +63,16 @@
                         Этот ресурс предназначен для облегчения регистрации на соревнования по пулевой
                         стрельбе и урощения отчености для огранизаторов соревнований.
                     </p>
-                    <p class="lead mb-0"><a href="#" class="text-white font-weight-bold">Продолжить чтение...</a></p>
+                    <p class="lead mb-0">
+                        <a href="#" class="text-white font-weight-bold">Продолжить чтение...</a>
+                    </p>
                 </div>
             </div>
             <main role="main" class="container">
                 @RenderBody()
             </main>
         </div>
-
+    
         <footer class="blog-footer">
             <div class="container container-bg d-flex justify-content-between">
                 <p>
@@ -81,241 +83,54 @@
                 </p>
             </div>
         </footer>
-
-        <!-- Modal sign in-->
-        <section class="modal fade text-center" id="autologizationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <button type="button" class="close popup-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <form class="form-signin">
-                        <div class="mb-4">
-                            <h3 class="h3 mb-3 font-weight-normal">Авторизация</h3>
-                            <p> Войдите для полного доступа ко всем возможностям сайта</p>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-                            <label for="inputEmail">Ваш e-mail или логин</label>
-                        </div>
-
-                        <div class="form-label-group">
-                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-                            <label for="inputPassword">Пароль</label>
-                        </div>
-
-                        <div class="checkbox mb-3">
-                            <label>
-                                <input type="checkbox" value="remember-me"> Запомнить меня
-                            </label>
-                        </div>
-                        <div class="mb-4">
-                            <a href="#">Забыли пароль?</a>
-
-                        </div>
-
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Вход</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-
-        <!-- Modal sign out-->
-        <section class="modal fade" id="signUpPopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <button type="button" class="close popup-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link  disabled" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            здесть что-то 1
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">здесть что-то 2</div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            здесть что-то 3<div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+    
+        @{
+            Html.RenderPartial("SignInModal");
+        }
+        
+        @{
+            Html.RenderPartial("SignOutModal");
+        }
+    
         <script type="text/javascript">
-                        var linksShootingRange = {
-                            Index: "@Url.Action("Index", "ShootingRange")",
-                            Add: "@Url.Action("Add", "ShootingRange")",
-                            Delete: "@Url.Action("Delete", "ShootingRange")",
-                            GetListByRegion: "@Url.Action("GetListByRegion", "ShootingRange")"
-                        };
-
-                        var linksCommon = {
-                            GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
-                        }
-
-                        var linkslogin = "@Url.Action("Login", "Account")";
-                        
-                        var linksClub = {
-                            Get: "@Url.Action("GetShootingClubsByRegion", "ShootingClub")",
-                            Delete: "@Url.Action("Delete", "ShootingClub")",
-                            Index: "@Url.Action("Index", "ShootingClub")",
-                            Add: "@Url.Action("Add", "ShootingClub")"
-                        }
-
-                        var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
-                        
-                        var linksRegistration = {
-                            UpdateUser : "@Url.Action("UpdateUser","Registration")",
-                            AddUser : "@Url.Action("AddUser", "Registration")"
-                        }
-
-                        var linkHome = "@Url.Action("Index","Home")";
-                        
-                        @{
-                            var shooterRoleId = (int)RoleParams.RoleEnum.Shooter;
-                            var organizationRoleId = (int)RoleParams.RoleEnum.Organization;
-                        }
-                        
-                        var roles = {
-                            shooterRoleId : "@shooterRoleId",
-                            organizationRoleId: "@organizationRoleId"
-                        }
+            var linksShootingRange = {
+                Index: "@Url.Action("Index", "ShootingRange")",
+                Add: "@Url.Action("Add", "ShootingRange")",
+                Delete: "@Url.Action("Delete", "ShootingRange")",
+                GetListByRegion: "@Url.Action("GetListByRegion", "ShootingRange")"
+            };
+        
+            var linksCommon = {
+                GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")"
+            }
+        
+            var linkslogin = "@Url.Action("Login", "Account")";
+        
+            var linksClub = {
+                Get: "@Url.Action("GetShootingClubsByRegion", "ShootingClub")",
+                Delete: "@Url.Action("Delete", "ShootingClub")",
+                Index: "@Url.Action("Index", "ShootingClub")",
+                Add: "@Url.Action("Add", "ShootingClub")"
+            }
+        
+            var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
+        
+            var linksRegistration = {
+                UpdateUser: "@Url.Action("UpdateUser", "Registration")",
+                AddUser: "@Url.Action("AddUser", "Registration")"
+            }
+        
+            var linkHome = "@Url.Action("Index", "Home")";
+                                
+            @{
+                var shooterRoleId = (int) RoleParams.RoleEnum.Shooter;
+                var organizationRoleId = (int) RoleParams.RoleEnum.Organization;
+            }
+                                
+            var roles = {
+                shooterRoleId: "@shooterRoleId",
+                organizationRoleId: "@organizationRoleId"
+            }
         </script>
     </body>
 </html>
-
-        @*<div id="InfoError" class="instr" style="opacity: 0; padding: 0; padding-bottom: 6px; width: 15%; text-align: center; position: fixed; bottom: 30px; top: 150px; height: 15%;">
-
-                        <div id="closeshowInfo">Закрыть</div>
-                        <div style="position: relative; margin: 2px; border-radius: 4px; border: 3px solid red; height: 80%; background-color: white;">
-                            <div id="divShowError" style="display: inline; padding: 5px; color: red; font-family: tahoma; font-size: 14px"></div>
-                            <div id="showInfo" style="display: inline; padding: 5px; color: green; font-family: tahoma; font-size: 14px;"></div>
-                        </div>
-                    </div>
-
-                    <script type="text/javascript">
-                            
-                            //скролл
-                            function scroll(div) {
-                                var topcoords = $(div).offset().top;
-                                window.scrollTo(0, topcoords);
-                            }
-
-                            // Добавление стрелок на все дивы - кнопки с выпадающим контентом
-                            function addSumbol(div, isUp, text) {
-                                var a = isUp ? "&#8659;" : "&#8657;"
-                                var text = a + a + a + text + a + a + a;
-                                div.html(text);
-                            }
-
-                            //на весь выпадоющий контент
-                            function togetherContent(button, content, text) {
-                                $(document).on("click",
-                                    button,
-                                    function() {
-                                        if ($(content).is(":hidden")) {
-                                            $(content).slideDown();
-                                            addSumbol($(button), false, text);
-                                            $(button).addClass("light");
-                                            scroll(button);
-                                        } else {
-                                            $(content).slideUp();
-                                            addSumbol($(button), true, text);
-                                            $(button).removeClass("light");
-                                        }
-                                    });
-                            }
-
-                            //  Делаем кликабельные блоки в меню
-                            $(document).on("click",
-                                ".mainMenu div",
-                                function() {
-                                    window.location = $(this).find("a").attr("href");
-                                    return false;
-                                });
-
-                            // Форматируем дату для правильной передачи в контроллер
-                            function FormatDate(date) {
-                                var year = date.getFullYear();
-                                var month = date.getMonth() + 1;
-                                var day = date.getDate();
-                            }
-
-                            //закрываем showInfo
-                            $(document).on("click",
-                                "#closeshowInfo",
-                                function() {
-                                    $("#InfoError").animate({ "opacity": "0" }, "slow");
-                                });
-
-                    </script>
-                    <article>
-                        <div id="divRenderBody" class="divRenderBody">
-                            @RenderBody()
-                        </div>
-                    </article>
-
-                    <footer style="height: 40px;">
-                        <div id="footer" style="text-align: center;">
-                            <h5 style="display: inline; color: black;">D&V Applications</h5><br />
-                            <a style="color: black" href="mailto:disa15@rambler.ru">Обратная связь</a>
-                        </div>
-                    </footer>
-
-                </div>
-                <!--Preload  -->
-                <style>
-                    #hellopreloader_preload {
-                        display: block;
-                        position: fixed;
-                        z-index: 99999;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        min-width: 1000px;
-                        background: #2574A9 url(http://hello-site.ru//main/images/preloads/rings.svg) center center no-repeat;
-                        background-size: 101px;
-                    }
-                </style>
-                <div id="hellopreloader">
-                    <div id="hellopreloader_preload"></div>
-                </div>
-
-                <script type="text/javascript">
-                    var hellopreloader = document.getElementById("hellopreloader_preload");
-
-                    function fadeOutnojquery(el) {
-                        el.style.opacity = 1;
-                        var interhellopreloader = setInterval(function () {
-                            el.style.opacity = el.style.opacity - 0.05;
-                            if (el.style.opacity <= 0.05) {
-                                clearInterval(interhellopreloader);
-                                hellopreloader.style.display = "none";
-                            }
-                        },
-                            16);
-                    }
-
-                    window.onload = function () {
-                        setTimeout(function () {
-                            fadeOutnojquery(hellopreloader);
-                        },
-                            1000);
-                    };
-                </script>
-
-                
-            </body>
-            </html>  *@

@@ -5,6 +5,8 @@
 
 @model ShootServ.Models.ShootingClub.ShooterClubPageModel
 
+<script src="~/Scripts/ShootServ/shootingClub.js"></script>
+
 <h3>Добавление и просмотр стрелковых клубов</h3>
 
 <div id="addDiv">
@@ -22,23 +24,23 @@
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(x => x.SavingShooterClub.Name)</td>
-                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.Name)</td>
+                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.Name, new { @Name="name", @Id="name"})</td>
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(x => x.SavingShooterClub.IdShootingRange)</td>
-                    <td id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges)</td>
+                    <td id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges, new { @Name = "idShootingRange", @Id="idShootingRange" })</td>
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(x => x.SavingShooterClub.Address)</td>
-                    <td>@Html.TextAreaFor(x => x.SavingShooterClub.Address)</td>
+                    <td>@Html.TextAreaFor(x => x.SavingShooterClub.Address, new { @Name = "address", @Id="address"})</td>
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(x => x.SavingShooterClub.Phone)</td>
-                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.Phone)</td>
+                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.Phone, new { @Name = "phone", @Id="phone" })</td>
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(x => x.SavingShooterClub.MainCoach)</td>
-                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.MainCoach)</td>
+                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.MainCoach, new { @Name = "mainCoach", @Id="mainCoach" })</td>
                 </tr>
             </table>
 
