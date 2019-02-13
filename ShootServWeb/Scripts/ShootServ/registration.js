@@ -95,9 +95,14 @@ var registrationActor = function () {
         var idRegion = $("#idRegion").val();
         var idCountry = $("#idCountry").val();
         var shootingClubs = getShootingClubs(idCountry, idRegion);
-        /// todo: нужно отрендерить shootingClubs каким-либо образом
+        this.renderClubs(shootingClubs);
     };
 
+    this.renderClubs = function(data)
+    {
+        renderJsonArrayToSelect($("#idClub"), "Id", "Name", data);
+    }
+    
     // валидация ввода
     this.validateInput = function(isEditing) {
 
@@ -144,10 +149,8 @@ var registrationActor = function () {
             return false;
         }
 
-        if ($("#idRole").val() == roles.organizationRoleId) {
-            // доп. проверка организатора
-        }
-        else {
+        if ($("#idRole").val() != roles.organizationRoleId) 
+        {
             // доп. проверка стрелка
             if (!$("#idWeaponType").val()) {
                 showError("Не введен тип оружия стрелка");

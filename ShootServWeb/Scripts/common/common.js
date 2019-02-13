@@ -25,6 +25,10 @@ function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
     var select = $(select);
     select.html("");
 
+    if (!json) {
+        return;
+    }
+    
     if ( typeof(json) === "string")
     {
         json = JSON.parse(json);
