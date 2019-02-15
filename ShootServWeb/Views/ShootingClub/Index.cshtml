@@ -7,47 +7,59 @@
 
 <script src="~/Scripts/ShootServ/shootingClub.js"></script>
 
-<h3>Добавление и просмотр стрелковых клубов</h3>
+<h3 class="h3">Добавление и просмотр стрелковых клубов</h3>
 
 <div id="addDiv">
-    <div style="position: relative; height: 330px; margin-top: 20px;">
-        @using (Html.BeginForm("Add", "ShootingClub", FormMethod.Post, new {id = "addform"}))
+    <div>
+        @using (Html.BeginForm("Add", "ShootingClub", FormMethod.Post, new { id = "addform" }))
         {
-            <table style="margin: auto;">
-                <tr>
-                    <td>Страна</td>
-                    <td>@Html.DropDownList("idCountry", Model.Countries)</td>
-                </tr>
-                <tr>
-                    <td>Регион</td>
-                    <td id="tdRegion">@Html.DropDownList("idRegion", Model.Regions)</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x => x.SavingShooterClub.Name)</td>
-                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.Name, new { @Name="name", @Id="name"})</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x => x.SavingShooterClub.IdShootingRange)</td>
-                    <td id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges, new { @Name = "idShootingRange", @Id="idShootingRange" })</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x => x.SavingShooterClub.Address)</td>
-                    <td>@Html.TextAreaFor(x => x.SavingShooterClub.Address, new { @Name = "address", @Id="address"})</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x => x.SavingShooterClub.Phone)</td>
-                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.Phone, new { @Name = "phone", @Id="phone" })</td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(x => x.SavingShooterClub.MainCoach)</td>
-                    <td>@Html.TextBoxFor(x => x.SavingShooterClub.MainCoach, new { @Name = "mainCoach", @Id="mainCoach" })</td>
-                </tr>
-            </table>
+        <div class="form-group">
+            <div class="row mt-4">
+                <div class="col-lg-6 col-xs-12">
+                    <label for="idCountry">Страна</label>
+                    @Html.DropDownList("idCountry", Model.Countries)      <!--  СЮда добавить класс class = "form-control"-->
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    <label for="idRegion">Регион</label>
+                    <div id="tdRegion">
+                        @Html.DropDownList("idRegion", Model.Regions)           <!--  СЮда добавить класс class = "form-control"-->
+                    </div>
+                </div>
+                </div>
+            </div>
 
-            <input id="addBt" type="button" value="Добавить"/>
-        }
-    </div>
-</div>
+                <div class="form-group">
+                    <div class="row mt-4">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.SavingShooterClub.Name)
+                            @Html.TextBoxFor(x => x.SavingShooterClub.Name, new { @Name = "name", @Id = "name", @class = "form-control" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.SavingShooterClub.IdShootingRange)
+                            <div id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges, new { @Name = "idShootingRange", @Id = "idShootingRange", @class = "form-control" })</div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.SavingShooterClub.Phone)
+                            @Html.TextBoxFor(x => x.SavingShooterClub.Phone, new { @Name = "phone", @Id = "phone", @class = "form-control" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12 ">
+                            @Html.LabelFor(x => x.SavingShooterClub.MainCoach)
+                            @Html.TextBoxFor(x => x.SavingShooterClub.MainCoach, new { @Name = "mainCoach", @Id = "mainCoach", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-lg-8 col-xs-12">
+                            @Html.LabelFor(x => x.SavingShooterClub.Address)
+                            @Html.TextAreaFor(x => x.SavingShooterClub.Address, new { @Name = "address", @Id = "address", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <input id="addBt" class="btn btn-lg btn-primary mx-auto" type="button" value="Добавить">
+                }
+            </div>
+        </div>
 
 <div id="divShowShow" class="instr" style="width: 1000px; padding: 0;">
     <div id="divShowClab" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"> </div>
