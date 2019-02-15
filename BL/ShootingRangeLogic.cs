@@ -67,12 +67,12 @@ namespace BL
                     res.ErrorMessage = "Ошибка определения пользователя";
                 }
             }
-            else 
+            else
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Нельзя удалить тир, к которому привязан стрелковый клуб";
             }
-            
+
             return res;
         }
 
@@ -101,21 +101,13 @@ namespace BL
             var queryUser = _userLogic.Get(userId);
             if (queryUser != null)
             {
-                if (queryUser.IdRole == (int)RolesEnum.Organization)
+                var allInRegions = _dalShootingRange.GetByRegion(shootingRange.IdRegion);
+                if (!allInRegions.Any(x => string.Equals(x.Name, shootingRange.Name, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    var allInRegions = _dalShootingRange.GetByRegion(shootingRange.IdRegion);
-                    if (!allInRegions.Any(x => string.Equals(x.Name, shootingRange.Name, StringComparison.InvariantCultureIgnoreCase)))
-                    {
-                        _dalShootingRange.Create(shootingRange);
-                    }
-                }
-                else 
-                {
-                    res.IsOk = false;
-                    res.ErrorMessage = "Роль пользователя не является организатором";
+                    _dalShootingRange.Create(shootingRange);
                 }
             }
-            else 
+            else
             {
                 res.IsOk = false;
                 res.ErrorMessage = "Не найден пользователь";

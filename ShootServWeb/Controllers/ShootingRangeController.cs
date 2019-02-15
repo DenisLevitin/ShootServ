@@ -29,7 +29,7 @@ namespace ShootServ.Controllers
         }
 
         [CustomAuthorize]
-        [HttpGet]
+        [HttpPost]
         public ActionResult Add(ShootingRangeModelParams model)
         {
             if (ModelState.IsValid)
