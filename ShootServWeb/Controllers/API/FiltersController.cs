@@ -1,5 +1,4 @@
 ﻿using BL;
-using System;
 using System.Web.Http;
 
 namespace ShootServ.API.Controllers
@@ -18,7 +17,7 @@ namespace ShootServ.API.Controllers
         public object GetRegions([FromUri]int? idCountry)
         {
             var result = _regionsLogic.GetByCountry(idCountry);
-            
+            return Json(result);
         }
     }
 }
