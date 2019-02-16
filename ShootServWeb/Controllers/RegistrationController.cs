@@ -79,7 +79,7 @@ namespace ShootServ.Controllers
                 var region = postModel.IdClub.HasValue ? _regionsLogic.GetRegionByClub(postModel.IdClub.Value) : null;
                 var country = region != null ? _countryLogic.GetCountryByRegion(region.Id).Data : null;
 
-                model.RegionsList = _regionsLogic.GetByCountry(country?.Id).Data
+                model.RegionsList = _regionsLogic.GetByCountry(country?.Id)
                     .Select((x) => new SelectListItem { Value = x.Id.ToString(), Text = x.Name, Selected = x.Id == region?.Id }).ToList();
                 
                 model.CountriesList.ForEach((x) =>

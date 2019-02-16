@@ -46,57 +46,30 @@ namespace DAL
         /// Получить список регионов
         /// </summary>
         /// <returns></returns>
-        public ResultInfoRef<List<RegionParams>> GetAll()
+        public List<RegionParams> GetAll()
         {
-            var res = new ResultInfoRef<List<RegionParams>>();
-
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    var query = db.Regions.OrderBy(x=>x.Name).ToList();
-                    res.Data = query.ConvertAll(Convert);
-                }
-                catch (Exception exc)
-                {
-                    res.Result.IsOk = false;
-                    res.Result.ErrorMessage = "При получении регионов произошла ошиибка";
-                    res.Result.Exc = exc;
-                }
+                var query = db.Regions.OrderBy(x => x.Name).ToList();
+                return query.ConvertAll(Convert);
             }
-
-            return res;
         }
 
         /// <summary>
         /// Получить список регионов
         /// </summary>
         /// <returns></returns>
-        public ResultInfoRef<List<RegionParams>> GetByCountry(int idCountry)
+        public List<RegionParams> GetByCountry(int idCountry)
         {
-            var res = new ResultInfoRef<List<RegionParams>>();
+            using (var db = DBContext.GetContext())
+            {
+                var query = (from region in db.Regions
+                             join country in db.Countries on region.IdCountry equals country.Id
+                             where country.Id == idCountry
+                             select region).ToList();
 
-                try
-                {
-                    using (var db = DBContext.GetContext())
-                    {
-                        var query = (from region in db.Regions
-                                     join country in db.Countries on region.IdCountry equals country.Id
-                                     where country.Id == idCountry
-                                     select region).ToList();
-
-                        res.Data = query.ConvertAll(Convert);
-                    }
-                }
-                catch (Exception exc)
-                {
-                    res.Result.IsOk = false;
-                    res.Result.ErrorMessage = "При получении региона по стране произошла ошибка";
-                    res.Result.Exc = exc;
-                }
-            
-
-            return res;
+                return query.ConvertAll(Convert);
+            }
         }
 
         /// <summary>
@@ -139,10 +112,10 @@ namespace DAL
                 try
                 {
                     var query = (from club in db.ShooterClubs
-                                join shootingRange1 in db.ShootingRanges on club.IdShootingRange equals shootingRange1.Id
-                                join region in db.Regions on shootingRange1.IdRegion equals region.IdRegion
-                                where club.IdClub == idClub
-                                select region).Distinct().First();
+                                 join shootingRange1 in db.ShootingRanges on club.IdShootingRange equals shootingRange1.Id
+                                 join region in db.Regions on shootingRange1.IdRegion equals region.IdRegion
+                                 where club.IdClub == idClub
+                                 select region).Distinct().First();
                     res = Convert(query);
                 }
                 catch (Exception exc)

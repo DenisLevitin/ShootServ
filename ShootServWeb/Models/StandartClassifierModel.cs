@@ -54,7 +54,7 @@ namespace ShootServ.Models
             if (addAll)
                 res.Add(new SelectListItem { Value = "", Text = "Все регионы" });
 
-            var query = new RegionsLogic().GetByCountry(idCountry).Data;
+            var query = new RegionsLogic().GetByCountry(idCountry);
             foreach (var item in query)
             {
                 res.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
