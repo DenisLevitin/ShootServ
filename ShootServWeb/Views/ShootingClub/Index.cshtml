@@ -17,12 +17,12 @@
             <div class="row mt-4">
                 <div class="col-lg-6 col-xs-12">
                     <label for="idCountry">Страна</label>
-                    @Html.DropDownList("idCountry", Model.Countries)      <!--  СЮда добавить класс class = "form-control"-->
+                    @Html.DropDownList("idCountry", Model.Countries, new {@class = "form-control" })   
                 </div>
                 <div class="col-lg-6 col-xs-12">
                     <label for="idRegion">Регион</label>
                     <div id="tdRegion">
-                        @Html.DropDownList("idRegion", Model.Regions)           <!--  СЮда добавить класс class = "form-control"-->
+                        @Html.DropDownList("idRegion", Model.Regions, new {@class = "form-control" })  
                     </div>
                 </div>
                 </div>
