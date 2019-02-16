@@ -22,7 +22,7 @@
 
 function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
 {
-    var select = $(select);
+    var selectElement = $(select);
     select.html("");
 
     if (!json) {
@@ -35,6 +35,6 @@ function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
     }
     
     $.each(json, function(i, val){
-        select.append($('<option />', { value: val[valueFieldName], text: val[textFieldName] }));
+        selectElement.append($('<option />', { value: val[valueFieldName], text: val[textFieldName] }));
     });
 }

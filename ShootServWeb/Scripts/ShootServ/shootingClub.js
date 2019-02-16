@@ -109,7 +109,6 @@ var shootingClubPageActor = function () {
     this.changeCountry = function() {
         var idCountry = $("#idCountry").val();
         getRegions(idCountry, "idRegion", function (data) {
-            console.log(data);
             renderJsonArrayToSelect($("#idRegion"), "Id", "Name", data);
             
         });
