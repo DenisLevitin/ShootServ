@@ -45,15 +45,28 @@
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-between">
                     <a class="p-2 text-muted" href="@Url.Action("Index", "Home", new {Area = ""})">На главную</a>
-                    <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingRange")">Тиры</a>
-                    <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
-                    <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
-                    <a class="p-2 text-muted" href="#">О проекте</a>
-                    <a class="p-2 text-muted" href="#">
-                        @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
-                    </a>
-                    @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
-                </nav>
+                   
+                    <div class="dropdown open">
+                        <a class="btn  btn-default dropdown-toggle" href="@Url.Action("Index", "ShootingRange")" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Тиры
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="p-2 text-muted dropdown-item" href="@Url.Action("Index", "ShootingRange")">Добавление тиров</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="p-2 text-muted dropdown-item" href="@Url.Action("Index", "ShootingRange")">Просмотр тиров</a>
+                        </div>
+                    </div>
+                      
+
+                        <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
+                        <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
+                        <a class="p-2 text-muted" href="#">О проекте</a>
+                        <a class="p-2 text-muted" href="#">
+                            @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
+                        </a>
+                        @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
+</nav>
             </div>
         
             <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
