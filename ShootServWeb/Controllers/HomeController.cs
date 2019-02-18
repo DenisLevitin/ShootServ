@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using BO;
 
 namespace ShootServ.Controllers
@@ -41,6 +42,7 @@ namespace ShootServ.Controllers
         public ActionResult Logout()
         {
             Session.Abandon();
+            FormsAuthentication.SignOut();
 
             return Redirect(Url.Action("Login", "Account"));
         }
