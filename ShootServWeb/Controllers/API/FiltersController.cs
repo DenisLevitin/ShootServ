@@ -13,7 +13,7 @@ namespace ShootServ.API.Controllers
         }
 
         [HttpGet]
-        [Route("api/GetRegions/{idCountry}")]
+        [Route("api/GetRegions/{idCountry}", Name = "GetRegions")]
         public object GetRegions([FromUri]int? idCountry)
         {
             var result = _regionsLogic.GetByCountry(idCountry);
