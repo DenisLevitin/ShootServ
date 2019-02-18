@@ -60,7 +60,7 @@ namespace ShootServ.Controllers
 
         public ActionResult List()
         {
-            ViewBag.Regions = StandartClassifierModelLogic.GetRegionsByCountry(1);
+            ViewBag.Regions = StandartClassifierModelLogic.GetRegionsByCountry(null);
             return View("List");
         }
         
