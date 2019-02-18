@@ -56,7 +56,7 @@ namespace DAL
                     query = query.Where(x => x.IdCountry == idCountry);
                 }
                 
-                var data = db.Regions.OrderBy(x=>x.IdCountry).ThenBy(x=>x.Name).ToList();
+                var data = query.OrderBy(x=>x.IdCountry).ThenBy(x=>x.Name).ToList();
                 return data.Select(Convert).ToList();
             }
         }
