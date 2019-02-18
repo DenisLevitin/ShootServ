@@ -1,38 +1,39 @@
 ﻿@model ShootServ.Models.ShootingRange.ShootingRangeModelParams
 
- @using (Html.BeginForm("Add", "ShootingRange", FormMethod.Post, new { id="addform", @style="width:98%"}))
-    {
-     
-        <table style="width:99%;height:99%">
-            <tr>
-                <td>@Html.LabelFor(x => x.Name)</td>
-                <td>@Html.TextBoxFor(x => x.Name)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.CountryId)</td>
-                <td>@Html.DropDownListFor(x => x.CountryId, Model.Countries)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.RegionId)</td>
-                <td id="tdRegionId">@Html.DropDownListFor(x => x.RegionId, Model.Regions)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Town)</td>
-                <td>@Html.TextBoxFor(x => x.Town)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Address)</td>
-                <td>@Html.TextAreaFor(x => x.Address)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Phone)</td>
-                <td>@Html.TextBoxFor(x => x.Phone)</td>
-            </tr>
-            <tr>
-                <td>@Html.LabelFor(x => x.Info)</td>
-                <td>@Html.TextAreaFor(x => x.Info)</td>
-            </tr>
-        </table>
+@using (Html.BeginForm("Add", "ShootingRange", FormMethod.Post, new { id = "addform"}))
+{
 
-        <input id="addBt" type="button" value="Добавить" />
-    }
+
+    @Html.LabelFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <div class="row mt-4">
+        <div class="col-lg-6 col-xs-12">
+            @Html.LabelFor(x => x.CountryId)
+            @Html.DropDownListFor(x => x.CountryId, Model.Countries, new { @class = "form-control" })
+        </div>
+        <div class="col-lg-6 col-xs-12">
+            @Html.LabelFor(x => x.RegionId)
+            <div id="tdRegionId">@Html.DropDownListFor(x => x.RegionId, Model.Regions, new { @class = "form-control" })</div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-lg-6 col-xs-12">
+            @Html.LabelFor(x => x.Town)
+            @Html.TextBoxFor(x => x.Town, new { @class = "form-control" })
+        </div>
+        <div class="col-lg-6 col-xs-12">
+            @Html.LabelFor(x => x.Phone)
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="mt-4">
+        @Html.LabelFor(x => x.Address)
+        @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+    </div>
+    <div class="mt-4">
+        @Html.LabelFor(x => x.Info)
+        @Html.TextAreaFor(x => x.Info, new { @class = "form-control" })
+
+    </div>
+    <input id="addBt" class="btn btn-lg btn-primary mx-auto mt-4" type="button" value="Добавить" />
+}

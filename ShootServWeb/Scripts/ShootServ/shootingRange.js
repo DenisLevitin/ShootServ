@@ -90,8 +90,12 @@ var shootingRangePageActor = function () {
     // Нужно вызвать эту функцию при изменении региона
     this.changeCountry = function() {
         var idCountry = $("#CountryId").val();
-        this.getRegionsByCountry(idCountry);
-    };
+        if (idCountry) {
+            var regions = getRegions(idCountry);
+            var idRegion = $("#RegionId");
+            renderJsonArrayToSelect(idRegion, "Id", "Name", regions);
+        }
+        };
 
     this.construct = function(){
     };
@@ -139,26 +143,5 @@ var shootingRangePageActor = function () {
             });
         }
     };
-    
-    // Получить список регионов по стране
-    this.getRegionsByCountry = function (idCountry) {
-        if (idCountry) {
-            $.ajax({
-                url: linksCommon.GetRegionsByCountry,
-                dataType: "html",
-                data: {
-                    idCountry: idCountry,
-                    tagName: "RegionId",
-                    addAll : true
-                },
-                async: false,
-                success: function (data) {
-                    $("#tdRegionId").html(data);
-                },
-                error: function () {
-                    showError("Ошибка ajax");
-                }
-            });
-        }
-    }
+
 };
