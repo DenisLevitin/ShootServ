@@ -7,16 +7,18 @@
 
 <script src="~/Scripts/ShootServ/shootingRange.js"></script>
 
-<h3>Создание и просмотр тиров</h3>
+<h3>Создание тиров</h3>
 
 <div id="divShootingRange">
     <div id="divDiv" class="instr">
         <div id="divAddShootingRange" class="addListStyle"></div>
         @using (Html.BeginForm("Add", "ShootingRange", FormMethod.Post, new { id = "addform" }))
         {
-            <div class="mt-4">
-                @Html.LabelFor(x => x.Name)
-                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            <div class=" mt-4">
+                
+                    @Html.LabelFor(x => x.Name)
+                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+           
             </div>
             <div class="row mt-4">
                 <div class="col-lg-6 col-xs-12">
@@ -38,18 +40,19 @@
                     @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
                 </div>
             </div>
-            <div class="mt-4">
-                @Html.LabelFor(x => x.Address)
-                @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+            <div class="row mt-4">
+                <div class="col-lg-6 col-xs-12">
+                    @Html.LabelFor(x => x.Address)
+                    @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+                </div>
+                <div class="col-lg-6 col-xs-12">
+                    @Html.LabelFor(x => x.Info)
+                    @Html.TextAreaFor(x => x.Info, new { @class = "form-control" })
+                    </div>
+                </div>
+                <input id="addBt" class="btn btn-lg btn-primary mx-auto mt-4" type="button" value="Добавить" />
+                }
             </div>
-            <div class="mt-4">
-                @Html.LabelFor(x => x.Info)
-                @Html.TextAreaFor(x => x.Info, new { @class = "form-control" })
-
-            </div>
-            <input id="addBt" class="btn btn-lg btn-primary mx-auto mt-4" type="button" value="Добавить" />
-        }
-    </div>
-</div>
+        </div>
 
 

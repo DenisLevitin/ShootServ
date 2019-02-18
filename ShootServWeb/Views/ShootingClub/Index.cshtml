@@ -13,58 +13,67 @@
     <div>
         @using (Html.BeginForm("Add", "ShootingClub", FormMethod.Post, new { id = "addform" }))
         {
-        <div class="form-group">
-            <div class="row mt-4">
-                <div class="col-lg-6 col-xs-12">
-                    <label for="idCountry">Страна</label>
-                    @Html.DropDownList("idCountry", Model.Countries, new {@class = "form-control" })   
-                </div>
-                <div class="col-lg-6 col-xs-12">
-                    <label for="idRegion">Регион</label>
-                    <div id="tdRegion">
-                        @Html.DropDownList("idRegion", Model.Regions, new {@class = "form-control" })  
+            <div class="form-group">
+                <div class="row mt-4">
+                    <div class="col-lg-6 col-xs-12">
+                        <label for="idCountry">Страна</label>
+                        @Html.DropDownList("idCountry", Model.Countries, new { @class = "form-control" })
                     </div>
-                </div>
+                    <div class="col-lg-6 col-xs-12">
+                        <label for="idRegion">Регион</label>
+                        <div id="tdRegion">
+                            @Html.DropDownList("idRegion", Model.Regions, new { @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
             </div>
 
-                <div class="form-group">
-                    <div class="row mt-4">
-                        <div class="col-lg-6 col-xs-12">
-                            @Html.LabelFor(x => x.SavingShooterClub.Name)
-                            @Html.TextBoxFor(x => x.SavingShooterClub.Name, new { @Name = "name", @Id = "name", @class = "form-control" })
-                        </div>
-                        <div class="col-lg-6 col-xs-12">
-                            @Html.LabelFor(x => x.SavingShooterClub.IdShootingRange)
-                            <div id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges, new { @Name = "idShootingRange", @Id = "idShootingRange", @class = "form-control" })</div>
-                        </div>
+            <div class="form-group">
+                <div class="row mt-4">
+                    <div class="col-lg-6 col-xs-12">
+
+                        @Html.LabelFor(x => x.SavingShooterClub.Name)
+
+                        @Html.TextBoxFor(x => x.SavingShooterClub.Name, new { @Name = "name", @Id = "name", @class = "form-control" })
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-lg-6 col-xs-12">
-                            @Html.LabelFor(x => x.SavingShooterClub.Phone)
-                            @Html.TextBoxFor(x => x.SavingShooterClub.Phone, new { @Name = "phone", @Id = "phone", @class = "form-control" })
+                    <div class="col-lg-6 col-xs-12">
+                        <div class="row">
+                            <div class="col-lg-6 col-xs-12">
+                                @Html.LabelFor(x => x.SavingShooterClub.IdShootingRange)
+                            </div>
+                            <div class="col-lg-6 col-xs-12 text-right">
+                                <a href="@Url.Action("Index", "ShootingRange")"  target="blank">Добавить тир</a>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-xs-12 ">
-                            @Html.LabelFor(x => x.SavingShooterClub.MainCoach)
-                            @Html.TextBoxFor(x => x.SavingShooterClub.MainCoach, new { @Name = "mainCoach", @Id = "mainCoach", @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="row justify-content-center mt-4">
-                        <div class="col-lg-8 col-xs-12">
-                            @Html.LabelFor(x => x.SavingShooterClub.Address)
-                            @Html.TextAreaFor(x => x.SavingShooterClub.Address, new { @Name = "address", @Id = "address", @class = "form-control" })
-                        </div>
+                        <div id="tdShootingRange">@Html.DropDownListFor(x => x.SavingShooterClub.IdShootingRange, Model.ShootingRanges, new { @Name = "idShootingRange", @Id = "idShootingRange", @class = "form-control" })</div>
                     </div>
                 </div>
-                <input id="addBt" class="btn btn-lg btn-primary mx-auto" type="button" value="Добавить">
-                }
+                <div class="row mt-4">
+                    <div class="col-lg-6 col-xs-12">
+                        @Html.LabelFor(x => x.SavingShooterClub.Phone)
+                        @Html.TextBoxFor(x => x.SavingShooterClub.Phone, new { @Name = "phone", @Id = "phone", @class = "form-control" })
+                    </div>
+                    <div class="col-lg-6 col-xs-12 ">
+                        @Html.LabelFor(x => x.SavingShooterClub.MainCoach)
+                        @Html.TextBoxFor(x => x.SavingShooterClub.MainCoach, new { @Name = "mainCoach", @Id = "mainCoach", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-4">
+                    <div class="col-lg-8 col-xs-12">
+                        @Html.LabelFor(x => x.SavingShooterClub.Address)
+                        @Html.TextAreaFor(x => x.SavingShooterClub.Address, new { @Name = "address", @Id = "address", @class = "form-control" })
+                    </div>
+                </div>
             </div>
-        </div>
+            <input id="addBt" class="btn btn-lg btn-primary mx-auto" type="button" value="Добавить">
+        }
+    </div>
+</div>
 
 <div id="divShowShow" class="instr" style="width: 1000px; padding: 0;">
     <div id="divShowClab" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"> </div>
     <div id="divShowClabHidden" style="display: none;">
-        <div >
+        <div>
             <div id="list" style="height: 90%">
             </div>
         </div>
