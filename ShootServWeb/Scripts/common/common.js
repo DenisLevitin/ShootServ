@@ -18,6 +18,14 @@
             }
         });
     }
+
+    $.ajaxSetup({
+        statusCode: {
+            401: function(){ // выполнить функцию если код ответа HTTP 401
+                showInfo("пользователь не авторизован");
+            }
+        }
+    });
 })();
 
 function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
