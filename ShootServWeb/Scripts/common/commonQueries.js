@@ -1,17 +1,19 @@
 // Получить список регионов по стране ( это много где копируется )
-function getRegions(idCountry, tagName, callback) {
+function getRegions(idCountry) {
+    var result = null;
     $.ajax({
         url: linksCommon.GetRegions + '/' + idCountry,
         dataType: "html",
         type: "GET",
         async: false,
         success: function (data) {
-            callback(data);
+            result = data;
         },
         error: function () {
             showError("Ошибка ajax");
         }
     });
+    return result;
 }
 
 // Получить список стрелковых клубов в регионе

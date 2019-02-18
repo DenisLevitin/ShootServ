@@ -23,7 +23,7 @@
 function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
 {
     var selectElement = $(select);
-    select.html("");
+    selectElement.html("");
 
     if (!json) {
         return;
