@@ -9,15 +9,16 @@
 
 <h3>Создание и просмотр тиров</h3>
 
-<div id="divShootingRange" style="margin-top: 15px; width: 100%;">
-    <div id="divDiv" class="instr" style="width: 1000px; padding: 0;">
-        <div id="divAddShootingRange" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"></div>
+<div id="divShootingRange">
+    <div id="divDiv" class="instr">
+        <div id="divAddShootingRange" class="addListStyle"></div>
             @Html.Partial("Add", Model)
     </div>
 </div>
 
  @Html.Label("region-choise", "Регион")
  @Html.DropDownList("region-choise", Model.Regions)
+
  <div id="list" style="margin-top: 15px; width: 100%; height: 80%;">
     <div id="divDiv1" class="instr" style="width: 1000px; padding: 0;">
         <div id="divShowShootingRange" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"></div>
