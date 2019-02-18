@@ -1,11 +1,12 @@
 ﻿@model ShootServ.Models.ShootingRange.ShootingRangeModelParams
 
-@using (Html.BeginForm("Add", "ShootingRange", FormMethod.Post, new { id = "addform"}))
+@using (Html.BeginForm("Add", "ShootingRange", FormMethod.Post, new { id = "addform" }))
 {
 
-
-    @Html.LabelFor(x => x.Name)
-    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <div class="mt-4">
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    </div>
     <div class="row mt-4">
         <div class="col-lg-6 col-xs-12">
             @Html.LabelFor(x => x.CountryId)
