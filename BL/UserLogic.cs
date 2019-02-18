@@ -49,7 +49,7 @@ namespace BL
         /// <param name="login">логин</param>
         /// <param name="password">пароль</param>
         /// <returns></returns>
-        public ResultInfoRef<UserParams> Authentification(string login, string password)
+        public ResultInfoRef<UserParams> GetUserByLoginAndPassword(string login, string password)
         {
             var res = new ResultInfoRef<UserParams>() {Data = null};
 
@@ -73,7 +73,7 @@ namespace BL
         /// </summary>
         /// <param name="password"></param>
         /// <returns></returns>
-        private string HashPassword(string password)
+        private static string HashPassword(string password)
         {
             var bytes = Encoding.ASCII.GetBytes(password);
             var md5 = MD5.Create();

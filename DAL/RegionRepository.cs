@@ -46,29 +46,18 @@ namespace DAL
         /// Получить список регионов
         /// </summary>
         /// <returns></returns>
-        public List<RegionParams> GetAll()
+        public List<RegionParams> GetByCountry(int? idCountry)
         {
             using (var db = DBContext.GetContext())
             {
-                var query = db.Regions.OrderBy(x => x.Name).ToList();
-                return query.ConvertAll(Convert);
-            }
-        }
-
-        /// <summary>
-        /// Получить список регионов
-        /// </summary>
-        /// <returns></returns>
-        public List<RegionParams> GetByCountry(int idCountry)
-        {
-            using (var db = DBContext.GetContext())
-            {
-                var query = (from region in db.Regions
-                             join country in db.Countries on region.IdCountry equals country.Id
-                             where country.Id == idCountry
-                             select region).ToList();
-
-                return query.ConvertAll(Convert);
+                var query = db.Regions.AsQueryable();
+                if (idCountry.HasValue)
+                {
+                    query = query.Where(x => x.IdCountry == idCountry);
+                }
+                
+                var data = query.OrderBy(x=>x.IdCountry).ThenBy(x=>x.Name).ToList();
+                return data.Select(Convert).ToList();
             }
         }
 
