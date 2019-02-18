@@ -2,6 +2,7 @@
 using BL;
 using BO;
 using ShootServ.Helpers;
+using ShootServ.Models;
 using ShootServ.Models.ShootingRange;
 
 namespace ShootServ.Controllers
@@ -17,7 +18,11 @@ namespace ShootServ.Controllers
         
         public ActionResult Index()
         {
-            var model = new ShootingRangeModelParams();            
+            var model = new ShootingRangeModelParams
+            {
+                Countries = StandartClassifierModelLogic.GetCountryList()
+            };
+
             return View("Index", model);
         }
 
@@ -27,7 +32,7 @@ namespace ShootServ.Controllers
             var model = _shootingRangeLogic.GetByRegion(idRegion);
             return new JsonResult() { Data = model, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
-
+        
         [CustomAuthorize]
         [HttpPost]
         public ActionResult Add(ShootingRangeModelParams model)
@@ -53,6 +58,12 @@ namespace ShootServ.Controllers
             return new JsonResult { Data = new { IsOk = false, Message = string.Empty, ValidationMessages = ModelState.ToErrorsDictionary()}, JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
 
+        public ActionResult List()
+        {
+            ViewBag.Regions = StandartClassifierModelLogic.GetRegionsByCountry(1);
+            return View("List");
+        }
+        
         [CustomAuthorize]
         [HttpPost]
         public ActionResult Delete(int idShootingRange)
