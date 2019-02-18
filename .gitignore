@@ -145,8 +145,5 @@
 /packages/WebActivator.1.0.0.0/*.nupkg
 .vs\ShootServ\v15\.suo
 .vs\ShootServ\v15\Server\sqlite3\storage.ide
-/ShootServWeb/bin/Newtonsoft.Json.xml
-/ShootServWeb/bin/ShootServ.dll.config
-/ShootServWeb/bin/System.Net.Http.Formatting.xml
-/ShootServWeb/bin/System.Web.Http.WebHost.xml
-/ShootServWeb/bin/System.Web.Http.xml
+/ShootServWeb/bin/**/**.*
+/.vs/ShootServ/15/.suo
