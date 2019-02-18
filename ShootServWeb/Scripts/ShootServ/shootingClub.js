@@ -78,6 +78,7 @@ $(document).ready(function () {
         });
 
     actor.changeCountry();
+    actor.changeRegion();
 });
 
 var renderClubs = function (data) {
