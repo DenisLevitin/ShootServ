@@ -49,6 +49,7 @@ $(document).ready(function ()
                     url: linksShootingRange.Add,
                     dataType: "json",
                     data: $("form").serialize(),
+                    method: "POST",
                     async: false,
                     success: function (data) {
                         if (data.IsOk) {
