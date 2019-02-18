@@ -88,9 +88,8 @@ var registrationActor = function () {
     // Изменить страну
     this.changeCountry = function() {
         var idCountry = $("#idCountry").val();
-        getRegions(idCountry, "idRegion", function (data) {
-            $("#tdRegionsList").html(data);
-        });
+        var regions = getRegions(idCountry, $("#idRegion"));
+        renderJsonArrayToSelect(idRegion, "Id", "Name", regions);
     };
 
     // Изменить регион
