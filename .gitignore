@@ -1,5 +1,5 @@
 *.cache
-
+/.vs
 *.dll
 *pdb
 /BO/obj/Debug/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
@@ -145,7 +145,7 @@
 /packages/WebActivator.1.0.0.0/*.nupkg
 .vs\ShootServ\v15\.suo
 .vs\ShootServ\v15\Server\sqlite3\storage.ide
-/ShootServWeb/bin/**/**.*
+/ShootServWeb/bin/*.**
 /.vs/ShootServ/15/.suo
 /ShootServWeb/bin/AttributeRouting.Web.Http.WebHost.xml
 /ShootServWeb/bin/AttributeRouting.Web.Http.xml
