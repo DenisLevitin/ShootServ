@@ -13,13 +13,15 @@ namespace ShootServ
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            LoggerConfig.RegisterLogger();
+            AutofaqConfig.Configure();
+            
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
-
+            
             //var binder = new ModelDateBinder(new CultureInfo("ru-RU").DateTimeFormat.ShortDatePattern);
             //ModelBinders.Binders.Add(typeof(DateTime), binder);
             //ModelBinders.Binders.Add(typeof(DateTime?), binder);

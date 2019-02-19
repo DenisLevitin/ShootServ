@@ -107,7 +107,7 @@ namespace BL
                             if (!queryExistLogin)
                             {
                                 res.Data = _dalUser.Create(user);
-                                
+
                                 // Посылаем e-mail счастливому пользователю
                                 string body = $@"Уважаемый пользователь, вы зарегистрировались на сервисе www.shoot-serv.ru
                                                  Через него вы можете подавать заявки на соревнования, либо создавать их и отслеживать список заявленных. 
@@ -174,7 +174,7 @@ namespace BL
                 {
                     res.Data = queryAddUser.Data;
                     shooter.IdUser = queryAddUser.Data;
-                    
+
                     var addResult = _blShooter.Add(shooter);
                     res.Result = addResult.Result;
                     if (res.Result.IsOk)
@@ -264,23 +264,19 @@ namespace BL
                     string newPassword = PasswordHelper.GetRandomPassword();
 
                     // Сохраняем новый пароль в таблицу неактивированных паролей
-                    var queryRecAdd = _recoveryPasswordsLogic.QueryForRecoveryPassword(user.Id, HashPassword(newPassword));
-                    if (queryRecAdd.Result.IsOk)
+                    var queryRecovery = _recoveryPasswordsLogic.QueryForRecoveryPassword(user.Id, HashPassword(newPassword));
+                    // неактивированный пароль отправляем на e-mail пользователя
+
+                    string subject = "Восстановление пароля на shoot-serv";
+
+                    string url = $"http://shoot-serv-ru.1gb.ru/Account/RecoveryPassword?idUser={user.Id}&idRec={queryRecovery}";
+                    string body = $"Вы выслали запрос на восстановление пароля на сервисе shoot-serv для вашего логина {login}. Ваш новый пароль {newPassword}. Для активации пароля перейдите по следующей ссылке {url}";
+
+                    var sendResult = EmailSender.EmailHelper.SendMail(email, subject, body);
+                    if (!sendResult)
                     {
-                        // неактивированный пароль отправляем на e-mail пользователя
-
-                        string subject = "Восстановление пароля на shoot-serv";
-
-                        string url = $"http://shoot-serv-ru.1gb.ru/Account/RecoveryPassword?idUser={user.Id}&idRec={queryRecAdd.Data}";
-                        string body = $"Вы выслали запрос на восстановление пароля на сервисе shoot-serv для вашего логина {login}. Ваш новый пароль {newPassword}. Для активации пароля перейдите по следующей ссылке {url}";
-
-                        var sendResult = EmailSender.EmailHelper.SendMail(email, subject, body);
-                        if (!sendResult)
-                        {
-                            /// TODO: Как - нибудь в лог запихнуть результат
-                        }
+                        /// TODO: Как - нибудь в лог запихнуть результат
                     }
-                    else res = queryRecAdd.Result;
                 }
                 else
                 {
