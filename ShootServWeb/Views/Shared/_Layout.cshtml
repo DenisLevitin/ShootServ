@@ -87,8 +87,7 @@
             <main role="main" class="container">
                 @RenderBody()
             </main>
-            <table id="list"><tr><td></td></tr></table>
-            <div id="pager"></div>
+
         </div>
 
         <footer class="blog-footer">
@@ -153,31 +152,6 @@
             }
         </script>
 
-        <script type="text/javascript">
-            $(function () {
-                $("#list").jqGrid({
-                    url: linksShootingRange.GetListByRegion,
-                    datatype: 'JSON',
-                    mtype: 'GET',
-                    colNames: ['Тир', 'Телефон', 'Регион', 'Адрес'],
-                    colModel: [
-                        { name: 'Name', "label": 'Name', "sortable": true },
-                        { name: 'Phone', "label": 'phone', "sortable": false },
-                        { name: 'RegionName', "label": 'RegionName', "sortable": true, "sorttype": "string" },
-                        { name: 'Address',"sortable": false }
-                    ],
-                               styleUI: 'Bootstrap',
-                    rowNum: 10,
-                    rowList: [10, 20, 30],
-                    gridview: true,
-                    autoencode: true,
-                    viewrecords: true,
-                    height: 250,
-                    rowNum: 20,
-                    autoWidth: true
-             
-                });
-            });
-        </script>
+
     </body>
 </html>
