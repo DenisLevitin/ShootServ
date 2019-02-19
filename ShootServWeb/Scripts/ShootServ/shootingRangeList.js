@@ -2,15 +2,14 @@ $(document).ready(function () {
     var actor = new shootingRangeListActor();
 
     actor.changeRegion();
-    $(document).on("change", "#region-choise", function ()
-    {
+    $(document).on("change", "#region-choise", function () {
         actor.changeRegion();
     });
 
     // Клик на ссылке удалить тир
     $(document).on("click", ".delRange", function () {
 
-        if ( isAuthorize) {
+        if (isAuthorize) {
             var a = $(this);
             var tr = a.closest("tr");
             var id = a.attr("idShootRange");
@@ -18,7 +17,7 @@ $(document).ready(function () {
             $.ajax({
                 url: linksShootingRange.Delete,
                 dataType: "json",
-                data: {idShootingRange: id},
+                data: { idShootingRange: id },
                 async: false,
                 success: function (data) {
                     if (data.IsOk) {
@@ -37,15 +36,11 @@ $(document).ready(function () {
     });
 });
 
-
-
-
+var shootingRangeListActor = function () {
 
     // Получить список тиров по региону
-    this.getListByRegion = function(idRegion)
-    {
+    this.getListByRegion = function (idRegion) {
         var rez;
-        if (idRegion) {
             $.ajax({
                 url: linksShootingRange.GetListByRegion,
                 dataType: "json",
@@ -55,66 +50,56 @@ $(document).ready(function () {
                     /// TODO: в data json, надо построить в listShootingRanges таблицу
                     rez = data;
                 },
-                error: function ()
-                {
+                error: function () {
                     showError("Ошибка ajax");
                 }
             });
-        }
+        
         return rez;
-};
+    };
 
     //таблица JQGrid
-//очистить
-this.clearTable = function () {
-    $(".gridContainer").html('<table id="list"><tr><td></td></tr></table>');
-};
+    //очистить
+    this.clearTable = function () {
+        $(".gridContainer").html('<table id="list"><tr><td></td></tr></table>');
+    };
 
-//создать
-this.createGrid = function (ranges) {
-    clearTable();
-    $("#list").jqGrid({
-        datatype: "local",
-        data: ranges,
-        colNames: ['Тир', 'Телефон', 'Регион', 'Адрес'],
-        colModel: [
-            { name: 'Name', "label": 'Name', "sortable": true },
-            { name: 'Phone', "label": 'phone', "sortable": false },
-            { name: 'RegionName', "label": 'RegionName', "sortable": true, "sorttype": "string" },
-            { name: 'Address', "sortable": false }
-        ],
-        styleUI: 'Bootstrap',
-
-
-        gridview: true,
-        autoencode: true,
-        viewrecords: true,
-        
-        loadonce: true,
-        
-        shrinkToFit: true,
-        postData: { expediente: "expediente" },
-        sortorder: 'desc',
-        autorowheight: true,
-        autoheight: false,
-        autowidth: true,
-        columnsresize: true,
-        forceFit: true,
-        hidegrid: true
-
-    });
-};
-
-var shootingRangeListActor = function () {
+    //создать
+    this.createGrid = function (ranges) {
+        this.clearTable();
+        $("#list").jqGrid({
+            datatype: "local",
+            data: ranges,
+            colNames: ['Тир', 'Телефон', 'Регион', 'Адрес'],
+            colModel: [
+                { name: 'Name', "label": 'Name', "sortable": true },
+                { name: 'Phone', "label": 'phone', "sortable": false },
+                { name: 'RegionName', "label": 'RegionName', "sortable": true, "sorttype": "string" },
+                { name: 'Address', "sortable": false }
+            ],
+            styleUI: 'Bootstrap',
+            gridview: true,
+            autoencode: true,
+            viewrecords: true,
+            loadonce: true,
+            shrinkToFit: true,
+            postData: { expediente: "expediente" },
+            sortorder: 'desc',
+            autorowheight: true,
+            autoheight: false,
+            autowidth: true,
+            columnsresize: true,
+            forceFit: true,
+            hidegrid: true
+        });
+    };
 
     // Нужно вызвать эту функцию при изменении региона
     this.changeRegion = function () {
         var idRegion = $("#region-choise").val();
-        if (idRegion) {
-            var rages = getListByRegion(idRegion);
-            createGrid(rages);
-        }
-        };
+            var rages = this.getListByRegion(idRegion);
+            this.createGrid(rages);
+    };
 
     this.construct = function () {
     };
