@@ -1,5 +1,9 @@
 ﻿using System.Configuration;
+using System.IO;
+using System.Web;
 using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 
 namespace ShootServ
 {
@@ -9,7 +13,8 @@ namespace ShootServ
         {
             var configuration = new LoggerConfiguration();
             configuration.MinimumLevel.Debug();
-            configuration.WriteTo.File(ConfigurationManager.AppSettings["LogFilePath"]);
+            var path = Path.Combine( HttpRuntime.AppDomainAppPath, ConfigurationManager.AppSettings["LogFilePath"]);          
+            configuration.WriteTo.File(path, levelSwitch: new LoggingLevelSwitch(LogEventLevel.Error));
             Log.Logger = configuration.CreateLogger();
         }
     }
