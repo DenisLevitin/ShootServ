@@ -90,8 +90,8 @@ this.createGrid = function (ranges) {
         autoencode: true,
         viewrecords: true,
         
-      
-     
+        loadonce: true,
+        
         shrinkToFit: true,
         postData: { expediente: "expediente" },
         sortorder: 'desc',
