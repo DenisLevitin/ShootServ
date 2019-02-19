@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using BL;
 using Newtonsoft.Json;
+using Serilog;
 using ShootingCompetitionsRequests.Models;
 using ShootServ.Models.Cup;
 
@@ -15,7 +16,7 @@ namespace ShootServ.Controllers
         private readonly CupModelLogic _modelLogic;
         private readonly CupLogic _cupLogic;
         
-        public CupController()
+        public CupController(ILogger logger) : base(logger)
         {
             _modelLogic = new CupModelLogic();
             _cupLogic = new CupLogic();

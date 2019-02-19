@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using BL;
 using BO;
+using Serilog;
 using ShootServ.Helpers;
 using ShootServ.Models;
 using ShootServ.Models.ShootingRange;
@@ -11,7 +12,7 @@ namespace ShootServ.Controllers
     {
         private readonly ShootingRangeLogic _shootingRangeLogic;
 
-        public ShootingRangeController()
+        public ShootingRangeController(ILogger logger) : base(logger)
         {
             _shootingRangeLogic = new ShootingRangeLogic();
         }
