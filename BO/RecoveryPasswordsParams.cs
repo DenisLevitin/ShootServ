@@ -5,13 +5,8 @@ namespace BO
     /// <summary>
     /// Запись из пула паролей для восстановления
     /// </summary>
-    public class RecoveryPasswordsParams
+    public class RecoveryPasswordsParams : ModelBase
     {
-        /// <summary>
-        /// Ид. записи
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Пароль
         /// </summary>
