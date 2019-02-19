@@ -84,16 +84,24 @@ this.createGrid = function (ranges) {
             { name: 'Address', "sortable": false }
         ],
         styleUI: 'Bootstrap',
-        rowNum: 10,
-        rowList: [10, 20, 30],
+
+
         gridview: true,
         autoencode: true,
         viewrecords: true,
-        height: 200,
-        autoWidth: true,
-        autowidth: true,
+        
+      
+     
         shrinkToFit: true,
-        postData: { expediente: "expediente" }
+        postData: { expediente: "expediente" },
+        sortorder: 'desc',
+        autorowheight: true,
+        autoheight: false,
+        autowidth: true,
+        columnsresize: true,
+        forceFit: true,
+        hidegrid: true
+
     });
 };
 
