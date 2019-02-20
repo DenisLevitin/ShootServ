@@ -43,11 +43,11 @@
             <div class="row mt-4">
                 <div class="col-lg-6 col-xs-12">
                     @Html.LabelFor(x => x.Address)
-                    @Html.TextAreaFor(x => x.Address, new { @class = "form-control" })
+                    @Html.TextAreaFor(x => x.Address, new { @class = "form-control", @rows = 5 })
                 </div>
                 <div class="col-lg-6 col-xs-12">
                     @Html.LabelFor(x => x.Info)
-                    @Html.TextAreaFor(x => x.Info, new { @class = "form-control" })
+                    @Html.TextAreaFor(x => x.Info, new { @class = "form-control", @rows = 5 })
                     </div>
                 </div>
                 <input id="addBt" class="btn btn-lg btn-primary mx-auto mt-4" type="button" value="Добавить" />
