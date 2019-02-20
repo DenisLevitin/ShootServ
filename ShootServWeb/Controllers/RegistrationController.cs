@@ -9,6 +9,7 @@ using ShootServ.Models.Registration;
 
 namespace ShootServ.Controllers
 {
+    [AllowAnonymous]
     public class RegistrationController : BaseController
     {
         private readonly ShooterCategoryLogic _categoryLogic;
