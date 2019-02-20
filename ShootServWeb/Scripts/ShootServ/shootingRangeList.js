@@ -40,7 +40,7 @@ var shootingRangeListActor = function () {
 
     // Получить список тиров по региону
     this.getListByRegion = function (idRegion) {
-        var rez;
+        var result;
             $.ajax({
                 url: linksShootingRange.GetListByRegion,
                 dataType: "json",
@@ -48,14 +48,14 @@ var shootingRangeListActor = function () {
                 async: false,
                 success: function (data) {
                     /// TODO: в data json, надо построить в listShootingRanges таблицу
-                    rez = data;
+                    result = data;
                 },
                 error: function () {
                     showError("Ошибка ajax");
                 }
             });
         
-        return rez;
+        return result;
     };
 
     //таблица JQGrid
@@ -65,10 +65,11 @@ var shootingRangeListActor = function () {
     };
    
     //создать
-    this.createGrid = function (ranges) {
+    this.createGrid = function (shootingRanges) {
+        var JQGRIG_SETTINGS = getJQGridSettings();
         var JQGridProperties = Object.assign({
             datatype: "local",
-            data: ranges,
+            data: shootingRanges,
             colNames: ['Тир', 'Телефон', 'Регион', 'Адрес'],
             colModel: [
                 { name: 'Name', "label": 'Name', "sortable": true },
@@ -76,7 +77,7 @@ var shootingRangeListActor = function () {
                 { name: 'RegionName', "label": 'RegionName', "sortable": true, "sorttype": "string" },
                 { name: 'Address', "sortable": false }
             ]
-        }, window.common.JQGRID_PARAMETRES);
+        }, JQGRIG_SETTINGS);
         
 
         this.clearTable();
@@ -87,8 +88,8 @@ var shootingRangeListActor = function () {
     // Нужно вызвать эту функцию при изменении региона
     this.changeRegion = function () {
         var idRegion = $("#region-choise").val();
-            var rages = this.getListByRegion(idRegion);
-            this.createGrid(rages);
+            var shootingClubs = this.getListByRegion(idRegion);
+        this.createGrid(shootingClubs);
     };
 
     this.construct = function () {

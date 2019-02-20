@@ -49,19 +49,21 @@ function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
     });
 }
 
-window.common.JQGRID_PARAMETRES = {
-    styleUI: 'Bootstrap',
-    gridview: true,
-    autoencode: true,
-    viewrecords: true,
-    loadonce: true,
-    shrinkToFit: true,
-    postData: { expediente: "expediente" },
-    sortorder: 'desc',
-    autorowheight: true,
-    autoheight: true,
-    autowidth: true,
-    columnsresize: true,
-    forceFit: true,
-    hidegrid: true
+var getJQGridSettings = function () {
+    return {
+        styleUI: 'Bootstrap',
+        gridview: true,
+        autoencode: true,
+        viewrecords: true,
+        loadonce: true,
+        shrinkToFit: true,
+        postData: { expediente: "expediente" },
+        sortorder: 'desc',
+        autorowheight: true,
+        autoheight: true,
+        autowidth: true,
+        columnsresize: true,
+        forceFit: true,
+        hidegrid: true
+    };
 };
