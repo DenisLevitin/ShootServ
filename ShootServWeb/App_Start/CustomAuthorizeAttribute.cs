@@ -1,15 +1,9 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace ShootServ
 {
     public class CustomAuthorizeAttribute : AuthorizeAttribute
     {
-        protected override bool AuthorizeCore(HttpContextBase httpContext)
-        {
-            return httpContext.Session["user"] != null;
-        }
-
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             if (!filterContext.RequestContext.HttpContext.Request.IsAjaxRequest())
@@ -18,7 +12,8 @@ namespace ShootServ
             }
             else
             {
-                filterContext.RequestContext.HttpContext.Response.StatusCode = 401;
+                filterContext.Result = new HttpStatusCodeResult(401);
+                filterContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
             }
         }
     }

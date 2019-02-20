@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using BL;
 using ShootingCompetitionsRequests.Models;
 
@@ -20,17 +21,17 @@ namespace ShootServ.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 var userLogic = new UserLogic();
-                var query = userLogic.Authentification(model.UserName, model.Password);
+                var query = userLogic.GetUserByLoginAndPassword(model.UserName, model.Password);
                 if (query.Result.IsOk)
                 {
                     // аутентификация произошла успешно
                     Session["user"] = query.Data;
+                    FormsAuthentication.SetAuthCookie(model.UserName, false);
                     return RedirectToLocal(returnUrl);
                 }
                 else
