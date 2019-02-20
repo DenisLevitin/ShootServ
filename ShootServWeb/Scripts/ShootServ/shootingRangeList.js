@@ -86,7 +86,7 @@ var shootingRangeListActor = function () {
             postData: { expediente: "expediente" },
             sortorder: 'desc',
             autorowheight: true,
-            autoheight: false,
+            autoheight: true,
             autowidth: true,
             columnsresize: true,
             forceFit: true,
