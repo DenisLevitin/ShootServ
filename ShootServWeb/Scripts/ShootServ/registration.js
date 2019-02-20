@@ -9,7 +9,12 @@ $(document).ready(function() {
     }
 
     $.datepicker.setDefaults($.datepicker.regional['ru']);
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker(
+        $("#anim").on("change", function () {
+            $("#datepicker").datepicker("option", "showAnim", $(this).val());
+        })
+    );
+
 
     $(document).on("change", "#idCountry", function () {
         actor.changeCountry();
@@ -74,7 +79,8 @@ $(document).ready(function() {
 });
 
 var registrationActor = function () {
-
+    var inputRegions = $("#idRegion");
+    var inputCountry = $("#idCountry");
     this.registrationFormShifterByName = function (idRole) {
         if ( idRole == roles.shooterRoleId)
         {
@@ -87,15 +93,18 @@ var registrationActor = function () {
     
     // Изменить страну
     this.changeCountry = function() {
-        var idCountry = $("#idCountry").val();
-        var regions = getRegions(idCountry, $("#idRegion"));
-        renderJsonArrayToSelect(idRegion, "Id", "Name", regions);
+        var idCountry = inputCountry.val();
+        var regions = getRegions(idCountry, inputRegions);
+        renderJsonArrayToSelect(inputRegions, "Id", "Name", regions);
+        var idRegion = inputRegions.val();
+        var shootingClubs = getShootingClubs(idCountry, idRegion);
+        this.renderClubs(shootingClubs);
     };
 
     // Изменить регион
     this.changeRegion = function() {
-        var idRegion = $("#idRegion").val();
-        var idCountry = $("#idCountry").val();
+        var idRegion = inputRegions.val();
+        var idCountry = inputCountry.val();
         var shootingClubs = getShootingClubs(idCountry, idRegion);
         this.renderClubs(shootingClubs);
     };
