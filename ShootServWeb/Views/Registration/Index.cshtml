@@ -26,23 +26,23 @@ else
                 @Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
                 @Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList, new { id = "idRole", @Name = "idRole", @class = "form-control" })
                 @Html.LabelFor(x => x.PostModel.Name, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Name, new { id = "name", @Name = "name", @class = "form-control" })
+                @Html.TextBoxFor(x => x.PostModel.Name, new { id = "name", @Name = "name", @class = "form-control", @required="true" })
 
                 @Html.LabelFor(x => x.PostModel.FatherName, new { @class = "mt-4" })
                 @Html.TextBoxFor(x => x.PostModel.FatherName, new { id = "fatherName", @Name = "fatherName", @class = "form-control" })
                 @Html.LabelFor(x => x.PostModel.Family, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Family, new { id = "family", @Name = "family", @class = "form-control" })
+                @Html.TextBoxFor(x => x.PostModel.Family, new { id = "family", @Name = "family", @class = "form-control", @required = "true" })
                 @Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
-                @Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id = "sex", @Name = "sex", @class = "form-control" })
-                @Html.LabelFor(x => x.PostModel.Login, new { @class = "mt-4" })
+                @Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id = "sex", @Name = "sex", @class = "form-control", @required = "true" })
+                @Html.LabelFor(x => x.PostModel.Login, new { @class = "mt-4"})
 
-                @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control" })
+                @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control", @required = "true" })
                 @Html.LabelFor(x => x.PostModel.Password, new { @class = "mt-4" })
-                @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control" })
+                @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control", @required = "true" , @type="password"})
                 @Html.Label("Повторите пароль", new { @class = "mt-4" })
-                @Html.Password("password2", "", new { @class = "form-control" })
+                @Html.Password("password2", "", new { @class = "form-control", @required = "true", @type = "password" })
                 @Html.LabelFor(x => x.PostModel.Email, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control" })
+                @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control", @required = "true", @type = "email" })
 
             </div>
 
@@ -52,7 +52,7 @@ else
                 @Html.Label("Регион", new { @class = "mt-4" })
                 <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
                 @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday" })
+                @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true", @type = "date" })
                 <div class="row">
                     <div class="col-sm-6">
                         @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-4" })
@@ -80,7 +80,7 @@ else
         }
         else
         {
-            <input type="button" class="btn btn-primary mt-4 " id="editBt" value="Сохранить" />
+            <input type="button" class="btn btn-primary mt-4 text" id="editBt" value="Сохранить" />
         }
     </div>
        

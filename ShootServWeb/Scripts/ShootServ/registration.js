@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
     var actor = new registrationActor();
-    $("#shooterTable").hide();
+    $("#divShooterInput").hide();
     
     if (isAuthorize) {
         var roleId = $("#idRole").val();
@@ -82,12 +82,12 @@ var registrationActor = function () {
     var inputRegions = $("#idRegion");
     var inputCountry = $("#idCountry");
     this.registrationFormShifterByName = function (idRole) {
-        if ( idRole == roles.shooterRoleId)
+        if ( idRole === roles.shooterRoleId)
         {
-            $("#shooterTable").show();
+            $("#divShooterInput").show();
         }
         else {
-            $("#shooterTable").hide();
+            $("#divShooterInput").hide();
         }
     };
     
