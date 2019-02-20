@@ -63,11 +63,10 @@ var shootingRangeListActor = function () {
     this.clearTable = function () {
         $(".gridContainer").html('<table id="list"><tr><td></td></tr></table>');
     };
-
+   
     //создать
     this.createGrid = function (ranges) {
-        this.clearTable();
-        $("#list").jqGrid({
+        var JQGridProperties = Object.assign({
             datatype: "local",
             data: ranges,
             colNames: ['Тир', 'Телефон', 'Регион', 'Адрес'],
@@ -76,22 +75,13 @@ var shootingRangeListActor = function () {
                 { name: 'Phone', "label": 'phone', "sortable": false },
                 { name: 'RegionName', "label": 'RegionName', "sortable": true, "sorttype": "string" },
                 { name: 'Address', "sortable": false }
-            ],
-            styleUI: 'Bootstrap',
-            gridview: true,
-            autoencode: true,
-            viewrecords: true,
-            loadonce: true,
-            shrinkToFit: true,
-            postData: { expediente: "expediente" },
-            sortorder: 'desc',
-            autorowheight: true,
-            autoheight: true,
-            autowidth: true,
-            columnsresize: true,
-            forceFit: true,
-            hidegrid: true
-        });
+            ]
+        }, window.common.JQGRID_PARAMETRES);
+        
+
+        this.clearTable();
+        //инициализация jqGrid
+        $("#list").jqGrid(JQGridProperties);
     };
 
     // Нужно вызвать эту функцию при изменении региона
