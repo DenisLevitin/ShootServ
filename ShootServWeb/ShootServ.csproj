@@ -355,7 +355,6 @@
     <Content Include="Scripts\ShootServ\registration.js" />
     <Content Include="Scripts\ShootServ\shootingClub.js" />
     <Content Include="Scripts\ShootServ\shootingRange.js" />
-    <Content Include="Scripts\ShootServ\shootingRangeList.js" />
     <Content Include="Views\Cup\CompetitionsList.cshtml" />
     <Content Include="Views\Cup\CupsList.cshtml" />
     <Content Include="Views\Cup\Index.cshtml" />
@@ -364,8 +363,8 @@
     <Content Include="Views\Shared\SignOutModal.cshtml" />
     <Content Include="Views\ShootingClub\Index.cshtml" />
     <Content Include="Views\ShootingClub\ListShootingClubs.cshtml" />
+    <Content Include="Views\ShootingRange\Add.cshtml" />
     <Content Include="Views\ShootingRange\Index.cshtml" />
-    <Content Include="Views\ShootingRange\List.cshtml" />
     <Content Include="Views\ViewCup\CompetitionsList.cshtml" />
     <Content Include="Views\ViewCup\EntryShootersList.cshtml" />
     <Content Include="Views\ViewCup\Index.cshtml" />

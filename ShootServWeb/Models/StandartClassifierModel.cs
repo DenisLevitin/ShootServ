@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using BL;
+using BO;
 
 namespace ShootServ.Models
 {
@@ -47,7 +48,7 @@ namespace ShootServ.Models
         /// Получить список регионов
         /// </summary>
         /// <returns></returns>
-        public static List<SelectListItem> GetRegionsByCountry(int? idCountry, bool addAll = true)
+        public static List<SelectListItem> GetRegionsByCountry(int idCountry, bool addAll = true)
         {
             var res = new List<SelectListItem>();
             if (addAll)

@@ -21,7 +21,17 @@ namespace BL
         /// </summary>
         public List<RegionParams> GetByCountry(int? idCountry)
         {
-            return _dalReginos.GetByCountry(idCountry);
+            return idCountry.HasValue ? _dalReginos.GetByCountry(idCountry.Value) : _dalReginos.GetAll();
+        }
+
+        /// <summary>
+        /// Получить регион по ид.
+        /// </summary>
+        /// <param name="idRegion">ид. региона</param>
+        /// <returns></returns>
+        public RegionParams Get(int idRegion)
+        {
+            return _dalReginos.Get(idRegion);
         }
 
         /// <summary>

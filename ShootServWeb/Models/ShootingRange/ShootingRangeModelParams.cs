@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using BL;
+using ShootingCompetitionsRequests.Models;
 
 namespace ShootServ.Models.ShootingRange
 {
@@ -76,8 +78,9 @@ namespace ShootServ.Models.ShootingRange
 
         public ShootingRangeModelParams()
         { 
-            Countries = new List<SelectListItem>();
-            Regions = new List<SelectListItem>();
+            Countries = StandartClassifierModelLogic.GetCountryList();
+            Regions = StandartClassifierModelLogic.GetRegionsByCountry(1); /// TODO : HardCode
         }
+
     }
 }
