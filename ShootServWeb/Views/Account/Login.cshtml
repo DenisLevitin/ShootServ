@@ -11,14 +11,12 @@
     @Html.ValidationSummary(true)
 
     <div class="form-group">
-        <div class="row mt-4">
+        <div class="row mt-4 justify-content-center">
             <div class="col-lg-6 col-xs-12">
-                @Html.LabelFor(m => m.UserName)
+                @Html.LabelFor(m => m.UserName, new { @Class = "mt-4"})
                 @Html.TextBoxFor(m => m.UserName, new { @Class = "form-control", @Placeholder="Введите, пожалуйста, Ваше имя или E-mail " })
                 @Html.ValidationMessageFor(m => m.UserName)
-            </div>
-            <div class="col-lg-6 col-xs-12">
-                @Html.LabelFor(m => m.Password)
+                @Html.LabelFor(m => m.Password, new { @Class = "mt-4" })
                 @Html.PasswordFor(m => m.Password, new { @Class = "form-control", @Placeholder = "Введите, пожалуйста, Ваш пароль"})
                 @Html.ValidationMessageFor(m => m.Password)
             </div>

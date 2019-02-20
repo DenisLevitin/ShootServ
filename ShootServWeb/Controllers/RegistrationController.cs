@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.Security;
 using BL;
 using BO;
 using Serilog;
@@ -149,6 +150,7 @@ namespace ShootServ.Controllers
                 if (user != null)
                 {
                     Session["user"] = user;
+                    FormsAuthentication.SetAuthCookie(user.Login, false);
                 }
             }
 
