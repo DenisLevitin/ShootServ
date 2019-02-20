@@ -3,11 +3,13 @@ using System.Linq;
 using System.Web.Mvc;
 using BL;
 using BO;
+using Serilog;
 using ShootServ.Models;
 using ShootServ.Models.Registration;
 
 namespace ShootServ.Controllers
 {
+    [AllowAnonymous]
     public class RegistrationController : BaseController
     {
         private readonly ShooterCategoryLogic _categoryLogic;
@@ -17,7 +19,7 @@ namespace ShootServ.Controllers
         private readonly CountryLogic _countryLogic;
         private readonly ShootingClubLogic _shootingClubLogic;
 
-        public RegistrationController()
+        public RegistrationController(ILogger logger) : base(logger)
         {
             _categoryLogic = new ShooterCategoryLogic();
             _userLogic = new UserLogic();

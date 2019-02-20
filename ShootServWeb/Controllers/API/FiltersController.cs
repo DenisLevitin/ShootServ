@@ -1,7 +1,7 @@
-﻿using BL;
-using System.Web.Http;
+﻿using System.Web.Http;
+using BL;
 
-namespace ShootServ.API.Controllers
+namespace ShootServ.Controllers.API
 {
     public class FiltersController : ApiController
     {

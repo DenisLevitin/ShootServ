@@ -1,11 +1,16 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
 using BO;
+using Serilog;
 
 namespace ShootServ.Controllers
 {
     public class HomeController : BaseController
     {     
+        public HomeController(ILogger logger) : base(logger)
+        {
+        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -45,6 +50,6 @@ namespace ShootServ.Controllers
             FormsAuthentication.SignOut();
 
             return Redirect(Url.Action("Login", "Account"));
-        }
+        }     
     }
 }

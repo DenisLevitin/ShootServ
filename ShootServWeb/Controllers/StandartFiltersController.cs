@@ -1,11 +1,16 @@
 ﻿using System.Web.Mvc;
+using Serilog;
 using ShootingCompetitionsRequests.Models;
 using ShootServ.Models;
 
 namespace ShootServ.Controllers
 {
-    public class StandartFiltersController : Controller
+    public class StandartFiltersController : BaseController
     {
+        public StandartFiltersController(ILogger logger) : base(logger)
+        {
+        }
+        
         //
         // GET: /StandartFilters/
 
@@ -18,7 +23,6 @@ namespace ShootServ.Controllers
                 Items = countries
             };
             return PartialView("DropDownListModel", model);
-        }
-
+        }      
     }
 }

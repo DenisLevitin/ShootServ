@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using BL;
 using BO;
+using Serilog;
 using ShootServ.Models.Cup;
 
 namespace ShootServ.Controllers
@@ -13,7 +14,7 @@ namespace ShootServ.Controllers
         private readonly EntryForCompetitionsLogic _entryLogic;
         private readonly CupLogic _cupLogic;
         
-        public ViewCupController()
+        public ViewCupController(ILogger logger) : base(logger)
         {
             _viewCupModelLogic = new ViewCupModelLogic();
             _entryLogic = new EntryForCompetitionsLogic();

@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using BL;
 using BO;
+using Serilog;
 using ShootServ.Models;
 using ShootServ.Models.ShootingClub;
 
@@ -12,7 +13,7 @@ namespace ShootServ.Controllers
         // GET: /ShootingClub/ShootingClub/
         private readonly ShootingClubLogic _shootingClubLogic;
 
-        public ShootingClubController()
+        public ShootingClubController(ILogger logger) : base(logger)
         {
             _shootingClubLogic = new ShootingClubLogic();
         }
@@ -32,6 +33,7 @@ namespace ShootServ.Controllers
         /// <param name="idCountry">ид. страны</param>
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult GetShootingClubsByRegion(int? idCountry, int? idRegion)
         {
