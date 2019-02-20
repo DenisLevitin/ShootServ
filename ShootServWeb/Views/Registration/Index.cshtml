@@ -38,11 +38,11 @@ else
 
                 @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control", @required = "true" })
                 @Html.LabelFor(x => x.PostModel.Password, new { @class = "mt-4" })
-                @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control", @required = "true" , @type="password"})
+                @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control", @required = "true"})
                 @Html.Label("Повторите пароль", new { @class = "mt-4" })
-                @Html.Password("password2", "", new { @class = "form-control", @required = "true", @type = "password" })
+                @Html.Password("password2", "", new { @class = "form-control", @required = "true" })
                 @Html.LabelFor(x => x.PostModel.Email, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control", @required = "true", @type = "email" })
+                @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control", @required = "true"})
 
             </div>
 
@@ -52,7 +52,7 @@ else
                 @Html.Label("Регион", new { @class = "mt-4" })
                 <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
                 @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true", @type = "date" })
+                @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
                 <div class="row">
                     <div class="col-sm-6">
                         @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-4" })
