@@ -1,261 +1,142 @@
-@font-face {
-    font-family: "Poppins-Regular";
-    src: url("../fonts/poppins/Poppins-Regular.ttf");
+
+.com {
+    color: #93a1a1;
 }
 
-@font-face {
-    font-family: "Poppins-Medium";
-    src: url("../fonts/poppins/Poppins-Medium.ttf");
+.lit {
+    color: #195f91;
 }
 
-@font-face {
-    font-family: "Poppins-SemiBold";
-    src: url("../fonts/poppins/Poppins-SemiBold.ttf");
+.pun, .opn, .clo {
+    color: #93a1a1;
 }
 
-
-
-
-input, textarea, select, button {
-    font-family: "Poppins-Regular";
-    font-size: 14px;
-    color: #333;
+.fun {
+    color: #dc322f;
 }
 
-
-
-
-
-ul {
-    padding: 0;
-    margin: 0;
-    list-style: none;
+.str, .atv {
+    color: #D14;
 }
 
-
-
-
-
-.wrapper {
-    margin: auto;
-    padding: 7px;
-    background: url("../images/form-bg.png") repeat;
+.kwd, .prettyprint .tag {
+    color: #1e347b;
 }
 
-.wizard {
-    position: relative;
+.typ, .atn, .dec, .var {
+    color: teal;
+}
+
+.pln {
+    color: #48484c;
+}
+
+.prettyprint {
+    padding: 8px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+}
+
+    .prettyprint.linenums {
+        -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+        -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+        box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    }
+
+/* Specify class=linenums on a pre to get line numbering */
+ol.linenums {
+    margin: 0 0 0 33px; /* IE indents via margin-left */
+}
+
+    ol.linenums li {
+        padding-left: 12px;
+        color: #bebec5;
+        line-height: 20px;
+        text-shadow: 0 1px 0 #fff;
+    }
+/*
+ * contextMenu.js v 1.4.0
+ * Author: Sudhanshu Yadav
+ * s-yadav.github.com
+ * Copyright (c) 2013 Sudhanshu Yadav.
+ * Dual licensed under the MIT and GPL licenses
+**/
+
+.iw-contextMenu {
+    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.10);
+    border: 1px solid #c8c7cc;
+    border-radius: 11px;
+    display: none;
+    z-index: 1000000132;
+    max-width: 300px;
+}
+
+.iw-cm-menu {
     background: #fff;
+    color: #000;
+    margin: 0px;
+    padding: 0px;
 }
 
-.steps .current-info, .steps .number {
-    display: none;
+.iw-curMenu {
 }
 
-.steps {
-    position: absolute;
-    right: 42px;
-    top: 5px;
-    z-index: 9;
-}
-
-    .steps ul {
-        position: relative;
-    }
-
-        .steps ul:before {
-            content: "1";
-            font-size: 40px;
-            color: #ccc;
-            font-family: "Poppins-Medium";
-        }
-
-        .steps ul:after {
-            content: "/ 4";
-            font-size: 15px;
-            color: #ccc;
-            font-family: "Poppins-Medium";
-            position: absolute;
-            left: 16px;
-            top: 13px;
-            width: 22px;
-        }
-
-        .steps ul.step-2:before {
-            content: "2";
-        }
-
-        .steps ul.step-2:after {
-            left: 31px;
-        }
-
-        .steps ul.step-3:before {
-            content: "3";
-        }
-
-        .steps ul.step-3:after {
-            left: 31px;
-        }
-        .steps ul.step-4:before {
-            content: "4";
-        }
-
-        .steps ul.step-4:after {
-            left: 31px;
-        }
-
-
-.form-row {
-    display: flex;
-    margin-bottom: 25px;
-}
-
-    .form-row .form-col {
-        width: 50%;
-        margin-right: 40px;
-    }
-
-        .form-row .form-col:last-child {
-            margin-right: 0;
-        }
-
-.form-col label {
-    color: #333;
-    margin-bottom: 7px;
-    display: block;
-}
-
-.form-holder {
+.iw-cm-menu li {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, Ubuntu, sans-serif;
+    list-style: none;
+    padding: 10px;
+    padding-right: 20px;
+    border-bottom: 1px solid #c8c7cc;
+    cursor: pointer;
     position: relative;
+    font-size: 14px;
+    margin: 0;
+    line-height: inherit;
 }
 
-    .form-holder i:not(.zmdi-chevron-down) {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 15px;
-        font-size: 17px;
+    .iw-cm-menu li:first-child {
+        border-top-left-radius: 11px;
+        border-top-right-radius: 11px;
     }
 
-.form-holder i.zmdi-chevron-down {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 15px;
-        font-size: 17px;
+    .iw-cm-menu li:last-child {
+        border-bottom-left-radius: 11px;
+        border-bottom-right-radius: 11px;
+        border-bottom: none;
     }
 
-.form-holder.password i {
-        cursor: pointer;
-}
-
-.form-control {
-    height: 42px;
-    border: 1px solid #ccc;
+.iw-mOverlay {
+    position: absolute;
     width: 100%;
-    background: none;
-    font-size: 15px;
-    padding-left: 46px;
-    color: #999;
-    font-family: "Poppins-Medium";
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background: #FFF;
+    opacity: .5;
 }
 
-.form-control:focus{
-    border-color: #3377c0;
+.iw-contextMenu li.iw-mDisable {
+    opacity: 0.3;
+    cursor: default;
 }
 
-
-
-.grid-item {
-    cursor: pointer;
+.iw-mSelected {
+    background-color: #F6F6F6;
 }
 
-.grid-item .heading {
-        text-transform: uppercase;
-        font-size: 11px;
-        background: #b3b3b3;
-        color: #fff;
-        font-family: "Poppins-Medium";
-        writing-mode: tb-rl;
-        transform: rotate(-180deg);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 500;
-        letter-spacing: 1px;
+.iw-cm-arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #000;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    margin-top: -5px;
 }
 
-.grid-item.active .heading {
-        background: #3377c0;
+.iw-mSelected > .iw-cm-arrow-right {
 }
 
-.grid-item:hover img {
-        opacity: 0.6;
-}
-
-.actions ul {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 42px;
-}
-
-    .actions ul.mt-7 {
-        margin-top: 7px;
-    }
-
-.actions li a {
-    border: none;
-    display: inline-flex;
-    height: 42px;
-    width: 112px;
-    align-items: center;
-    color: #fff;
-    cursor: pointer;
-    background: #3377c0;
-    text-transform: uppercase;
-    justify-content: center;
-    letter-spacing: 1px;
-}
-
-    .actions li a:hover {
-        background: #3b87d9;
-    }
-
-.actions li:first-child a {
-    background: none;
-    border: 1px solid #3377c0;
-    color: #3377c0;
-}
-
-.actions li:first-child a:hover {
-        border-color: transparent;
-        color: #fff;
-        background: #3b87d9;
-}
-
-.actions li[aria-disabled="true"]:before {
-    content: "Your must fill all fields, to be able to continue";
-}
-
-.actions li[aria-disabled="true"] a {
-    display: none;
-}
-
-@media (max-width: 767px) {
-
-
-    .form-row {
-        display: block;
-    }
-
-
-
-    .actions ul {
-        flex-direction: column;
-        align-items: flex-end;
-    }
-
-        .actions ul li {
-            margin-bottom: 20px;
-        }
-}
-/*# sourceMappingURL=style.css.map */
+/*context menu css end */

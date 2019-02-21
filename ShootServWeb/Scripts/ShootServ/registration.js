@@ -1,66 +1,27 @@
 
 $(document).ready(function () {
     //wizard form
-    $(function () {
-        $("#addform").steps({
-            headerTag: "h4",
-            bodyTag: "section",
-            transitionEffect: "fade",
-            enableAllSteps: true,
-            transitionEffectSpeed: 300,
-            labels: {
-                next: "Вперед",
-                previous: "Назад"
-            },
-            onStepChanging: function (event, currentIndex, newIndex) {
-                if (newIndex === 1) {
-                    $('.steps ul').addClass('step-2');
-                } else {
+    $('#rootwizard').bootstrapWizard({
+        onNext: function (tab, navigation, index) {
+            if (index == 2) {
+                // Make sure we entered the name
+                if (!$('#name').val()) {
+                    alert('You must enter your name');
+                    $('#name').focus();
+                    return false;
+                }
+            }
 
-                    $('.steps ul').removeClass('step-2');
-                }
-                if (newIndex === 2) {
-                    $('.steps ul').addClass('step-3');
-                    $('.actions ul').addClass('mt-7');
-                } else {
-                    $('.steps ul').removeClass('step-3');
-                    $('.actions ul').removeClass('mt-7');
-                }
-                if (newIndex === 3) {
-                    $('.steps ul').addClass('step-4');
-                    $('.actions ul').addClass('mt-7');
-                } else {
-                    $('.steps ul').removeClass('step-4');
-                    $('.actions ul').removeClass('mt-7');
-                }
-                return true;
-            }
-        });
-        // Custom Button Jquery Steps
-        $('.forward').click(function () {
-            $("#addform").steps('next');
-        });
-        $('.backward').click(function () {
-            $("#addform").steps('previous');
-        });
-        // Grid 
-        $('.grid .grid-item').click(function () {
-            $('.grid .grid-item').removeClass('active');
-            $(this).addClass('active');
-        });
-        // Click to see password 
-        $('.password i').click(function () {
-            if ($('.password input').attr('type') === 'password') {
-                $(this).next().attr('type', 'text');
-            } else {
-                $('.password input').attr('type', 'password');
-            }
-        });
-        // Date Picker
-        var dp1 = $('.datepicker').datepicker().data('datepicker');
-        dp1.selectDate(new Date());
+            // Set the name for the next tab
+            $('#tab3').html('Hello, ' + $('#name').val());
+
+        }, onTabShow: function (tab, navigation, index) {
+            var $total = navigation.find('li').length;
+            var $current = index + 1;
+            var $percent = ($current / $total) * 100;
+            $('#rootwizard .progress-bar').css({ width: $percent + '%' });
+        }
     });
-
     //
     //
     //
