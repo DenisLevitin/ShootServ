@@ -239,6 +239,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\datePicker.css" />
+    <Content Include="Content\themes\base\formWizard\css\style.css" />
+    <Content Include="Content\themes\base\formWizard\datePicker\datepicker.js" />
+    <Content Include="Content\themes\base\formWizard\datePicker\datepicker.min.css" />
+    <Content Include="Content\themes\base\formWizard\js\jquery.steps.js" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -436,6 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\themes\base\formWizard\img\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

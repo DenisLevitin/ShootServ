@@ -1,5 +1,64 @@
 
-$(document).ready(function() {
+$(document).ready(function () {
+    //wizard form
+    $(function () {
+        $("#wizard").steps({
+            headerTag: "h4",
+            bodyTag: "section",
+            transitionEffect: "fade",
+            enableAllSteps: true,
+            transitionEffectSpeed: 300,
+            labels: {
+                next: "Next",
+                previous: "Back"
+            },
+            onStepChanging: function (event, currentIndex, newIndex) {
+                if (newIndex === 1) {
+                    $('.steps ul').addClass('step-2');
+                } else {
+
+                    $('.steps ul').removeClass('step-2');
+                }
+                if (newIndex === 2) {
+                    $('.steps ul').addClass('step-3');
+                    $('.actions ul').addClass('mt-7');
+                } else {
+                    $('.steps ul').removeClass('step-3');
+                    $('.actions ul').removeClass('mt-7');
+                }
+                return true;
+            }
+        });
+        // Custom Button Jquery Steps
+        $('.forward').click(function () {
+            $("#wizard").steps('next');
+        });
+        $('.backward').click(function () {
+            $("#wizard").steps('previous');
+        });
+        // Grid 
+        $('.grid .grid-item').click(function () {
+            $('.grid .grid-item').removeClass('active');
+            $(this).addClass('active');
+        });
+        // Click to see password 
+        $('.password i').click(function () {
+            if ($('.password input').attr('type') === 'password') {
+                $(this).next().attr('type', 'text');
+            } else {
+                $('.password input').attr('type', 'password');
+            }
+        });
+        // Date Picker
+        var dp1 = $('#dp1').datepicker().data('datepicker');
+        dp1.selectDate(new Date());
+    });
+
+    //
+    //
+    //
+
+
     var actor = new registrationActor();
     $("#divShooterInput").hide();
     
@@ -115,11 +174,10 @@ var registrationActor = function () {
     };
     
     // валидация ввода
-    this.validateInput = function(isEditing) {
+    this.validateInput = function (isEditing) {
 
         var name = $("#name").val();
-        if (!name)
-        {
+        if (!name) {
             showError("Не введено имя");
             return false;
         }
@@ -160,8 +218,7 @@ var registrationActor = function () {
             return false;
         }
 
-        if ($("#idRole").val() != roles.organizationRoleId) 
-        {
+        if ($("#idRole").val() !== roles.organizationRoleId) {
             // доп. проверка стрелка
             if (!$("#idWeaponType").val()) {
                 showError("Не введен тип оружия стрелка");
@@ -181,5 +238,5 @@ var registrationActor = function () {
         }
 
         return true;
-    }
+    };
 };
