@@ -8,16 +8,16 @@
 
     window.common.lightValidationMessagesOnForm = function (form, validationMessages) {
         $.each(validationMessages, function (key, value) {
-            var attribute = '[name=\"' + key +'\"]';
+            var attribute = '[name=\"' + key + '\"]';
             var errorInput = form.find(attribute);
             if (errorInput) {
                 createVisualError(errorInput, value);
                 setInterval(function () {
-                    errorInput.attr('style','');
+                    errorInput.attr('style', '');
                 }, 20000);
             }
         });
-    }
+    };
 
     $.ajaxSetup({
         statusCode: {
@@ -26,6 +26,8 @@
             }
         }
     });
+
+
 })();
 
 function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
@@ -46,3 +48,22 @@ function renderJsonArrayToSelect(select, valueFieldName, textFieldName, json)
         selectElement.append($('<option />', { value: val[valueFieldName], text: val[textFieldName] }));
     });
 }
+
+var getJQGridSettings = function () {
+    return {
+        styleUI: 'Bootstrap',
+        gridview: true,
+        autoencode: true,
+        viewrecords: true,
+        loadonce: true,
+        shrinkToFit: true,
+        postData: { expediente: "expediente" },
+        sortorder: 'desc',
+        autorowheight: true,
+        autoheight: true,
+        autowidth: true,
+        columnsresize: true,
+        forceFit: true,
+        hidegrid: true
+    };
+};

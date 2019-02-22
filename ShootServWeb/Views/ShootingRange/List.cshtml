@@ -1,14 +1,6 @@
 <script src="~/Scripts/ShootServ/shootingRangeList.js"></script>
 
 @Html.Label("region-choise", "Region")
-@Html.DropDownList("region-choise", (List<SelectListItem>)ViewBag.Regions)
-
-<div id="list" style="margin-top: 15px; width: 100%; height: 80%;">
-    <div id="divDiv1" class="instr" style="width: 1000px; padding: 0;">
-        <div id="divShowShootingRange" class="addListStyle" style="width: 100%; padding-bottom: 20px; padding-top: 20px;"></div>
-        <div id="divShowShootingR">
-            <div id="listShootingRanges">
-            </div>
-        </div>
-    </div>
+@Html.DropDownList("region-choise", (List<SelectListItem>)ViewBag.Regions, new { @class = "form-control" })
+<div class="gridContainer myjqueryUI mt-4">
 </div>

@@ -1,26 +1,31 @@
 ﻿@using BO
 <!DOCTYPE html>
 <html lang="ru">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta charset="utf-8"/>
-        <title>Shoot-Serv</title>
-    
-        <meta name="viewport" content="width=device-width"/>
-        <link href="~/Content/style.min.css" rel="stylesheet"/>
-        <title>Shoot-Serv</title>
-    
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/jqueryui")
-        @Scripts.Render("~/bundles/datepicker")
-        @RenderSection("scripts", required: false)
-        <script src="~/Scripts/popper.min.js"></script>
-        <script src="~/Scripts/bootstrap.min.js"></script>
-    
-        <script src="~/Scripts/common/layout.js"></script>
-        <script src="~/Scripts/common/commonQueries.js"></script>
-        <script src="~/Scripts/common/common.js"></script>
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>Shoot-Serv</title>
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/style.min.css" rel="stylesheet" />
+    <title>Shoot-Serv</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/datepicker")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/common/layout.js"></script>
+    <script src="~/Scripts/common/commonQueries.js"></script>
+    <script src="~/Scripts/common/common.js"></script>
+    <link href="~/Content/themes/base/grid/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
+
+    <script src="~/Content/themes/base/grid/jquery.jqGrid.min.js"></script>
+    <script src="~/Content/themes/base/grid.locale-ru.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
 
     <body class="main-bg">
         <div class="container container-bg">
@@ -45,10 +50,10 @@
             <div class="nav-scroller py-1 mb-2">
                 <nav class="nav d-flex justify-content-between">
                     <a class="p-2 text-muted" href="@Url.Action("Index", "Home", new {Area = ""})">На главную</a>
-                   
+
                     <div class="dropdown open">
                         <a class="btn  btn-default dropdown-toggle" href="@Url.Action("Index", "ShootingRange")" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Тиры
+                            Тиры
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -57,18 +62,18 @@
                             <a class="p-2 text-muted dropdown-item" href="@Url.Action("List", "ShootingRange")">Просмотр тиров</a>
                         </div>
                     </div>
-                      
 
-                        <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
-                        <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
-                        <a class="p-2 text-muted" href="#">О проекте</a>
-                        <a class="p-2 text-muted" href="#">
-                            @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
-                        </a>
-                        @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
-</nav>
+
+                    <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
+                    <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
+                    <a class="p-2 text-muted" href="#">О проекте</a>
+                    <a class="p-2 text-muted" href="#">
+                        @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
+                    </a>
+                    @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
+                </nav>
             </div>
-        
+
             <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
                 <div class="col-md-6 px-0">
                     <h1 class="display-5 font-italic">Shoot-Serv для стрелкового спорта</h1>
@@ -84,8 +89,9 @@
             <main role="main" class="container">
                 @RenderBody()
             </main>
+
         </div>
-    
+
         <footer class="blog-footer">
             <div class="container container-bg d-flex justify-content-between">
                 <p>
@@ -96,56 +102,58 @@
                 </p>
             </div>
         </footer>
-    
+
         @{
             Html.RenderPartial("SignInModal");
         }
-        
+
         @{
             Html.RenderPartial("SignOutModal");
         }
-    
+
         <script type="text/javascript">
             var linksShootingRange = {
                 Index: "@Url.Action("Index", "ShootingRange")",
-                List : "@Url.Action("List", "ShootingRange")", 
+                List : "@Url.Action("List", "ShootingRange")",
                 Add: "@Url.Action("Add", "ShootingRange")",
                 Delete: "@Url.Action("Delete", "ShootingRange")",
                 GetListByRegion: "@Url.Action("GetListByRegion", "ShootingRange")"
             };
-        
+
             var linksCommon = {
                 GetRegionsByCountry: "@Url.Action("GetRegionsByCountry", "StandartFilters")",
                 GetRegions: "api/GetRegions"
             }
-        
+
             var linkslogin = "@Url.Action("Login", "Account")";
-        
+
             var linksClub = {
                 Get: "@Url.Action("GetShootingClubsByRegion", "ShootingClub")",
                 Delete: "@Url.Action("Delete", "ShootingClub")",
                 Index: "@Url.Action("Index", "ShootingClub")",
                 Add: "@Url.Action("Add", "ShootingClub")"
             }
-        
+
             var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
-        
+
             var linksRegistration = {
                 UpdateUser: "@Url.Action("UpdateUser", "Registration")",
                 AddUser: "@Url.Action("AddUser", "Registration")"
             }
-        
+
             var linkHome = "@Url.Action("Index", "Home")";
-                                
+
             @{
                 var shooterRoleId = (int) RoleParams.RoleEnum.Shooter;
                 var organizationRoleId = (int) RoleParams.RoleEnum.Organization;
             }
-                                
+
             var roles = {
                 shooterRoleId: "@shooterRoleId",
                 organizationRoleId: "@organizationRoleId"
             }
         </script>
+
+
     </body>
 </html>
