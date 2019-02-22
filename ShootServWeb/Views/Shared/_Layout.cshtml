@@ -6,9 +6,11 @@
     <meta charset="utf-8" />
     <title>Shoot-Serv</title>
 
+    <link href="~/Content/themes/base/grid/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/style.min.css" rel="stylesheet" />
     <link href="~/Content/themes/base/formWizard/datePicker/datepicker.min.css" rel="stylesheet" />
-
+    <link href="~/Content/themes/base/formWizard/css/style.css" rel="stylesheet" />
     <link href="~/Content/style.min.css" rel="stylesheet" />
     <title>Shoot-Serv</title>
     <link href="~/Content/themes/base/formWizard/css/style.css" rel="stylesheet" />
@@ -22,9 +24,14 @@
     <script src="~/Scripts/common/layout.js"></script>
     <script src="~/Scripts/common/commonQueries.js"></script>
     <script src="~/Scripts/common/common.js"></script>
+
+
+    <script src="~/Content/themes/base/grid/jquery.jqGrid.min.js"></script>
+    <script src="~/Content/themes/base/grid.locale-ru.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 
-<body class="main-bg">
+    <body class="main-bg">
     <div class="container container-bg">
         <header class="blog-header py-3">
             <div class="row flex-nowrap justify-content-between align-items-center">
@@ -50,7 +57,7 @@
 
                 <div class="dropdown open">
                     <a class="btn  btn-default dropdown-toggle" href="@Url.Action("Index", "ShootingRange")" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Тиры
+                            Тиры
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -61,14 +68,14 @@
                 </div>
 
 
-                <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
-                <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
-                <a class="p-2 text-muted" href="#">О проекте</a>
-                <a class="p-2 text-muted" href="#">
-                    @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
-                </a>
-                @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
-            </nav>
+                    <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
+                    <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
+                    <a class="p-2 text-muted" href="#">О проекте</a>
+                    <a class="p-2 text-muted" href="#">
+                        @*    @{ Html.RenderAction("GetUserInfo", "Home", new { Area = "" }); }*@
+                    </a>
+                    @*   <a class="p-2 text-muted" href="@Url.Action("Logout", "Home", new {Area = ""})" ">Выход</a>*@
+                </nav>
         </div>
 
         <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
@@ -86,6 +93,7 @@
         <main role="main" class="container">
             @RenderBody()
         </main>
+
     </div>
 
     <footer class="blog-footer">

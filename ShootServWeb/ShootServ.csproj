@@ -242,7 +242,14 @@
     <Content Include="Content\themes\base\formWizard\css\style.css" />
     <Content Include="Content\themes\base\formWizard\datePicker\datepicker.js" />
     <Content Include="Content\themes\base\formWizard\datePicker\datepicker.min.css" />
-    <Content Include="Content\themes\base\formWizard\js\jquery.steps.js" />
+    <Content Include="Content\themes\base\formWizard\js\jquery.steps.js" />    <Content Include="Content\themes\base\grid.locale-ru.js" />
+    <Content Include="Content\themes\base\grid\grid.locale-ru.js" />
+    <Content Include="Content\themes\base\grid\jquery-1.11.0.min.js" />
+    <Content Include="Content\themes\base\grid\jquery.jqGrid.min.js" />
+    <Content Include="Content\themes\base\grid\ui.jqgrid-bootstrap-ui.css" />
+    <Content Include="Content\themes\base\grid\ui.jqgrid-bootstrap.css" />
+    <Content Include="Content\themes\base\grid\ui.jqgrid-bootstrap4.css" />
+    <Content Include="Content\themes\base\grid\ui.jqgrid.css" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Content\themes\base\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
