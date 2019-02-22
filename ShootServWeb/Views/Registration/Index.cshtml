@@ -15,103 +15,97 @@ else
     <h3>Пользовательские данные</h3>
 }
 
-<script src="~/Scripts/ShootServ/registration.js"></script>
 <main>
 
     @using (Html.BeginForm("AddUser", "Registration", FormMethod.Post, new { id = "addform" }))
     {
-       
-    <div id="rootwizard">
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <ul class="row justify-content-between">
-                        <li class="col"><a href="#tab1" class="btn btn-primary" data-toggle="tab">First</a></li>
-                        <li class="col"><a href="#tab2" class="btn btn-primary" data-toggle="tab">Second</a></li>
-                        <li class="col"><a href="#tab3" class="btn btn-primary" data-toggle="tab">Third</a></li>
-                        <li class="col"><a href="#tab4" class="btn btn-primary" data-toggle="tab">Forth</a></li>
-                 
-                    </ul>
+
+        <div id="rootwizard">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <ul class="row justify-content-between">
+                            <li class="col"><a href="#tab1" class="btn btn-primary" data-toggle="tab">Ваша роль на сайте</a></li>
+                            <li class="col"><a href="#tab2" class="btn btn-primary" data-toggle="tab">Авторизационные данные</a></li>
+                            <li class="col"><a href="#tab3" class="btn btn-primary" data-toggle="tab">Личные данные</a></li>
+                            <li class="col divShooterInput"><a href="#tab4" class="btn btn-primary" data-toggle="tab">Данные о стрелке</a></li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
+
+            <div class="tab-content">
+                <div class="tab-pane" id="tab1">
+                    <h3>Ваша роль на сайте</h3>
+                    @Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
+                    @Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList, new { id = "idRole", @Name = "idRole", @class = "form-control" })
+
+                </div>
+                <div class="tab-pane" id="tab2">
+                    <h3>Авторизационные данные</h3>
+                    @Html.LabelFor(x => x.PostModel.Email, new { @class = "mt-4" })
+                    @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control required email", @required = "true" })
+                    @Html.LabelFor(x => x.PostModel.Login, new { @class = "mt-4" })
+                    @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control required", @required = "true" })
+                    @Html.LabelFor(x => x.PostModel.Password, new { @class = "mt-4" })
+                    @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control required", @required = "true" })
+                    @Html.Label("Повторите пароль", new { @class = "mt-4" })
+                    @Html.Password("password2", "", new { @class = "form-control required" })
+                </div>
+                <div class="tab-pane" id="tab3">
+                    <h3>Личные данные</h3>
+
+                    @Html.LabelFor(x => x.PostModel.Name, new { @class = "mt-4" })
+                    @Html.TextBoxFor(x => x.PostModel.Name, new { id = "name", @Name = "name", @class = "form-control required" })
+                    @Html.LabelFor(x => x.PostModel.FatherName, new { @class = "mt-4" })
+                    @Html.TextBoxFor(x => x.PostModel.FatherName, new { id = "fatherName", @Name = "fatherName", @class = "form-control" })
+                    @Html.LabelFor(x => x.PostModel.Family, new { @class = "mt-4" })
+                    @Html.TextBoxFor(x => x.PostModel.Family, new { id = "family", @Name = "family", @class = "form-control required" })
+                    @Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
+                    @Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id = "sex", @Name = "sex", @class = "form-control" })
+
+                </div>
+                <div class="tab-pane" id="tab4">
+                    <h3>Данные о стрелке</h3>
+                    @Html.Label("Страна", new { @class = "mt-4" })
+                    @Html.DropDownList("idCountry", Model.CountriesList, new { @class = "form-control" })
+                    @Html.Label("Регион", new { @class = "mt-4" })
+                    <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
+                    @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-4" })
+                    @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
+
+                    @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-4" })
+
+                    <div id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs, new { id = "idClub", @Name = "idClub", @class = "form-control" })</div>
+                    @Html.LabelFor(x => x.PostModel.IdWeaponType, new { @class = "mt-4" })
+                    @Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes, new { id = "idWeaponType", @Name = "idWeaponType", @class = "form-control" })
+                    @Html.LabelFor(x => x.PostModel.IdShooterCategory, new { @class = "mt-4" })
+                    @Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories, new { id = "idShooterCategory", @Name = "idShooterCategory", @class = "form-control" })
+
+                    @Html.LabelFor(x => x.PostModel.Address, new { @class = "mt-4" })
+                    @Html.TextAreaFor(x => x.PostModel.Address, new { id = "address", @Name = "address", @class = "form-control required", @rows = 5 })
+                </div>
+
+                <ul class="pager wizard nav row justify-content-between mt-4">
+                    <li class="previous col text-center"><a class="btn btn-primary" href="javascript:;">Назад</a></li>
+                    <li class="next col text-center"><a class="btn btn-primary" href="javascript:;">Вперед</a></li>
+                    <li class="finish col text-center">
+                        @if (!Model.IsEditMode)
+                        {
+                            <input type="button" class="btn btn-primary" id="addBt" value="Зарегистрировать" />
+                        }
+                        else
+                        {
+                            <input type="button" class="btn btn-primary" id="editBt" value="Сохранить" />
+                        }
+                    </li>
+                </ul>
+
+            </div>
         </div>
-        <div id="bar" class="progress">
-            <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
-        </div>
-        <div class="tab-content">
-            <div class="tab-pane" id="tab1">
-           
-                        @Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
-                        @Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList, new { id = "idRole", @Name = "idRole", @class = "form-control" })
-         
-            </div>
-            <div class="tab-pane" id="tab2">
-                <h3>Авторизационные данные</h3>
-                @Html.LabelFor(x => x.PostModel.Email, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control", @required = "true" })
-                @Html.LabelFor(x => x.PostModel.Login, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control", @required = "true" })
-                @Html.LabelFor(x => x.PostModel.Password, new { @class = "mt-4" })
-                @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control", @required = "true" })
-                @Html.Label("Повторите пароль", new { @class = "mt-4" })
-                @Html.Password("password2", "", new { @class = "form-control", @required = "true" })
-            </div>
-            <div class="tab-pane" id="tab3">
-                <h3>Личные данные</h3>
-
-                @Html.LabelFor(x => x.PostModel.Name, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Name, new { id = "name", @Name = "name", @class = "form-control", @required = "true" })
-                @Html.LabelFor(x => x.PostModel.FatherName, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.FatherName, new { id = "fatherName", @Name = "fatherName", @class = "form-control" })
-                @Html.LabelFor(x => x.PostModel.Family, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.Family, new { id = "family", @Name = "family", @class = "form-control", @required = "true" })
-                @Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
-                @Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id = "sex", @Name = "sex", @class = "form-control", @required = "true" })
-
-            </div>
-            <div class="tab-pane" id="tab4">
-                <h3>Личные данные</h3>
-                @Html.Label("Страна", new { @class = "mt-4" })
-                @Html.DropDownList("idCountry", Model.CountriesList, new { @class = "form-control" })
-                @Html.Label("Регион", new { @class = "mt-4" })
-                <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
-                @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
-
-                @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-4" })
-
-                <div id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs, new { id = "idClub", @Name = "idClub", @class = "form-control" })</div>
-                @Html.LabelFor(x => x.PostModel.IdWeaponType, new { @class = "mt-4" })
-                @Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes, new { id = "idWeaponType", @Name = "idWeaponType", @class = "form-control" })
-                @Html.LabelFor(x => x.PostModel.IdShooterCategory, new { @class = "mt-4" })
-                @Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories, new { id = "idShooterCategory", @Name = "idShooterCategory", @class = "form-control" })
-
-                @Html.LabelFor(x => x.PostModel.Address, new { @class = "mt-4" })
-                @Html.TextAreaFor(x => x.PostModel.Address, new { id = "address", @Name = "address", @class = "form-control", @rows = 5 })
-            </div>
-
-            <ul class="pager wizard nav row justify-content-between">       
-                <li class="previous col text-center"><a class="btn btn-primary" href="javascript:;">Previous</a></li>
-                <li class="next col text-center"><a class="btn btn-primary" href="javascript:;">Next</a></li>
-                <li class="finish col text-center">
-                    @if (!Model.IsEditMode)
-                    {
-                        <input type="button" class="btn btn-primary" id="addBt" value="Зарегистрировать" />
-                    }
-                    else
-                    {
-                        <input type="button" class="btn btn-primary" id="editBt" value="Сохранить" />
-                    }
-                </li>
-            </ul>
-
-
-        </div>
-    </div>
-
-
-
 
     }
     <script src="~/Content/themes/base/formWizard/js/jquery.steps.js"></script>
+    <script src="~/Scripts/ShootServ/registration.js"></script>
 </main>
