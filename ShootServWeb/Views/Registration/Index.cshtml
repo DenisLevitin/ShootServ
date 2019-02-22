@@ -25,11 +25,11 @@ else
         <div class="navbar">
             <div class="navbar-inner">
                 <div class="container">
-                    <ul>
-                        <li><a href="#tab1" data-toggle="tab">First</a></li>
-                        <li><a href="#tab2" data-toggle="tab">Second</a></li>
-                        <li><a href="#tab3" data-toggle="tab">Third</a></li>
-                        <li><a href="#tab4" data-toggle="tab">Forth</a></li>
+                    <ul class="row justify-content-between">
+                        <li class="col"><a href="#tab1" class="btn btn-primary" data-toggle="tab">First</a></li>
+                        <li class="col"><a href="#tab2" class="btn btn-primary" data-toggle="tab">Second</a></li>
+                        <li class="col"><a href="#tab3" class="btn btn-primary" data-toggle="tab">Third</a></li>
+                        <li class="col"><a href="#tab4" class="btn btn-primary" data-toggle="tab">Forth</a></li>
                  
                     </ul>
                 </div>
@@ -90,19 +90,17 @@ else
                 @Html.TextAreaFor(x => x.PostModel.Address, new { id = "address", @Name = "address", @class = "form-control", @rows = 5 })
             </div>
 
-            <ul class="pager wizard">
-                <li class="previous first"><a href="javascript:;">First</a></li>
-                <li class="previous"><a href="javascript:;">Previous</a></li>
-                <li class="next last"><a href="javascript:;">Last</a></li>
-                <li class="next"><a href="javascript:;">Next</a></li>
-                <li class="finish">
+            <ul class="pager wizard nav row justify-content-between">       
+                <li class="previous col text-center"><a class="btn btn-primary" href="javascript:;">Previous</a></li>
+                <li class="next col text-center"><a class="btn btn-primary" href="javascript:;">Next</a></li>
+                <li class="finish col text-center">
                     @if (!Model.IsEditMode)
                     {
-                        <input type="button" class="btn btn-primary mt-4" id="addBt" value="Зарегистрировать" />
+                        <input type="button" class="btn btn-primary" id="addBt" value="Зарегистрировать" />
                     }
                     else
                     {
-                        <input type="button" class="btn btn-primary mt-4 text" id="editBt" value="Сохранить" />
+                        <input type="button" class="btn btn-primary" id="editBt" value="Сохранить" />
                     }
                 </li>
             </ul>

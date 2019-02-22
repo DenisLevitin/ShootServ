@@ -138,5 +138,8 @@ ol.linenums {
 
 .iw-mSelected > .iw-cm-arrow-right {
 }
+.hidden {
+    display:none;
+}
 
 /*context menu css end */
