@@ -33,6 +33,7 @@ namespace ShootServ.Controllers
         /// <param name="idCountry">ид. страны</param>
         /// <param name="idRegion">ид. региона</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult GetShootingClubsByRegion(int? idCountry, int? idRegion)
         {
