@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-lg-6 col-xs-12">
                     @Html.LabelFor(x => x.Info)
-                    @Html.TextAreaFor(x => x.Info, new { @class = "form-control", @rows = 5 })
+                    @Html.TextAreaFor(x => x.Info, new { @class = "form-control", @rows = 5, @requared="true"})
                     </div>
                 </div>
                 <input id="addBt" class="btn btn-lg btn-primary mx-auto mt-4" type="button" value="Добавить" />

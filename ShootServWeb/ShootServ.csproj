@@ -238,11 +238,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\registration.css" />
     <Content Include="Content\themes\base\datePicker.css" />
     <Content Include="Content\themes\base\formWizard\css\style.css" />
     <Content Include="Content\themes\base\formWizard\datePicker\datepicker.js" />
     <Content Include="Content\themes\base\formWizard\datePicker\datepicker.min.css" />
-    <Content Include="Content\themes\base\formWizard\js\jquery.steps.js" />    <Content Include="Content\themes\base\grid.locale-ru.js" />
+    <Content Include="Content\themes\base\formWizard\js\jquery.steps.js" />
+    <Content Include="Content\themes\base\grid.locale-ru.js" />
     <Content Include="Content\themes\base\grid\grid.locale-ru.js" />
     <Content Include="Content\themes\base\grid\jquery-1.11.0.min.js" />
     <Content Include="Content\themes\base\grid\jquery.jqGrid.min.js" />

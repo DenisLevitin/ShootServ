@@ -14,7 +14,7 @@ else
 {
     <h3>Пользовательские данные</h3>
 }
-
+    <link href="~/Content/registration.css" rel="stylesheet" />
 <main>
 
     @using (Html.BeginForm("AddUser", "Registration", FormMethod.Post, new { id = "addform" }))
@@ -23,12 +23,12 @@ else
         <div id="rootwizard">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <div class="container">
-                        <ul class="row justify-content-between">
-                            <li class="col"><a href="#tab1" class="btn btn-primary" data-toggle="tab">Ваша роль на сайте</a></li>
-                            <li class="col"><a href="#tab2" class="btn btn-primary" data-toggle="tab">Авторизационные данные</a></li>
-                            <li class="col"><a href="#tab3" class="btn btn-primary" data-toggle="tab">Личные данные</a></li>
-                            <li class="col divShooterInput"><a href="#tab4" class="btn btn-primary" data-toggle="tab">Данные о стрелке</a></li>
+                    <div class="container " aria-label="breadcrumb">
+                        <ul class="row  breadcrumb">
+                            <li class="col breadcrumb-item"><a href="#tab1" class="" data-toggle="tab">Роль</a></li>
+                            <li class="col breadcrumb-item"><a href="#tab2" class="" data-toggle="tab">Авторизация</a></li>
+                            <li class="col breadcrumb-item" style="flex-grow: 0.17"><a href="#tab3" class="" data-toggle="tab">Личные данные</a></li>
+                            <li class="col breadcrumb-item divShooterInput"><a href="#tab4" class="" data-toggle="tab">Стрелок</a></li>
 
                         </ul>
                     </div>
@@ -38,59 +38,104 @@ else
             <div class="tab-content">
                 <div class="tab-pane" id="tab1">
                     <h3>Ваша роль на сайте</h3>
-                    @Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
-                    @Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList, new { id = "idRole", @Name = "idRole", @class = "form-control" })
-
+                    <div class="row mt-4">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.IdRole, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
+                            @Html.DropDownListFor(x => x.PostModel.IdRole, Model.RolesList, new { id = "idRole", @Name = "idRole", @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
+
                 <div class="tab-pane" id="tab2">
                     <h3>Авторизационные данные</h3>
-                    @Html.LabelFor(x => x.PostModel.Email, new { @class = "mt-4" })
-                    @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control required email", @required = "true" })
-                    @Html.LabelFor(x => x.PostModel.Login, new { @class = "mt-4" })
-                    @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control required", @required = "true" })
-                    @Html.LabelFor(x => x.PostModel.Password, new { @class = "mt-4" })
-                    @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control required", @required = "true" })
-                    @Html.Label("Повторите пароль", new { @class = "mt-4" })
-                    @Html.Password("password2", "", new { @class = "form-control required" })
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Email, new { @class = "mt-2" })
+                            @Html.TextBoxFor(x => x.PostModel.Email, new { id = "email", @Name = "email", @class = "form-control required email", @required = "true" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Password, new { @class = "mt-2" })
+                            @Html.PasswordFor(x => x.PostModel.Password, new { id = "password", @Name = "password", @class = "form-control required", @required = "true" })
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Login, new { @class = "mt-2" })
+                            @Html.TextBoxFor(x => x.PostModel.Login, new { id = "login", @Name = "login", @class = "form-control required", @required = "true" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.Label("Повторите пароль", new { @class = "mt-2" })
+                            @Html.Password("password2", "", new { @class = "form-control required" })
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane" id="tab3">
                     <h3>Личные данные</h3>
-
-                    @Html.LabelFor(x => x.PostModel.Name, new { @class = "mt-4" })
-                    @Html.TextBoxFor(x => x.PostModel.Name, new { id = "name", @Name = "name", @class = "form-control required" })
-                    @Html.LabelFor(x => x.PostModel.FatherName, new { @class = "mt-4" })
-                    @Html.TextBoxFor(x => x.PostModel.FatherName, new { id = "fatherName", @Name = "fatherName", @class = "form-control" })
-                    @Html.LabelFor(x => x.PostModel.Family, new { @class = "mt-4" })
-                    @Html.TextBoxFor(x => x.PostModel.Family, new { id = "family", @Name = "family", @class = "form-control required" })
-                    @Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-4" })
-                    @Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id = "sex", @Name = "sex", @class = "form-control" })
-
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Name, new { @class = "mt-2" })
+                            @Html.TextBoxFor(x => x.PostModel.Name, new { id = "name", @Name = "name", @class = "form-control required" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.FatherName, new { @class = "mt-2" })
+                            @Html.TextBoxFor(x => x.PostModel.FatherName, new { id = "fatherName", @Name = "fatherName", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Family, new { @class = "mt-2" })
+                            @Html.TextBoxFor(x => x.PostModel.Family, new { id = "family", @Name = "family", @class = "form-control required" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Sex, new { @readonly = Model.IsEditMode ? "readonly" : "", @class = "mt-2" })
+                            @Html.DropDownListFor(x => x.PostModel.Sex, Model.SexList, new { id = "sex", @Name = "sex", @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane" id="tab4">
                     <h3>Данные о стрелке</h3>
-                    @Html.Label("Страна", new { @class = "mt-4" })
-                    @Html.DropDownList("idCountry", Model.CountriesList, new { @class = "form-control" })
-                    @Html.Label("Регион", new { @class = "mt-4" })
-                    <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
-                    @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-4" })
-                    @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.Label("Страна", new { @class = "mt-2" })
+                            @Html.DropDownList("idCountry", Model.CountriesList, new { @class = "form-control" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.Label("Регион", new { @class = "mt-2" })
+                            <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-2" })
+                            @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-2" })
 
-                    @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-4" })
-
-                    <div id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs, new { id = "idClub", @Name = "idClub", @class = "form-control" })</div>
-                    @Html.LabelFor(x => x.PostModel.IdWeaponType, new { @class = "mt-4" })
-                    @Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes, new { id = "idWeaponType", @Name = "idWeaponType", @class = "form-control" })
-                    @Html.LabelFor(x => x.PostModel.IdShooterCategory, new { @class = "mt-4" })
-                    @Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories, new { id = "idShooterCategory", @Name = "idShooterCategory", @class = "form-control" })
-
-                    @Html.LabelFor(x => x.PostModel.Address, new { @class = "mt-4" })
-                    @Html.TextAreaFor(x => x.PostModel.Address, new { id = "address", @Name = "address", @class = "form-control required", @rows = 5 })
+                            <div id="tdClubsList">@Html.DropDownListFor(x => x.PostModel.IdClub, Model.ShooterClubs, new { id = "idClub", @Name = "idClub", @class = "form-control" })</div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.IdWeaponType, new { @class = "mt-2" })
+                            @Html.DropDownListFor(x => x.PostModel.IdWeaponType, Model.WeaponTypes, new { id = "idWeaponType", @Name = "idWeaponType", @class = "form-control" })
+                        </div>
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.IdShooterCategory, new { @class = "mt-2" })
+                            @Html.DropDownListFor(x => x.PostModel.IdShooterCategory, Model.Categories, new { id = "idShooterCategory", @Name = "idShooterCategory", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-lg-6 col-xs-12">
+                            @Html.LabelFor(x => x.PostModel.Address, new { @class = "mt-2" })
+                            @Html.TextAreaFor(x => x.PostModel.Address, new { id = "address", @Name = "address", @class = "form-control required", @rows = 5 })
+                        </div>
+                    </div>
                 </div>
-
                 <ul class="pager wizard nav row justify-content-between mt-4">
-                    <li class="previous col text-center"><a class="btn btn-primary" href="javascript:;">Назад</a></li>
-                    <li class="next col text-center"><a class="btn btn-primary" href="javascript:;">Вперед</a></li>
-                    <li class="finish col text-center">
+                    <li class="previous col text-right"><a class="btn btn-primary" href="javascript:;">Назад</a></li>
+                    <li class="next col text-left"><a class="btn btn-primary" href="javascript:;">Вперед</a></li>
+                    <li class="finish col text-left">
                         @if (!Model.IsEditMode)
                         {
                             <input type="button" class="btn btn-primary" id="addBt" value="Зарегистрировать" />

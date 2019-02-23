@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     var $validator = $("#addform").validate({
         rules: {
@@ -10,14 +9,46 @@ $(document).ready(function () {
             namefield: {
                 required: true,
                 minlength: 3
+            },
+            password: {
+                minlength: 7
+            },
+            password2: {
+                minlength: 7,
+                equalTo: password
+            },
+            login: {
+                required: true
+            },
+            adress: {
+                minlength: 20,
+                required: true
             }
+  
         },
         messages: {
             name: "пожалуйста, введитте Ваше имя",
             family: "пожалуйста, введитте Вашу Фамилию",
+            password: {
+                required: "Это поле необходимо заполнить",
+                minlength: "Пароль должен бытьт не менее 20 символов"
+            },
+            adress: {
+                required: "Это поле необходимо заполнить",
+                minlength: "Пароль должен бытьт не менее 7 символов"
+            },
+            password2: {
+                required: "Это поле необходимо заполнить",
+                minlength: "Пароль должен бытьт не менее 7 символов",
+                equalTo: "пароли не совпадают"
+            }
+            ,
             email: {
                 required: "Это поле необходимо заполнить",
                 email: "формат: name@domain.com"
+            },
+            login: {
+                required: "Это поле необходимо заполнить"
             }
         }
     });
@@ -30,22 +61,19 @@ $(document).ready(function () {
                 return false;
             }
         },
+        onTabClick: function (tab, navigation, index) {
+            return false;
+        },
         onTabShow: function (tab, navigation, index) {
             var $total = navigation.find('li').length;
             var $current = index + 1;
             var $percent = ($current / $total) * 100;
         }
-
-        
     });
-    //
-    //
-    //
-
 
     var actor = new registrationActor();
     $(".divShooterInput").hide();
-    
+
     if (isAuthorize) {
         var roleId = $("#idRole").val();
         actor.registrationFormShifterByName(roleId);
@@ -58,24 +86,22 @@ $(document).ready(function () {
         })
     );
 
-
     $(document).on("change", "#idCountry", function () {
         actor.changeCountry();
     });
 
-    $(document).on("change", "#idRegion", function() {
+    $(document).on("change", "#idRegion", function () {
         actor.changeRegion();
     });
 
-    $(document).on("change", "#idRole", function() {
+    $(document).on("change", "#idRole", function () {
         var roleId = $("#idRole").val();
         actor.registrationFormShifterByName(roleId);
     });
 
     // клик на сохранить
     $(document).on("click", "#editBt", function () {
-        if (actor.validateInput(true))
-        {
+        if (actor.validateInput(true)) {
             $.ajax({
                 url: linksRegistration.UpdateUser,
                 dataType: "json",
@@ -96,7 +122,7 @@ $(document).ready(function () {
     });
 
     // клик на добавить
-    $(document).on("click", "#addBt", function() {
+    $(document).on("click", "#addBt", function () {
         if (actor.validateInput(false)) {
             $.ajax({
                 url: linksRegistration.AddUser,
@@ -125,17 +151,16 @@ var registrationActor = function () {
     var inputRegions = $("#idRegion");
     var inputCountry = $("#idCountry");
     this.registrationFormShifterByName = function (idRole) {
-        if ( idRole === roles.shooterRoleId)
-        {
+        if (idRole === roles.shooterRoleId) {
             $(".divShooterInput").show();
         }
         else {
             $(".divShooterInput").hide();
         }
     };
-    
+
     // Изменить страну
-    this.changeCountry = function() {
+    this.changeCountry = function () {
         var idCountry = inputCountry.val();
         var regions = getRegions(idCountry, inputRegions);
         renderJsonArrayToSelect(inputRegions, "Id", "Name", regions);
@@ -145,82 +170,14 @@ var registrationActor = function () {
     };
 
     // Изменить регион
-    this.changeRegion = function() {
+    this.changeRegion = function () {
         var idRegion = inputRegions.val();
         var idCountry = inputCountry.val();
         var shootingClubs = getShootingClubs(idCountry, idRegion);
         this.renderClubs(shootingClubs);
     };
 
-    this.renderClubs = function(data)
-    {
+    this.renderClubs = function (data) {
         renderJsonArrayToSelect($("#idClub"), "Id", "Name", data);
-    };
-    
-    // валидация ввода
-    this.validateInput = function (isEditing) {
-
-        var name = $("#name").val();
-        if (!name) {
-            showError("Не введено имя");
-            return false;
-        }
-
-        var family = $("#family").val();
-        if (!family) {
-            showError("Не введена фамилия");
-            return false;
-        }
-
-        var login = $("#login").val();
-        if (!login) {
-            showError("Не введена фамилия");
-            return false;
-        }
-
-        var password = $("#password").val();
-        // если валидация при редактировании, то пароли не валидируем и не сравниваем. Если какой-либо пароль введен, то считаем, что его надо обновить
-        if (!isEditing || password.length > 0) {
-            if (!password) {
-                showError("Не введен пароль");
-                return false;
-            }
-
-            if ($("#password").val() != $("#password2").val()) {
-                showError("Пароли не совпадают");
-                return false;
-            }
-        }
-
-        if (!$("#idRole").val()) {
-            showError("Не введена роль");
-            return false;
-        }
-
-        if (!$("#email").val()) {
-            showError("Не введен email");
-            return false;
-        }
-
-        if ($("#idRole").val() !== roles.organizationRoleId) {
-            // доп. проверка стрелка
-            if (!$("#idWeaponType").val()) {
-                showError("Не введен тип оружия стрелка");
-                return false;
-            }
-
-            if (!$("#idShooterCategory").val()) {
-                showError("Не введен разряд стрелка");
-                return false;
-            }
-
-            var dateBirthday = $("#dateBirthday").val();
-            if (!dateBirthday) {
-                showError("Не введена дата рождения");
-                return false;
-            }
-        }
-
-        return true;
     };
 };
