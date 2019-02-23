@@ -58,16 +58,28 @@ input[type="checkbox"].input-validation-error {
 }
 
     .breadcrumb-item + .breadcrumb-item::before {
-        content: '➝';
+        content: '♂';
         position: absolute;
         left: -110px;
+        transform: rotate(45deg);
+        transition-property: transform;
+        transition-duration: 4s;
+  
+    }
+    .breadcrumb-item + .breadcrumb-item:hover::before {
+        transition-property: transform;
+        transition-duration: 4s;
+
+        color: black;
+        transform: scale(2);
+        content:'ХУЙ';
     }
 
-.breadcrumb .col {
-    flex-basis: 0;
-    flex-grow: 0;
-    max-width: 100%;
-}
+        .breadcrumb .col {
+            flex-basis: 0;
+            flex-grow: 0;
+            max-width: 100%;
+        }
 
 .breadcrumb {
     justify-content: space-between;
