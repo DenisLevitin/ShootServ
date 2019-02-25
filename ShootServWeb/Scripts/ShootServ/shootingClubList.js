@@ -1,42 +1,13 @@
 ﻿$(document).ready(function () {
-    var actor = new shootingRangeListActor();
+    var actor = new shootingClubListActor();
 
     actor.changeRegion();
     $(document).on("change", "#region-choise", function () {
         actor.changeRegion();
     });
-
-    // Клик на ссылке удалить тир
-    $(document).on("click", ".delRange", function () {
-
-        if (isAuthorize) {
-            var a = $(this);
-            var tr = a.closest("tr");
-            var id = a.attr("idShootRange");
-
-            $.ajax({
-                url: linksClub.Delete,
-                dataType: "json",
-                data: { idShootingRange: id },
-                async: false,
-                success: function (data) {
-                    if (data.IsOk) {
-                        showInfo("Тир удален");
-                        tr.remove();
-                    } else showError(data.Message);
-                },
-                error: function (data) {
-                    showError("Ошибка ajax");
-                }
-            });
-        }
-        else {
-            redirectToLoginPage(linksShootingRange.Index);
-        }
-    });
 });
 
-var shootingRangeListActor = function () {
+var shootingClubListActor = function () {
 
     // Получить список тиров по региону
     this.getListByRegion = function (idRegion) {
@@ -47,7 +18,7 @@ var shootingRangeListActor = function () {
             data: { idRegion: idRegion },
             async: false,
             success: function (data) {
-                /// TODO: в data json, надо построить в listShootingRanges таблицу
+                /// TODO: в data json, надо построить в listShootingClubs таблицу
                 result = data;
             },
             error: function () {
@@ -65,12 +36,12 @@ var shootingRangeListActor = function () {
     };
 
     //создать
-    this.createGrid = function (shootingRanges) {
+    this.createGrid = function (shootingClubs) {
         var JQGRIG_SETTINGS = getJQGridSettings();
         var JQGridProperties = Object.assign({
             datatype: "local",
             del: true,
-            data: shootingRanges,
+            data: shootingClubs,
             pager: '#pagernav2',
             colNames: ['Клуб', 'Телефон', 'Регион', 'Адрес'],
             colModel: [
