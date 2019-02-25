@@ -111,9 +111,7 @@ var shootingClubPageActor = function () {
         var idCountry = $("#idCountry").val();
         var regions = getRegions(idCountry, $("#idRegion"));
         renderJsonArrayToSelect($("#idRegion"), "Id", "Name", regions);
-         var idRegion = $("#idRegion").val();
-        var shootingRanges = getShootingRanges(idRegion);
-        renderShootingRanges(shootingRanges);
+        this.changeRegion();
     };
 
     this.changeRegion = function() {
