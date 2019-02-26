@@ -69,7 +69,9 @@ var shootingRangeListActor = function () {
         var JQGRIG_SETTINGS = getJQGridSettings();
         var JQGridProperties = Object.assign({
             datatype: "local",
+            del: true,
             data: shootingRanges,
+            pager: '#pagernav2',
             colNames: ['Тир', 'Телефон', 'Регион', 'Адрес'],
             colModel: [
                 { name: 'Name', "label": 'Name', "sortable": true },

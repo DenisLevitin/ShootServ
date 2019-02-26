@@ -59,6 +59,12 @@ namespace ShootServ.Controllers
             return new JsonResult { Data = new { IsOk = res.IsOk, Message = res.ErrorMessage } };
         }
 
+        public ActionResult List()
+        {
+            ViewBag.Regions = StandartClassifierModelLogic.GetRegionsByCountry(null);
+            return View("List");
+        }
+
         [HttpPost]
         [CustomAuthorize]
         public ActionResult Delete(int idClub)

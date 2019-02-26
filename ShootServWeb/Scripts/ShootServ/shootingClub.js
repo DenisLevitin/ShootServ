@@ -13,35 +13,6 @@ $(document).ready(function () {
             actor.changeRegion();
         });
 
-    // Клик на "Удалить"
-    $(document).on("click",
-        ".delClub",
-        function() {
-            if (isAuthorize) {
-                var a = $(this);
-                var idClub = a.attr("idClub");
-
-                $.ajax({
-                    url: linksClub.Delete,
-                    dataType: "json",
-                    data: { idClub: idClub },
-                    async: false,
-                    success: function(data) {
-                        if (data.IsOk) {
-                            showInfo("Стрелковый клуб удален"); // showInfo
-                            a.closest("tr").remove();
-                        } else showError(data.Message); // сообщение об ошибке как -то показать на странице
-                    },
-                    error: function(data) {
-                        showError("Ошибка ajax");
-                    }
-                });
-            } else {
-                redirectToLoginPage(linksClub.Index);
-            }
-
-        });
-
     $(document).on("click",
         "#addBt",
         function() {
@@ -57,13 +28,7 @@ $(document).ready(function () {
                         success: function(data) {
                             if (data.IsOk) {
                                 showInfo("Стрелковый клуб добавлен"); // showInfo
-
-                                var idRegion = $("#idRegion").val();
-                                var idCountry = $("#idCountry").val();
-
-                                var clubs = getShootingClubs(idCountry, idRegion); /// todo: Здесь не работает, т.к возвращается json, найти способ отрендерить
-                                renderClubs(clubs);
-                                
+                                window.location = linksClub.List;
                             } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                         },
                         error: function(data) {
@@ -80,10 +45,6 @@ $(document).ready(function () {
     actor.changeCountry();
     actor.changeRegion();
 });
-
-var renderClubs = function (data) {
-    // not implemented
-};
 
 var renderShootingRanges = function(data)
 {
@@ -110,7 +71,8 @@ var shootingClubPageActor = function () {
     this.changeCountry = function() {
         var idCountry = $("#idCountry").val();
         var regions = getRegions(idCountry, $("#idRegion"));
-        renderJsonArrayToSelect(idRegion, "Id", "Name", regions);
+        renderJsonArrayToSelect($("#idRegion"), "Id", "Name", regions);
+        this.changeRegion();
     };
 
     this.changeRegion = function() {

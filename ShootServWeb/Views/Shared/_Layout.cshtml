@@ -65,8 +65,21 @@
                     </div>
                 </div>
 
+                    <div class="dropdown open">
+                        <a class="btn  btn-default dropdown-toggle" href="@Url.Action("Index", "ShootingRange")" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Команды
+                        </a>
 
-                    <a class="p-2 text-muted" href="@Url.Action("Index", "ShootingClub")">Команды</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="p-2 text-muted dropdown-item" href="@Url.Action("Index", "ShootingClub")">Добавление команд</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="p-2 text-muted dropdown-item" href="@Url.Action("List", "ShootingClub")">Просмотр команд</a>
+      
+
+                        </div>
+                    </div>
+
+      
                     <a class="p-2 text-muted" href="@Url.Action("Index", "Cup")">Соревнования</a>
                     <a class="p-2 text-muted" href="#">О проекте</a>
                     <a class="p-2 text-muted" href="#">
@@ -133,7 +146,8 @@
                 Get: "@Url.Action("GetShootingClubsByRegion", "ShootingClub")",
                 Delete: "@Url.Action("Delete", "ShootingClub")",
                 Index: "@Url.Action("Index", "ShootingClub")",
-                Add: "@Url.Action("Add", "ShootingClub")"
+                Add: "@Url.Action("Add", "ShootingClub")",
+                List: "@Url.Action("List", "ShootingClub")"
             }
 
             var isAuthorize = ("@ViewBag.IsLogin").toLowerCase() === "true";
