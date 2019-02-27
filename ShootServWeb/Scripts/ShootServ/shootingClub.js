@@ -78,7 +78,6 @@ var shootingClubPageActor = function () {
 
     this.changeRegion = function() {
         var idRegion = $("#idRegion").val();
-
         var shootingRanges = getShootingRanges(idRegion);
         renderShootingRanges(shootingRanges);
     };

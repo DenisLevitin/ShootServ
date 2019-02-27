@@ -52,7 +52,8 @@ else
                 @Html.Label("Регион", new { @class = "mt-4" })
                 <div id="tdRegionsList">@Html.DropDownList("idRegion", Model.RegionsList, new { @class = "form-control" })</div>
                 @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-4" })
-                @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
+                @Html.TextBoxFor(x => x.PostModel.DateBirthday, new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true", @type = "text" })
+                <input type="text" id="datepicker">
                 <div class="row">
                     <div class="col-sm-6">
                         @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-4" })

@@ -8,12 +8,8 @@ $(document).ready(function() {
         actor.registrationFormShifterByName(roleId);
     }
 
-    $.datepicker.setDefaults($.datepicker.regional['ru']);
-    $(".datepicker").datepicker(
-        $("#anim").on("change", function () {
-            $("#datepicker").datepicker("option", "showAnim", $(this).val());
-        })
-    );
+
+    $("#datepicker").datepicker();
 
 
     $(document).on("change", "#idCountry", function () {
