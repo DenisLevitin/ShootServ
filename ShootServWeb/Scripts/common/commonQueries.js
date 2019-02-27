@@ -3,7 +3,7 @@ function getRegions(idCountry) {
     var result = null;
     $.ajax({
         url: linksCommon.GetRegions + '/' + idCountry,
-        dataType: "html",
+        dataType: "JSON",
         type: "GET",
         async: false,
         success: function (data) {
@@ -21,7 +21,7 @@ function getShootingClubs(idCountry, idRegion) {
     var result = null;
     $.ajax({
         url: linksClub.Get,
-        dataType: "html",
+        dataType: "JSON",
         type: "GET",
         async: false,
         data: {
