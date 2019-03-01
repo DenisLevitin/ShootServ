@@ -123,7 +123,6 @@ $(document).ready(function () {
 
     // клик на добавить
     $(document).on("click", "#addBt", function () {
-        if (actor.validateInput(false)) {
             $.ajax({
                 url: linksRegistration.AddUser,
                 dataType: "json",
@@ -140,7 +139,6 @@ $(document).ready(function () {
                     showError("Ошибка ajax");
                 }
             });
-        }
     });
 
     actor.changeCountry();
