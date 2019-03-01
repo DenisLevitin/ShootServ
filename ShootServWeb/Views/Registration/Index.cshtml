@@ -109,8 +109,7 @@ else
                             @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-2" })
                             @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday"})
                             <script>
-                                $("#dateBirthday").datepicker({ dateFormat: 'dd.mm.yy' });
-                            
+                                $("#dateBirthday").datepicker({ dateFormat: 'dd.mm.yy' });  
                             </script>
                         </div>
                         <div class="col-lg-6 col-xs-12">
