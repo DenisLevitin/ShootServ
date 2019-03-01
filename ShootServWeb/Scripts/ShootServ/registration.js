@@ -80,7 +80,7 @@ $(document).ready(function () {
     }
 
 
-    $("#datepicker").datepicker();
+
 
     $(document).on("change", "#idCountry", function () {
         actor.changeCountry();
@@ -125,8 +125,10 @@ $(document).ready(function () {
             method: "POST",
             success: function (data) {
                 if (data.IsOk) {
-                    showInfo("Регистрация проведена успешно"); // showInfo
-                    window.location = linkHome;
+                    showInfo("Регистрация проведена успешно", function () {
+                        window.location = linkHome;
+                    }); // showInfo
+                 
                 } else showError(data.Message); // сообщение об ошибке как -то показать на странице
             },
             error: function (data) {

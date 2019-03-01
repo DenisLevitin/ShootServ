@@ -108,6 +108,9 @@ else
                         <div class="col-lg-6 col-xs-12">
                             @Html.LabelFor(x => x.PostModel.DateBirthday, new { @class = "mt-2" })
                             @Html.TextBoxFor(x => x.PostModel.DateBirthday, "{0:dd.MM.yyyy}", new { @class = "datepicker, form-control", id = "dateBirthday", @Name = "dateBirthday", @required = "true" })
+                            <script>
+                                $("#dateBirthday").datepicker();
+                            </script>
                         </div>
                         <div class="col-lg-6 col-xs-12">
                             @Html.LabelFor(x => x.PostModel.IdClub, new { @class = "mt-2" })
