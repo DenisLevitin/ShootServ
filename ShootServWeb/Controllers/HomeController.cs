@@ -1,5 +1,4 @@
 ﻿using System.Web.Mvc;
-using System.Web.Security;
 using BO;
 using Serilog;
 
@@ -41,15 +40,6 @@ namespace ShootServ.Controllers
         {
             ViewBag.Message = "Страница описания приложения.";
             return View();
-        }
-
-        [CustomAuthorize]
-        public ActionResult Logout()
-        {
-            Session.Abandon();
-            FormsAuthentication.SignOut();
-
-            return Redirect(Url.Action("Login", "Account"));
-        }     
+        }   
     }
 }

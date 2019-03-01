@@ -1,6 +1,11 @@
 // Получить список регионов по стране ( это много где копируется )
 function getRegions(idCountry) {
     var result = null;
+
+    if (!idCountry) {
+        idCountry = "null";
+    }
+
     $.ajax({
         url: linksCommon.GetRegions + '/' + idCountry,
         dataType: "JSON",
