@@ -11,9 +11,11 @@ $(document).ready(function () {
                 minlength: 3
             },
             password: {
+                required: true,
                 minlength: 7
             },
             password2: {
+                required: true,
                 minlength: 7,
                 equalTo: password
             },
@@ -27,25 +29,25 @@ $(document).ready(function () {
 
         },
         messages: {
-            name: "пожалуйста, введитте Ваше имя",
-            family: "пожалуйста, введитте Вашу Фамилию",
+            name: "Пожалуйста, введите Ваше имя",
+            family: "Пожалуйста, введите Вашу Фамилию",
             password: {
                 required: "Это поле необходимо заполнить",
-                minlength: "Пароль должен бытьт не менее 20 символов"
+                minlength: "Пароль должен быть не менее 7 символов"
             },
             adress: {
                 required: "Это поле необходимо заполнить",
-                minlength: "Пароль должен бытьт не менее 7 символов"
+                minlength: "Адрес должен быть не менее 20 символов"
             },
             password2: {
                 required: "Это поле необходимо заполнить",
-                minlength: "Пароль должен бытьт не менее 7 символов",
-                equalTo: "пароли не совпадают"
+                minlength: "Пароль должен быть не менее 7 символов",
+                equalTo: "Пароли не совпадают"
             }
             ,
             email: {
                 required: "Это поле необходимо заполнить",
-                email: "формат: name@domain.com"
+                email: "Формат: name@domain.com"
             },
             login: {
                 required: "Это поле необходимо заполнить"
@@ -104,10 +106,10 @@ $(document).ready(function () {
             async: false,
             method: "POST",
             success: function (data) {
-                //  if (data.IsOk) {
+                if (data.IsOk) {
                 showInfo("Данные обновлены"); // showInfo
                 window.location = linkHome;
-                // } else showError(data.Message); // сообщение об ошибке как -то показать на странице
+                } else showError(data.Message); // сообщение об ошибке как -то показать на странице
             },
             error: function (data) {
                 showError("Ошибка ajax");
