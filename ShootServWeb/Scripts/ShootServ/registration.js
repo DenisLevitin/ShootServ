@@ -101,7 +101,7 @@ $(document).ready(function () {
 
     // клик на сохранить
     $(document).on("click", "#editBt", function () {
-        if (actor.validateInput(true)) {
+       
             $.ajax({
                 url: linksRegistration.UpdateUser,
                 dataType: "json",
@@ -118,7 +118,7 @@ $(document).ready(function () {
                     showError("Ошибка ajax");
                 }
             });
-        }
+   
     });
 
     // клик на добавить
