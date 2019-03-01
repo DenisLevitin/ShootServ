@@ -27,8 +27,9 @@ $(document).ready(function () {
                         method: "POST",
                         success: function(data) {
                             if (data.IsOk) {
-                                showInfo("Стрелковый клуб добавлен"); // showInfo
-                                window.location = linksClub.List;
+                                var relocation = function () { window.location = linksClub.List; };
+                                showInfo("Стрелковый клуб успешно добавлен", relocation);
+
                             } else showError(data.Message); // сообщение об ошибке как -то показать на странице
                         },
                         error: function(data) {
@@ -77,7 +78,6 @@ var shootingClubPageActor = function () {
 
     this.changeRegion = function() {
         var idRegion = $("#idRegion").val();
-
         var shootingRanges = getShootingRanges(idRegion);
         renderShootingRanges(shootingRanges);
     };

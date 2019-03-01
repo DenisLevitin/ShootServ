@@ -16,6 +16,11 @@ namespace ShootServ.Controllers.API
         [Route("api/GetRegions/{idCountry}", Name = "GetRegions")]
         public object GetRegions([FromUri]int? idCountry)
         {
+            if (idCountry.HasValue && idCountry <= 0)
+            {
+                idCountry = null;
+            }
+
             var result = _regionsLogic.GetByCountry(idCountry);
             return Json(result);
         }

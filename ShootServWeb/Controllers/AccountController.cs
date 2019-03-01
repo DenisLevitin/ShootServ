@@ -49,6 +49,15 @@ namespace ShootServ.Controllers
             return View(model);
         }
 
+        [CustomAuthorize]
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            FormsAuthentication.SignOut();
+
+            return Redirect(Url.Action("Login", "Account"));
+        }
+
         /// <summary>
         /// Запрос на восстановление пароля
         /// </summary>

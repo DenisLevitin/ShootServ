@@ -18,8 +18,9 @@ $(document).ready(function ()
                     async: false,
                     success: function (data) {
                         if (data.IsOk) {
-                            showInfo("Тир успешно добавлен");
-                            window.location = linksShootingRange.List;
+                            var relocation = function () { window.location = linksShootingRange.List; };
+                            showInfo("Тир успешно добавлен", relocation);
+                
                         } else {
                             if (data.Message) {
                                 showError(data.Message); // сообщение об ошибке как -то показать на странице 
@@ -47,11 +48,10 @@ var shootingRangePageActor = function () {
     // Нужно вызвать эту функцию при изменении региона
     this.changeCountry = function() {
         var idCountry = $("#CountryId").val();
-        if (idCountry) {
-            var regions = getRegions(idCountry);
+        var regions = getRegions(idCountry); // Ошибка!!!!
+
             var idRegion = $("#RegionId");
             renderJsonArrayToSelect(idRegion, "Id", "Name", regions);
-        }
     };
 
     this.construct = function(){

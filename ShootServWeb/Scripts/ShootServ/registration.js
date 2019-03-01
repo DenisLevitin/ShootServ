@@ -11,9 +11,11 @@ $(document).ready(function () {
                 minlength: 3
             },
             password: {
+                required: true,
                 minlength: 7
             },
             password2: {
+                required: true,
                 minlength: 7,
                 equalTo: password
             },
@@ -24,28 +26,28 @@ $(document).ready(function () {
                 minlength: 20,
                 required: true
             }
-  
+
         },
         messages: {
-            name: "пожалуйста, введитте Ваше имя",
-            family: "пожалуйста, введитте Вашу Фамилию",
+            name: "Пожалуйста, введите Ваше имя",
+            family: "Пожалуйста, введите Вашу Фамилию",
             password: {
                 required: "Это поле необходимо заполнить",
-                minlength: "Пароль должен бытьт не менее 20 символов"
+                minlength: "Пароль должен быть не менее 7 символов"
             },
             adress: {
                 required: "Это поле необходимо заполнить",
-                minlength: "Пароль должен бытьт не менее 7 символов"
+                minlength: "Адрес должен быть не менее 20 символов"
             },
             password2: {
                 required: "Это поле необходимо заполнить",
-                minlength: "Пароль должен бытьт не менее 7 символов",
-                equalTo: "пароли не совпадают"
+                minlength: "Пароль должен быть не менее 7 символов",
+                equalTo: "Пароли не совпадают"
             }
             ,
             email: {
                 required: "Это поле необходимо заполнить",
-                email: "формат: name@domain.com"
+                email: "Формат: name@domain.com"
             },
             login: {
                 required: "Это поле необходимо заполнить"
@@ -79,12 +81,8 @@ $(document).ready(function () {
         actor.registrationFormShifterByName(roleId);
     }
 
-    $.datepicker.setDefaults($.datepicker.regional['ru']);
-    $(".datepicker").datepicker(
-        $("#anim").on("change", function () {
-            $("#datepicker").datepicker("option", "showAnim", $(this).val());
-        })
-    );
+
+
 
     $(document).on("change", "#idCountry", function () {
         actor.changeCountry();
@@ -101,44 +99,44 @@ $(document).ready(function () {
 
     // клик на сохранить
     $(document).on("click", "#editBt", function () {
-       
-            $.ajax({
-                url: linksRegistration.UpdateUser,
-                dataType: "json",
-                data: $("form").serialize(),
-                async: false,
-                method: "POST",
-                success: function (data) {
-                    if (data.IsOk) {
-                        showInfo("Данные обновлены"); // showInfo
-                        window.location = linkHome;
-                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
-                },
-                error: function (data) {
-                    showError("Ошибка ajax");
-                }
-            });
-   
+        $.ajax({
+            url: linksRegistration.UpdateUser,
+            dataType: "json",
+            data: $("form").serialize(),
+            async: false,
+            method: "POST",
+            success: function (data) {
+                if (data.IsOk) {
+                showInfo("Данные обновлены"); // showInfo
+                window.location = linkHome;
+                } else showError(data.Message); // сообщение об ошибке как -то показать на странице
+            },
+            error: function (data) {
+                showError("Ошибка ajax");
+            }
+        });
     });
 
     // клик на добавить
     $(document).on("click", "#addBt", function () {
-            $.ajax({
-                url: linksRegistration.AddUser,
-                dataType: "json",
-                data: $("form").serialize(),
-                async: false,
-                method: "POST",
-                success: function (data) {
-                    if (data.IsOk) {
-                        showInfo("Регистрация проведена успешно"); // showInfo
+        $.ajax({
+            url: linksRegistration.AddUser,
+            dataType: "json",
+            data: $("form").serialize(),
+            async: false,
+            method: "POST",
+            success: function (data) {
+                if (data.IsOk) {
+                    showInfo("Регистрация проведена успешно", function () {
                         window.location = linkHome;
-                    } else showError(data.Message); // сообщение об ошибке как -то показать на странице
-                },
-                error: function (data) {
-                    showError("Ошибка ajax");
-                }
-            });
+                    }); // showInfo
+                 
+                } else showError(data.Message); // сообщение об ошибке как -то показать на странице
+            },
+            error: function (data) {
+                showError("Ошибка ajax");
+            }
+        });
     });
 
     actor.changeCountry();
