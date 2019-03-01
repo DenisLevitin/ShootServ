@@ -1,0 +1,78 @@
+﻿/* styles for validation helpers */
+.field-validation-error {
+    color: #e80c4d;
+    font-weight: bold;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #e80c4d;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/*Wizard Form*/
+.nav-pills ul {
+    list-style: none;
+}
+
+
+/***/
+.navbar-inner {
+    width: 100%;
+}
+
+.breadcrumb-item a.active {
+    color: #007bff;
+}
+
+    .breadcrumb-item a.active:hover {
+        color: #007bff;
+    }
+
+.breadcrumb-item a {
+    cursor: default;
+    color: #6c757d;
+}
+
+    .breadcrumb-item a:hover {
+        text-decoration: none;
+        color: #6c757d;
+    }
+
+.breadcrumb-item {
+    flex-grow: 0;
+}
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: '->';
+        position: absolute;
+        left: -110px;
+  
+    }
+
+        .breadcrumb .col {
+            flex-basis: 0;
+            flex-grow: 0;
+            max-width: 100%;
+        }
+
+.breadcrumb {
+    justify-content: space-between;
+}
+h3 {
+    text-align: center;
+}

@@ -6,24 +6,25 @@
     <meta charset="utf-8" />
     <title>Shoot-Serv</title>
 
+    <link href="~/Content/themes/base/grid/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/style.min.css" rel="stylesheet" />
+    <link href="~/Content/themes/base/formWizard/css/style.css" rel="stylesheet" />
     <title>Shoot-Serv</title>
-
     @Scripts.Render("~/bundles/jquery")
     <link href="~/Content/themes/base/JQUi/jquery-ui.min.css" rel="stylesheet" />
     <script src="~/Content/themes/base/JQUi/jquery-ui.min.js"></script>
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/popper.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-
+    <script src="~/Content/themes/base/grid/jquery.jqGrid.min.js"></script>
+    <script src="~/Content/themes/base/grid.locale-ru.js"></script>
     <script src="~/Scripts/common/layout.js"></script>
     <script src="~/Scripts/common/commonQueries.js"></script>
     <script src="~/Scripts/common/common.js"></script>
-    <link href="~/Content/themes/base/grid/ui.jqgrid-bootstrap-ui.css" rel="stylesheet" />
 
-    <script src="~/Content/themes/base/grid/jquery.jqGrid.min.js"></script>
-    <script src="~/Content/themes/base/grid.locale-ru.js"></script>
+
+
     <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 
@@ -236,7 +237,7 @@
                 organizationRoleId: "@organizationRoleId"
             }
     </script>
-
-
+    <script src="~/Content/themes/base/formWizard/datePicker/datepicker.js"></script>
 </body>
+
 </html>
