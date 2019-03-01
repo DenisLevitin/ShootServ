@@ -19,5 +19,10 @@
         /// Порядковый номер разряда
         /// </summary>
         public int OrderSort { get; set; }
+        
+        /// <summary>
+        /// Url на картинке
+        /// </summary>
+        public string PictureUrl { get; set; }
     }
 }
