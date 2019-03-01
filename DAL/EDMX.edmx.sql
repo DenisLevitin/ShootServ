@@ -185,7 +185,8 @@ CREATE TABLE [dbo].[ShooterCategory] (
     [Id] int  NOT NULL,
     [Name] varchar(50)  NOT NULL,
     [Keychar] varchar(50)  NOT NULL,
-    [OrderSort] int  NOT NULL
+    [OrderSort] int  NOT NULL,
+	[PictureUrl] varchar(100) NOT NULL
 );
 GO
 
@@ -203,7 +204,8 @@ GO
 CREATE TABLE [dbo].[WeaponTypes] (
     [Id] int  NOT NULL,
     [Name] varchar(50)  NOT NULL,
-    [KeyChar] varchar(50)  NOT NULL
+    [KeyChar] varchar(50)  NOT NULL,
+	[PictureUrl] varchar(100) NOT NULL
 );
 GO
 
