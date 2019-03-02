@@ -40,6 +40,7 @@ namespace DAL
         public DbSet<ShooterClubs> ShooterClubs { get; set; }
         public DbSet<Shooters> Shooters { get; set; }
         public DbSet<ShootingRanges> ShootingRanges { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<WeaponTypes> WeaponTypes { get; set; }
     }

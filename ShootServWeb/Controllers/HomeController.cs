@@ -1,13 +1,22 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
+using BL;
 using BO;
 using Serilog;
+using ShootServ.Models;
 
 namespace ShootServ.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : BaseController
-    {     
+    {
+        private readonly ShooterCategoryLogic _shooterCategoryLogic;
+        private readonly ShooterLogic _shooterLogic;
+
         public HomeController(ILogger logger) : base(logger)
         {
+            _shooterCategoryLogic = new ShooterCategoryLogic();
+            _shooterLogic = new ShooterLogic();
         }
         
         /// <summary>
@@ -27,13 +36,18 @@ namespace ShootServ.Controllers
 
         public ActionResult GetUserInfo()
         {
-            var user = new UserParams();
-            if (CurrentUser != null)
+            var model = new UserInfoModel(CurrentUser);
+
+            if ( CurrentUser?.IdRole == (int)RolesEnum.Shooter)
             {
-                user = CurrentUser;
+                var shooter = _shooterLogic.GetByUser(CurrentUser.Id);
+                var shooterCategories = _shooterCategoryLogic.GetAll();
+                var weaponTypes = _shooterLogic.GetAllWeaponTypes();
+                model.ShooterCategory = shooterCategories.FirstOrDefault(x => x.Id == shooter.IdCategory);
+                model.Weapon = weaponTypes.FirstOrDefault(x => x.Id == shooter.IdWeaponType);
             }
 
-            return PartialView("UserInfo", user);
+            return PartialView("LoginPartial", model);
         }
 
         public ActionResult About()

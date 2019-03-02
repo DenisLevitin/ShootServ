@@ -16,7 +16,8 @@ namespace DAL
             {
                 Id = dalShooterCategory.Id,
                 Name = dalShooterCategory.Name,
-                OrderSort = dalShooterCategory.OrderSort
+                OrderSort = dalShooterCategory.OrderSort,
+                PictureUrl = dalShooterCategory.PictureUrl
             };
         }
 
@@ -30,14 +31,7 @@ namespace DAL
             ShooterCategoryParams shooterCategory;
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    shooterCategory = Convert(db.ShooterCategory.First(x => x.Id == catId));
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении разряда по иденификатору произошла ошибка");
-                }
+                shooterCategory = Convert(db.ShooterCategory.First(x => x.Id == catId));
             }
 
             return shooterCategory;
@@ -52,14 +46,7 @@ namespace DAL
             var res = new List<ShooterCategoryParams>();
             using (var db = DBContext.GetContext())
             {
-                try
-                {
-                    res = db.ShooterCategory.ToList().ConvertAll(Convert);
-                }
-                catch (Exception exc)
-                {
-                    throw new Exception("При получении разряда по иденификатору произошла ошибка");
-                }
+                res = db.ShooterCategory.ToList().ConvertAll(Convert);
             }
 
             return res;

@@ -12,10 +12,13 @@ namespace BL
     public class ShooterLogic
     {
         private readonly ShooterRepository _dalShooter;
+        private readonly WeaponTypeRepository _weaponTypeRepository;
+        private static IReadOnlyCollection<WeaponTypeParams> _weaponTypes;
 
         public ShooterLogic()
         {
             _dalShooter = new ShooterRepository();
+            _weaponTypeRepository = new WeaponTypeRepository();
         }
 
         /// <summary>
@@ -121,6 +124,16 @@ namespace BL
         public void Update(int idShooter, ShooterParams shooter)
         {
             _dalShooter.Update(shooter, idShooter);
+        }
+
+        public IReadOnlyCollection<WeaponTypeParams> GetAllWeaponTypes()
+        {
+            if ( _weaponTypes == null)
+            {
+                _weaponTypes = _weaponTypeRepository.GetAll();
+            }
+
+            return _weaponTypes;
         }
     }
 }

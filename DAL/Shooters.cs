@@ -24,7 +24,7 @@ namespace DAL
         public string Family { get; set; }
         public string Name { get; set; }
         public string FatherName { get; set; }
-        public int? IdClub { get; set; }
+        public Nullable<int> IdClub { get; set; }
         public string Address { get; set; }
         public int IdCategory { get; set; }
         public System.DateTime BirthDate { get; set; }
