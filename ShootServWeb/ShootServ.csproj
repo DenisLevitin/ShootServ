@@ -254,7 +254,7 @@
     <Content Include="Content\themes\base\images\qualities\kms.png" />
     <Content Include="Content\themes\base\images\qualities\msmk.png" />
     <Content Include="Content\themes\base\images\qualities\zms.png" />
-    <Content Include="Content\themes\base\images\role\gun.jpg" />
+    <Content Include="Content\themes\base\images\role\pistol.jpg" />
     <Content Include="Content\themes\base\images\role\incognito.jpg" />
     <Content Include="Content\themes\base\images\role\organizer.jpg" />
     <Content Include="Content\themes\base\images\role\rifle.jpg" />

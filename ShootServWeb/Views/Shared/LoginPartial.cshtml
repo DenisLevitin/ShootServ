@@ -10,10 +10,14 @@
             {
                 <img width="100" height="100" src="@Model.Weapon.PictureUrl" />
             }
+            else
+            {
+                <img width="100" height="100" src="/Content/themes/base/images/role/organizer.jpg" />
+            }
             <div class="login-description">
                 <h4 class="login-description_title">
-                    @Model.User.Login 
-                </h4>    
+                    @Model.User.Login
+                </h4>
                 <ul class="login-quality_list">
                     <li class="login-quality_item">
                         @if (Model.ShooterCategory != null)
