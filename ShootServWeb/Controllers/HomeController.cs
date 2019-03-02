@@ -7,6 +7,7 @@ using ShootServ.Models;
 
 namespace ShootServ.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : BaseController
     {
         private readonly ShooterCategoryLogic _shooterCategoryLogic;
@@ -35,15 +36,15 @@ namespace ShootServ.Controllers
 
         public ActionResult GetUserInfo()
         {
-            var model = new UserInfoModel(CurrentUser)
-            {
-                ShooterCategories = _shooterCategoryLogic.GetAll()
-            };
+            var model = new UserInfoModel(CurrentUser);
 
             if ( CurrentUser?.IdRole == (int)RolesEnum.Shooter)
             {
                 var shooter = _shooterLogic.GetByUser(CurrentUser.Id);
-                model.ShooterCategory = model.ShooterCategories.FirstOrDefault(x => x.Id == shooter.IdCategory);
+                var shooterCategories = _shooterCategoryLogic.GetAll();
+                var weaponTypes = _shooterLogic.GetAllWeaponTypes();
+                model.ShooterCategory = shooterCategories.FirstOrDefault(x => x.Id == shooter.IdCategory);
+                model.Weapon = weaponTypes.FirstOrDefault(x => x.Id == shooter.IdWeaponType);
             }
 
             return PartialView("LoginPartial", model);

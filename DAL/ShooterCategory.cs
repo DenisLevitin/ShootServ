@@ -24,7 +24,7 @@ namespace DAL
         public string Keychar { get; set; }
         public int OrderSort { get; set; }
         public string PictureUrl { get; set; }
-
+    
         public virtual ICollection<Shooters> Shooters { get; set; }
     }
 }

@@ -73,6 +73,7 @@
     <Compile Include="ShootingRangeListItem.cs" />
     <Compile Include="ShootingRangeParams.cs" />
     <Compile Include="UserParams.cs" />
+    <Compile Include="WeaponTypeEnum.cs" />
     <Compile Include="WeaponTypeParams.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

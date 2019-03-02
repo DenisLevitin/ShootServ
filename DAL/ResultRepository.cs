@@ -19,13 +19,13 @@ namespace DAL
                 Id = model.Id,
                 IdShooter = model.IdShooter,
                 IdCompetitionTypeCup = model.IdCompetitionTypeCup,
-                ResultOfFinal = model.ResultOfFinal,
-                Serie1 = model.Serie1,
-                Serie2 = model.Serie2,
-                Serie3 = model.Serie3,
-                Serie4 = model.Serie4,
-                Serie5 = model.Serie5,
-                Serie6 = model.Serie6
+                //ResultOfFinal = model.ResultOfFinal,
+                //Serie1 = model.Serie1,
+                //Serie2 = model.Serie2,
+                //Serie3 = model.Serie3,
+                //Serie4 = model.Serie4,
+                //Serie5 = model.Serie5,
+                //Serie6 = model.Serie6
             };
         }
 
@@ -36,13 +36,13 @@ namespace DAL
                 Id = entity.Id,
                 IdShooter = entity.IdShooter,
                 IdCompetitionTypeCup = entity.IdCompetitionTypeCup,
-                ResultOfFinal = entity.ResultOfFinal,
-                Serie1 = entity.Serie1,
-                Serie2 = entity.Serie2,
-                Serie3 = entity.Serie3,
-                Serie4 = entity.Serie4,
-                Serie5 = entity.Serie5,
-                Serie6 = entity.Serie6
+                //ResultOfFinal = entity.ResultOfFinal,
+                //Serie1 = entity.Serie1,
+                //Serie2 = entity.Serie2,
+                //Serie3 = entity.Serie3,
+                //Serie4 = entity.Serie4,
+                //Serie5 = entity.Serie5,
+                //Serie6 = entity.Serie6
             };
         }
 

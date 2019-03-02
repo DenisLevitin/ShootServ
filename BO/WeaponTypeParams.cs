@@ -3,13 +3,8 @@
     /// <summary>
     /// Тип оружия стрелка ( пистолет или винтовка(лучше название сменить))
     /// </summary>
-    public class WeaponTypeParams
+    public partial class WeaponTypeParams : ModelBase
     {
-        /// <summary>
-        /// Ид. типа оружия
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Название типа
         /// </summary>
@@ -17,11 +12,6 @@
 
         public string Keychar { get; set; }
 
-        public enum WeaponTypeEnum
-        {
-            Rifle = 1,
-            Pistol = 2,
-            RifleMovingTarget = 3
-        }
+        public string PictureUrl { get; set; }
     }
 }
