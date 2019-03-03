@@ -2,10 +2,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model ShootServ.Models.Registration.RegistrationPageModel
+@model ShootServ.Models.Registration.RegistrationPostModel
 
 <div>
-    @Html.TextBoxFor(x=>x.PostModel.Family)
-    @Html.TextBoxFor(x=>x.PostModel.Name)
-    @Html.TextBoxFor(x=>x.PostModel.Login)
+    @Html.TextBoxFor(x => x.Family)
+    @Html.TextBoxFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Login)
 </div>

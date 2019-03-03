@@ -117,7 +117,7 @@ namespace ShootServ.Controllers
             }
 
             var pageModel = GetModelByExistUser(CurrentUser.Id);
-            return View("Profile", pageModel);
+            return View("Profile", pageModel.PostModel);
         }
 
         [HttpPost]
