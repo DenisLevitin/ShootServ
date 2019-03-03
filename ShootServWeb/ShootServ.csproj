@@ -419,6 +419,7 @@
     <Content Include="Views\Shared\_LayoutNoMenu.cshtml" />
     <Content Include="Views\Account\RecoverPassword.cshtml" />
     <Content Include="Views\Shared\ErrorCustom.cshtml" />
+    <Content Include="Views\Registration\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
