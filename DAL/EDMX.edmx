@@ -98,13 +98,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdShooter" Type="int" Nullable="false" />
           <Property Name="IdCompetitionTypeCup" Type="int" Nullable="false" />
-          <Property Name="Serie1" Type="float" />
-          <Property Name="Serie2" Type="float" />
-          <Property Name="Serie3" Type="float" />
-          <Property Name="Serie4" Type="float" />
-          <Property Name="Serie5" Type="float" />
-          <Property Name="Serie6" Type="float" />
-          <Property Name="ResultOfFinal" Type="float" />
+          <Property Name="ResultInPoints" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -122,6 +116,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Keychar" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OrderSort" Type="int" Nullable="false" />
+          <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ShooterClubs">
           <Key>
@@ -144,7 +139,7 @@
           <Property Name="Family" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FatherName" Type="varchar" MaxLength="50" />
-          <Property Name="IdClub" Type="int" Nullable="false" />
+          <Property Name="IdClub" Type="int" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
           <Property Name="IdCategory" Type="int" Nullable="false" />
           <Property Name="BirthDate" Type="datetime" Nullable="false" />
@@ -165,6 +160,16 @@
           <Property Name="IdRegion" Type="int" Nullable="false" />
           <Property Name="Town" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IdUser" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -187,6 +192,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="KeyChar" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PictureUrl" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_CompetitionType_WeaponTypes">
           <End Role="WeaponTypes" Type="Self.WeaponTypes" Multiplicity="1" />
@@ -381,7 +387,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Shooters_ShooterClubs">
-          <End Role="ShooterClubs" Type="Self.ShooterClubs" Multiplicity="1" />
+          <End Role="ShooterClubs" Type="Self.ShooterClubs" Multiplicity="0..1" />
           <End Role="Shooters" Type="Self.Shooters" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShooterClubs">
@@ -468,6 +474,7 @@
           <EntitySet Name="ShooterClubs" EntityType="Self.ShooterClubs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Shooters" EntityType="Self.Shooters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ShootingRanges" EntityType="Self.ShootingRanges" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WeaponTypes" EntityType="Self.WeaponTypes" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_CompetitionType_WeaponTypes" Association="Self.FK_CompetitionType_WeaponTypes">
@@ -579,6 +586,7 @@
           <EntitySet Name="ShooterClubs" EntityType="ShootingCompetitionRequestsModel.ShooterClubs" />
           <EntitySet Name="Shooters" EntityType="ShootingCompetitionRequestsModel.Shooters" />
           <EntitySet Name="ShootingRanges" EntityType="ShootingCompetitionRequestsModel.ShootingRanges" />
+          <EntitySet Name="sysdiagrams" EntityType="ShootingCompetitionRequestsModel.sysdiagrams" />
           <EntitySet Name="Users" EntityType="ShootingCompetitionRequestsModel.Users" />
           <EntitySet Name="WeaponTypes" EntityType="ShootingCompetitionRequestsModel.WeaponTypes" />
           <AssociationSet Name="FK_CompetitionType_WeaponTypes" Association="ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes">
@@ -782,13 +790,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdShooter" Type="Int32" Nullable="false" />
           <Property Name="IdCompetitionTypeCup" Type="Int32" Nullable="false" />
-          <Property Name="Serie1" Type="Double" />
-          <Property Name="Serie2" Type="Double" />
-          <Property Name="Serie3" Type="Double" />
-          <Property Name="Serie4" Type="Double" />
-          <Property Name="Serie5" Type="Double" />
-          <Property Name="Serie6" Type="Double" />
-          <Property Name="ResultOfFinal" Type="Double" />
+          <Property Name="ResultInPoints" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CupCompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_Results_CupCompetitionType" FromRole="Results" ToRole="CupCompetitionType" />
           <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Results_Shooters" FromRole="Results" ToRole="Shooters" />
         </EntityType>
@@ -809,6 +811,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Keychar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="OrderSort" Type="Int32" Nullable="false" />
+          <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_ShooterCategory" FromRole="ShooterCategory" ToRole="Shooters" />
         </EntityType>
         <EntityType Name="ShooterClubs">
@@ -835,7 +838,7 @@
           <Property Name="Family" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IdClub" Type="Int32" Nullable="false" />
+          <Property Name="IdClub" Type="Int32" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdCategory" Type="Int32" Nullable="false" />
           <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -867,6 +870,16 @@
           <NavigationProperty Name="ShooterClubs" Relationship="ShootingCompetitionRequestsModel.FK_ShooterClubs_ShootingRanges" FromRole="ShootingRanges" ToRole="ShooterClubs" />
           <NavigationProperty Name="Users" Relationship="ShootingCompetitionRequestsModel.FK_ShootingRanges_Users" FromRole="ShootingRanges" ToRole="Users" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="Id" />
@@ -894,6 +907,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="KeyChar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PictureUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CompetitionType" Relationship="ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes" FromRole="WeaponTypes" ToRole="CompetitionType" />
           <NavigationProperty Name="Shooters" Relationship="ShootingCompetitionRequestsModel.FK_Shooters_WeaponTypes" FromRole="WeaponTypes" ToRole="Shooters" />
         </EntityType>
@@ -1114,7 +1128,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Shooters_ShooterClubs">
-          <End Type="ShootingCompetitionRequestsModel.ShooterClubs" Role="ShooterClubs" Multiplicity="1" />
+          <End Type="ShootingCompetitionRequestsModel.ShooterClubs" Role="ShooterClubs" Multiplicity="0..1" />
           <End Type="ShootingCompetitionRequestsModel.Shooters" Role="Shooters" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ShooterClubs">
@@ -1265,13 +1279,7 @@
           <EntitySetMapping Name="Results">
             <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Results">
               <MappingFragment StoreEntitySet="Results">
-                <ScalarProperty Name="ResultOfFinal" ColumnName="ResultOfFinal" />
-                <ScalarProperty Name="Serie6" ColumnName="Serie6" />
-                <ScalarProperty Name="Serie5" ColumnName="Serie5" />
-                <ScalarProperty Name="Serie4" ColumnName="Serie4" />
-                <ScalarProperty Name="Serie3" ColumnName="Serie3" />
-                <ScalarProperty Name="Serie2" ColumnName="Serie2" />
-                <ScalarProperty Name="Serie1" ColumnName="Serie1" />
+                <ScalarProperty Name="ResultInPoints" ColumnName="ResultInPoints" />
                 <ScalarProperty Name="IdCompetitionTypeCup" ColumnName="IdCompetitionTypeCup" />
                 <ScalarProperty Name="IdShooter" ColumnName="IdShooter" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -1290,6 +1298,7 @@
           <EntitySetMapping Name="ShooterCategory">
             <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.ShooterCategory">
               <MappingFragment StoreEntitySet="ShooterCategory">
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
                 <ScalarProperty Name="OrderSort" ColumnName="OrderSort" />
                 <ScalarProperty Name="Keychar" ColumnName="Keychar" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1343,6 +1352,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.Users">
               <MappingFragment StoreEntitySet="Users">
@@ -1361,6 +1381,7 @@
           <EntitySetMapping Name="WeaponTypes">
             <EntityTypeMapping TypeName="ShootingCompetitionRequestsModel.WeaponTypes">
               <MappingFragment StoreEntitySet="WeaponTypes">
+                <ScalarProperty Name="PictureUrl" ColumnName="PictureUrl" />
                 <ScalarProperty Name="KeyChar" ColumnName="KeyChar" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

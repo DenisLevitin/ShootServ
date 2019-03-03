@@ -12,6 +12,8 @@ namespace BL
     {
         private readonly ShooterCategoryRepository _dalShooterCategory;
 
+        private static IReadOnlyCollection<ShooterCategoryParams> _shooterCategories;
+
         public ShooterCategoryLogic()
         {
             _dalShooterCategory = new ShooterCategoryRepository();
@@ -31,9 +33,14 @@ namespace BL
         /// Получить список разрядов
         /// </summary>
         /// <returns></returns>
-        public List<ShooterCategoryParams> GetAll()
+        public IReadOnlyCollection<ShooterCategoryParams> GetAll()
         {
-            return _dalShooterCategory.GetAll().OrderBy(x=>x.OrderSort).ToList();
+            if (_shooterCategories == null)
+            {
+                _shooterCategories = _dalShooterCategory.GetAll().OrderBy(x => x.OrderSort).ToList();
+            }
+
+            return _shooterCategories;
         }
     }
 }

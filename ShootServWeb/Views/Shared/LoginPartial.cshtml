@@ -1,0 +1,42 @@
+﻿@model ShootServ.Models.UserInfoModel
+
+@if (Model != null && Model.User != null)
+{
+    <div class="login-partial">
+
+        <div class="login-quality">
+
+            @if (Model.Weapon != null)
+            {
+                <img width="100" height="100" src="@Model.Weapon.PictureUrl" />
+            }
+            else
+            {
+                <img width="100" height="100" src="/Content/themes/base/images/role/organizer.jpg" />
+            }
+            <div class="login-description">
+                <h4 class="login-description_title">
+                    @Model.User.Login
+                </h4>
+                <ul class="login-quality_list">
+                    <li class="login-quality_item">
+                        @if (Model.ShooterCategory != null)
+                        {
+                            <img width="40" src="@Model.ShooterCategory.PictureUrl" />
+                        }
+                    </li>
+                </ul>
+                @using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    <input type="submit" class="btn btn-outline-secondary btn-sm exit-btn" value="Выйти">
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <a class="btn btn-sm btn-outline-secondary mx-2" href="@Url.Action("Index", "Registration")">Регистрация</a>
+    <a class="btn btn-sm btn-outline-secondary mx-2" href="@Url.Action("Login", "Account")">Вход</a>
+}
+

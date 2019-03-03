@@ -38,7 +38,7 @@ namespace ShootServ.Controllers
                 SexList = StandartClassifierModelLogic.GetSexList(),
                 WeaponTypes = StandartClassifierModelLogic.GetWeaponTypeList(),
                 CountriesList = StandartClassifierModelLogic.GetCountryList(),
-                Categories = _categoryLogic.GetAll().ConvertAll(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name}),
+                Categories = _categoryLogic.GetAll().Select(x => new SelectListItem {Value = x.Id.ToString(), Text = x.Name}).ToList(),
             };
             
             result.PostModel.DateBirthday = DateTime.Now.AddYears(-18);

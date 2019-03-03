@@ -23,6 +23,7 @@ namespace DAL
         public int Id { get; set; }
         public string Name { get; set; }
         public string KeyChar { get; set; }
+        public string PictureUrl { get; set; }
     
         public virtual ICollection<CompetitionType> CompetitionType { get; set; }
         public virtual ICollection<Shooters> Shooters { get; set; }

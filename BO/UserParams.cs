@@ -47,6 +47,14 @@ namespace BO
         /// </summary>
         public string Email { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return string.Format("{0} {1}", Name, FamilyName);
+            }
+        }
+
         public UserParams()
         {
             IdRole = 1;

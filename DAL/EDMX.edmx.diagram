@@ -5,23 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a2822978be8e4273827550723066ba81" Name="Диаграмма1" ZoomLevel="77">
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.CompetitionType" Width="1.5" PointX="10.5" PointY="17.125" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Countries" Width="1.5" PointX="0.75" PointY="6.25" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.CupCompetitionType" Width="1.5" PointX="12.75" PointY="9.875" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Cups" Width="1.5" PointX="10.5" PointY="9.5" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.CupTypes" Width="1.5" PointX="8.25" PointY="13.75" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.EntryForCompetitions" Width="1.5" PointX="15" PointY="7" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.EntryStatus" Width="1.5" PointX="12.75" PointY="6" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.RecoveredPasswords" Width="1.5" PointX="5.25" PointY="22.375" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Regions" Width="1.5" PointX="3" PointY="6" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Results" Width="1.5" PointX="18" PointY="6.5" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Roles" Width="1.5" PointX="0.75" PointY="10.25" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.ShooterCategory" Width="1.5" PointX="7.5" PointY="5.25" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.ShooterClubs" Width="1.5" PointX="7.5" PointY="9.625" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Shooters" Width="1.5" PointX="9.75" PointY="4" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.ShootingRanges" Width="1.5" PointX="5.25" PointY="9.5" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Users" Width="1.5" PointX="3" PointY="9.25" />
-        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.WeaponTypes" Width="1.5" PointX="8.25" PointY="17.25" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.CompetitionType" Width="1.5" PointX="10.5" PointY="16.5" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Countries" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.CupCompetitionType" Width="1.5" PointX="12.75" PointY="9.25" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Cups" Width="1.5" PointX="10.5" PointY="8.75" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.CupTypes" Width="1.5" PointX="8.25" PointY="13.125" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.EntryForCompetitions" Width="1.5" PointX="18" PointY="6.25" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.EntryStatus" Width="1.5" PointX="15.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.RecoveredPasswords" Width="1.5" PointX="5.25" PointY="21.75" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Regions" Width="1.5" PointX="3" PointY="5.375" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Results" Width="1.5" PointX="15" PointY="6.5" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Roles" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.ShooterCategory" Width="1.5" PointX="7.5" PointY="4.5" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.ShooterClubs" Width="1.5" PointX="7.5" PointY="9" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Shooters" Width="1.5" PointX="9.75" PointY="3.375" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.ShootingRanges" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.Users" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="ShootingCompetitionRequestsModel.WeaponTypes" Width="1.5" PointX="8.25" PointY="16.5" />
         <AssociationConnector Association="ShootingCompetitionRequestsModel.FK_CompetitionType_WeaponTypes" />
         <AssociationConnector Association="ShootingCompetitionRequestsModel.FK_CupCompetitionType_CompetitionType" />
         <AssociationConnector Association="ShootingCompetitionRequestsModel.FK_Regions_Countries" />
