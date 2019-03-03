@@ -106,6 +106,20 @@ namespace ShootServ.Controllers
             return View("Index", model);
         }
 
+        [HttpGet]
+        [CustomAuthorize]
+        [System.Web.Http.Route("Profile")]
+        public ActionResult Profile()
+        {
+            if (CurrentUser == null)
+            {
+                throw new Exception("Ошибка авторизации");
+            }
+
+            var pageModel = GetModelByExistUser(CurrentUser.Id);
+            return View("Profile", pageModel);
+        }
+
         [HttpPost]
         public ActionResult AddUser(RegistrationPostModel model)
         {

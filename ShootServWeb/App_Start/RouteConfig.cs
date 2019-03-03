@@ -32,7 +32,13 @@ namespace ShootServ
                 url: "Cup/{action}",
                 defaults: new { controller = "Cup", action = "Index" }
             );
-            
+
+            routes.MapRoute(
+                name: "Profile",
+                url: "Profile",
+                defaults: new { controller = "Registration", action = "Profile" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
