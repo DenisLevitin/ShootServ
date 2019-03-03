@@ -18,6 +18,9 @@
     flex-wrap: wrap;
     margin: 0;
     padding: 5px 0;
+    position: absolute;
+    top: 30px;
+    right: -30px;
 }
 
 .username {
