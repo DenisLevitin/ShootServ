@@ -240,6 +240,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\LoginPartial.css" />
+    <Content Include="Content\profile.css" />
     <Content Include="Content\registration.css" />
     <Content Include="Content\themes\base\formWizard\css\style.css" />
     <Content Include="Content\themes\base\formWizard\datePicker\datepicker.js" />
@@ -324,7 +325,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="Content\themes\loginPartial.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Template\Шаблон_заявки_excel.xlsx" />
@@ -368,6 +368,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\ShootServ\cup.js" />
+    <Content Include="Scripts\ShootServ\profile.js" />
     <Content Include="Scripts\ShootServ\registration.js" />
     <Content Include="Scripts\ShootServ\shootingClub.js" />
     <Content Include="Scripts\ShootServ\shootingClubList.js" />

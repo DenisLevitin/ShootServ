@@ -4,8 +4,80 @@
 
 @model ShootServ.Models.Registration.RegistrationPostModel
 
-<div>
-    @Html.TextBoxFor(x => x.Family)
-    @Html.TextBoxFor(x => x.Name)
-    @Html.TextBoxFor(x => x.Login)
-</div>
+<main>
+    <script src="~/Scripts/ShootServ/profile.js"></script>
+    <form method="post">
+        <section class="row no-edit js-user-data">
+            <div class="col-lg-3 col-xs-5">
+                <img height="150" width="150" src="/Content/themes/base/images/role/organizer.jpg" />
+            </div>
+            <div class="col-lg-4">
+                @Html.TextBoxFor(x => x.Login, new { @class = "form-control", @disabled = "true" })
+
+                @Html.TextBoxFor(x => x.Family, new { @class = "form-control", @disabled = "true" })
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", @disabled = "true" })
+            </div>
+            <div class="col">
+                <input type="button" class="btn btn-primary" id="editButton" value="Редактировать">
+                <input type="submit" class="btn btn-primary hidden" id="submitButton" value="Сохранить">
+            </div>
+        </section>
+    </form>
+
+    <section class="jumbotron">
+        <div class="row">
+            <div class="col text-center">
+                <b>10</b> соревнований
+            </div>
+            <div class="col text-center">
+                <b>5</b> побед
+            </div>
+            <div class="col text-center">
+                <b>15</b> записей
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>20 достижений</h2>
+        <div class="row">
+            <div class="col">
+
+                <img width="100" src="~/Content/themes/base/images/qualities/1.png" />
+            </div>
+            <div class="col">
+                <img width="100" src="~/Content/themes/base/images/qualities/2.png" />
+            </div>
+            <div class="col">
+
+                <img width="100" src="~/Content/themes/base/images/qualities/3.png" />
+            </div>
+            <div class="col">
+
+                <img width="100" src="~/Content/themes/base/images/qualities/kms.png" />
+            </div>
+            <div class="col">
+
+                <img width="100" src="~/Content/themes/base/images/qualities/msmk.png" />
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>30 соревнований</h2>
+        <div class="row">
+            <div class="col">
+                <div class="competition-wrap">
+                    <div class="competition-item">
+                        <img src="http://shooting-russia.ru/upload/no-image-sq.jpg">
+                        <div class="competition-buttons">
+                            <a href="http://shooting-russia.ru/upload/iblock/420/VP_DM_60d.pdf" class="button">Протокол</a>
+                        </div>
+                    </div>
+                    <div class="competition-title">
+                        <a href="">Первенство России и Всероссийские соревнований по пулевой стрельбе г.Белгород</a>
+                        <time datetime="10.02.1010">10.02.1010</time>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

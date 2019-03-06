@@ -1,0 +1,116 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.competition-wrap {
+    width: 300px;
+    margin: 0 auto;
+    background: white;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 14px;
+    font-family: Lora;
+    text-transform: uppercase;
+}
+
+.competition-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.competition-wrap img {
+    display: block;
+    width: 100%;
+}
+
+.competition-buttons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .8);
+    opacity: 0;
+    transition: .3s ease-in-out;
+}
+
+.button {
+    text-decoration: none;
+    color: #c0a97a;
+    font-size: 12px;
+    width: 140px;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 2px solid #c0a97a;
+    transform: translate(-50%, -50%) scale(0);
+    transition: .3s ease-in-out;
+}
+
+    .button:before {
+        content: "\f07a";
+        font-family: FontAwesome;
+        margin-right: 10px;
+    }
+
+.competition-item:hover .competition-buttons {
+    opacity: 1;
+}
+
+.competition-item:hover .button {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.button:hover {
+    background: black;
+}
+
+.competition-title {
+    color: #5e5e5e;
+}
+
+    .competition-title a {
+        text-decoration: none;
+        color: #2e2e2e;
+        font-weight: 600;
+        margin: 15px 0 5px;
+        padding-bottom: 7px;
+        display: block;
+        position: relative;
+        transition: .3s ease-in-out;
+    }
+
+        .competition-title a:after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: #2e2e2e;
+            left: 50%;
+            margin-left: -20px;
+            bottom: 0;
+            transition: .3s ease-in-out;
+        }
+
+        .competition-title a:hover {
+            color: #c0a97a;
+        }
+
+    .competition-title:hover a:after {
+        background: #c0a97a;
+    }
+
+.competition-price {
+    font-size: 20px;
+    color: #c0a97a;
+    font-weight: 700;
+}
+
+/*задизабленные кнопки*/
+
+.no-edit .form-control {
+border: none;
+background: none;
+}
