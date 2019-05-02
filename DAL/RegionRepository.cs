@@ -8,39 +8,9 @@ namespace DAL
     /// <summary>
     /// DAL класс для работы с таблицей Regions
     /// </summary>
-    public class RegionRepository
+    public class RegionRepository : BaseRepository<RegionParams, Regions>
     {
-        private RegionParams Convert(Regions dalRegion)
-        {
-            return new RegionParams
-            {
-                Id = dalRegion.IdRegion,
-                Name = dalRegion.Name
-            };
-        }
-
-        /// <summary>
-        /// Получить регион по идентификатору
-        /// </summary>
-        /// <param name="idRegion">ид. региона</param>
-        /// <returns></returns>
-        public RegionParams Get(int idRegion)
-        {
-            var region = new RegionParams();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    region = Convert(db.Regions.FirstOrDefault(x => x.IdRegion == idRegion));
-                }
-                catch (Exception exc)
-                {
-                    //throw new Exception("При получении региона по идентификатору произошла ошибка");
-                }
-            }
-
-            return region;
-        }
+        protected override Func<Regions, int> GetPrimaryKeyValue => x => x.IdRegion;
 
         /// <summary>
         /// Получить список регионов
@@ -48,17 +18,7 @@ namespace DAL
         /// <returns></returns>
         public List<RegionParams> GetByCountry(int? idCountry)
         {
-            using (var db = DBContext.GetContext())
-            {
-                var query = db.Regions.AsQueryable();
-                if (idCountry.HasValue)
-                {
-                    query = query.Where(x => x.IdCountry == idCountry);
-                }
-                
-                var data = query.OrderBy(x=>x.IdCountry).ThenBy(x=>x.Name).ToList();
-                return data.Select(Convert).ToList();
-            }
+            return idCountry.HasValue ? GetFiltered(x => x.IdCountry == idCountry.Value) : GetAll();
         }
 
         /// <summary>
@@ -68,24 +28,7 @@ namespace DAL
         /// <returns></returns>
         public RegionParams GetRegionByShootingRange(int idShootingRange)
         {
-            RegionParams res = new RegionParams();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var query = (from shootingRange1 in db.ShootingRanges
-                                 join region in db.Regions on shootingRange1.IdRegion equals region.IdRegion
-                                 where shootingRange1.Id == idShootingRange
-                                 select region).Distinct().First();
-                    res = Convert(query);
-                }
-                catch (Exception exc)
-                {
-                    //throw new Exception("При получении региона по идентификатору произошла ошибка");
-                }
-            }
-
-            return res;
+            return GetFirstOrDefault(x => x.ShootingRanges.Any(y => y.Id == idShootingRange));
         }
 
         /// <summary>
@@ -95,25 +38,21 @@ namespace DAL
         /// <returns></returns>
         public RegionParams GetRegionByClub(int idClub)
         {
-            RegionParams res = new RegionParams();
-            using (var db = DBContext.GetContext())
-            {
-                try
-                {
-                    var query = (from club in db.ShooterClubs
-                                 join shootingRange1 in db.ShootingRanges on club.IdShootingRange equals shootingRange1.Id
-                                 join region in db.Regions on shootingRange1.IdRegion equals region.IdRegion
-                                 where club.IdClub == idClub
-                                 select region).Distinct().First();
-                    res = Convert(query);
-                }
-                catch (Exception exc)
-                {
-                    //throw new Exception("При получении региона по идентификатору произошла ошибка");
-                }
-            }
+            return GetFirstOrDefault(x => x.ShootingRanges.SelectMany(sr => sr.ShooterClubs).Any(y => y.IdClub == idClub));
+        }
 
-            return res;
+        protected override RegionParams ConvertToModel(Regions entity)
+        {
+            return new RegionParams
+            {
+                Id = entity.IdRegion,
+                Name = entity.Name
+            };
+        }
+
+        protected override Regions ConvertToEntity(RegionParams model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

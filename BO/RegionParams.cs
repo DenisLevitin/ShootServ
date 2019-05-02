@@ -3,13 +3,8 @@
     /// <summary>
     /// Регион
     /// </summary>
-    public class RegionParams
+    public class RegionParams : ModelBase
     {
-        /// <summary>
-        /// Ид. региона
-        /// </summary>
-        public int Id { get; set; }
-
         /// <summary>
         /// Название региона
         /// </summary>
